@@ -3,14 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>JoKing</title>
+  <title>ConstraintLayout的使用 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="JoKing">
-<meta property="og:url" content="https://joking111111.github.io/index.html">
+  <meta name="description" content="1.为什么要使用它？优点： 较复杂布局下，ConstraintLayout比RelativeLayout和LinearLayout嵌套布局性能要好。 我们知道，AndroidUI绘制是由Cpu跟Gpu共同完成，CPU主要负责计算和参数传递如canvas的传递，而Gpu负责绘制纹理。所以优化UI有两方面：减少层级嵌套和减少过度绘制。ConstraintLayout明显地将复杂布局的层次下降到甚至只有">
+<meta name="keywords" content="UI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ConstraintLayout的使用">
+<meta property="og:url" content="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/index.html">
 <meta property="og:site_name" content="JoKing">
+<meta property="og:description" content="1.为什么要使用它？优点： 较复杂布局下，ConstraintLayout比RelativeLayout和LinearLayout嵌套布局性能要好。 我们知道，AndroidUI绘制是由Cpu跟Gpu共同完成，CPU主要负责计算和参数传递如canvas的传递，而Gpu负责绘制纹理。所以优化UI有两方面：减少层级嵌套和减少过度绘制。ConstraintLayout明显地将复杂布局的层次下降到甚至只有">
+<meta property="og:image" content="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/chain.png">
+<meta property="og:image" content="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/chainStyle.png">
+<meta property="og:updated_time" content="2017-09-24T11:40:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JoKing">
+<meta name="twitter:title" content="ConstraintLayout的使用">
+<meta name="twitter:description" content="1.为什么要使用它？优点： 较复杂布局下，ConstraintLayout比RelativeLayout和LinearLayout嵌套布局性能要好。 我们知道，AndroidUI绘制是由Cpu跟Gpu共同完成，CPU主要负责计算和参数传递如canvas的传递，而Gpu负责绘制纹理。所以优化UI有两方面：减少层级嵌套和减少过度绘制。ConstraintLayout明显地将复杂布局的层次下降到甚至只有">
+<meta name="twitter:image" content="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/chain.png">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -59,9 +67,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-ConstraintLayout的使用" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-ConstraintLayout的使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/24/ConstraintLayout的使用/" class="article-date">
   <time datetime="2017-09-24T10:49:38.000Z" itemprop="datePublished">2017-09-24</time>
@@ -74,8 +80,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/24/ConstraintLayout的使用/">ConstraintLayout的使用</a>
+    <h1 class="article-title" itemprop="name">
+      ConstraintLayout的使用
     </h1>
   
 
@@ -137,140 +143,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-Android系统架构概述" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/24/Android系统架构概述/" class="article-date">
-  <time datetime="2017-09-24T08:53:22.000Z" itemprop="datePublished">2017-09-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/24/Android系统架构概述/">Android系统架构概述</a>
-    </h1>
+    <a href="/2017/09/24/Android系统架构概述/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Android系统架构概述</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Android系统架构分为五层"><a href="#Android系统架构分为五层" class="headerlink" title="Android系统架构分为五层"></a>Android系统架构分为五层</h2><p><img src="/2017/09/24/Android系统架构概述/android-stack.png" alt="Android系统架构"><br>图为Android官方文档上的。</p>
-<h2 id="1-应用层"><a href="#1-应用层" class="headerlink" title="1.应用层"></a>1.应用层</h2><p>我们编写的APP和系统的APP属于这层。</p>
-<h2 id="2-Java-Framework"><a href="#2-Java-Framework" class="headerlink" title="2.Java Framework"></a>2.Java Framework</h2><p>开发人员使用的java api属于这层。</p>
-<h2 id="3-Native"><a href="#3-Native" class="headerlink" title="3.Native"></a>3.Native</h2><ul>
-<li>(1)C/C++库：OpenGL ES,Media Framework,SQLite,SSL,FreeType</li>
-<li>(2)Android运行时库：Dalvik虚拟机、ART虚拟机。</li>
-</ul>
-<h2 id="4-HAL硬件抽象层"><a href="#4-HAL硬件抽象层" class="headerlink" title="4.HAL硬件抽象层"></a>4.HAL硬件抽象层</h2><p>操作系统与硬件电路打交道的接口层。</p>
-<h2 id="5-Linux内核层"><a href="#5-Linux内核层" class="headerlink" title="5.Linux内核层"></a>5.Linux内核层</h2><p>一些移动设备的驱动跟Linux内核。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj7yoaasc0000g2vff6ah8h0a" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-学习git的教程资料" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/24/学习git的教程资料/" class="article-date">
-  <time datetime="2017-09-24T01:41:59.000Z" itemprop="datePublished">2017-09-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/24/学习git的教程资料/">学习git的教程资料</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-廖雪峰的git教程"><a href="#1-廖雪峰的git教程" class="headerlink" title="1.廖雪峰的git教程"></a>1.廖雪峰的git教程</h2><h3 id="讲解有趣详细。"><a href="#讲解有趣详细。" class="headerlink" title="讲解有趣详细。"></a>讲解有趣详细。</h3><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/" target="_blank" rel="external">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/</a></p>
-<h2 id="2-learn-git-branching"><a href="#2-learn-git-branching" class="headerlink" title="2.learn git branching"></a>2.learn git branching</h2><h3 id="通过一系列的实际应用场景，提升你的git操作能力，非常不错的训练网站。"><a href="#通过一系列的实际应用场景，提升你的git操作能力，非常不错的训练网站。" class="headerlink" title="通过一系列的实际应用场景，提升你的git操作能力，非常不错的训练网站。"></a>通过一系列的实际应用场景，提升你的git操作能力，非常不错的训练网站。</h3><p><a href="http://learngitbranching.js.org/" target="_blank" rel="external">http://learngitbranching.js.org/</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj7yoaasn0004g2vfha0w2kvq" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git的常用概念" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/24/git的常用概念/" class="article-date">
-  <time datetime="2017-09-24T00:28:37.000Z" itemprop="datePublished">2017-09-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/24/git的常用概念/">git的常用概念</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-工作区"><a href="#1-工作区" class="headerlink" title="1.工作区"></a>1.工作区</h2><h3 id="就是电脑存放你文件的目录。"><a href="#就是电脑存放你文件的目录。" class="headerlink" title="就是电脑存放你文件的目录。"></a>就是电脑存放你文件的目录。</h3><h2 id="2-本地仓库"><a href="#2-本地仓库" class="headerlink" title="2.本地仓库"></a>2.本地仓库</h2><h3 id="reposity简称repo，存放工程的每个版本，版本号是自动生成的SHA1计算出来的十六进制数。"><a href="#reposity简称repo，存放工程的每个版本，版本号是自动生成的SHA1计算出来的十六进制数。" class="headerlink" title="reposity简称repo，存放工程的每个版本，版本号是自动生成的SHA1计算出来的十六进制数。"></a>reposity简称repo，存放工程的每个版本，版本号是自动生成的SHA1计算出来的十六进制数。</h3><h2 id="3-暂存区"><a href="#3-暂存区" class="headerlink" title="3.暂存区"></a>3.暂存区</h2><h3 id="工作区与本地仓库之间的缓冲区，称暂存区。"><a href="#工作区与本地仓库之间的缓冲区，称暂存区。" class="headerlink" title="工作区与本地仓库之间的缓冲区，称暂存区。"></a>工作区与本地仓库之间的缓冲区，称暂存区。</h3><ul>
-<li>工作区通过git add提交到暂存区</li>
-<li>暂存区通过git commit提交到本地仓库。</li>
-</ul>
-<h2 id="4-远程仓库"><a href="#4-远程仓库" class="headerlink" title="4.远程仓库"></a>4.远程仓库</h2><h3 id="远程机器上的仓库，与本地仓库是独立的，体现了git是一款分布式软件。"><a href="#远程机器上的仓库，与本地仓库是独立的，体现了git是一款分布式软件。" class="headerlink" title="远程机器上的仓库，与本地仓库是独立的，体现了git是一款分布式软件。"></a>远程机器上的仓库，与本地仓库是独立的，体现了git是一款分布式软件。</h3><h2 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5.参考资料"></a>5.参考资料</h2><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013745374151782eb658c5a5ca454eaa451661275886c6000" target="_blank" rel="external">廖雪峰的git教程</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cj7yoaask0003g2vfvbv1br8q" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
