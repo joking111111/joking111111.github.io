@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://joking111111.github.io/2017/09/25/git简单命令/index.html">
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如1git add *.txt 3.git commit -m “XXX”把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 4.git status将工作区与版本库对比，提示差异的信息。 5.git log输出每次版本库的变动，从">
-<meta property="og:updated_time" content="2017-09-25T00:29:39.000Z">
+<meta property="og:updated_time" content="2017-09-25T15:14:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git简单命令">
 <meta name="twitter:description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如1git add *.txt 3.git commit -m “XXX”把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 4.git status将工作区与版本库对比，提示差异的信息。 5.git log输出每次版本库的变动，从">
@@ -92,11 +92,17 @@
 <h2 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h2><p>将工作区与版本库对比，提示差异的信息。</p>
 <h2 id="5-git-log"><a href="#5-git-log" class="headerlink" title="5.git log"></a>5.git log</h2><p>输出每次版本库的变动，从最近开始输出。可以查看每个版本的SHA1数值。</p>
 <h2 id="6-git-reflog"><a href="#6-git-reflog" class="headerlink" title="6.git reflog"></a>6.git reflog</h2><p>查看命令历史，log命令是查看提交历史，这两个命令有所不同。</p>
+<h2 id="7-git-checkout-dev"><a href="#7-git-checkout-dev" class="headerlink" title="7.git checkout dev"></a>7.git checkout dev</h2><ul>
+<li>将HEAD指向dev分支最近节点。</li>
+<li>参数也可以使用SHA1数值，这样可以准确地切到想要的节点。</li>
+<li>参数也可以使用HEAD^、HEAD～2等。</li>
+</ul>
+<h2 id="8-git-branch-b-dev"><a href="#8-git-branch-b-dev" class="headerlink" title="8.git branch -b dev"></a>8.git branch -b dev</h2><p>这条指令相当于：<br>git branch dev<br>git checkout dev<br>在当前HEAD指向的节点创建名为dev的分支并且将HEAD指向它。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj7zfsdwc0001l8vf9yfqz800" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj80bfr6w0004xavf3nqerifd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -106,6 +112,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2017/09/25/git版本回退/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          git版本回退
+        
+      </div>
+    </a>
   
   
     <a href="/2017/09/24/ConstraintLayout的使用/" id="article-nav-older" class="article-nav-link-wrap">
@@ -161,6 +176,10 @@
       <ul>
         
           <li>
+            <a href="/2017/09/25/git版本回退/">git版本回退</a>
+          </li>
+        
+          <li>
             <a href="/2017/09/25/git简单命令/">git简单命令</a>
           </li>
         
@@ -174,10 +193,6 @@
         
           <li>
             <a href="/2017/09/24/学习git的教程资料/">学习git的教程资料</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/24/git的常用概念/">git的常用概念</a>
           </li>
         
       </ul>

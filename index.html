@@ -61,6 +61,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git版本回退" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/25/git版本回退/" class="article-date">
+  <time datetime="2017-09-25T14:35:22.000Z" itemprop="datePublished">2017-09-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/25/git版本回退/">git版本回退</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-git-diff-XXX"><a href="#1-git-diff-XXX" class="headerlink" title="1.git diff XXX"></a>1.git diff XXX</h2><ul>
+<li>当我们使用git status查看工作区做了什么修改时，可以使用git diff XXX对修改过的文件XXX查看差异</li>
+</ul>
+<h2 id="2-git-reset-–hard-HEAD"><a href="#2-git-reset-–hard-HEAD" class="headerlink" title="2.git reset –hard HEAD^"></a>2.git reset –hard HEAD^</h2><h3 id="版本库回退"><a href="#版本库回退" class="headerlink" title="版本库回退"></a>版本库回退</h3><ul>
+<li>首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。</li>
+<li>HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2表示上两个版本，以此类推。</li>
+<li>这条指令执行后，版本库相当于不知道有这个版本了，使用git log也没法查找到commit-id，这时需要git reflog来找回commit-id。然后使用以下命令：  <pre><code>git reset --hard commit_id
+</code></pre>即可找回原来的版本。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj80bfr6v0003xavfjb1ml426" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-git简单命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/25/git简单命令/" class="article-date">
@@ -89,11 +136,17 @@
 <h2 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h2><p>将工作区与版本库对比，提示差异的信息。</p>
 <h2 id="5-git-log"><a href="#5-git-log" class="headerlink" title="5.git log"></a>5.git log</h2><p>输出每次版本库的变动，从最近开始输出。可以查看每个版本的SHA1数值。</p>
 <h2 id="6-git-reflog"><a href="#6-git-reflog" class="headerlink" title="6.git reflog"></a>6.git reflog</h2><p>查看命令历史，log命令是查看提交历史，这两个命令有所不同。</p>
+<h2 id="7-git-checkout-dev"><a href="#7-git-checkout-dev" class="headerlink" title="7.git checkout dev"></a>7.git checkout dev</h2><ul>
+<li>将HEAD指向dev分支最近节点。</li>
+<li>参数也可以使用SHA1数值，这样可以准确地切到想要的节点。</li>
+<li>参数也可以使用HEAD^、HEAD～2等。</li>
+</ul>
+<h2 id="8-git-branch-b-dev"><a href="#8-git-branch-b-dev" class="headerlink" title="8.git branch -b dev"></a>8.git branch -b dev</h2><p>这条指令相当于：<br>git branch dev<br>git checkout dev<br>在当前HEAD指向的节点创建名为dev的分支并且将HEAD指向它。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj7zfsdwc0001l8vf9yfqz800" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj80bfr6w0004xavf3nqerifd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -145,7 +198,7 @@
 <h3 id="布局文件"><a href="#布局文件" class="headerlink" title="布局文件"></a>布局文件</h3><ul>
 <li>记得加入xmlns:app=”<a href="http://schemas.android.com/apk/res-auto" target="_blank" rel="external">http://schemas.android.com/apk/res-auto</a>“</li>
 </ul>
-<h3 id="match-parent属性实效"><a href="#match-parent属性实效" class="headerlink" title="match_parent属性实效"></a>match_parent属性实效</h3><ul>
+<h3 id="match-parent属性失效"><a href="#match-parent属性失效" class="headerlink" title="match_parent属性失效"></a>match_parent属性失效</h3><ul>
 <li>warp_content、具体数值仍生效</li>
 <li>若控件在某方向上有约束，则应将该方向的宽高值设置为0dp</li>
 </ul>
@@ -177,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj7zfsdwf0003l8vfxbz53g2j" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj80bfr6s0001xavfal51aawt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
@@ -224,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj7zfsdw90000l8vfhkqdd4ea" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj80bfr6p0000xavfl6fqm13k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
@@ -264,7 +317,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj7zfsdwj0005l8vf26mnp0y0" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj80bfr6z0008xavfxofcg96y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -307,7 +360,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cj7zfsdwi0004l8vf4ysll87k" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cj80bfr6x0005xavf38qbxv2t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -363,6 +416,10 @@
       <ul>
         
           <li>
+            <a href="/2017/09/25/git版本回退/">git版本回退</a>
+          </li>
+        
+          <li>
             <a href="/2017/09/25/git简单命令/">git简单命令</a>
           </li>
         
@@ -376,10 +433,6 @@
         
           <li>
             <a href="/2017/09/24/学习git的教程资料/">学习git的教程资料</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/24/git的常用概念/">git的常用概念</a>
           </li>
         
       </ul>
