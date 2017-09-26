@@ -89,14 +89,19 @@
 <h2 id="2-git-reset-–hard-HEAD"><a href="#2-git-reset-–hard-HEAD" class="headerlink" title="2.git reset –hard HEAD^"></a>2.git reset –hard HEAD^</h2><h3 id="版本库回退"><a href="#版本库回退" class="headerlink" title="版本库回退"></a>版本库回退</h3><ul>
 <li>首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。</li>
 <li>HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2表示上两个版本，以此类推。</li>
-<li>这条指令执行后，版本库相当于不知道有这个版本了，使用git log也没法查找到commit-id，这时需要git reflog来找回commit-id。然后使用以下命令：  <pre><code>git reset --hard commit_id
+<li>由于有–hard这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id，这时需要git reflog来找回commit-id。然后使用以下命令：  <pre><code>git reset --hard commit_id
 </code></pre>即可找回原来的版本。</li>
+</ul>
+<h2 id="3-git-revert-HEAD"><a href="#3-git-revert-HEAD" class="headerlink" title="3.git revert HEAD"></a>3.git revert HEAD</h2><p>回退到上一版本的另一种方法，注意参数HEAD，是回退到上一版本。</p>
+<ul>
+<li>git reset是不会产生新的提交记录，反而有可能抹去提交记录，当我们要推送到远程仓库时，显然没有提交记录怎么推送呢？所以git reset适合操作本地仓库，不需要分享给远程仓库的。</li>
+<li>git revert是会在HEAD节点基础上生成一个提交节点的，也就是新的提交，所以可以推送到远程仓库，别人也能查看到远程记录。</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj80bfr6v0003xavfjb1ml426" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj80y3h800001lnvfvqk9oib5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -139,14 +144,18 @@
 <h2 id="7-git-checkout-dev"><a href="#7-git-checkout-dev" class="headerlink" title="7.git checkout dev"></a>7.git checkout dev</h2><ul>
 <li>将HEAD指向dev分支最近节点。</li>
 <li>参数也可以使用SHA1数值，这样可以准确地切到想要的节点。</li>
-<li>参数也可以使用HEAD^、HEAD～2等。</li>
+<li>参数也可以使用HEAD^、HEAD~2、dev^、dev~2等。</li>
 </ul>
 <h2 id="8-git-branch-b-dev"><a href="#8-git-branch-b-dev" class="headerlink" title="8.git branch -b dev"></a>8.git branch -b dev</h2><p>这条指令相当于：<br>git branch dev<br>git checkout dev<br>在当前HEAD指向的节点创建名为dev的分支并且将HEAD指向它。</p>
+<h2 id="9-git-merge-dev"><a href="#9-git-merge-dev" class="headerlink" title="9.git merge dev"></a>9.git merge dev</h2><ul>
+<li>在HEAD指向节点基础上合并dev的内容，生成新的一次提交。</li>
+<li>同理，参数也可以使用SHA1，HEAD^、HEAD~2等。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj80bfr6w0004xavf3nqerifd" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj80y3h850004lnvfz886rp2f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -230,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj80bfr6s0001xavfal51aawt" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj80y3h830003lnvfy7h7l6yj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
@@ -277,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj80bfr6p0000xavfl6fqm13k" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj80y3h7w0000lnvflcdmjy9d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
@@ -317,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj80bfr6z0008xavfxofcg96y" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj80y3h880008lnvf101o1ka4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -360,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cj80bfr6x0005xavf38qbxv2t" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cj80y3h870005lnvfgjjw1t1y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>

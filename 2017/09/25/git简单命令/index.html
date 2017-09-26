@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://joking111111.github.io/2017/09/25/git简单命令/index.html">
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如1git add *.txt 3.git commit -m “XXX”把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 4.git status将工作区与版本库对比，提示差异的信息。 5.git log输出每次版本库的变动，从">
-<meta property="og:updated_time" content="2017-09-25T15:14:23.000Z">
+<meta property="og:updated_time" content="2017-09-26T01:39:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git简单命令">
 <meta name="twitter:description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如1git add *.txt 3.git commit -m “XXX”把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 4.git status将工作区与版本库对比，提示差异的信息。 5.git log输出每次版本库的变动，从">
@@ -95,14 +95,18 @@
 <h2 id="7-git-checkout-dev"><a href="#7-git-checkout-dev" class="headerlink" title="7.git checkout dev"></a>7.git checkout dev</h2><ul>
 <li>将HEAD指向dev分支最近节点。</li>
 <li>参数也可以使用SHA1数值，这样可以准确地切到想要的节点。</li>
-<li>参数也可以使用HEAD^、HEAD～2等。</li>
+<li>参数也可以使用HEAD^、HEAD~2、dev^、dev~2等。</li>
 </ul>
 <h2 id="8-git-branch-b-dev"><a href="#8-git-branch-b-dev" class="headerlink" title="8.git branch -b dev"></a>8.git branch -b dev</h2><p>这条指令相当于：<br>git branch dev<br>git checkout dev<br>在当前HEAD指向的节点创建名为dev的分支并且将HEAD指向它。</p>
+<h2 id="9-git-merge-dev"><a href="#9-git-merge-dev" class="headerlink" title="9.git merge dev"></a>9.git merge dev</h2><ul>
+<li>在HEAD指向节点基础上合并dev的内容，生成新的一次提交。</li>
+<li>同理，参数也可以使用SHA1，HEAD^、HEAD~2等。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj80bfr6w0004xavf3nqerifd" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj80y3h850004lnvfz886rp2f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
