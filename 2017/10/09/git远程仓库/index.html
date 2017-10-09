@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>学习git的教程资料 | JoKing</title>
+  <title>git远程仓库 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.廖雪峰的git教程讲解有趣详细。https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/ 2.learn git branching通过一系列的实际应用场景，提升你的git操作能力，非常不错的训练网站。http://learngitbranching.js.org/">
+  <meta name="description" content="1.git clone ssh此命令克隆远程仓库到当前目录，ssh为https地址。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="学习git的教程资料">
-<meta property="og:url" content="https://joking111111.github.io/2017/09/24/学习git的教程资料/index.html">
+<meta property="og:title" content="git远程仓库">
+<meta property="og:url" content="https://joking111111.github.io/2017/10/09/git远程仓库/index.html">
 <meta property="og:site_name" content="JoKing">
-<meta property="og:description" content="1.廖雪峰的git教程讲解有趣详细。https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/ 2.learn git branching通过一系列的实际应用场景，提升你的git操作能力，非常不错的训练网站。http://learngitbranching.js.org/">
-<meta property="og:updated_time" content="2017-10-08T12:44:42.000Z">
+<meta property="og:description" content="1.git clone ssh此命令克隆远程仓库到当前目录，ssh为https地址。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区">
+<meta property="og:updated_time" content="2017-10-09T09:08:09.051Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="学习git的教程资料">
-<meta name="twitter:description" content="1.廖雪峰的git教程讲解有趣详细。https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/ 2.learn git branching通过一系列的实际应用场景，提升你的git操作能力，非常不错的训练网站。http://learngitbranching.js.org/">
+<meta name="twitter:title" content="git远程仓库">
+<meta name="twitter:description" content="1.git clone ssh此命令克隆远程仓库到当前目录，ssh为https地址。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -64,10 +64,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-学习git的教程资料" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-git远程仓库" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/09/24/学习git的教程资料/" class="article-date">
-  <time datetime="2017-09-24T01:41:59.000Z" itemprop="datePublished">2017-09-24</time>
+    <a href="/2017/10/09/git远程仓库/" class="article-date">
+  <time datetime="2017-10-09T08:09:28.000Z" itemprop="datePublished">2017-10-09</time>
 </a>
     
   </div>
@@ -78,7 +78,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      学习git的教程资料
+      git远程仓库
     </h1>
   
 
@@ -86,13 +86,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-廖雪峰的git教程"><a href="#1-廖雪峰的git教程" class="headerlink" title="1.廖雪峰的git教程"></a>1.廖雪峰的git教程</h2><h3 id="讲解有趣详细。"><a href="#讲解有趣详细。" class="headerlink" title="讲解有趣详细。"></a>讲解有趣详细。</h3><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/" target="_blank" rel="external">https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/</a></p>
-<h2 id="2-learn-git-branching"><a href="#2-learn-git-branching" class="headerlink" title="2.learn git branching"></a>2.learn git branching</h2><h3 id="通过一系列的实际应用场景，提升你的git操作能力，非常不错的训练网站。"><a href="#通过一系列的实际应用场景，提升你的git操作能力，非常不错的训练网站。" class="headerlink" title="通过一系列的实际应用场景，提升你的git操作能力，非常不错的训练网站。"></a>通过一系列的实际应用场景，提升你的git操作能力，非常不错的训练网站。</h3><p><a href="http://learngitbranching.js.org/" target="_blank" rel="external">http://learngitbranching.js.org/</a></p>
+        <h2 id="1-git-clone-ssh"><a href="#1-git-clone-ssh" class="headerlink" title="1.git clone ssh"></a>1.git clone ssh</h2><p>此命令克隆远程仓库到当前目录，ssh为https地址。</p>
+<ul>
+<li>执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！</li>
+</ul>
+<h2 id="2-git-fetch"><a href="#2-git-fetch" class="headerlink" title="2.git fetch"></a>2.git fetch</h2><ul>
+<li>这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区！</li>
+<li>比如仓库有master和bugFix分支，这个操作会更新origin/master和origin/bugFix，并不会改动master和bugFix。</li>
+</ul>
+<h2 id="3-git-merge-origin-master"><a href="#3-git-merge-origin-master" class="headerlink" title="3.git merge origin/master"></a>3.git merge origin/master</h2><p>此命令一般紧接着git fetch，将远程的更新合并到本地工作区。</p>
+<h2 id="4-git-pull"><a href="#4-git-pull" class="headerlink" title="4.git pull"></a>4.git pull</h2><p>此命令就是上两条命令的缩写，先fetch再merge。</p>
+<ul>
+<li>我们经常会先commit掉当前写的代码，然后pull下同事push的代码。</li>
+</ul>
+<h2 id="5-git-push"><a href="#5-git-push" class="headerlink" title="5.git push"></a>5.git push</h2><p>此命令会将本地commit推送到远程仓库，并且会更新origin/分支。</p>
+<ul>
+<li>有时候远程仓库已经改变了，但是你的本地分支（没有origin/前缀）不会修改。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj8k5kcgq000bfsvfbjme8856" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cj8k5kcgn0008fsvfc1g2z0jk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -103,19 +118,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/09/24/Android系统架构概述/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Android系统架构概述
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/09/24/git的常用概念/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/10/08/git高级操作/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">git的常用概念</div>
+      <div class="article-nav-title">git高级操作</div>
     </a>
   
 </nav>
