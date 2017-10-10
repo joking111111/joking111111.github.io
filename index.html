@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://joking111111.github.io"></form>
@@ -60,6 +60,72 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-learn-git-branching参考答案" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/10/learn-git-branching参考答案/" class="article-date">
+  <time datetime="2017-10-10T02:15:14.000Z" itemprop="datePublished">2017-10-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/10/learn-git-branching参考答案/">learn git branching参考答案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="高级："><a href="#高级：" class="headerlink" title="高级："></a>高级：</h2><p>1:    git checkout C4</p>
+<p>2:    git checkout bugFix^</p>
+<p>3:    git branch –f bugFix C0<br>    git branch –f master C6<br>    git checkout HEAD^</p>
+<p>4:    git reset HEAD^<br>    git checkout pushed<br>    git revert HEAD</p>
+<h2 id="移动提交记录："><a href="#移动提交记录：" class="headerlink" title="移动提交记录："></a>移动提交记录：</h2><p>1:    git cherry-pick C3 C4 C7</p>
+<p>2:    git rebase –i HEAD~4</p>
+<h2 id="杂项："><a href="#杂项：" class="headerlink" title="杂项："></a>杂项：</h2><p>1:    git checkout master<br>    git cherry-pick C4</p>
+<p>2:    git rebase –i HEAD~2<br>    git commit –amend<br>    git rebase –i HEAD~2<br>    git branch –f master HEAD</p>
+<p>3:    git checkout master<br>    git cherry-pick C2<br>    git commit –amend<br>    git cherry-pick C3</p>
+<p>4:    git checkout C2<br>    git tag v1<br>    git tag v0 C1</p>
+<p>5:    git describe master<br>    git commit</p>
+<h2 id="高级话题"><a href="#高级话题" class="headerlink" title="高级话题:"></a>高级话题:</h2><p>1:    git rebase master bugFix<br>第一个参数是父节点，第二个参数是目标节点。<br>    git rebase bugFix side<br>    git rebase side another<br>    git rebase another master</p>
+<p>2:    git branch bugWork HEAD^^2^</p>
+<p>3:    git checkout one<br>    git cherry-pick C4 C3 C2<br>    git checkout two<br>    git cherry-pick C5 C4 C3 C2<br>    git branch –f three C2</p>
+<h2 id="远程仓库："><a href="#远程仓库：" class="headerlink" title="远程仓库："></a>远程仓库：</h2><p>2:    git commit<br>    git checkout o/master<br>    git commit</p>
+<p>3:    git fetch</p>
+<p>4:    git pull</p>
+<p>5:    git clone<br>    git fakeTeamwork master 2<br>    git commit<br>    git pull</p>
+<p>6:    git commit<br>    git commit<br>    git push</p>
+<p>7:    git clone<br>    git fakeTeamwork<br>    git commit<br>    git pull –rebase<br>    git push</p>
+<h2 id="远程仓库高级："><a href="#远程仓库高级：" class="headerlink" title="远程仓库高级："></a>远程仓库高级：</h2><p>1:    git fetch<br>    git rebase o/master side1<br>    git rebase side1 side2<br>    git rebase side2 side3<br>    git rebase side3 master<br>    git push</p>
+<p>2:    git checkout master<br>    git pull<br>    git merge side1<br>    git merge side2<br>    git merge side3<br>    git push</p>
+<p>3:    git checkout –b side o/master<br>    git commit<br>    git pull –rebase<br>    git push</p>
+<p>4:    git push origin master<br>    git push origin foo</p>
+<p>5:    git push origin master^:foo<br>    git push origin foo:master</p>
+<p>6:    git fetch origin master~1:foo<br>    git fetch origin foo:master<br>    git checkout foo<br>    git merge master  </p>
+<p>7:    git push origin :foo<br>    git fetch origin :bar</p>
+<p>8:    git pull origin bar:foo<br>    git pull origin master:side</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cj8kzaph20009odfyn9rflr4t" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-git远程仓库" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -100,11 +166,21 @@
 <ul>
 <li>有时候远程仓库已经改变了，但是你的本地分支（没有origin/前缀）不会修改。</li>
 </ul>
+<h2 id="6-git-push-origin-source：destination"><a href="#6-git-push-origin-source：destination" class="headerlink" title="6.git push origin source：destination"></a>6.git push origin source：destination</h2><ul>
+<li>这里重点介绍三个参数origin：远程仓库的名字（一般都命名为origin），source：本地仓库的节点，destination：远程仓库的分支名。</li>
+<li>source参数可以不写同时把冒号去掉，如：  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git push origin master</div><div class="line">```  </div><div class="line">意义是将本地仓库master分支推送到远程仓库origin的分支master，并且同步本地origin/master分支。</div><div class="line">* source参数可以带～和^等移动符，如：</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>git push origin master^:foo<br>```<br>此时将master上一个提交历史推送到origin仓库的foo分支。如果foo分支不存在，将直接创建foo分支。</p>
+<h2 id="7-git-fetch-origin-source-destination"><a href="#7-git-fetch-origin-source-destination" class="headerlink" title="7.git fetch origin source:destination"></a>7.git fetch origin source:destination</h2><p>同理git fetch也有这种形式的命令，从这里可以看出fetch跟push其实是方向相反的操作，更深一步你可以用fetch代替push，只是大家都习惯使用fetch拉，push推。</p>
+<ul>
+<li>注意，destination参数如果不加origin/，就表示更新本地分支中的工作区，而不是跟踪远程仓库的</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cj8k5kcgn0008fsvfc1g2z0jk" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cj8kzapgv0003odfyolffwa7b" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -150,7 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cj8k5kcgo0009fsvf6z82lfwl" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cj8kzaph4000bodfyajwd770y" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -203,7 +279,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj8k5kcgl0004fsvffnoekngj" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj8kzapgy0004odfynr5in627" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -257,7 +333,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj8k5kcgm0005fsvfwdorw8sh" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj8kzaph00008odfy2cb2p5px" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -341,7 +417,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj8k5kcgf0001fsvfajkrkrdx" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj8kzapgr0001odfygwp5nhi2" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
@@ -388,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj8k5kcgb0000fsvfjgo14vck" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj8kzapgn0000odfy60igwdaw" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
@@ -428,7 +504,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj8k5kcgq000bfsvfbjme8856" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj8kzaph5000dodfy4bixtonw" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -471,7 +547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cj8k5kcgi0003fsvfyb8gobma" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cj8kzapgz0005odfy831lgavl" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -493,7 +569,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
     </div>
@@ -503,7 +579,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a>
     </div>
@@ -522,9 +598,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/10/10/learn-git-branching参考答案/">learn git branching参考答案</a>
+          </li>
         
           <li>
             <a href="/2017/10/09/git远程仓库/">git远程仓库</a>
@@ -542,10 +622,6 @@
             <a href="/2017/09/25/git简单命令/">git简单命令</a>
           </li>
         
-          <li>
-            <a href="/2017/09/24/ConstraintLayout的使用/">ConstraintLayout的使用</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -559,7 +635,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 JoKing<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

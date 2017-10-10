@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>git版本回退 | JoKing</title>
+  <title>learn git branching参考答案 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.git diff XXX 当我们使用git status查看工作区做了什么修改时，可以使用git diff XXX对修改过的文件XXX查看差异  2.git reset –hard HEAD^版本库回退 首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。 HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2">
+  <meta name="description" content="高级：1:    git checkout C4 2:    git checkout bugFix^ 3:    git branch –f bugFix C0    git branch –f master C6    git checkout HEAD^ 4:    git reset HEAD^    git checkout pushed    git revert HEAD 移动提交记">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git版本回退">
-<meta property="og:url" content="https://joking111111.github.io/2017/09/25/git版本回退/index.html">
+<meta property="og:title" content="learn git branching参考答案">
+<meta property="og:url" content="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/index.html">
 <meta property="og:site_name" content="JoKing">
-<meta property="og:description" content="1.git diff XXX 当我们使用git status查看工作区做了什么修改时，可以使用git diff XXX对修改过的文件XXX查看差异  2.git reset –hard HEAD^版本库回退 首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。 HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2">
-<meta property="og:updated_time" content="2017-10-09T07:27:39.302Z">
+<meta property="og:description" content="高级：1:    git checkout C4 2:    git checkout bugFix^ 3:    git branch –f bugFix C0    git branch –f master C6    git checkout HEAD^ 4:    git reset HEAD^    git checkout pushed    git revert HEAD 移动提交记">
+<meta property="og:updated_time" content="2017-10-10T02:19:35.723Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git版本回退">
-<meta name="twitter:description" content="1.git diff XXX 当我们使用git status查看工作区做了什么修改时，可以使用git diff XXX对修改过的文件XXX查看差异  2.git reset –hard HEAD^版本库回退 首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。 HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2">
+<meta name="twitter:title" content="learn git branching参考答案">
+<meta name="twitter:description" content="高级：1:    git checkout C4 2:    git checkout bugFix^ 3:    git branch –f bugFix C0    git branch –f master C6    git checkout HEAD^ 4:    git reset HEAD^    git checkout pushed    git revert HEAD 移动提交记">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -64,10 +64,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-git版本回退" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-learn-git-branching参考答案" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/09/25/git版本回退/" class="article-date">
-  <time datetime="2017-09-25T14:35:22.000Z" itemprop="datePublished">2017-09-25</time>
+    <a href="/2017/10/10/learn-git-branching参考答案/" class="article-date">
+  <time datetime="2017-10-10T02:15:14.000Z" itemprop="datePublished">2017-10-10</time>
 </a>
     
   </div>
@@ -78,7 +78,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      git版本回退
+      learn git branching参考答案
     </h1>
   
 
@@ -86,26 +86,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-git-diff-XXX"><a href="#1-git-diff-XXX" class="headerlink" title="1.git diff XXX"></a>1.git diff XXX</h2><ul>
-<li>当我们使用git status查看工作区做了什么修改时，可以使用git diff XXX对修改过的文件XXX查看差异</li>
-</ul>
-<h2 id="2-git-reset-–hard-HEAD"><a href="#2-git-reset-–hard-HEAD" class="headerlink" title="2.git reset –hard HEAD^"></a>2.git reset –hard HEAD^</h2><h3 id="版本库回退"><a href="#版本库回退" class="headerlink" title="版本库回退"></a>版本库回退</h3><ul>
-<li>首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。</li>
-<li>HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2表示上两个版本，以此类推。</li>
-<li>由于有–hard这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id，这时需要git reflog来找回commit-id。然后使用以下命令：  <pre><code>git reset --hard commit_id
-</code></pre>即可找回原来的版本。</li>
-</ul>
-<h2 id="3-git-revert-HEAD"><a href="#3-git-revert-HEAD" class="headerlink" title="3.git revert HEAD"></a>3.git revert HEAD</h2><p>回退到上一版本的另一种方法，注意参数HEAD，是回退到上一版本。</p>
-<ul>
-<li>git reset是不会产生新的提交记录，反而有可能抹去提交记录，当我们要推送到远程仓库时，显然没有提交记录怎么推送呢？所以git reset适合操作本地仓库，不需要分享给远程仓库的。</li>
-<li>git revert是会在HEAD节点基础上生成一个提交节点的，也就是新的提交，所以可以推送到远程仓库，别人也能查看到远程记录。</li>
-</ul>
-<h2 id="4-git-branch-f-master-HEAD"><a href="#4-git-branch-f-master-HEAD" class="headerlink" title="4.git branch -f master HEAD^"></a>4.git branch -f master HEAD^</h2><p>在git branch命令后加上参数-f和分支名master以及节点名HEAD^，这样就把master分支强制指向了HEAD的上一版本。即使当前HEAD不在master分支上，使用这个命令也能强制移动master分支的最新提交节点。</p>
+        <h2 id="高级："><a href="#高级：" class="headerlink" title="高级："></a>高级：</h2><p>1:    git checkout C4</p>
+<p>2:    git checkout bugFix^</p>
+<p>3:    git branch –f bugFix C0<br>    git branch –f master C6<br>    git checkout HEAD^</p>
+<p>4:    git reset HEAD^<br>    git checkout pushed<br>    git revert HEAD</p>
+<h2 id="移动提交记录："><a href="#移动提交记录：" class="headerlink" title="移动提交记录："></a>移动提交记录：</h2><p>1:    git cherry-pick C3 C4 C7</p>
+<p>2:    git rebase –i HEAD~4</p>
+<h2 id="杂项："><a href="#杂项：" class="headerlink" title="杂项："></a>杂项：</h2><p>1:    git checkout master<br>    git cherry-pick C4</p>
+<p>2:    git rebase –i HEAD~2<br>    git commit –amend<br>    git rebase –i HEAD~2<br>    git branch –f master HEAD</p>
+<p>3:    git checkout master<br>    git cherry-pick C2<br>    git commit –amend<br>    git cherry-pick C3</p>
+<p>4:    git checkout C2<br>    git tag v1<br>    git tag v0 C1</p>
+<p>5:    git describe master<br>    git commit</p>
+<h2 id="高级话题"><a href="#高级话题" class="headerlink" title="高级话题:"></a>高级话题:</h2><p>1:    git rebase master bugFix<br>第一个参数是父节点，第二个参数是目标节点。<br>    git rebase bugFix side<br>    git rebase side another<br>    git rebase another master</p>
+<p>2:    git branch bugWork HEAD^^2^</p>
+<p>3:    git checkout one<br>    git cherry-pick C4 C3 C2<br>    git checkout two<br>    git cherry-pick C5 C4 C3 C2<br>    git branch –f three C2</p>
+<h2 id="远程仓库："><a href="#远程仓库：" class="headerlink" title="远程仓库："></a>远程仓库：</h2><p>2:    git commit<br>    git checkout o/master<br>    git commit</p>
+<p>3:    git fetch</p>
+<p>4:    git pull</p>
+<p>5:    git clone<br>    git fakeTeamwork master 2<br>    git commit<br>    git pull</p>
+<p>6:    git commit<br>    git commit<br>    git push</p>
+<p>7:    git clone<br>    git fakeTeamwork<br>    git commit<br>    git pull –rebase<br>    git push</p>
+<h2 id="远程仓库高级："><a href="#远程仓库高级：" class="headerlink" title="远程仓库高级："></a>远程仓库高级：</h2><p>1:    git fetch<br>    git rebase o/master side1<br>    git rebase side1 side2<br>    git rebase side2 side3<br>    git rebase side3 master<br>    git push</p>
+<p>2:    git checkout master<br>    git pull<br>    git merge side1<br>    git merge side2<br>    git merge side3<br>    git push</p>
+<p>3:    git checkout –b side o/master<br>    git commit<br>    git pull –rebase<br>    git push</p>
+<p>4:    git push origin master<br>    git push origin foo</p>
+<p>5:    git push origin master^:foo<br>    git push origin foo:master</p>
+<p>6:    git fetch origin master~1:foo<br>    git fetch origin foo:master<br>    git checkout foo<br>    git merge master  </p>
+<p>7:    git push origin :foo<br>    git fetch origin :bar</p>
+<p>8:    git pull origin bar:foo<br>    git pull origin master:side</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj8kzapgy0004odfynr5in627" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cj8kzaph20009odfyn9rflr4t" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -116,19 +129,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/10/08/git高级操作/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          git高级操作
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/09/25/git简单命令/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/10/09/git远程仓库/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">git简单命令</div>
+      <div class="article-nav-title">git远程仓库</div>
     </a>
   
 </nav>
