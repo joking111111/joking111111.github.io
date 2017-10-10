@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://joking111111.github.io/2017/10/09/git远程仓库/index.html">
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="1.git clone ssh此命令克隆远程仓库到当前目录，ssh为https地址。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区">
-<meta property="og:updated_time" content="2017-10-10T02:24:54.268Z">
+<meta property="og:updated_time" content="2017-10-10T02:31:20.181Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git远程仓库">
 <meta name="twitter:description" content="1.git clone ssh此命令克隆远程仓库到当前目录，ssh为https地址。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区">
@@ -106,11 +106,11 @@
 <h2 id="6-git-push-origin-source：destination"><a href="#6-git-push-origin-source：destination" class="headerlink" title="6.git push origin source：destination"></a>6.git push origin source：destination</h2><ul>
 <li><p>这里重点介绍三个参数origin：远程仓库的名字（一般都命名为origin），source：本地仓库的节点，destination：远程仓库的分支名。</p>
 </li>
-<li><p>source参数可以不写同时把冒号去掉，如：  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git push origin master</div><div class="line">```  </div><div class="line">意义是将本地仓库master分支推送到远程仓库origin的分支master，并且同步本地origin/master分支。</div><div class="line"></div><div class="line">* source参数可以带～和^等移动符，如：</div></pre></td></tr></table></figure>
+<li><p>source参数可以不写同时把冒号去掉，如：<br><code>git push origin master</code><br>意义是将本地仓库master分支推送到远程仓库origin的分支master，并且同步本地origin/master分支。</p>
+</li>
+<li><p>source参数可以带～和^等移动符，如：<br><code>git push origin master^:foo</code><br>此时将master上一个提交历史推送到origin仓库的foo分支。如果foo分支不存在，将直接创建foo分支。</p>
 </li>
 </ul>
-<p>git push origin master^:foo<br>```<br>此时将master上一个提交历史推送到origin仓库的foo分支。如果foo分支不存在，将直接创建foo分支。</p>
 <h2 id="7-git-fetch-origin-source-destination"><a href="#7-git-fetch-origin-source-destination" class="headerlink" title="7.git fetch origin source:destination"></a>7.git fetch origin source:destination</h2><p>同理git fetch也有这种形式的命令，从这里可以看出fetch跟push其实是方向相反的操作，更深一步你可以用fetch代替push，只是大家都习惯使用fetch拉，push推。</p>
 <ul>
 <li>注意，destination参数如果不加origin/，就表示更新本地分支中的工作区，而不是跟踪远程仓库的</li>
@@ -119,7 +119,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cj8kzhjzc0008qcfy5imz3flt" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cj8kzlehd0008rlfydtf1gjrx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
