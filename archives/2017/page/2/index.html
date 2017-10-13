@@ -3,21 +3,14 @@
 <head>
   <meta charset="utf-8">
   
-  <title>git高级操作 | JoKing</title>
+  <title>Archives: 2017 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.git cherry-pick A B C 假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？  方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C。切换命令是git checkout dev。之后使用git merge D，git merge">
-<meta name="keywords" content="git">
-<meta property="og:type" content="article">
-<meta property="og:title" content="git高级操作">
-<meta property="og:url" content="https://joking111111.github.io/2017/10/08/git高级操作/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="JoKing">
+<meta property="og:url" content="https://joking111111.github.io/archives/2017/page/2/index.html">
 <meta property="og:site_name" content="JoKing">
-<meta property="og:description" content="1.git cherry-pick A B C 假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？  方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C。切换命令是git checkout dev。之后使用git merge D，git merge">
-<meta property="og:image" content="https://joking111111.github.io/2017/10/08/git高级操作/git%20cherry-pick.png">
-<meta property="og:updated_time" content="2017-10-09T07:42:52.445Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git高级操作">
-<meta name="twitter:description" content="1.git cherry-pick A B C 假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？  方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C。切换命令是git checkout dev。之后使用git merge D，git merge">
-<meta name="twitter:image" content="https://joking111111.github.io/2017/10/08/git高级操作/git%20cherry-pick.png">
+<meta name="twitter:title" content="JoKing">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -66,71 +59,44 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-git高级操作" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/08/git高级操作/" class="article-date">
-  <time datetime="2017-10-08T12:49:21.000Z" itemprop="datePublished">2017-10-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      git高级操作
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2017/09/24/git的常用概念/" class="archive-article-date">
+  <time datetime="2017-09-24T00:28:37.000Z" itemprop="datePublished">Sep 24</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/09/24/git的常用概念/">git的常用概念</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-git-cherry-pick-A-B-C"><a href="#1-git-cherry-pick-A-B-C" class="headerlink" title="1.git cherry-pick A B C"></a>1.git cherry-pick A B C</h2><p><img src="/2017/10/08/git高级操作/git cherry-pick.png" alt="git cherry-pick"></p>
-<p>假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？</p>
-<ul>
-<li>方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C。切换命令是git checkout dev。之后使用git merge D，git merge E。</li>
-<li>方法二：首先也要查看dev上的commit-id，然后在C上使用git cherry-pick D E。</li>
-<li>好像两个方法优劣对比不是很强，但是cherry-pick后跟的commit-id可以有很多个，当需要抓取的feature较多时方法二的优势就出来了。</li>
-<li>注意，如果是 HEAD 上游的提交，那就不能用cherry-pick抓取过来，因为很明显不能将同一分支上的历史提交再次提交。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cj8puk1c7000bwnvffng8opyz" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2017/10/09/git远程仓库/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          git远程仓库
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/09/25/git版本回退/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">git版本回退</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/archives/2017/">&laquo; __('prev')</a><a class="page-number" href="/archives/2017/">1</a><span class="page-number current">2</span>
+  </nav>
 </section>
         
           <aside id="sidebar">
