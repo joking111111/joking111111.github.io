@@ -48,9 +48,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://joking111111.github.io"></form>
@@ -88,10 +88,8 @@
 <li>var —–&gt; variable 可变值，相当于java普通变量。</li>
 </ul>
 <h2 id="2-object与companion-object"><a href="#2-object与companion-object" class="headerlink" title="2.object与companion object"></a>2.object与companion object</h2><ul>
-<li><p>object : 声明static对象，常用作单例。<br>特点：不可定义构造函数。使用时才立即初始化。</p>
-</li>
-<li><p>companion object : 译作伴随对象，可以理解为类静态成员。</p>
-</li>
+<li>object : 声明static对象，常用作单例。<br>特点：不可定义构造函数。使用时才立即初始化。  </li>
+<li>companion object : 译作伴随对象，可以理解为类静态成员。</li>
 </ul>
 <h2 id="3-open与abstract"><a href="#3-open与abstract" class="headerlink" title="3.open与abstract"></a>3.open与abstract</h2><ul>
 <li>open : 声明此类非final，可以继承。如果一个class没有同时声明open，则此类不能被继承，相当于final类。</li>
@@ -102,7 +100,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj8ykvjrh0009ozvffet4s44t" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj8zei3xx0008pbvf5gmmhrgy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -141,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cj8ykvjrj000dozvfvzf4tv89" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cj8zei3y1000dpbvf4vnh0k43" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -207,7 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cj8ykvjrl000gozvfgjruj6eq" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cj8zei3y4000ipbvftr84ygga" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -274,7 +272,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cj8ykvjri000bozvfd7288dbq" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cj8zei3xy0009pbvfa51f8w8w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -326,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cj8ykvjre0005ozvfwwqt15dr" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cj8zei3y0000bpbvft40uuli3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -366,8 +364,7 @@
 <h2 id="2-git-reset-–hard-HEAD"><a href="#2-git-reset-–hard-HEAD" class="headerlink" title="2.git reset –hard HEAD^"></a>2.git reset –hard HEAD^</h2><h3 id="版本库回退"><a href="#版本库回退" class="headerlink" title="版本库回退"></a>版本库回退</h3><ul>
 <li>首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。</li>
 <li>HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2表示上两个版本，以此类推。</li>
-<li>由于有–hard这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id，这时需要git reflog来找回commit-id。然后使用以下命令：  <pre><code>git reset --hard commit_id
-</code></pre>即可找回原来的版本。</li>
+<li>由于有–hard这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id，这时需要git reflog来找回commit-id。然后使用以下命令：<br><code>git reset --hard commit_id</code><br>即可找回原来的版本。</li>
 </ul>
 <h2 id="3-git-revert-HEAD"><a href="#3-git-revert-HEAD" class="headerlink" title="3.git revert HEAD"></a>3.git revert HEAD</h2><p>回退到上一版本的另一种方法，注意参数HEAD，是回退到上一版本。</p>
 <ul>
@@ -379,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj8ykvjrd0004ozvfn5i0npxa" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj8zei3xn0001pbvf2r4f6q5l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -414,7 +411,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-git-init"><a href="#1-git-init" class="headerlink" title="1.git init"></a>1.git init</h2><p>初始化本地仓库。</p>
-<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区。可以使用通配符如<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git add *.txt</div></pre></td></tr></table></figure></p>
+<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区。可以使用通配符如<br><code>git add *.txt</code></p>
 <h2 id="3-git-commit-m-“XXX”"><a href="#3-git-commit-m-“XXX”" class="headerlink" title="3.git commit -m “XXX”"></a>3.git commit -m “XXX”</h2><p>把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。</p>
 <h2 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h2><p>将工作区与版本库对比，提示差异的信息。</p>
 <h2 id="5-git-log"><a href="#5-git-log" class="headerlink" title="5.git log"></a>5.git log</h2><p>输出每次版本库的变动，从最近开始输出。可以查看每个版本的SHA1数值。</p>
@@ -433,7 +430,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj8ykvjrc0003ozvfrqe7hz3m" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj8zei3xs0003pbvfok0pwct5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -517,7 +514,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj8ykvjr90001ozvfsqwieazq" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj8zei3xv0005pbvf4d02px4n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
@@ -564,7 +561,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj8ykvjr50000ozvfhkp4docs" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj8zei3xi0000pbvfugz3mjy1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
@@ -604,7 +601,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj8ykvjrm000iozvf40m8kn87" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj8zei3y3000gpbvfs2yvply9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -630,7 +627,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
     </div>
@@ -640,7 +637,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/kotlin/" style="font-size: 15px;">kotlin</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a>
     </div>
@@ -659,7 +656,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -696,7 +693,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 JoKing<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
