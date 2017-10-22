@@ -61,6 +61,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git简单命令" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/25/git简单命令/" class="article-date">
+  <time datetime="2017-09-25T00:17:14.000Z" itemprop="datePublished">2017-09-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/25/git简单命令/">git简单命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-git-init"><a href="#1-git-init" class="headerlink" title="1.git init"></a>1.git init</h2><p>初始化本地仓库。</p>
+<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区。可以使用通配符如<br><code>git add *.txt</code></p>
+<h2 id="3-git-commit-m-“XXX”"><a href="#3-git-commit-m-“XXX”" class="headerlink" title="3.git commit -m “XXX”"></a>3.git commit -m “XXX”</h2><p>把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。</p>
+<h2 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h2><p>将工作区与版本库对比，提示差异的信息。</p>
+<h2 id="5-git-log"><a href="#5-git-log" class="headerlink" title="5.git log"></a>5.git log</h2><p>输出每次版本库的变动，从最近开始输出。可以查看每个版本的SHA1数值。</p>
+<h2 id="6-git-reflog"><a href="#6-git-reflog" class="headerlink" title="6.git reflog"></a>6.git reflog</h2><p>查看命令历史，log命令是查看提交历史，这两个命令有所不同。</p>
+<h2 id="7-git-checkout-dev"><a href="#7-git-checkout-dev" class="headerlink" title="7.git checkout dev"></a>7.git checkout dev</h2><ul>
+<li>将HEAD指向dev分支最近节点。</li>
+<li>参数也可以使用SHA1数值，这样可以准确地切到想要的节点。</li>
+<li>参数也可以使用HEAD^、HEAD~2、dev^、dev~2等。</li>
+</ul>
+<h2 id="8-git-branch-b-dev"><a href="#8-git-branch-b-dev" class="headerlink" title="8.git branch -b dev"></a>8.git branch -b dev</h2><p>这条指令相当于：<br>git branch dev<br>git checkout dev<br>在当前HEAD指向的节点创建名为dev的分支并且将HEAD指向它。</p>
+<h2 id="9-git-merge-dev"><a href="#9-git-merge-dev" class="headerlink" title="9.git merge dev"></a>9.git merge dev</h2><ul>
+<li>在HEAD指向节点基础上合并dev的内容，生成新的一次提交。</li>
+<li>同理，参数也可以使用SHA1，HEAD^、HEAD~2等。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj925n4h8000cw0vfttsgdkgd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ConstraintLayout的使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/24/ConstraintLayout的使用/" class="article-date">
@@ -133,7 +187,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj925h2h70003u3vfgyvwcog8" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj925n4h20003w0vf227x9mcx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
@@ -180,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj925h2h40001u3vfxy0usg04" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj925n4gz0001w0vfv6an2elc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
@@ -220,7 +274,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj925h2hl000ou3vfunls5mul" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj925n4hg000ow0vf7keqeo1e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -263,7 +317,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cj925h2he000cu3vfewefyimt" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cj925n4h7000aw0vf36797if2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
