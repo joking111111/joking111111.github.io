@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>kotlin笔记 | JoKing</title>
+  <title>RecyclerView笔记 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.val与var val —–&amp;gt; value 不可变值，相当于java中final变量。 var —–&amp;gt; variable 可变值，相当于java普通变量。  2.object与companion object object : 声明static对象，常用作单例。特点：不可定义构造函数。使用时才立即初始化。   companion object : 译作伴随对象，可以理解为类静态成员">
-<meta name="keywords" content="kotlin">
+  <meta name="description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml会提示新api）：recyclerView.setNestedScrollingEnabled(false);  2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有">
+<meta name="keywords" content="UI">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kotlin笔记">
-<meta property="og:url" content="https://joking111111.github.io/2017/10/11/kotlin笔记/index.html">
+<meta property="og:title" content="RecyclerView笔记">
+<meta property="og:url" content="https://joking111111.github.io/2017/10/22/RecyclerView笔记/index.html">
 <meta property="og:site_name" content="JoKing">
-<meta property="og:description" content="1.val与var val —–&amp;gt; value 不可变值，相当于java中final变量。 var —–&amp;gt; variable 可变值，相当于java普通变量。  2.object与companion object object : 声明static对象，常用作单例。特点：不可定义构造函数。使用时才立即初始化。   companion object : 译作伴随对象，可以理解为类静态成员">
-<meta property="og:updated_time" content="2017-10-20T04:31:40.305Z">
+<meta property="og:description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml会提示新api）：recyclerView.setNestedScrollingEnabled(false);  2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有">
+<meta property="og:updated_time" content="2017-10-22T02:44:27.170Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kotlin笔记">
-<meta name="twitter:description" content="1.val与var val —–&amp;gt; value 不可变值，相当于java中final变量。 var —–&amp;gt; variable 可变值，相当于java普通变量。  2.object与companion object object : 声明static对象，常用作单例。特点：不可定义构造函数。使用时才立即初始化。   companion object : 译作伴随对象，可以理解为类静态成员">
+<meta name="twitter:title" content="RecyclerView笔记">
+<meta name="twitter:description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml会提示新api）：recyclerView.setNestedScrollingEnabled(false);  2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -64,10 +64,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-kotlin笔记" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-RecyclerView笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/10/11/kotlin笔记/" class="article-date">
-  <time datetime="2017-10-11T02:07:05.000Z" itemprop="datePublished">2017-10-11</time>
+    <a href="/2017/10/22/RecyclerView笔记/" class="article-date">
+  <time datetime="2017-10-22T01:45:58.000Z" itemprop="datePublished">2017-10-22</time>
 </a>
     
   </div>
@@ -78,7 +78,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      kotlin笔记
+      RecyclerView笔记
     </h1>
   
 
@@ -86,27 +86,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-val与var"><a href="#1-val与var" class="headerlink" title="1.val与var"></a>1.val与var</h2><ul>
-<li>val —–&gt; value 不可变值，相当于java中final变量。</li>
-<li>var —–&gt; variable 可变值，相当于java普通变量。</li>
+        <h2 id="1-全展开"><a href="#1-全展开" class="headerlink" title="1.全展开"></a>1.全展开</h2><ul>
+<li>确保父容器是NestedScrollView</li>
+<li>在代码中设置（在xml会提示新api）：<br><code>recyclerView.setNestedScrollingEnabled(false);</code></li>
 </ul>
-<h2 id="2-object与companion-object"><a href="#2-object与companion-object" class="headerlink" title="2.object与companion object"></a>2.object与companion object</h2><ul>
-<li>object : 声明static对象，常用作单例。<br>特点：不可定义构造函数。使用时才立即初始化。  </li>
-<li>companion object : 译作伴随对象，可以理解为类静态成员。</li>
+<h2 id="2-刷新Item中的ProgressBar"><a href="#2-刷新Item中的ProgressBar" class="headerlink" title="2.刷新Item中的ProgressBar"></a>2.刷新Item中的ProgressBar</h2><ul>
+<li>RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有改变Alpha值的动画。所以刷新ProgressBar时会出现闪烁现象，因此要去掉或者自己实现ItemAnimator。<br><code>recyclerView.setItemAnimator(null);</code></li>
 </ul>
-<h2 id="3-open与abstract"><a href="#3-open与abstract" class="headerlink" title="3.open与abstract"></a>3.open与abstract</h2><ul>
-<li>open : 声明此类非final，可以继承。如果一个class没有同时声明open，则此类不能被继承，相当于final类。</li>
-<li>abstract : 跟java抽象类一样，可以有未实现方法。而open不能有未实现方法。</li>
-<li>题外话：那么单例object能不能被继承呢？<br>答案是不能的，因为object类g</li>
+<h2 id="3-滑到最底部"><a href="#3-滑到最底部" class="headerlink" title="3.滑到最底部"></a>3.滑到最底部</h2><ul>
+<li>这种场景默认方向是vertical，你也可以改成Horizontal，原理一样的。</li>
+<li>判断是否到底部：</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public static boolean isSlideToBottom(RecyclerView recyclerView) &#123;</div><div class="line">  if (recyclerView == null) return false;</div><div class="line">  if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()</div><div class="line">                &gt;= recyclerView.computeVerticalScrollRange())</div><div class="line">     return true;</div><div class="line">   return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>滑到最底部：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (isSlideToBottom(content)) &#123;</div><div class="line">   recyclerView.smoothScrollToPosition(offset);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>offset是系统常量。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj925h2hj000ku3vfyl4eolkv" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cj925h2h90004u3vfe0tuyjpb" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
 
     </footer>
   </div>
@@ -114,19 +118,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/10/22/Activity生命周期与finish方法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Activity生命周期与finish方法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/10/10/kotlin学习资料/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/10/22/Handler的存在意义/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">kotlin学习资料</div>
+      <div class="article-nav-title">Handler的存在意义</div>
     </a>
   
 </nav>

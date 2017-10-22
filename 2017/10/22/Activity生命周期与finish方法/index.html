@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>git高级操作 | JoKing</title>
+  <title>Activity生命周期与finish方法 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.git cherry-pick A B C 假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？  方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C。切换命令是git checkout dev。之后使用git merge D，git merge">
-<meta name="keywords" content="git">
+  <meta name="description" content="1.Activity的生命周期图片源自官方文档 2.finish方法 在onCreate()中调用finish()，会走onDestroy()。 在onStart()中调用finish()，会走onStop()。 在onResume()中调用finish()，会走onPause()。  3.解释 结合生命周期图，要重点理解生命周期是成对的，或者说是不同级别的。比如：onCreate和onDestr">
+<meta name="keywords" content="Android基础">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git高级操作">
-<meta property="og:url" content="https://joking111111.github.io/2017/10/08/git高级操作/index.html">
+<meta property="og:title" content="Activity生命周期与finish方法">
+<meta property="og:url" content="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/index.html">
 <meta property="og:site_name" content="JoKing">
-<meta property="og:description" content="1.git cherry-pick A B C 假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？  方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C。切换命令是git checkout dev。之后使用git merge D，git merge">
-<meta property="og:image" content="https://joking111111.github.io/2017/10/08/git高级操作/git%20cherry-pick.png">
-<meta property="og:updated_time" content="2017-10-19T14:44:41.766Z">
+<meta property="og:description" content="1.Activity的生命周期图片源自官方文档 2.finish方法 在onCreate()中调用finish()，会走onDestroy()。 在onStart()中调用finish()，会走onStop()。 在onResume()中调用finish()，会走onPause()。  3.解释 结合生命周期图，要重点理解生命周期是成对的，或者说是不同级别的。比如：onCreate和onDestr">
+<meta property="og:image" content="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/activity_lifecycle.png">
+<meta property="og:updated_time" content="2017-10-22T01:22:29.400Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git高级操作">
-<meta name="twitter:description" content="1.git cherry-pick A B C 假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？  方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C。切换命令是git checkout dev。之后使用git merge D，git merge">
-<meta name="twitter:image" content="https://joking111111.github.io/2017/10/08/git高级操作/git%20cherry-pick.png">
+<meta name="twitter:title" content="Activity生命周期与finish方法">
+<meta name="twitter:description" content="1.Activity的生命周期图片源自官方文档 2.finish方法 在onCreate()中调用finish()，会走onDestroy()。 在onStart()中调用finish()，会走onStop()。 在onResume()中调用finish()，会走onPause()。  3.解释 结合生命周期图，要重点理解生命周期是成对的，或者说是不同级别的。比如：onCreate和onDestr">
+<meta name="twitter:image" content="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/activity_lifecycle.png">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -66,10 +66,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-git高级操作" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Activity生命周期与finish方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/10/08/git高级操作/" class="article-date">
-  <time datetime="2017-10-08T12:49:21.000Z" itemprop="datePublished">2017-10-08</time>
+    <a href="/2017/10/22/Activity生命周期与finish方法/" class="article-date">
+  <time datetime="2017-10-22T01:05:44.000Z" itemprop="datePublished">2017-10-22</time>
 </a>
     
   </div>
@@ -80,7 +80,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      git高级操作
+      Activity生命周期与finish方法
     </h1>
   
 
@@ -88,28 +88,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-git-cherry-pick-A-B-C"><a href="#1-git-cherry-pick-A-B-C" class="headerlink" title="1.git cherry-pick A B C"></a>1.git cherry-pick A B C</h2><p><img src="/2017/10/08/git高级操作/git cherry-pick.png" alt="git cherry-pick"></p>
-<p>假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？</p>
-<ul>
-<li>方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C。切换命令是git checkout dev。之后使用git merge D，git merge E。</li>
-<li>方法二：首先也要查看dev上的commit-id，然后在C上使用git cherry-pick D E。</li>
-<li>好像两个方法优劣对比不是很强，但是cherry-pick后跟的commit-id可以有很多个，当需要抓取的feature较多时方法二的优势就出来了。</li>
-<li>注意，如果是 HEAD 上游的提交，那就不能用cherry-pick抓取过来，因为很明显不能将同一分支上的历史提交再次提交。</li>
+        <h2 id="1-Activity的生命周期"><a href="#1-Activity的生命周期" class="headerlink" title="1.Activity的生命周期"></a>1.Activity的生命周期</h2><p>图片源自官方文档<br><img src="/2017/10/22/Activity生命周期与finish方法/activity_lifecycle.png" alt="activity_lifecycle"></p>
+<h2 id="2-finish方法"><a href="#2-finish方法" class="headerlink" title="2.finish方法"></a>2.finish方法</h2><ul>
+<li>在onCreate()中调用finish()，会走onDestroy()。</li>
+<li>在onStart()中调用finish()，会走onStop()。</li>
+<li>在onResume()中调用finish()，会走onPause()。</li>
 </ul>
-<h2 id="2-git-rebase"><a href="#2-git-rebase" class="headerlink" title="2.git rebase"></a>2.git rebase</h2><ul>
-<li>多人协作大家基本习惯了merge的方式进行提交代码。但是最大的弊端就是提交历史变得有许多平行线。实际的确也是并行开发，但是当要追踪修改历史的时候，嗯，你可以冲上一杯咖啡了哈哈哈。</li>
-<li>先更新master分支，在dev分支上使用命令<br><code>git rebase master</code><br>这样看起来就像是在master上的节点检出的分支又再次合并回主分支，这样整个提交树就非常线性，易于追踪。</li>
-<li>另一个操作是<br><code>git rebase -i commit-id</code><br>这个命令可以“可视化操作提交历史”，有丢弃，修改，排序等功能。本人觉得在命令行操作哪有什么可视化操作哈哈哈。这个命令可以使用上述的cherry-pick命令代替。</li>
+<h2 id="3-解释"><a href="#3-解释" class="headerlink" title="3.解释"></a>3.解释</h2><ul>
+<li>结合生命周期图，要重点理解生命周期是成对的，或者说是不同级别的。比如：onCreate和onDestroy为第一阶梯，onStart和onStop是第二阶梯，onResume和onPause是第三阶梯。对于finish方法来说，应该是尽快完成调用，从用户体验来说，这是最优策略。所以如果在第一阶梯上，那么直接走下第一阶梯就可以了，没必要再走上第二第三阶梯。</li>
+<li>为什么生命周期周期要是成对的？我的理解有两点：<br>一、确保资源的正确释放。成对能保证资源生命周期正常。<br>二、便于系统处理维护生命周期。</li>
+<li>以上均为个人想法，错了不要怪我哈哈哈。</li>
 </ul>
-<h2 id="3-git-stash"><a href="#3-git-stash" class="headerlink" title="3.git stash"></a>3.git stash</h2><p>这个命令挺有用，尤其是还没做完手头上的工作，又不得不做别的事（切换到别的分支治疗），并且不想因此commit，那么这系列命令对你很有用！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1.git stash 将当前未commit的修改压栈</div><div class="line">2.git stash list 查看栈有哪些stash</div><div class="line">3.git stash pop 弹出（恢复）栈顶修改</div><div class="line">4.git stash clear 清空栈</div></pre></td></tr></table></figure></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cj925h2hh000gu3vfszdt1w07" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cj925h2h00000u3vfg0jaxfu9" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
 
     </footer>
   </div>
@@ -117,19 +114,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/10/09/git远程仓库/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/10/22/Handler的存在意义/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          git远程仓库
+          Handler的存在意义
         
       </div>
     </a>
   
   
-    <a href="/2017/09/25/git版本回退/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/10/11/kotlin笔记/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">git版本回退</div>
+      <div class="article-nav-title">kotlin笔记</div>
     </a>
   
 </nav>
