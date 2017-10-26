@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://joking111111.github.io/2017/10/11/kotlin笔记/index.html">
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="1.val与var val —–&amp;gt; value 不可变值，相当于java中final变量。 var —–&amp;gt; variable 可变值，相当于java普通变量。  2.object与companion object object : 声明static对象，常用作单例。特点：不可定义构造函数。使用时才立即初始化。   companion object : 译作伴随对象，可以理解为类静态成员">
-<meta property="og:updated_time" content="2017-10-20T04:31:40.305Z">
+<meta property="og:updated_time" content="2017-10-26T01:23:41.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kotlin笔记">
 <meta name="twitter:description" content="1.val与var val —–&amp;gt; value 不可变值，相当于java中final变量。 var —–&amp;gt; variable 可变值，相当于java普通变量。  2.object与companion object object : 声明static对象，常用作单例。特点：不可定义构造函数。使用时才立即初始化。   companion object : 译作伴随对象，可以理解为类静态成员">
@@ -97,13 +97,13 @@
 <h2 id="3-open与abstract"><a href="#3-open与abstract" class="headerlink" title="3.open与abstract"></a>3.open与abstract</h2><ul>
 <li>open : 声明此类非final，可以继承。如果一个class没有同时声明open，则此类不能被继承，相当于final类。</li>
 <li>abstract : 跟java抽象类一样，可以有未实现方法。而open不能有未实现方法。</li>
-<li>题外话：那么单例object能不能被继承呢？<br>答案是不能的，因为object类g</li>
+<li>题外话：那么单例object能不能被继承呢？<br>答案是不能的，因为object类没有共有构造函数，只有私有构造函数，子类无法调用父类的构造函数，因而无法被继承。这与java是一样的。</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj925n4hd000kw0vf6x0majcs" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj97sld5s000dnlfybf108hav" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>

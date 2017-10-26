@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://joking111111.github.io/2017/10/22/Handler的存在意义/index.html">
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="一、Handler的实现 创建：获取当前线程，通过线程的ThreadLocalMap获取Looper，关联Looper和Looper里面的MessageQueue。 投递：每次封装成Message对象投递进MessageQueue。 处理：这部分工作由Looper完成，它不断从MessageQueue中取Message。Message中有Callback就执行，没有就调用Message中的targ">
-<meta property="og:updated_time" content="2017-10-22T01:43:35.280Z">
+<meta property="og:updated_time" content="2017-10-26T01:27:06.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Handler的存在意义">
 <meta name="twitter:description" content="一、Handler的实现 创建：获取当前线程，通过线程的ThreadLocalMap获取Looper，关联Looper和Looper里面的MessageQueue。 投递：每次封装成Message对象投递进MessageQueue。 处理：这部分工作由Looper完成，它不断从MessageQueue中取Message。Message中有Callback就执行，没有就调用Message中的targ">
@@ -96,13 +96,14 @@
 <ul>
 <li>为什么我们可以使用View.post(Runnable)这种方式获取一个View的实际宽高？</li>
 <li>View的宽高至少要通过Measure方法执行完之后才能获取，并且有可能在Layout的时候被触发重新测量。所以只有View真正显示的时候获取的宽高是最准确的。</li>
-<li>View的绘制流程是借助Handler的事件处理机制。View.post(Runnable)</li>
+<li>View的绘制流程是借助Handler的事件处理机制。</li>
+<li>View.post(Runnable)将这个任务投递到串行队列中去，因此当这个任务被执行时，前面的View绘制任务已经执行完，这时候调用View.getWidth(),View.getHeight()肯定是有值并且准确的。</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cj925n4h30004w0vfkev42ete" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cj97sld5k0003nlfymzhwdj06" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
