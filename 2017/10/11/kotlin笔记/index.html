@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://joking111111.github.io/2017/10/11/kotlin笔记/index.html">
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="1.val与var val —–&amp;gt; value 不可变值，相当于java中final变量。 var —–&amp;gt; variable 可变值，相当于java普通变量。  2.object与companion object object : 声明static对象，常用作单例。特点：不可定义构造函数。使用时才立即初始化。   companion object : 译作伴随对象，可以理解为类静态成员">
-<meta property="og:updated_time" content="2017-10-26T01:23:41.750Z">
+<meta property="og:updated_time" content="2017-10-31T07:52:32.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kotlin笔记">
 <meta name="twitter:description" content="1.val与var val —–&amp;gt; value 不可变值，相当于java中final变量。 var —–&amp;gt; variable 可变值，相当于java普通变量。  2.object与companion object object : 声明static对象，常用作单例。特点：不可定义构造函数。使用时才立即初始化。   companion object : 译作伴随对象，可以理解为类静态成员">
@@ -55,7 +55,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://joking111111.github.io"></form>
@@ -99,11 +99,16 @@
 <li>abstract : 跟java抽象类一样，可以有未实现方法。而open不能有未实现方法。</li>
 <li>题外话：那么单例object能不能被继承呢？<br>答案是不能的，因为object类没有共有构造函数，只有私有构造函数，子类无法调用父类的构造函数，因而无法被继承。这与java是一样的。</li>
 </ul>
+<h2 id="4-操作符"><a href="#4-操作符" class="headerlink" title="4.操作符==,!=,===,!==,[]"></a>4.操作符==,!=,===,!==,[]</h2><h3 id="以下均为在kotlin的意义"><a href="#以下均为在kotlin的意义" class="headerlink" title="以下均为在kotlin的意义"></a>以下均为在kotlin的意义</h3><ul>
+<li>==：重载为a?.equals(b) ?: (b===null) ，即调用equals。</li>
+<li>===：判断两个引用是否相等。</li>
+<li>[]：重载get，set方法。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj97sld5s000dnlfybf108hav" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj9fbfwx9000ee9fyut8q4q3n" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -115,7 +120,7 @@
 <nav id="article-nav">
   
     <a href="/2017/10/22/Activity生命周期与finish方法/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Nieuwer</strong>
       <div class="article-nav-title">
         
           Activity生命周期与finish方法
@@ -125,7 +130,7 @@
   
   
     <a href="/2017/10/10/kotlin学习资料/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ouder</strong>
       <div class="article-nav-title">kotlin学习资料</div>
     </a>
   
@@ -143,7 +148,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android基础/">Android基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
     </div>
@@ -162,7 +167,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
@@ -172,7 +177,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
