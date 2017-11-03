@@ -61,6 +61,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java集合容器之HashMap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/03/Java集合容器之HashMap/" class="article-date">
+  <time datetime="2017-11-03T07:31:19.000Z" itemprop="datePublished">2017-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/03/Java集合容器之HashMap/">Java集合容器之HashMap</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-继承关系"><a href="#1-继承关系" class="headerlink" title="1.继承关系"></a>1.继承关系</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;</div><div class="line">    implements Map&lt;K,V&gt;, Cloneable, Serializable &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>继承自AbstractMap。AbstractMap实现了Map接口的方法，如增删改查方法。</p>
+<h2 id="2-Entry类"><a href="#2-Entry类" class="headerlink" title="2.Entry类"></a>2.Entry类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</div><div class="line">        final int hash;</div><div class="line">        final K key;</div><div class="line">        V value;</div><div class="line">        Node&lt;K,V&gt; next;</div><div class="line"></div><div class="line">        Node(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</div><div class="line">          ...</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public final K getKey()        &#123; return key; &#125;</div><div class="line">        public final V getValue()      &#123; return value; &#125;</div><div class="line">        public final String toString() &#123; return key + &quot;=&quot; + value; &#125;</div><div class="line"></div><div class="line">        public final int hashCode() &#123;</div><div class="line">            return Objects.hashCode(key) ^ Objects.hashCode(value);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public final V setValue(V newValue) &#123;</div><div class="line">		    ...</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public final boolean equals(Object o) &#123;</div><div class="line">            if (o == this)</div><div class="line">                return true;</div><div class="line">            if (o instanceof Map.Entry) &#123;</div><div class="line">                Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</div><div class="line">                if (Objects.equals(key, e.getKey()) &amp;&amp;</div><div class="line">                    Objects.equals(value, e.getValue()))</div><div class="line">                    return true;</div><div class="line">            &#125;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>final int hash;这个变量代表这个Entry的key的hash结果。</li>
+<li>Node<k,v> next;这个变量表明这是一个单链表。</k,v></li>
+</ul>
+<h2 id="3-图像理解数据结构"><a href="#3-图像理解数据结构" class="headerlink" title="3.图像理解数据结构"></a>3.图像理解数据结构</h2><p><img src="/2017/11/03/Java集合容器之HashMap/HashMap.png" alt="HashMap"></p>
+<ul>
+<li>左侧是一个一位数组，Hash表。Entry中的hash指的的就是这个数组的下标，用于快速查找或插入。</li>
+<li>从数组的每个节点开始延伸一条单链表。Entry中的next构成这条单链表。</li>
+</ul>
+<h2 id="4-重要方法"><a href="#4-重要方法" class="headerlink" title="4.重要方法"></a>4.重要方法</h2><h3 id="put-key，value"><a href="#put-key，value" class="headerlink" title="put(key，value)"></a>put(key，value)</h3><p>大致流程是：<br>1.判断是否要扩容（resize方法）；<br>2.根据key的hash值找到一维数组的下标从而找到链表的头，当然key为null时要特殊处理；<br>3.遍历单链表，判断是否有Entry的key与参数key一摸一样，如果一样直接更新Entry，返回旧的value值，否则遍历到链尾追加节点；<br>4.更新成员变量如size，调用resize方法，返回null，说明时增加了新节点，而不是更新节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">public V put(K key, V value) &#123;</div><div class="line">        return putVal(hash(key), key, value, false, true);</div><div class="line">&#125;</div><div class="line"></div><div class="line">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</div><div class="line">                   boolean evict) &#123;</div><div class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</div><div class="line">        if ((tab = table) == null || (n = tab.length) == 0)</div><div class="line">            n = (tab = resize()).length;</div><div class="line">        if ((p = tab[i = (n - 1) &amp; hash]) == null)</div><div class="line">            tab[i] = newNode(hash, key, value, null);</div><div class="line">        else &#123;</div><div class="line">            Node&lt;K,V&gt; e; K k;</div><div class="line">            if (p.hash == hash &amp;&amp;</div><div class="line">                ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                e = p;</div><div class="line">            else if (p instanceof TreeNode)</div><div class="line">                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</div><div class="line">            else &#123;</div><div class="line">                for (int binCount = 0; ; ++binCount) &#123;</div><div class="line">                    if ((e = p.next) == null) &#123;</div><div class="line">                        p.next = newNode(hash, key, value, null);</div><div class="line">                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</div><div class="line">                            treeifyBin(tab, hash);</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                    if (e.hash == hash &amp;&amp;</div><div class="line">                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                        break;</div><div class="line">                    p = e;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            if (e != null) &#123; // existing mapping for key</div><div class="line">                V oldValue = e.value;</div><div class="line">                if (!onlyIfAbsent || oldValue == null)</div><div class="line">                    e.value = value;</div><div class="line">                afterNodeAccess(e);</div><div class="line">                return oldValue;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        ++modCount;</div><div class="line">        if (++size &gt; threshold)</div><div class="line">            resize();</div><div class="line">        afterNodeInsertion(evict);</div><div class="line">        return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="get-key"><a href="#get-key" class="headerlink" title="get(key)"></a>get(key)</h3><p>大致流程是：<br>1.根据key的hash结果查找Hash表；<br>2.遍历单链表，如果找到，返回Entry的value值，否则返回null。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public V get(Object key) &#123;</div><div class="line">        Node&lt;K,V&gt; e;</div><div class="line">        return (e = getNode(hash(key), key)) == null ? null : e.value;</div><div class="line">&#125;</div><div class="line"></div><div class="line">final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</div><div class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</div><div class="line">        if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;</div><div class="line">            (first = tab[(n - 1) &amp; hash]) != null) &#123;</div><div class="line">            if (first.hash == hash &amp;&amp; // always check first node</div><div class="line">                ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                return first;</div><div class="line">            if ((e = first.next) != null) &#123;</div><div class="line">                if (first instanceof TreeNode)</div><div class="line">                    return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</div><div class="line">                do &#123;</div><div class="line">                    if (e.hash == hash &amp;&amp;</div><div class="line">                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                        return e;</div><div class="line">                &#125; while ((e = e.next) != null);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="5-补充"><a href="#5-补充" class="headerlink" title="5.补充"></a>5.补充</h2><ul>
+<li>HashMap后来追加了红黑树实现的Entry（代码中的TreeNode类），有兴趣的读者请自行查阅。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/11/03/Java集合容器之HashMap/" data-id="cj9jnfp9r0004qhvfa6e27ifw" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java集合容器/">Java集合容器</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Java集合容器之LinkedHashMap" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/01/Java集合容器之LinkedHashMap/" class="article-date">
@@ -105,7 +162,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/01/Java集合容器之LinkedHashMap/" data-id="cj9gq49j700037ffyrh38i3nk" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/11/01/Java集合容器之LinkedHashMap/" data-id="cj9jnfp9t0008qhvf4srmjc7w" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java集合容器/">Java集合容器</a></li></ul>
@@ -160,7 +217,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cj9gq49jf000f7ffympj06oz1" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cj9jnfp9y000gqhvf2ddebmlm" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
@@ -211,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cj9gq49j900057ffysgrzqgv9" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cj9jnfp9r0005qhvfoih02hw2" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
@@ -259,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cj9gq49j300017ffy5tcmefx0" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cj9jnfp9i0000qhvfshmqip97" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
@@ -318,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj9gq49ji000m7ffy5elkezud" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj9jnfpa4000rqhvf036htd05" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -357,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cj9gq49jh000k7ffyoymiiup4" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cj9jnfpa2000nqhvf9s1l3mbl" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -423,7 +480,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cj9gq49jk000o7ffy919izw2x" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cj9jnfpa3000pqhvfgfoo0yp5" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -490,59 +547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cj9gq49je000d7ffyfjydx5s0" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git高级操作" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/08/git高级操作/" class="article-date">
-  <time datetime="2017-10-08T12:49:21.000Z" itemprop="datePublished">2017-10-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/08/git高级操作/">git高级操作</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-git-cherry-pick-A-B-C"><a href="#1-git-cherry-pick-A-B-C" class="headerlink" title="1.git cherry-pick A B C"></a>1.git cherry-pick A B C</h2><p><img src="/2017/10/08/git高级操作/git cherry-pick.png" alt="git cherry-pick"></p>
-<p>假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？</p>
-<ul>
-<li>方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C。切换命令是git checkout dev。之后使用git merge D，git merge E。</li>
-<li>方法二：首先也要查看dev上的commit-id，然后在C上使用git cherry-pick D E。</li>
-<li>好像两个方法优劣对比不是很强，但是cherry-pick后跟的commit-id可以有很多个，当需要抓取的feature较多时方法二的优势就出来了。</li>
-<li>注意，如果是 HEAD 上游的提交，那就不能用cherry-pick抓取过来，因为很明显不能将同一分支上的历史提交再次提交。</li>
-</ul>
-<h2 id="2-git-rebase"><a href="#2-git-rebase" class="headerlink" title="2.git rebase"></a>2.git rebase</h2><ul>
-<li>多人协作大家基本习惯了merge的方式进行提交代码。但是最大的弊端就是提交历史变得有许多平行线。实际的确也是并行开发，但是当要追踪修改历史的时候，嗯，你可以冲上一杯咖啡了哈哈哈。</li>
-<li>先更新master分支，在dev分支上使用命令<br><code>git rebase master</code><br>这样看起来就像是在master上的节点检出的分支又再次合并回主分支，这样整个提交树就非常线性，易于追踪。</li>
-<li>另一个操作是<br><code>git rebase -i commit-id</code><br>这个命令可以“可视化操作提交历史”，有丢弃，修改，排序等功能。本人觉得在命令行操作哪有什么可视化操作哈哈哈。这个命令可以使用上述的cherry-pick命令代替。</li>
-</ul>
-<h2 id="3-git-stash"><a href="#3-git-stash" class="headerlink" title="3.git stash"></a>3.git stash</h2><p>这个命令挺有用，尤其是还没做完手头上的工作，又不得不做别的事（切换到别的分支治疗），并且不想因此commit，那么这系列命令对你很有用！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1.git stash 将当前未commit的修改压栈</div><div class="line">2.git stash list 查看栈有哪些stash</div><div class="line">3.git stash pop 弹出（恢复）栈顶修改</div><div class="line">4.git stash clear 清空栈</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cj9gq49jg000h7ffyx01mooeo" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cj9jnfpa0000lqhvft0kv5dvs" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -580,7 +585,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android基础/" style="font-size: 15px;">Android基础</a> <a href="/tags/Java集合容器/" style="font-size: 10px;">Java集合容器</a> <a href="/tags/UI/" style="font-size: 15px;">UI</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/kotlin/" style="font-size: 15px;">kotlin</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a>
+      <a href="/tags/Android基础/" style="font-size: 15px;">Android基础</a> <a href="/tags/Java集合容器/" style="font-size: 15px;">Java集合容器</a> <a href="/tags/UI/" style="font-size: 15px;">UI</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/kotlin/" style="font-size: 15px;">kotlin</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a>
     </div>
   </div>
 
@@ -602,6 +607,10 @@
       <ul>
         
           <li>
+            <a href="/2017/11/03/Java集合容器之HashMap/">Java集合容器之HashMap</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/01/Java集合容器之LinkedHashMap/">Java集合容器之LinkedHashMap</a>
           </li>
         
@@ -615,10 +624,6 @@
         
           <li>
             <a href="/2017/10/22/Activity生命周期与finish方法/">Activity生命周期与finish方法</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/11/kotlin笔记/">kotlin笔记</a>
           </li>
         
       </ul>

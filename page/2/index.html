@@ -61,6 +61,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git高级操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/08/git高级操作/" class="article-date">
+  <time datetime="2017-10-08T12:49:21.000Z" itemprop="datePublished">2017-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/08/git高级操作/">git高级操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-git-cherry-pick-A-B-C"><a href="#1-git-cherry-pick-A-B-C" class="headerlink" title="1.git cherry-pick A B C"></a>1.git cherry-pick A B C</h2><p><img src="/2017/10/08/git高级操作/git cherry-pick.png" alt="git cherry-pick"></p>
+<p>假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？</p>
+<ul>
+<li>方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C。切换命令是git checkout dev。之后使用git merge D，git merge E。</li>
+<li>方法二：首先也要查看dev上的commit-id，然后在C上使用git cherry-pick D E。</li>
+<li>好像两个方法优劣对比不是很强，但是cherry-pick后跟的commit-id可以有很多个，当需要抓取的feature较多时方法二的优势就出来了。</li>
+<li>注意，如果是 HEAD 上游的提交，那就不能用cherry-pick抓取过来，因为很明显不能将同一分支上的历史提交再次提交。</li>
+</ul>
+<h2 id="2-git-rebase"><a href="#2-git-rebase" class="headerlink" title="2.git rebase"></a>2.git rebase</h2><ul>
+<li>多人协作大家基本习惯了merge的方式进行提交代码。但是最大的弊端就是提交历史变得有许多平行线。实际的确也是并行开发，但是当要追踪修改历史的时候，嗯，你可以冲上一杯咖啡了哈哈哈。</li>
+<li>先更新master分支，在dev分支上使用命令<br><code>git rebase master</code><br>这样看起来就像是在master上的节点检出的分支又再次合并回主分支，这样整个提交树就非常线性，易于追踪。</li>
+<li>另一个操作是<br><code>git rebase -i commit-id</code><br>这个命令可以“可视化操作提交历史”，有丢弃，修改，排序等功能。本人觉得在命令行操作哪有什么可视化操作哈哈哈。这个命令可以使用上述的cherry-pick命令代替。</li>
+</ul>
+<h2 id="3-git-stash"><a href="#3-git-stash" class="headerlink" title="3.git stash"></a>3.git stash</h2><p>这个命令挺有用，尤其是还没做完手头上的工作，又不得不做别的事（切换到别的分支治疗），并且不想因此commit，那么这系列命令对你很有用！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1.git stash 将当前未commit的修改压栈</div><div class="line">2.git stash list 查看栈有哪些stash</div><div class="line">3.git stash pop 弹出（恢复）栈顶修改</div><div class="line">4.git stash clear 清空栈</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cj9jnfp9z000iqhvf7dfd0ncy" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-git版本回退" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/25/git版本回退/" class="article-date">
@@ -101,7 +153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj9gq49ja00087ffykpaa6ft4" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj9jnfp9x000eqhvfd4yg2e1p" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -155,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj9gq49jb00097ffyfnpbzy68" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj9jnfp9w000cqhvft5yupzuo" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -239,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj9gq49j000007ffykj6ny54g" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj9jnfp9q0003qhvfeasddkol" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
@@ -286,7 +338,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj9gq49j800047ffydtlxsxm2" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj9jnfp9m0001qhvfjvo6egau" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
@@ -326,7 +378,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj9gq49jl000q7ffy14kipey6" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cj9jnfpa5000sqhvfylgta465" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -369,7 +421,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cj9gq49jd000b7ffyup72gbzj" class="article-share-link">Partager</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cj9jnfp9u000aqhvfodiu23fg" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -407,7 +459,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android基础/" style="font-size: 15px;">Android基础</a> <a href="/tags/Java集合容器/" style="font-size: 10px;">Java集合容器</a> <a href="/tags/UI/" style="font-size: 15px;">UI</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/kotlin/" style="font-size: 15px;">kotlin</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a>
+      <a href="/tags/Android基础/" style="font-size: 15px;">Android基础</a> <a href="/tags/Java集合容器/" style="font-size: 15px;">Java集合容器</a> <a href="/tags/UI/" style="font-size: 15px;">UI</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/kotlin/" style="font-size: 15px;">kotlin</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a>
     </div>
   </div>
 
@@ -429,6 +481,10 @@
       <ul>
         
           <li>
+            <a href="/2017/11/03/Java集合容器之HashMap/">Java集合容器之HashMap</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/01/Java集合容器之LinkedHashMap/">Java集合容器之LinkedHashMap</a>
           </li>
         
@@ -442,10 +498,6 @@
         
           <li>
             <a href="/2017/10/22/Activity生命周期与finish方法/">Activity生命周期与finish方法</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/11/kotlin笔记/">kotlin笔记</a>
           </li>
         
       </ul>
