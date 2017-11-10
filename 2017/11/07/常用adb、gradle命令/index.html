@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="1.gradlegradlew是gradle wrapper中的可执行命令。  ./gradlew -v查看gradle版本。  ./gradlew clean清空build文件夹下所有东西。  ./gradlew build检查依赖并编译打包。一般按照build type打出所有包。  ./gradlew assembleDebug打出Debug版本apk，文件在build/output/apk">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-11-08T01:08:16.122Z">
+<meta property="og:updated_time" content="2017-11-08T14:52:42.720Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="常用adb、gradle命令">
 <meta name="twitter:description" content="1.gradlegradlew是gradle wrapper中的可执行命令。  ./gradlew -v查看gradle版本。  ./gradlew clean清空build文件夹下所有东西。  ./gradlew build检查依赖并编译打包。一般按照build type打出所有包。  ./gradlew assembleDebug打出Debug版本apk，文件在build/output/apk">
@@ -105,13 +105,22 @@
 </li>
 </ul>
 <h2 id="2-adb安装应用"><a href="#2-adb安装应用" class="headerlink" title="2.adb安装应用"></a>2.adb安装应用</h2><ul>
-<li>右键选中的apk包，copy path。然后执行<code>adb install path</code>。path为粘贴板上的东西。</li>
+<li><p><code>adb devices</code> 查看连接上的devices。</p>
+</li>
+<li><p><code>adb install -r &lt;path&gt;</code> 安装apk。</p>
+</li>
+<li><p><code>adb pull &lt;remote&gt; &lt;local&gt;</code> 从设备拉取文件。</p>
+</li>
+<li><p><code>adb push &lt;local&gt; &lt;remote&gt;</code> 推送文件到设备。</p>
+</li>
+<li><p><code>adb shell</code> 进入shell模式。</p>
+</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/07/常用adb、gradle命令/" data-id="cj9qcymgn000usjvfg2jfkys4" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/07/常用adb、gradle命令/" data-id="cj9tvy8qz0010l4vfmvfory24" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
@@ -153,7 +162,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android基础/">Android基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java集合容器/">Java集合容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境配置/">开发环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android基础/">Android基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java集合容器/">Java集合容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-blog/">hexo blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境配置/">开发环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
     </div>
   </div>
 
@@ -163,7 +172,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android基础/" style="font-size: 16.67px;">Android基础</a> <a href="/tags/Java集合容器/" style="font-size: 13.33px;">Java集合容器</a> <a href="/tags/UI/" style="font-size: 13.33px;">UI</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/kotlin/" style="font-size: 13.33px;">kotlin</a> <a href="/tags/开发环境配置/" style="font-size: 10px;">开发环境配置</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a>
+      <a href="/tags/Android基础/" style="font-size: 16.67px;">Android基础</a> <a href="/tags/Java集合容器/" style="font-size: 13.33px;">Java集合容器</a> <a href="/tags/UI/" style="font-size: 13.33px;">UI</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo-blog/" style="font-size: 10px;">hexo blog</a> <a href="/tags/kotlin/" style="font-size: 13.33px;">kotlin</a> <a href="/tags/开发环境配置/" style="font-size: 10px;">开发环境配置</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a>
     </div>
   </div>
 
@@ -185,6 +194,10 @@
       <ul>
         
           <li>
+            <a href="/2017/11/09/搭建基于hexo的博客以及如何迁移/">搭建基于hexo的博客以及如何迁移</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/08/mac下配置zsh/">mac下配置zsh</a>
           </li>
         
@@ -198,10 +211,6 @@
         
           <li>
             <a href="/2017/11/03/Java集合容器之HashMap/">Java集合容器之HashMap</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/01/Java集合容器之LinkedHashMap/">Java集合容器之LinkedHashMap</a>
           </li>
         
       </ul>
