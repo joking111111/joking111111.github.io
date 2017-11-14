@@ -15,7 +15,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/chain.png">
 <meta property="og:image" content="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/chainStyle.png">
-<meta property="og:updated_time" content="2017-10-27T06:03:17.261Z">
+<meta property="og:updated_time" content="2017-11-11T12:30:49.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ConstraintLayout的使用">
 <meta name="twitter:description" content="1.为什么要使用它？优点： 较复杂布局下，ConstraintLayout比RelativeLayout和LinearLayout嵌套布局性能要好。 我们知道，AndroidUI绘制是由Cpu跟Gpu共同完成，CPU主要负责计算和参数传递如canvas的传递，而Gpu负责绘制纹理。所以优化UI有两方面：减少层级嵌套和减少过度绘制。ConstraintLayout明显地将复杂布局的层次下降到甚至只有">
@@ -133,14 +133,19 @@
 <h2 id="6-chainStyle"><a href="#6-chainStyle" class="headerlink" title="6.chainStyle"></a>6.chainStyle</h2><h3 id="什么是chain？"><a href="#什么是chain？" class="headerlink" title="什么是chain？"></a>什么是chain？</h3><p><img src="/2017/09/24/ConstraintLayout的使用/chain.png" alt="chain"><br>一个chain（假定方向是水平），元素两两关联（像双链表）。</p>
 <h3 id="如何加style"><a href="#如何加style" class="headerlink" title="如何加style"></a>如何加style</h3><p><img src="/2017/09/24/ConstraintLayout的使用/chainStyle.png" alt="chainStyle"></p>
 <ul>
-<li>在头节点元素加属性layout_constraintHorizontal_chainStyle</li>
-<li>还可以使用layout_constraintHorizontal_weight跟0dp宽实现LinearLayout的效果</li>
+<li>在头节点元素加属性<code>layout_constraintHorizontal_chainStyle</code></li>
+<li>还可以使用<code>layout_constraintHorizontal_weight</code>跟0dp宽实现LinearLayout的效果</li>
+</ul>
+<h2 id="7-拉力"><a href="#7-拉力" class="headerlink" title="7.拉力"></a>7.拉力</h2><ul>
+<li><code>layout_constraintHorizontal_bias</code>水平拉力比</li>
+<li><code>layout_constraintVertical_bias</code>垂直拉力比</li>
+<li>可以调整到左右的距离比例（宽或高不为0dp时生效）</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj9tvy8qf0003l4vfu3913zdf" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj9yw3egp0003ljvfhm0h9f5f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>

@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="1.val与var val —–&amp;gt; value 不可变值，相当于java中final变量。 var —–&amp;gt; variable 可变值，相当于java普通变量。  2.object与companion object object : 声明static对象，常用作单例。特点：不可定义构造函数。使用时才立即初始化。   companion object : 译作伴随对象，可以理解为类静态成员">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-11-01T05:57:28.743Z">
+<meta property="og:updated_time" content="2017-11-11T15:01:10.103Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kotlin笔记">
 <meta name="twitter:description" content="1.val与var val —–&amp;gt; value 不可变值，相当于java中final变量。 var —–&amp;gt; variable 可变值，相当于java普通变量。  2.object与companion object object : 声明static对象，常用作单例。特点：不可定义构造函数。使用时才立即初始化。   companion object : 译作伴随对象，可以理解为类静态成员">
@@ -108,11 +108,19 @@
 <h3 id="特别注意"><a href="#特别注意" class="headerlink" title="特别注意"></a>特别注意</h3><ul>
 <li>以上操作符使用均针对对象，而像int等基本数据类型的操作符，是没有改变的。</li>
 </ul>
-
+<h2 id="5-匿名内部类"><a href="#5-匿名内部类" class="headerlink" title="5.匿名内部类"></a>5.匿名内部类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">user.login(object : SaveListener&lt;BmobUser&gt;() &#123;</div><div class="line">     override fun done(b: BmobUser?, e: BmobException?) &#123;</div><div class="line">         hideLoading()</div><div class="line">         if (e != null) &#123;</div><div class="line">             toast(&quot;登陆成功！&quot;)</div><div class="line">             MainActivity.start(this@LoginActivity)</div><div class="line">             finish()</div><div class="line">         &#125; else &#123;</div><div class="line">             toast(e.toString())</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="6-静态代码块与非静态代码块"><a href="#6-静态代码块与非静态代码块" class="headerlink" title="6.静态代码块与非静态代码块"></a>6.静态代码块与非静态代码块</h2><ul>
+<li>静态代码块</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">companion object &#123;</div><div class="line">    init &#123;</div><div class="line">    	...       </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>非静态代码块</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">init &#123;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj9tvy8qt000pl4vf4gd0uv5i" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj9yw3egz000lljvf9zrnhi3w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>

@@ -105,11 +105,19 @@
 <h3 id="特别注意"><a href="#特别注意" class="headerlink" title="特别注意"></a>特别注意</h3><ul>
 <li>以上操作符使用均针对对象，而像int等基本数据类型的操作符，是没有改变的。</li>
 </ul>
-
+<h2 id="5-匿名内部类"><a href="#5-匿名内部类" class="headerlink" title="5.匿名内部类"></a>5.匿名内部类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">user.login(object : SaveListener&lt;BmobUser&gt;() &#123;</div><div class="line">     override fun done(b: BmobUser?, e: BmobException?) &#123;</div><div class="line">         hideLoading()</div><div class="line">         if (e != null) &#123;</div><div class="line">             toast(&quot;登陆成功！&quot;)</div><div class="line">             MainActivity.start(this@LoginActivity)</div><div class="line">             finish()</div><div class="line">         &#125; else &#123;</div><div class="line">             toast(e.toString())</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="6-静态代码块与非静态代码块"><a href="#6-静态代码块与非静态代码块" class="headerlink" title="6.静态代码块与非静态代码块"></a>6.静态代码块与非静态代码块</h2><ul>
+<li>静态代码块</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">companion object &#123;</div><div class="line">    init &#123;</div><div class="line">    	...       </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>非静态代码块</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">init &#123;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj9tvy8qt000pl4vf4gd0uv5i" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj9yw3egz000lljvf9zrnhi3w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -149,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cj9tvy8qr000nl4vfqonv31o5" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cj9yw3eh2000pljvf2bievgzt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -215,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cj9tvy8qw000vl4vfax2tgf1o" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cj9yw3eh3000rljvf72y9bzy1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -282,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cj9tvy8qp000il4vfmk1le7ku" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cj9yw3egx000iljvf4wb4vfp2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -334,7 +342,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cj9tvy8qq000ll4vfi6g2pd4x" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cj9yw3eh1000nljvfzzmq745s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -386,7 +394,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj9tvy8ql000al4vfxu2lxgst" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj9yw3egt000aljvfnsu3gowm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -440,7 +448,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj9tvy8qo000gl4vflom41fyt" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj9yw3egv000eljvffz3ku5uz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -517,14 +525,19 @@
 <h2 id="6-chainStyle"><a href="#6-chainStyle" class="headerlink" title="6.chainStyle"></a>6.chainStyle</h2><h3 id="什么是chain？"><a href="#什么是chain？" class="headerlink" title="什么是chain？"></a>什么是chain？</h3><p><img src="/2017/09/24/ConstraintLayout的使用/chain.png" alt="chain"><br>一个chain（假定方向是水平），元素两两关联（像双链表）。</p>
 <h3 id="如何加style"><a href="#如何加style" class="headerlink" title="如何加style"></a>如何加style</h3><p><img src="/2017/09/24/ConstraintLayout的使用/chainStyle.png" alt="chainStyle"></p>
 <ul>
-<li>在头节点元素加属性layout_constraintHorizontal_chainStyle</li>
-<li>还可以使用layout_constraintHorizontal_weight跟0dp宽实现LinearLayout的效果</li>
+<li>在头节点元素加属性<code>layout_constraintHorizontal_chainStyle</code></li>
+<li>还可以使用<code>layout_constraintHorizontal_weight</code>跟0dp宽实现LinearLayout的效果</li>
+</ul>
+<h2 id="7-拉力"><a href="#7-拉力" class="headerlink" title="7.拉力"></a>7.拉力</h2><ul>
+<li><code>layout_constraintHorizontal_bias</code>水平拉力比</li>
+<li><code>layout_constraintVertical_bias</code>垂直拉力比</li>
+<li>可以调整到左右的距离比例（宽或高不为0dp时生效）</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj9tvy8qf0003l4vfu3913zdf" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj9yw3egp0003ljvfhm0h9f5f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
@@ -571,7 +584,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj9tvy8qb0001l4vfx78x967f" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj9yw3egm0001ljvfol0j8i0o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
