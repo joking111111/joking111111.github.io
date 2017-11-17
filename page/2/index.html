@@ -114,10 +114,13 @@
 <li>非静态代码块</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">init &#123;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="7-for循环"><a href="#7-for循环" class="headerlink" title="7.for循环"></a>7.for循环</h2><h3 id="1-普通循环"><a href="#1-普通循环" class="headerlink" title="(1)普通循环"></a>(1)普通循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">for(i in 0..9)&#123;</div><div class="line">    println(i)</div><div class="line">&#125;</div><div class="line">i范围是0到9</div><div class="line"></div><div class="line">for(i until 0..9)&#123;</div><div class="line">    println(i)</div><div class="line">&#125;</div><div class="line">i范围是0到8</div></pre></td></tr></table></figure>
+<h3 id="2-迭代器"><a href="#2-迭代器" class="headerlink" title="(2)迭代器"></a>(2)迭代器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">val list = listOf(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)</div><div class="line"></div><div class="line">for(s in list)&#123;</div><div class="line">    print(s)</div><div class="line">&#125;</div><div class="line"></div><div class="line">for((index, item) in list.withIndex())&#123;</div><div class="line">    print(index + &quot;:&quot; + item)</div><div class="line">&#125;</div><div class="line">带下标的循环，index、item名称可以改。</div><div class="line"></div><div class="line">list.forEach&#123;</div><div class="line">    print(it)</div><div class="line">&#125;</div><div class="line">这里的it相当于迭代器。</div></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj9yw3egz000lljvf9zrnhi3w" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cja40h7lb000hogvf4qvgkb52" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -157,7 +160,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cj9yw3eh2000pljvf2bievgzt" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cja40h7li000sogvfbolo0j0n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -223,7 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cj9yw3eh3000rljvf72y9bzy1" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cja40h7lg000oogvflhq1upv0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -290,7 +293,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cj9yw3egx000iljvf4wb4vfp2" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cja40h7l9000dogvfrk4x8hr6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -342,7 +345,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cj9yw3eh1000nljvfzzmq745s" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cja40h7la000fogvfsx8y06lq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -394,7 +397,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cj9yw3egt000aljvfnsu3gowm" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cja40h7l60008ogvfzz7ea0p1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -429,8 +432,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-git-init"><a href="#1-git-init" class="headerlink" title="1.git init"></a>1.git init</h2><p>初始化本地仓库。</p>
-<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区。可以使用通配符如<br><code>git add *.txt</code></p>
-<h2 id="3-git-commit-m-“XXX”"><a href="#3-git-commit-m-“XXX”" class="headerlink" title="3.git commit -m “XXX”"></a>3.git commit -m “XXX”</h2><p>把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。</p>
+<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区。可以使用通配符如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git add *.txt</div></pre></td></tr></table></figure>
+<h2 id="3-git-commit-m-“XXX”"><a href="#3-git-commit-m-“XXX”" class="headerlink" title="3.git commit -m “XXX”"></a>3.git commit -m “XXX”</h2><ul>
+<li>把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。</li>
+<li><code>git commit -amed</code>追加修改到上次提交。</li>
+</ul>
 <h2 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h2><p>将工作区与版本库对比，提示差异的信息。</p>
 <h2 id="5-git-log"><a href="#5-git-log" class="headerlink" title="5.git log"></a>5.git log</h2><p>输出每次版本库的变动，从最近开始输出。可以查看每个版本的SHA1数值。</p>
 <h2 id="6-git-reflog"><a href="#6-git-reflog" class="headerlink" title="6.git reflog"></a>6.git reflog</h2><p>查看命令历史，log命令是查看提交历史，这两个命令有所不同。</p>
@@ -440,7 +447,8 @@
 <li>参数也可以使用HEAD^、HEAD~2、dev^、dev~2等。</li>
 </ul>
 <h2 id="8-git-branch-b-dev"><a href="#8-git-branch-b-dev" class="headerlink" title="8.git branch -b dev"></a>8.git branch -b dev</h2><p>这条指令相当于：<br>git branch dev<br>git checkout dev<br>在当前HEAD指向的节点创建名为dev的分支并且将HEAD指向它。</p>
-<h2 id="9-git-merge-dev"><a href="#9-git-merge-dev" class="headerlink" title="9.git merge dev"></a>9.git merge dev</h2><ul>
+<h2 id="9-git-branch-d-dev"><a href="#9-git-branch-d-dev" class="headerlink" title="9.git branch -d dev"></a>9.git branch -d dev</h2><p>删除dev分支。</p>
+<h2 id="10-git-merge-dev"><a href="#10-git-merge-dev" class="headerlink" title="10.git merge dev"></a>10.git merge dev</h2><ul>
 <li>在HEAD指向节点基础上合并dev的内容，生成新的一次提交。</li>
 <li>同理，参数也可以使用SHA1，HEAD^、HEAD~2等。</li>
 </ul>
@@ -448,7 +456,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj9yw3egv000eljvffz3ku5uz" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cja40h7l8000bogvfkknyojh2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -537,7 +545,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cj9yw3egp0003ljvfhm0h9f5f" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cja40h7l30003ogvficn1anbu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
@@ -584,7 +592,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cj9yw3egm0001ljvfol0j8i0o" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cja40h7kx0000ogvfiq9mqwmx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>

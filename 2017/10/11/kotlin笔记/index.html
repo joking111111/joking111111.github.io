@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="1.val与var val —–&amp;gt; value 不可变值，相当于java中final变量。 var —–&amp;gt; variable 可变值，相当于java普通变量。  2.object与companion object object : 声明static对象，常用作单例。特点：不可定义构造函数。使用时才立即初始化。   companion object : 译作伴随对象，可以理解为类静态成员">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-11-11T15:01:10.103Z">
+<meta property="og:updated_time" content="2017-11-15T13:56:08.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kotlin笔记">
 <meta name="twitter:description" content="1.val与var val —–&amp;gt; value 不可变值，相当于java中final变量。 var —–&amp;gt; variable 可变值，相当于java普通变量。  2.object与companion object object : 声明static对象，常用作单例。特点：不可定义构造函数。使用时才立即初始化。   companion object : 译作伴随对象，可以理解为类静态成员">
@@ -117,10 +117,13 @@
 <li>非静态代码块</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">init &#123;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="7-for循环"><a href="#7-for循环" class="headerlink" title="7.for循环"></a>7.for循环</h2><h3 id="1-普通循环"><a href="#1-普通循环" class="headerlink" title="(1)普通循环"></a>(1)普通循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">for(i in 0..9)&#123;</div><div class="line">    println(i)</div><div class="line">&#125;</div><div class="line">i范围是0到9</div><div class="line"></div><div class="line">for(i until 0..9)&#123;</div><div class="line">    println(i)</div><div class="line">&#125;</div><div class="line">i范围是0到8</div></pre></td></tr></table></figure>
+<h3 id="2-迭代器"><a href="#2-迭代器" class="headerlink" title="(2)迭代器"></a>(2)迭代器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">val list = listOf(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)</div><div class="line"></div><div class="line">for(s in list)&#123;</div><div class="line">    print(s)</div><div class="line">&#125;</div><div class="line"></div><div class="line">for((index, item) in list.withIndex())&#123;</div><div class="line">    print(index + &quot;:&quot; + item)</div><div class="line">&#125;</div><div class="line">带下标的循环，index、item名称可以改。</div><div class="line"></div><div class="line">list.forEach&#123;</div><div class="line">    print(it)</div><div class="line">&#125;</div><div class="line">这里的it相当于迭代器。</div></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cj9yw3egz000lljvf9zrnhi3w" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cja40h7lb000hogvf4qvgkb52" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>

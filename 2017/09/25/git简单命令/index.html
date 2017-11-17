@@ -5,18 +5,18 @@
   
   <title>git简单命令 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如git add *.txt 3.git commit -m “XXX”把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 4.git status将工作区与版本库对比，提示差异的信息。 5.git log输出每次版本库的变动，从最">
+  <meta name="description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如 12git add .git add *.txt 3.git commit -m “XXX” 把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 git commit -amed追加修改到上次提交。  4.git status将">
 <meta name="keywords" content="git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git简单命令">
 <meta property="og:url" content="https://joking111111.github.io/2017/09/25/git简单命令/index.html">
 <meta property="og:site_name" content="JoKing">
-<meta property="og:description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如git add *.txt 3.git commit -m “XXX”把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 4.git status将工作区与版本库对比，提示差异的信息。 5.git log输出每次版本库的变动，从最">
+<meta property="og:description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如 12git add .git add *.txt 3.git commit -m “XXX” 把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 git commit -amed追加修改到上次提交。  4.git status将">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-10-20T04:33:04.332Z">
+<meta property="og:updated_time" content="2017-11-17T14:39:46.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git简单命令">
-<meta name="twitter:description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如git add *.txt 3.git commit -m “XXX”把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 4.git status将工作区与版本库对比，提示差异的信息。 5.git log输出每次版本库的变动，从最">
+<meta name="twitter:description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如 12git add .git add *.txt 3.git commit -m “XXX” 把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 git commit -amed追加修改到上次提交。  4.git status将">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -88,8 +88,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-git-init"><a href="#1-git-init" class="headerlink" title="1.git init"></a>1.git init</h2><p>初始化本地仓库。</p>
-<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区。可以使用通配符如<br><code>git add *.txt</code></p>
-<h2 id="3-git-commit-m-“XXX”"><a href="#3-git-commit-m-“XXX”" class="headerlink" title="3.git commit -m “XXX”"></a>3.git commit -m “XXX”</h2><p>把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。</p>
+<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区。可以使用通配符如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git add *.txt</div></pre></td></tr></table></figure>
+<h2 id="3-git-commit-m-“XXX”"><a href="#3-git-commit-m-“XXX”" class="headerlink" title="3.git commit -m “XXX”"></a>3.git commit -m “XXX”</h2><ul>
+<li>把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。</li>
+<li><code>git commit -amed</code>追加修改到上次提交。</li>
+</ul>
 <h2 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h2><p>将工作区与版本库对比，提示差异的信息。</p>
 <h2 id="5-git-log"><a href="#5-git-log" class="headerlink" title="5.git log"></a>5.git log</h2><p>输出每次版本库的变动，从最近开始输出。可以查看每个版本的SHA1数值。</p>
 <h2 id="6-git-reflog"><a href="#6-git-reflog" class="headerlink" title="6.git reflog"></a>6.git reflog</h2><p>查看命令历史，log命令是查看提交历史，这两个命令有所不同。</p>
@@ -99,7 +103,8 @@
 <li>参数也可以使用HEAD^、HEAD~2、dev^、dev~2等。</li>
 </ul>
 <h2 id="8-git-branch-b-dev"><a href="#8-git-branch-b-dev" class="headerlink" title="8.git branch -b dev"></a>8.git branch -b dev</h2><p>这条指令相当于：<br>git branch dev<br>git checkout dev<br>在当前HEAD指向的节点创建名为dev的分支并且将HEAD指向它。</p>
-<h2 id="9-git-merge-dev"><a href="#9-git-merge-dev" class="headerlink" title="9.git merge dev"></a>9.git merge dev</h2><ul>
+<h2 id="9-git-branch-d-dev"><a href="#9-git-branch-d-dev" class="headerlink" title="9.git branch -d dev"></a>9.git branch -d dev</h2><p>删除dev分支。</p>
+<h2 id="10-git-merge-dev"><a href="#10-git-merge-dev" class="headerlink" title="10.git merge dev"></a>10.git merge dev</h2><ul>
 <li>在HEAD指向节点基础上合并dev的内容，生成新的一次提交。</li>
 <li>同理，参数也可以使用SHA1，HEAD^、HEAD~2等。</li>
 </ul>
@@ -107,7 +112,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cj9yw3egv000eljvffz3ku5uz" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cja40h7l8000bogvfkknyojh2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
