@@ -62,6 +62,110 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Glide笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/19/Glide笔记/" class="article-date">
+  <time datetime="2017-11-19T06:23:15.000Z" itemprop="datePublished">2017-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/19/Glide笔记/">Glide笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-基本组件"><a href="#一-基本组件" class="headerlink" title="一.基本组件"></a>一.基本组件</h2><h3 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1.基本使用"></a>1.基本使用</h3><p>以下均基于Glide4.x版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.into(imageView);</div></pre></td></tr></table></figure>
+<h3 id="2-RequestOptions"><a href="#2-RequestOptions" class="headerlink" title="2.RequestOptions"></a>2.RequestOptions</h3><p>Glide的常用选项</p>
+<ul>
+<li>裁剪样式circleCrop、circleCrop等。</li>
+<li>加载中占位图placeholder</li>
+<li>加载失败图error</li>
+<li>…</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">RequestOptions centerCropOptions = new RequestOptions()</div><div class="line">            .centerCrop()</div><div class="line">            .placeholder(R.drawable.img_loading)</div><div class="line">            .error(R.drawable.img_failed);</div></pre></td></tr></table></figure>
+<h3 id="3-RequestBuilder"><a href="#3-RequestBuilder" class="headerlink" title="3.RequestBuilder"></a>3.RequestBuilder</h3><p>可以理解为一个个的请求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder = Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options);</div></pre></td></tr></table></figure>
+<p>当调用RequestBuilder.into(target)时开始加载。这个方法的返回值类型不再是RequestBuilder了。</p>
+<h2 id="二、回调监听"><a href="#二、回调监听" class="headerlink" title="二、回调监听"></a>二、回调监听</h2><h3 id="1-加载失败回调监听"><a href="#1-加载失败回调监听" class="headerlink" title="1.加载失败回调监听"></a>1.加载失败回调监听</h3><p>RequestBuilder.listen(RequestListener)方法监听load成功还是失败。</p>
+<ul>
+<li>注意这里不能在监听里对同一个target（imageView）发起加载请求，因为当前请求尚未结束，会抛出异常。</li>
+<li>所以无法使用这个监听实现加载失败时加载备用url的需求。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.listener(new RequestListener() &#123;</div><div class="line">	@Override</div><div class="line">	public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target, boolean isFirstResource) &#123;</div><div class="line">		//false：事件继续往下传递</div><div class="line">		//true：事件不再往下传递</div><div class="line">   		return false;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public boolean onResourceReady(Object resource, Object model, Target target, DataSource dataSource, boolean isFirstResource) &#123;</div><div class="line">		//false：事件继续往下传递</div><div class="line">		//true：事件不再往下传递</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">&#125;)</div><div class="line">.into(imageView);</div></pre></td></tr></table></figure>
+<h3 id="2-请求失败监听"><a href="#2-请求失败监听" class="headerlink" title="2.请求失败监听"></a>2.请求失败监听</h3><p>RequestBuilder.error(RequestBuilder)方法监听这个request成功还是失败。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder1 = Glide.with(getContext())</div><div class="line">.load(url1)</div><div class="line">.apply(options);</div><div class="line"></div><div class="line">RequestBuilder builder2 = Glide.with(getContext())</div><div class="line">.load(url2)</div><div class="line">.apply(options)</div><div class="line">.error(builder1);</div><div class="line"></div><div class="line">builder2.into(imageView);</div></pre></td></tr></table></figure>
+<p>这段代码意义为当url2加载失败后，会启用builder1这个请求，加载url1。这样我们就可以实现多级url加载了。</p>
+<p>以下为我写的多级加载url方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public static void loadUrls(String[] urls, RequestOptions options, ImageView imageView) &#123;</div><div class="line">        if (urls == null || urls.length == 0) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        RequestBuilder frontBuilder = Glide.with(getContext()).load(urls[0]).apply(options);</div><div class="line">        //只有一个url，直接加载</div><div class="line">        if (urls.length == 1) &#123;</div><div class="line">            frontBuilder.into(imageView);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        RequestBuilder prevBuilder = frontBuilder;</div><div class="line">        for (int i = 1; i &lt; urls.length; i++) &#123;</div><div class="line">            RequestBuilder nextBuilder = Glide.with(getContext()).load(urls[i]).apply(options);</div><div class="line">            prevBuilder.error(nextBuilder);</div><div class="line">            prevBuilder = nextBuilder;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        frontBuilder.into(imageView);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cja6etv7q0005lfvf24ghlm4i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android三方库/">Android三方库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-android使用kotlin注意事项" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/19/android使用kotlin注意事项/" class="article-date">
+  <time datetime="2017-11-19T06:23:03.000Z" itemprop="datePublished">2017-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/19/android使用kotlin注意事项/">android使用kotlin注意事项</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、注意参数可空"><a href="#一、注意参数可空" class="headerlink" title="一、注意参数可空"></a>一、注意参数可空</h2><p>现在第三方库基本都用java写，使用kotlin调用三方库时，最常见的场景就是实现回调接口。实现回调接口的时候，注意接口方法参数如果可空一定要加上”?”修饰，否则崩溃时很难从日志发现问题所在。</p>
+<ul>
+<li>基本数据类型没必要加”?”，只有对象才需要加。</li>
+<li>使用kotlin设计接口时也要注意这一点。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/11/19/android使用kotlin注意事项/" data-id="cja6etv7v000elfvfmvdkj331" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-搭建基于hexo的博客以及如何迁移" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/09/搭建基于hexo的博客以及如何迁移/" class="article-date">
@@ -104,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/09/搭建基于hexo的博客以及如何迁移/" data-id="cja40h7lm0010ogvfy90an3un" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/09/搭建基于hexo的博客以及如何迁移/" data-id="cja6etv8a0013lfvfahma7vfk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo-blog/">hexo blog</a></li></ul>
@@ -169,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/08/mac下配置zsh/" data-id="cja40h7lk000vogvfrjz3imzi" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/08/mac下配置zsh/" data-id="cja6etv86000vlfvfxt8ekwhu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发环境配置/">开发环境配置</a></li></ul>
@@ -236,7 +340,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/07/常用adb、gradle命令/" data-id="cja40h7ll000xogvfbkrogxhf" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/07/常用adb、gradle命令/" data-id="cja6etv890010lfvfbteol9qu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
@@ -292,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/07/管理多个ssh-key/" data-id="cja40h7ln0012ogvfhue34nt9" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/07/管理多个ssh-key/" data-id="cja6etv8c0015lfvfdhz8mw3b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -349,7 +453,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/03/Java集合容器之HashMap/" data-id="cja40h7lc000jogvfn6ff9po5" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/03/Java集合容器之HashMap/" data-id="cja6etv7r0008lfvfiy0j99hv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java集合容器/">Java集合容器</a></li></ul>
@@ -405,7 +509,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/01/Java集合容器之LinkedHashMap/" data-id="cja40h7l40004ogvfxmk00e7k" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/01/Java集合容器之LinkedHashMap/" data-id="cja6etv7t000alfvfoch8lpu0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java集合容器/">Java集合容器</a></li></ul>
@@ -460,109 +564,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cja40h7l50005ogvf4ud5qcww" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cja6etv7u000clfvfd8m5gu9u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Handler的存在意义" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/22/Handler的存在意义/" class="article-date">
-  <time datetime="2017-10-22T01:06:27.000Z" itemprop="datePublished">2017-10-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/22/Handler的存在意义/">Handler的存在意义</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、Handler的实现"><a href="#一、Handler的实现" class="headerlink" title="一、Handler的实现"></a>一、Handler的实现</h2><ul>
-<li>创建：获取当前线程，通过线程的ThreadLocalMap获取Looper，关联Looper和Looper里面的MessageQueue。</li>
-<li>投递：每次封装成Message对象投递进MessageQueue。</li>
-<li>处理：这部分工作由Looper完成，它不断从MessageQueue中取Message。Message中有Callback就执行，没有就调用Message中的target.dispatchMessage(Message)方法投递给这个消息产生的Handler。</li>
-</ul>
-<h2 id="二、Handler的作用"><a href="#二、Handler的作用" class="headerlink" title="二、Handler的作用"></a>二、Handler的作用</h2><h3 id="1-切换线程，线程间通信"><a href="#1-切换线程，线程间通信" class="headerlink" title="1.切换线程，线程间通信"></a>1.切换线程，线程间通信</h3><p>开发中经常使用到这个功能。</p>
-<h3 id="2-将事件或任务序列化"><a href="#2-将事件或任务序列化" class="headerlink" title="2.将事件或任务序列化"></a>2.将事件或任务序列化</h3><p>序列化最大的好处就是顺序执行，便于维护，不会出现任务错乱的情况，并且在单线程内不需要并发。以下举一个经典的例子：</p>
-<ul>
-<li>为什么我们可以使用View.post(Runnable)这种方式获取一个View的实际宽高？</li>
-<li>View的宽高至少要通过Measure方法执行完之后才能获取，并且有可能在Layout的时候被触发重新测量。所以只有View真正显示的时候获取的宽高是最准确的。</li>
-<li>View的绘制流程是借助Handler的事件处理机制。</li>
-<li>View.post(Runnable)将这个任务投递到串行队列中去，因此当这个任务被执行时，前面的View绘制任务已经执行完，这时候调用View.getWidth(),View.getHeight()肯定是有值并且准确的。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cja40h7le000logvfmf7z5g2h" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Activity生命周期与finish方法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/22/Activity生命周期与finish方法/" class="article-date">
-  <time datetime="2017-10-22T01:05:44.000Z" itemprop="datePublished">2017-10-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/22/Activity生命周期与finish方法/">Activity生命周期与finish方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-Activity的生命周期"><a href="#1-Activity的生命周期" class="headerlink" title="1.Activity的生命周期"></a>1.Activity的生命周期</h2><p>图片源自官方文档<br><img src="/2017/10/22/Activity生命周期与finish方法/activity_lifecycle.png" alt="activity_lifecycle"></p>
-<h2 id="2-finish方法"><a href="#2-finish方法" class="headerlink" title="2.finish方法"></a>2.finish方法</h2><ul>
-<li>在onCreate()中调用finish()，会走onDestroy()。</li>
-<li>在onStart()中调用finish()，会走onStop()。</li>
-<li>在onResume()中调用finish()，会走onPause()。</li>
-</ul>
-<h2 id="3-解释"><a href="#3-解释" class="headerlink" title="3.解释"></a>3.解释</h2><ul>
-<li>结合生命周期图，要重点理解生命周期是成对的，或者说是不同级别的。比如：onCreate和onDestroy为第一阶梯，onStart和onStop是第二阶梯，onResume和onPause是第三阶梯。对于finish方法来说，应该是尽快完成调用，从用户体验来说，这是最优策略。所以如果在第一阶梯上，那么直接走下第一阶梯就可以了，没必要再走上第二第三阶梯。</li>
-<li>为什么生命周期周期要是成对的？我的理解有两点：<br>一、确保资源的正确释放。成对能保证资源生命周期正常。<br>二、便于系统处理维护生命周期。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cja40h7l00001ogvfj6ljswim" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
 
     </footer>
   </div>
@@ -587,7 +592,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android基础/">Android基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java集合容器/">Java集合容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-blog/">hexo blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境配置/">开发环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android三方库/">Android三方库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android基础/">Android基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java集合容器/">Java集合容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-blog/">hexo blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境配置/">开发环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
     </div>
   </div>
 
@@ -597,7 +602,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android基础/" style="font-size: 16.67px;">Android基础</a> <a href="/tags/Java集合容器/" style="font-size: 13.33px;">Java集合容器</a> <a href="/tags/UI/" style="font-size: 13.33px;">UI</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo-blog/" style="font-size: 10px;">hexo blog</a> <a href="/tags/kotlin/" style="font-size: 13.33px;">kotlin</a> <a href="/tags/开发环境配置/" style="font-size: 10px;">开发环境配置</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a>
+      <a href="/tags/Android三方库/" style="font-size: 10px;">Android三方库</a> <a href="/tags/Android基础/" style="font-size: 16.67px;">Android基础</a> <a href="/tags/Java集合容器/" style="font-size: 13.33px;">Java集合容器</a> <a href="/tags/UI/" style="font-size: 13.33px;">UI</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo-blog/" style="font-size: 10px;">hexo blog</a> <a href="/tags/kotlin/" style="font-size: 16.67px;">kotlin</a> <a href="/tags/开发环境配置/" style="font-size: 10px;">开发环境配置</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a>
     </div>
   </div>
 
@@ -619,6 +624,14 @@
       <ul>
         
           <li>
+            <a href="/2017/11/19/Glide笔记/">Glide笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/19/android使用kotlin注意事项/">android使用kotlin注意事项</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/09/搭建基于hexo的博客以及如何迁移/">搭建基于hexo的博客以及如何迁移</a>
           </li>
         
@@ -628,14 +641,6 @@
         
           <li>
             <a href="/2017/11/07/常用adb、gradle命令/">常用adb、gradle命令</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/07/管理多个ssh-key/">管理多个ssh key</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/03/Java集合容器之HashMap/">Java集合容器之HashMap</a>
           </li>
         
       </ul>
