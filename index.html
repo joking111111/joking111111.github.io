@@ -62,6 +62,44 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Effective-Java笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/23/Effective-Java笔记/" class="article-date">
+  <time datetime="2017-11-23T14:42:17.000Z" itemprop="datePublished">2017-11-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/23/Effective-Java笔记/">Effective Java笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/11/23/Effective-Java笔记/" data-id="cjacldc0c0004p5vfyuciid5c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Glide笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/19/Glide笔记/" class="article-date">
@@ -85,7 +123,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="一-基本组件"><a href="#一-基本组件" class="headerlink" title="一.基本组件"></a>一.基本组件</h2><h3 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1.基本使用"></a>1.基本使用</h3><p>以下均基于Glide4.x版本。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.into(imageView);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//加载图片</div><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.into(imageView);</div><div class="line"></div><div class="line">//取消加载</div><div class="line">Glide.with(getContext())</div><div class="line">.clear(imageView);</div></pre></td></tr></table></figure>
 <h3 id="2-RequestOptions"><a href="#2-RequestOptions" class="headerlink" title="2.RequestOptions"></a>2.RequestOptions</h3><p>Glide的常用选项</p>
 <ul>
 <li>裁剪样式circleCrop、circleCrop等。</li>
@@ -97,24 +135,24 @@
 <h3 id="3-RequestBuilder"><a href="#3-RequestBuilder" class="headerlink" title="3.RequestBuilder"></a>3.RequestBuilder</h3><p>可以理解为一个个的请求。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder = Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options);</div></pre></td></tr></table></figure>
 <p>当调用RequestBuilder.into(target)时开始加载。这个方法的返回值类型不再是RequestBuilder了。</p>
-<h2 id="二、回调监听"><a href="#二、回调监听" class="headerlink" title="二、回调监听"></a>二、回调监听</h2><h3 id="1-加载失败回调监听"><a href="#1-加载失败回调监听" class="headerlink" title="1.加载失败回调监听"></a>1.加载失败回调监听</h3><p>RequestBuilder.listen(RequestListener)方法监听load成功还是失败。</p>
+<h2 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h2><h3 id="1-加载失败回调监听"><a href="#1-加载失败回调监听" class="headerlink" title="1.加载失败回调监听"></a>1.加载失败回调监听</h3><p>RequestBuilder.listen(RequestListener)方法监听load成功还是失败。</p>
 <ul>
 <li>注意这里不能在监听里对同一个target（imageView）发起加载请求，因为当前请求尚未结束，会抛出异常。</li>
 <li>所以无法使用这个监听实现加载失败时加载备用url的需求。</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.listener(new RequestListener() &#123;</div><div class="line">	@Override</div><div class="line">	public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target, boolean isFirstResource) &#123;</div><div class="line">		//false：事件继续往下传递</div><div class="line">		//true：事件不再往下传递</div><div class="line">   		return false;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public boolean onResourceReady(Object resource, Object model, Target target, DataSource dataSource, boolean isFirstResource) &#123;</div><div class="line">		//false：事件继续往下传递</div><div class="line">		//true：事件不再往下传递</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">&#125;)</div><div class="line">.into(imageView);</div></pre></td></tr></table></figure>
-<h3 id="2-请求失败监听"><a href="#2-请求失败监听" class="headerlink" title="2.请求失败监听"></a>2.请求失败监听</h3><p>RequestBuilder.error(RequestBuilder)方法监听这个request成功还是失败。</p>
+<h3 id="2-请求失败后启用备用请求"><a href="#2-请求失败后启用备用请求" class="headerlink" title="2.请求失败后启用备用请求"></a>2.请求失败后启用备用请求</h3><p>RequestBuilder.error(RequestBuilder)方法可以在这个request失败后启用备用的request。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder1 = Glide.with(getContext())</div><div class="line">.load(url1)</div><div class="line">.apply(options);</div><div class="line"></div><div class="line">RequestBuilder builder2 = Glide.with(getContext())</div><div class="line">.load(url2)</div><div class="line">.apply(options)</div><div class="line">.error(builder1);</div><div class="line"></div><div class="line">builder2.into(imageView);</div></pre></td></tr></table></figure>
 <p>这段代码意义为当url2加载失败后，会启用builder1这个请求，加载url1。这样我们就可以实现多级url加载了。</p>
-<p>以下为我写的多级加载url方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public static void loadUrls(String[] urls, RequestOptions options, ImageView imageView) &#123;</div><div class="line">        if (urls == null || urls.length == 0) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        RequestBuilder frontBuilder = Glide.with(getContext()).load(urls[0]).apply(options);</div><div class="line">        //只有一个url，直接加载</div><div class="line">        if (urls.length == 1) &#123;</div><div class="line">            frontBuilder.into(imageView);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        RequestBuilder prevBuilder = frontBuilder;</div><div class="line">        for (int i = 1; i &lt; urls.length; i++) &#123;</div><div class="line">            RequestBuilder nextBuilder = Glide.with(getContext()).load(urls[i]).apply(options);</div><div class="line">            prevBuilder.error(nextBuilder);</div><div class="line">            prevBuilder = nextBuilder;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        frontBuilder.into(imageView);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以下为多级加载url方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public static void loadUrls(String[] urls, RequestOptions options, ImageView imageView) &#123;</div><div class="line">        if (urls == null || urls.length == 0) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        RequestBuilder frontBuilder = Glide.with(getContext()).load(urls[0]).apply(options);</div><div class="line">        RequestBuilder prevBuilder = frontBuilder;</div><div class="line">        </div><div class="line">        for (int i = 1; i &lt; urls.length; i++) &#123;</div><div class="line">            RequestBuilder nextBuilder = Glide.with(getContext()).load(urls[i]).apply(options);</div><div class="line">            prevBuilder.error(nextBuilder);</div><div class="line">            prevBuilder = nextBuilder;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        frontBuilder.into(imageView);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cjab6oqfl0008tyvfj9oal6y5" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cjacldc0d0005p5vfocn7cvf4" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android三方库/">Android三方库</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -154,10 +192,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/19/android使用kotlin注意事项/" data-id="cjab6oqfm0009tyvffs66sl0r" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/19/android使用kotlin注意事项/" data-id="cjacldc0l000ip5vfy7nce2eb" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/">Kotlin</a></li></ul>
 
     </footer>
   </div>
@@ -208,10 +246,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/09/搭建基于hexo的博客以及如何迁移/" data-id="cjab6oqg3000xtyvfpezrfuvw" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/09/搭建基于hexo的博客以及如何迁移/" data-id="cjacldc110018p5vfu9334f0h" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo-blog/">hexo blog</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
 
     </footer>
   </div>
@@ -273,10 +311,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/08/mac下配置zsh/" data-id="cjab6oqg0000rtyvfvaiz6ujq" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/08/mac下配置zsh/" data-id="cjacldc0t000wp5vf5426hhpg" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发环境配置/">开发环境配置</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
 
     </footer>
   </div>
@@ -340,10 +378,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/07/常用adb、gradle命令/" data-id="cjab6oqg2000utyvfk07g21jv" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/07/常用adb、gradle命令/" data-id="cjacldc100016p5vf597n0x4g" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -396,10 +434,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/07/管理多个ssh-key/" data-id="cjab6oqg80014tyvfg83jojgf" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/07/管理多个ssh-key/" data-id="cjacldc12001bp5vfp3gbkx1j" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
 
     </footer>
   </div>
@@ -453,10 +491,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/03/Java集合容器之HashMap/" data-id="cjab6oqfo000btyvfs2kpi1zo" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/03/Java集合容器之HashMap/" data-id="cjacldc0g000ap5vfi2pashus" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java集合容器/">Java集合容器</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
 
     </footer>
   </div>
@@ -509,71 +547,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/01/Java集合容器之LinkedHashMap/" data-id="cjab6oqfp000dtyvft8r3xpnb" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/01/Java集合容器之LinkedHashMap/" data-id="cjacldc0i000dp5vf5nidulon" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java集合容器/">Java集合容器</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-RecyclerView笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/22/RecyclerView笔记/" class="article-date">
-  <time datetime="2017-10-22T01:45:58.000Z" itemprop="datePublished">2017-10-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/22/RecyclerView笔记/">RecyclerView笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-全展开"><a href="#1-全展开" class="headerlink" title="1.全展开"></a>1.全展开</h2><ul>
-<li>确保父容器是NestedScrollView</li>
-<li>在代码中设置（在xml会提示新api）：<br><code>recyclerView.setNestedScrollingEnabled(false);</code></li>
-</ul>
-<h2 id="2-刷新Item中的ProgressBar"><a href="#2-刷新Item中的ProgressBar" class="headerlink" title="2.刷新Item中的ProgressBar"></a>2.刷新Item中的ProgressBar</h2><ul>
-<li>RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有改变Alpha值的动画。所以刷新ProgressBar时会出现闪烁现象，因此要去掉或者自己实现ItemAnimator。<br><code>recyclerView.setItemAnimator(null);</code></li>
-</ul>
-<h2 id="3-滑到最底部"><a href="#3-滑到最底部" class="headerlink" title="3.滑到最底部"></a>3.滑到最底部</h2><ul>
-<li>这种场景默认方向是vertical，你也可以改成Horizontal，原理一样的。</li>
-<li>判断是否到底部：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public static boolean isSlideToBottom(RecyclerView recyclerView) &#123;</div><div class="line">  if (recyclerView == null) return false;</div><div class="line">  if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()</div><div class="line">                &gt;= recyclerView.computeVerticalScrollRange())</div><div class="line">     return true;</div><div class="line">   return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>滑到最底部：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (isSlideToBottom(content)) &#123;</div><div class="line">   recyclerView.smoothScrollToPosition(offset);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>offset是系统常量。</p>
-<h2 id="4-记录滑动的状态"><a href="#4-记录滑动的状态" class="headerlink" title="4.记录滑动的状态"></a>4.记录滑动的状态</h2><p>参考Activtiy的onSaveInstanceState与onRestoreInstanceState，查看RecyclerView的这两个方法。</p>
-<p>以下为26.1.0版本源码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">protected Parcelable onSaveInstanceState() &#123;</div><div class="line">        SavedState state = new SavedState(super.onSaveInstanceState());</div><div class="line">        if (mPendingSavedState != null) &#123;</div><div class="line">            state.copyFrom(mPendingSavedState);</div><div class="line">        &#125; else if (mLayout != null) &#123;</div><div class="line">            state.mLayoutState = mLayout.onSaveInstanceState();</div><div class="line">        &#125; else &#123;</div><div class="line">            state.mLayoutState = null;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return state;</div><div class="line">&#125;</div><div class="line"></div><div class="line">protected void onRestoreInstanceState(Parcelable state) &#123;</div><div class="line">        if (!(state instanceof SavedState)) &#123;</div><div class="line">            super.onRestoreInstanceState(state);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        mPendingSavedState = (SavedState) state;</div><div class="line">        super.onRestoreInstanceState(mPendingSavedState.getSuperState());</div><div class="line">        if (mLayout != null &amp;&amp; mPendingSavedState.mLayoutState != null) &#123;</div><div class="line">            mLayout.onRestoreInstanceState(mPendingSavedState.mLayoutState);</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>最重要的变量就是mLayout，它就是LayoutManager。LayoutManager顾名思义，就是管理布局状态的，所以保存布局状态当然要使用它了。</p>
-<p>获取状态和保存状态：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Parcelable state = mLayout.onSaveInstanceState();</div><div class="line"></div><div class="line">if (state != null) &#123;</div><div class="line">	mLayout.onRestoreInstanceState(state);</div><div class="line">&#125; else &#123;</div><div class="line">	//null处理</div><div class="line">	mRecyclerView.smoothScrollToPosition(0);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//smoothScrollToPosition源码</div><div class="line">public void smoothScrollToPosition(int position) &#123;</div><div class="line">        if (mLayoutFrozen) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        if (mLayout == null) &#123;</div><div class="line">            Log.e(TAG, &quot;Cannot smooth scroll without a LayoutManager set. &quot;</div><div class="line">                    + &quot;Call setLayoutManager with a non-null argument.&quot;);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        mLayout.smoothScrollToPosition(this, mState, position);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjab6oqfk0005tyvflib2kh5m" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UI/">UI</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
 
     </footer>
   </div>
@@ -598,7 +575,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android三方库/">Android三方库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android基础/">Android基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java集合容器/">Java集合容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-blog/">hexo blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境配置/">开发环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kotlin/">Kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
     </div>
   </div>
 
@@ -608,7 +585,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android三方库/" style="font-size: 10px;">Android三方库</a> <a href="/tags/Android基础/" style="font-size: 16.67px;">Android基础</a> <a href="/tags/Java集合容器/" style="font-size: 13.33px;">Java集合容器</a> <a href="/tags/UI/" style="font-size: 13.33px;">UI</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo-blog/" style="font-size: 10px;">hexo blog</a> <a href="/tags/kotlin/" style="font-size: 16.67px;">kotlin</a> <a href="/tags/开发环境配置/" style="font-size: 10px;">开发环境配置</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a>
+      <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Git/" style="font-size: 20px;">Git</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
     </div>
   </div>
 
@@ -630,6 +607,10 @@
       <ul>
         
           <li>
+            <a href="/2017/11/23/Effective-Java笔记/">Effective Java笔记</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/19/Glide笔记/">Glide笔记</a>
           </li>
         
@@ -643,10 +624,6 @@
         
           <li>
             <a href="/2017/11/08/mac下配置zsh/">mac下配置zsh</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/07/常用adb、gradle命令/">常用adb、gradle命令</a>
           </li>
         
       </ul>

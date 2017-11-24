@@ -62,6 +62,67 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-RecyclerView笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/22/RecyclerView笔记/" class="article-date">
+  <time datetime="2017-10-22T01:45:58.000Z" itemprop="datePublished">2017-10-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/22/RecyclerView笔记/">RecyclerView笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-全展开"><a href="#1-全展开" class="headerlink" title="1.全展开"></a>1.全展开</h2><ul>
+<li>确保父容器是NestedScrollView</li>
+<li>在代码中设置（在xml会提示新api）：<br><code>recyclerView.setNestedScrollingEnabled(false);</code></li>
+</ul>
+<h2 id="2-刷新Item中的ProgressBar"><a href="#2-刷新Item中的ProgressBar" class="headerlink" title="2.刷新Item中的ProgressBar"></a>2.刷新Item中的ProgressBar</h2><ul>
+<li>RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有改变Alpha值的动画。所以刷新ProgressBar时会出现闪烁现象，因此要去掉或者自己实现ItemAnimator。<br><code>recyclerView.setItemAnimator(null);</code></li>
+</ul>
+<h2 id="3-滑到最底部"><a href="#3-滑到最底部" class="headerlink" title="3.滑到最底部"></a>3.滑到最底部</h2><ul>
+<li>这种场景默认方向是vertical，你也可以改成Horizontal，原理一样的。</li>
+<li>判断是否到底部：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public static boolean isSlideToBottom(RecyclerView recyclerView) &#123;</div><div class="line">  if (recyclerView == null) return false;</div><div class="line">  if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()</div><div class="line">                &gt;= recyclerView.computeVerticalScrollRange())</div><div class="line">     return true;</div><div class="line">   return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>滑到最底部：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (isSlideToBottom(content)) &#123;</div><div class="line">   recyclerView.smoothScrollToPosition(offset);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>offset是系统常量。</p>
+<h2 id="4-记录滑动的状态"><a href="#4-记录滑动的状态" class="headerlink" title="4.记录滑动的状态"></a>4.记录滑动的状态</h2><p>参考Activtiy的onSaveInstanceState与onRestoreInstanceState，查看RecyclerView的这两个方法。</p>
+<p>以下为26.1.0版本源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">protected Parcelable onSaveInstanceState() &#123;</div><div class="line">        SavedState state = new SavedState(super.onSaveInstanceState());</div><div class="line">        if (mPendingSavedState != null) &#123;</div><div class="line">            state.copyFrom(mPendingSavedState);</div><div class="line">        &#125; else if (mLayout != null) &#123;</div><div class="line">            state.mLayoutState = mLayout.onSaveInstanceState();</div><div class="line">        &#125; else &#123;</div><div class="line">            state.mLayoutState = null;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return state;</div><div class="line">&#125;</div><div class="line"></div><div class="line">protected void onRestoreInstanceState(Parcelable state) &#123;</div><div class="line">        if (!(state instanceof SavedState)) &#123;</div><div class="line">            super.onRestoreInstanceState(state);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        mPendingSavedState = (SavedState) state;</div><div class="line">        super.onRestoreInstanceState(mPendingSavedState.getSuperState());</div><div class="line">        if (mLayout != null &amp;&amp; mPendingSavedState.mLayoutState != null) &#123;</div><div class="line">            mLayout.onRestoreInstanceState(mPendingSavedState.mLayoutState);</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最重要的变量就是mLayout，它就是LayoutManager。LayoutManager顾名思义，就是管理布局状态的，所以保存布局状态当然要使用它了。</p>
+<p>获取状态和保存状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Parcelable state = mLayout.onSaveInstanceState();</div><div class="line"></div><div class="line">if (state != null) &#123;</div><div class="line">	mLayout.onRestoreInstanceState(state);</div><div class="line">&#125; else &#123;</div><div class="line">	//null处理</div><div class="line">	mRecyclerView.smoothScrollToPosition(0);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//smoothScrollToPosition源码</div><div class="line">public void smoothScrollToPosition(int position) &#123;</div><div class="line">        if (mLayoutFrozen) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        if (mLayout == null) &#123;</div><div class="line">            Log.e(TAG, &quot;Cannot smooth scroll without a LayoutManager set. &quot;</div><div class="line">                    + &quot;Call setLayoutManager with a non-null argument.&quot;);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        mLayout.smoothScrollToPosition(this, mState, position);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjacldc0k000fp5vffkeourep" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Handler的存在意义" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/22/Handler的存在意义/" class="article-date">
@@ -101,10 +162,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cjab6oqfj0004tyvf5bcn0ynu" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cjacldc0f0008p5vf538p51lx" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -149,10 +210,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cjab6oqfi0003tyvf4z1jnp0i" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cjacldc030000p5vfkrk3qq2g" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android基础/">Android基础</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -225,10 +286,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cjab6oqg1000ttyvfkayhsvgk" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cjacldc0s000up5vf3aykz0kk" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/">Kotlin</a></li></ul>
 
     </footer>
   </div>
@@ -251,7 +312,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/10/kotlin学习资料/">kotlin学习资料</a>
+      <a class="article-title" href="/2017/10/10/kotlin学习资料/">Kotlin学习资料</a>
     </h1>
   
 
@@ -265,10 +326,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cjab6oqfz000ptyvfxo0s8yj6" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cjacldc0u000zp5vf8cv89bnw" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/">Kotlin</a></li></ul>
 
     </footer>
   </div>
@@ -331,10 +392,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cjab6oqg70012tyvfqyhwf8dy" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cjacldc0x0011p5vfqvkerxc6" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
 
     </footer>
   </div>
@@ -398,10 +459,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cjab6oqfy000ntyvf85zslzd0" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cjacldc0r000sp5vfq525hyuf" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
 
     </footer>
   </div>
@@ -450,10 +511,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cjab6oqfw000ltyvffdhg09s1" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cjacldc0q000qp5vfkew83qd2" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
 
     </footer>
   </div>
@@ -502,70 +563,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjab6oqfv000jtyvf9zkuxlrt" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjacldc0m000kp5vf2fjdjjy7" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git简单命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/25/git简单命令/" class="article-date">
-  <time datetime="2017-09-25T00:17:14.000Z" itemprop="datePublished">2017-09-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/25/git简单命令/">git简单命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-git-init"><a href="#1-git-init" class="headerlink" title="1.git init"></a>1.git init</h2><p>初始化本地仓库。</p>
-<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区。可以使用通配符如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git add *.txt</div></pre></td></tr></table></figure>
-<h2 id="3-git-commit-m-“XXX”"><a href="#3-git-commit-m-“XXX”" class="headerlink" title="3.git commit -m “XXX”"></a>3.git commit -m “XXX”</h2><ul>
-<li>把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。</li>
-<li>追加修改到上次提交。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit --amend</div></pre></td></tr></table></figure>
-<h2 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h2><p>将工作区与版本库对比，提示差异的信息。</p>
-<h2 id="5-git-log"><a href="#5-git-log" class="headerlink" title="5.git log"></a>5.git log</h2><p>输出每次版本库的变动，从最近开始输出。可以查看每个版本的SHA1数值。</p>
-<h2 id="6-git-reflog"><a href="#6-git-reflog" class="headerlink" title="6.git reflog"></a>6.git reflog</h2><p>查看命令历史，log命令是查看提交历史，这两个命令有所不同。</p>
-<h2 id="7-git-checkout-dev"><a href="#7-git-checkout-dev" class="headerlink" title="7.git checkout dev"></a>7.git checkout dev</h2><ul>
-<li>将HEAD指向dev分支最近节点。</li>
-<li>参数也可以使用SHA1数值，这样可以准确地切到想要的节点。</li>
-<li>参数也可以使用HEAD^、HEAD~2、dev^、dev~2等。</li>
-</ul>
-<h2 id="8-git-branch-b-dev"><a href="#8-git-branch-b-dev" class="headerlink" title="8.git branch -b dev"></a>8.git branch -b dev</h2><p>这条指令相当于：<br>git branch dev<br>git checkout dev<br>在当前HEAD指向的节点创建名为dev的分支并且将HEAD指向它。</p>
-<h2 id="9-git-branch-d-dev"><a href="#9-git-branch-d-dev" class="headerlink" title="9.git branch -d dev"></a>9.git branch -d dev</h2><p>删除dev分支。</p>
-<h2 id="10-git-merge-dev"><a href="#10-git-merge-dev" class="headerlink" title="10.git merge dev"></a>10.git merge dev</h2><ul>
-<li>在HEAD指向节点基础上合并dev的内容，生成新的一次提交。</li>
-<li>同理，参数也可以使用SHA1，HEAD^、HEAD~2等。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cjab6oqfr000ftyvfvhstqf0h" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
 
     </footer>
   </div>
@@ -590,7 +591,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android三方库/">Android三方库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android基础/">Android基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java集合容器/">Java集合容器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UI/">UI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-blog/">hexo blog</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境配置/">开发环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/系统源码/">系统源码</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kotlin/">Kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
     </div>
   </div>
 
@@ -600,7 +601,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android三方库/" style="font-size: 10px;">Android三方库</a> <a href="/tags/Android基础/" style="font-size: 16.67px;">Android基础</a> <a href="/tags/Java集合容器/" style="font-size: 13.33px;">Java集合容器</a> <a href="/tags/UI/" style="font-size: 13.33px;">UI</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/hexo-blog/" style="font-size: 10px;">hexo blog</a> <a href="/tags/kotlin/" style="font-size: 16.67px;">kotlin</a> <a href="/tags/开发环境配置/" style="font-size: 10px;">开发环境配置</a> <a href="/tags/系统源码/" style="font-size: 10px;">系统源码</a>
+      <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Git/" style="font-size: 20px;">Git</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
     </div>
   </div>
 
@@ -622,6 +623,10 @@
       <ul>
         
           <li>
+            <a href="/2017/11/23/Effective-Java笔记/">Effective Java笔记</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/19/Glide笔记/">Glide笔记</a>
           </li>
         
@@ -635,10 +640,6 @@
         
           <li>
             <a href="/2017/11/08/mac下配置zsh/">mac下配置zsh</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/07/常用adb、gradle命令/">常用adb、gradle命令</a>
           </li>
         
       </ul>
