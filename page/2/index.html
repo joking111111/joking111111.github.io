@@ -62,6 +62,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java集合容器之LinkedHashMap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/01/Java集合容器之LinkedHashMap/" class="article-date">
+  <time datetime="2017-11-01T05:58:10.000Z" itemprop="datePublished">2017-11-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/01/Java集合容器之LinkedHashMap/">Java集合容器之LinkedHashMap</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-继承关系"><a href="#1-继承关系" class="headerlink" title="1.继承关系"></a>1.继承关系</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class LinkedHashMap&lt;K,V&gt;</div><div class="line">    extends HashMap&lt;K,V&gt;</div><div class="line">    implements Map&lt;K,V&gt; &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>LinkedHashMap是HashMap的子类，从面向对象设计思想上讲，LinkedHashMap更多的是增加或改写HashMap的方法。</p>
+<h2 id="2-Entry类"><a href="#2-Entry类" class="headerlink" title="2.Entry类"></a>2.Entry类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">static class LinkedHashMapEntry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; &#123;</div><div class="line">        LinkedHashMapEntry&lt;K,V&gt; before, after;</div><div class="line">        LinkedHashMapEntry(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</div><div class="line">            super(hash, key, value, next);</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>LinkedHashMapEntry是HashMap.Node的子类，构造方法直接调用父类构造方法，额外加多两个前后引用。</p>
+<ul>
+<li>next引用是提供给父类HashMap.Node构建HashMap的单链表的！</li>
+<li>before, after是构建一个双向回环链表！</li>
+<li>两者并无关联，也不冲突！</li>
+</ul>
+<h2 id="3-图像理解数据结构"><a href="#3-图像理解数据结构" class="headerlink" title="3.图像理解数据结构"></a>3.图像理解数据结构</h2><ul>
+<li>上一节提及到，双链表和HashMap并不冲突，所以HashMap部分可以参考HashMap。</li>
+<li>以下为双向回环链表部分。<br><img src="/2017/11/01/Java集合容器之LinkedHashMap/双向回环链表.png" alt="双向回环链表"></li>
+</ul>
+<h2 id="4-与HashMap比较"><a href="#4-与HashMap比较" class="headerlink" title="4.与HashMap比较"></a>4.与HashMap比较</h2><ul>
+<li>遍历集合时，LinkedHashMap保留元素进入顺序，HashMap则无法保证元素进入顺序。当然要耗费一点性能。</li>
+<li>LinkedHashMap每次都将元素加入至双向链表的尾部，利用这个特性实现LruCache，并不是因为LruCache的需要而实现了LinkedHashMap。</li>
+</ul>
+<h2 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5.参考资料"></a>5.参考资料</h2><p><a href="http://www.cnblogs.com/xrq730/p/5052323.html" target="_blank" rel="external">http://www.cnblogs.com/xrq730/p/5052323.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/11/01/Java集合容器之LinkedHashMap/" data-id="cjahigfqm000fldvffpem9dzh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-RecyclerView笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/22/RecyclerView笔记/" class="article-date">
@@ -111,7 +167,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjaeni4mu000fhhvfn5q4hysh" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjahigfql000dldvfgfpj9qxi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -162,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cjaeni4mk0005hhvfgh7k7ae9" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cjahigfqh0008ldvftxh310f3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -210,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cjaeni4m90000hhvfq253w9nk" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cjahigfq30000ldvfhed7z79e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -286,7 +342,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cjaeni4n1000uhhvfv6ccf835" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cjahigfqv000yldvfhlvorfs9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/">Kotlin</a></li></ul>
@@ -326,7 +382,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cjaeni4n4000zhhvfl6f3xrlo" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cjahigfqu000vldvftqh7x2rf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/">Kotlin</a></li></ul>
@@ -392,7 +448,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cjaeni4n3000xhhvfrljlca3k" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cjahigfqx0010ldvf5tdciqz2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -459,7 +515,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cjaeni4mw000jhhvf37jqg37z" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cjahigfqr000rldvfrjqq5rtd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -511,59 +567,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cjaeni4n0000thhvfz81amv6i" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git版本回退" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/25/git版本回退/" class="article-date">
-  <time datetime="2017-09-25T14:35:22.000Z" itemprop="datePublished">2017-09-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/25/git版本回退/">git版本回退</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-git-diff-XXX"><a href="#1-git-diff-XXX" class="headerlink" title="1.git diff XXX"></a>1.git diff XXX</h2><ul>
-<li>当我们使用git status查看工作区做了什么修改时，可以使用git diff XXX对修改过的文件XXX查看差异</li>
-</ul>
-<h2 id="2-git-reset-–hard-HEAD"><a href="#2-git-reset-–hard-HEAD" class="headerlink" title="2.git reset –hard HEAD^"></a>2.git reset –hard HEAD^</h2><h3 id="版本库回退"><a href="#版本库回退" class="headerlink" title="版本库回退"></a>版本库回退</h3><ul>
-<li>首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。</li>
-<li>HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2表示上两个版本，以此类推。</li>
-<li>由于有–hard这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id，这时需要git reflog来找回commit-id。然后使用以下命令：<br><code>git reset --hard commit_id</code><br>即可找回原来的版本。</li>
-</ul>
-<h2 id="3-git-revert-HEAD"><a href="#3-git-revert-HEAD" class="headerlink" title="3.git revert HEAD"></a>3.git revert HEAD</h2><p>回退到上一版本的另一种方法，注意参数HEAD，是回退到上一版本。</p>
-<ul>
-<li>git reset是不会产生新的提交记录，反而有可能抹去提交记录，当我们要推送到远程仓库时，显然没有提交记录怎么推送呢？所以git reset适合操作本地仓库，不需要分享给远程仓库的。</li>
-<li>git revert是会在HEAD节点基础上生成一个提交节点的，也就是新的提交，所以可以推送到远程仓库，别人也能查看到远程记录。</li>
-</ul>
-<h2 id="4-git-branch-f-master-HEAD"><a href="#4-git-branch-f-master-HEAD" class="headerlink" title="4.git branch -f master HEAD^"></a>4.git branch -f master HEAD^</h2><p>在git branch命令后加上参数-f和分支名master以及节点名HEAD^，这样就把master分支强制指向了HEAD的上一版本。即使当前HEAD不在master分支上，使用这个命令也能强制移动master分支的最新提交节点。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjaeni4mx000mhhvfikp9tzwd" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cjahigfqs000uldvfnqtwz1a7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -601,7 +605,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Git/" style="font-size: 20px;">Git</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 20px;">Git</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 15px;">Kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
     </div>
   </div>
 
@@ -623,6 +627,10 @@
       <ul>
         
           <li>
+            <a href="/2017/11/25/深入理解Android卷一笔记/">深入理解Android卷一笔记</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/23/Effective-Java笔记/">Effective Java笔记</a>
           </li>
         
@@ -636,10 +644,6 @@
         
           <li>
             <a href="/2017/11/09/搭建基于hexo的博客以及如何迁移/">搭建基于hexo的博客以及如何迁移</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/08/mac下配置zsh/">mac下配置zsh</a>
           </li>
         
       </ul>

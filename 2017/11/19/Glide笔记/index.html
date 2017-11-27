@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="一.基本组件1.基本使用以下均基于Glide4.x版本。 123456789//加载图片Glide.with(getContext()).load(url).apply(options).into(imageView);//取消加载Glide.with(getContext()).clear(imageView); 2.RequestOptionsGlide的常用选项  裁剪样式circleCro">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-11-24T00:44:39.613Z">
+<meta property="og:updated_time" content="2017-11-25T08:45:23.877Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Glide笔记">
 <meta name="twitter:description" content="一.基本组件1.基本使用以下均基于Glide4.x版本。 123456789//加载图片Glide.with(getContext()).load(url).apply(options).into(imageView);//取消加载Glide.with(getContext()).clear(imageView); 2.RequestOptionsGlide的常用选项  裁剪样式circleCro">
@@ -110,11 +110,11 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder1 = Glide.with(getContext())</div><div class="line">.load(url1)</div><div class="line">.apply(options);</div><div class="line"></div><div class="line">RequestBuilder builder2 = Glide.with(getContext())</div><div class="line">.load(url2)</div><div class="line">.apply(options)</div><div class="line">.error(builder1);</div><div class="line"></div><div class="line">builder2.into(imageView);</div></pre></td></tr></table></figure>
 <p>这段代码意义为当url2加载失败后，会启用builder1这个请求，加载url1。这样我们就可以实现多级url加载了。</p>
 <p>以下为多级加载url方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public static void loadUrls(String[] urls, RequestOptions options, ImageView imageView) &#123;</div><div class="line">        if (urls == null || urls.length == 0) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        RequestBuilder frontBuilder = Glide.with(getContext()).load(urls[0]).apply(options);</div><div class="line">        RequestBuilder prevBuilder = frontBuilder;</div><div class="line">        </div><div class="line">        for (int i = 1; i &lt; urls.length; i++) &#123;</div><div class="line">            RequestBuilder nextBuilder = Glide.with(getContext()).load(urls[i]).apply(options);</div><div class="line">            prevBuilder.error(nextBuilder);</div><div class="line">            prevBuilder = nextBuilder;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        frontBuilder.into(imageView);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public static void loadUrls(String[] urls, RequestOptions options, ImageView imageView) &#123;</div><div class="line">        if (urls == null || urls.length == 0) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        RequestBuilder&lt;Drawable&gt; frontBuilder = Glide.with(getContext()).load(urls[0]).apply(options);</div><div class="line">        RequestBuilder&lt;Drawable&gt; prevBuilder = frontBuilder;</div><div class="line">        </div><div class="line">        for (int i = 1; i &lt; urls.length; i++) &#123;</div><div class="line">            RequestBuilder&lt;Drawable&gt; nextBuilder = Glide.with(getContext()).load(urls[i]).apply(options);</div><div class="line">            prevBuilder.error(nextBuilder);</div><div class="line">            prevBuilder = nextBuilder;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        frontBuilder.into(imageView);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cjaeni4mj0004hhvfxtc2wf0n" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cjahigfqd0004ldvfvwshixv1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -166,7 +166,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 16.67px;">Android</a> <a href="/tags/Git/" style="font-size: 20px;">Git</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 20px;">Git</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 15px;">Kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
     </div>
   </div>
 
@@ -188,6 +188,10 @@
       <ul>
         
           <li>
+            <a href="/2017/11/25/深入理解Android卷一笔记/">深入理解Android卷一笔记</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/23/Effective-Java笔记/">Effective Java笔记</a>
           </li>
         
@@ -201,10 +205,6 @@
         
           <li>
             <a href="/2017/11/09/搭建基于hexo的博客以及如何迁移/">搭建基于hexo的博客以及如何迁移</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/08/mac下配置zsh/">mac下配置zsh</a>
           </li>
         
       </ul>
