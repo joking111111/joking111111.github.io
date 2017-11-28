@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="1.git clone ssh此命令克隆远程仓库到当前目录，ssh为https地址。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-11-24T00:46:39.282Z">
+<meta property="og:updated_time" content="2017-11-27T13:45:14.657Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git远程仓库">
 <meta name="twitter:description" content="1.git clone ssh此命令克隆远程仓库到当前目录，ssh为https地址。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区">
@@ -99,7 +99,9 @@
 <h2 id="4-git-pull"><a href="#4-git-pull" class="headerlink" title="4.git pull"></a>4.git pull</h2><p>此命令就是上两条命令的缩写，先fetch再merge。</p>
 <ul>
 <li>我们经常会先commit掉当前写的代码，然后pull下同事push的代码。</li>
+<li>不使用merge方式，采用rebase方式：</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull --rebase</div></pre></td></tr></table></figure>
 <h2 id="5-git-push"><a href="#5-git-push" class="headerlink" title="5.git push"></a>5.git push</h2><p>此命令会将本地commit推送到远程仓库，并且会更新origin/分支。</p>
 <ul>
 <li>有时候远程仓库已经改变了，但是你的本地分支（没有origin/前缀）不会修改。</li>
@@ -120,7 +122,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cjahigfqr000rldvfrjqq5rtd" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cjajr5nc5000qm5vfklb052kw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -172,7 +174,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 20px;">Git</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 15px;">Kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 16.67px;">Git</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
     </div>
   </div>
 
@@ -194,6 +196,10 @@
       <ul>
         
           <li>
+            <a href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/25/深入理解Android卷一笔记/">深入理解Android卷一笔记</a>
           </li>
         
@@ -207,10 +213,6 @@
         
           <li>
             <a href="/2017/11/19/android使用kotlin注意事项/">android使用kotlin注意事项</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/09/搭建基于hexo的博客以及如何迁移/">搭建基于hexo的博客以及如何迁移</a>
           </li>
         
       </ul>

@@ -62,6 +62,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git高级操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/08/git高级操作/" class="article-date">
+  <time datetime="2017-10-08T12:49:21.000Z" itemprop="datePublished">2017-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/08/git高级操作/">git高级操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-git-cherry-pick-A-B-C"><a href="#1-git-cherry-pick-A-B-C" class="headerlink" title="1.git cherry-pick A B C"></a>1.git cherry-pick A B C</h2><p><img src="/2017/10/08/git高级操作/git cherry-pick.png" alt="git cherry-pick"></p>
+<p>假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？</p>
+<ul>
+<li>方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C。切换命令是git checkout dev。之后使用git merge D，git merge E。</li>
+<li>方法二：首先也要查看dev上的commit-id，然后在C上使用git cherry-pick D E。</li>
+<li>好像两个方法优劣对比不是很强，但是cherry-pick后跟的commit-id可以有很多个，当需要抓取的feature较多时方法二的优势就出来了。</li>
+<li>注意，如果是 HEAD 上游的提交，那就不能用cherry-pick抓取过来，因为很明显不能将同一分支上的历史提交再次提交。</li>
+</ul>
+<h2 id="2-git-rebase"><a href="#2-git-rebase" class="headerlink" title="2.git rebase"></a>2.git rebase</h2><ul>
+<li>多人协作大家基本习惯了merge的方式进行提交代码。但是最大的弊端就是提交历史变得有许多平行线。实际的确也是并行开发，但是当要追踪修改历史的时候，嗯，你可以冲上一杯咖啡了哈哈哈。</li>
+<li>先更新master分支，在dev分支上使用命令<br><code>git rebase master</code><br>这样看起来就像是在master上的节点检出的分支又再次合并回主分支，这样整个提交树就非常线性，易于追踪。</li>
+<li>另一个操作是<br><code>git rebase -i commit-id</code><br>这个命令可以“可视化操作提交历史”，有丢弃，修改，排序等功能。本人觉得在命令行操作哪有什么可视化操作哈哈哈。这个命令可以使用上述的cherry-pick命令代替。</li>
+</ul>
+<h2 id="3-git-stash"><a href="#3-git-stash" class="headerlink" title="3.git stash"></a>3.git stash</h2><p>这个命令挺有用，尤其是还没做完手头上的工作，又不得不做别的事（切换到别的分支治疗），并且不想因此commit，那么这系列命令对你很有用！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1.git stash 将当前未commit的修改压栈</div><div class="line">2.git stash list 查看栈有哪些stash</div><div class="line">3.git stash pop 弹出（恢复）栈顶修改</div><div class="line">4.git stash clear 清空栈</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cjajr5nc6000sm5vf1t7kmico" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-git版本回退" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/25/git版本回退/" class="article-date">
@@ -87,10 +139,10 @@
         <h2 id="1-git-diff-XXX"><a href="#1-git-diff-XXX" class="headerlink" title="1.git diff XXX"></a>1.git diff XXX</h2><ul>
 <li>当我们使用git status查看工作区做了什么修改时，可以使用git diff XXX对修改过的文件XXX查看差异</li>
 </ul>
-<h2 id="2-git-reset-–hard-HEAD"><a href="#2-git-reset-–hard-HEAD" class="headerlink" title="2.git reset –hard HEAD^"></a>2.git reset –hard HEAD^</h2><h3 id="版本库回退"><a href="#版本库回退" class="headerlink" title="版本库回退"></a>版本库回退</h3><ul>
+<h2 id="2-git-reset-hard-HEAD"><a href="#2-git-reset-hard-HEAD" class="headerlink" title="2.git reset --hard HEAD^"></a>2.git reset <code>--hard</code> HEAD^</h2><h3 id="版本库回退"><a href="#版本库回退" class="headerlink" title="版本库回退"></a>版本库回退</h3><ul>
 <li>首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。</li>
 <li>HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2表示上两个版本，以此类推。</li>
-<li>由于有–hard这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id，这时需要git reflog来找回commit-id。然后使用以下命令：<br><code>git reset --hard commit_id</code><br>即可找回原来的版本。</li>
+<li>由于有<code>--hard</code>这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id，这时需要git reflog来找回commit-id。然后使用以下命令：<br><code>git reset --hard commit_id</code><br>即可找回原来的版本。</li>
 </ul>
 <h2 id="3-git-revert-HEAD"><a href="#3-git-revert-HEAD" class="headerlink" title="3.git revert HEAD"></a>3.git revert HEAD</h2><p>回退到上一版本的另一种方法，注意参数HEAD，是回退到上一版本。</p>
 <ul>
@@ -102,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjahigfqo000kldvfu8rd6gp5" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjajr5nc1000km5vfkl5wwvp8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -162,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cjahigfqq000pldvf6vfk5uqu" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cjajr5nc4000om5vfp07n30a0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -251,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cjahigfqe0005ldvfw9f6sblb" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cjajr5nbk0001m5vft2119fsk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -298,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cjahigfq90001ldvfhiihpm4q" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cjajr5nbo0003m5vfu551i4zq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -338,7 +390,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cjahigfr3001aldvfe9l9fmpd" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cjajr5ncc0014m5vfnnmyyido" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -381,7 +433,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cjahigfqp000nldvfjp33zkuk" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cjajr5nc2000mm5vfw3r2hip8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -419,7 +471,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 20px;">Git</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 15px;">Kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 16.67px;">Git</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
     </div>
   </div>
 
@@ -441,6 +493,10 @@
       <ul>
         
           <li>
+            <a href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/25/深入理解Android卷一笔记/">深入理解Android卷一笔记</a>
           </li>
         
@@ -454,10 +510,6 @@
         
           <li>
             <a href="/2017/11/19/android使用kotlin注意事项/">android使用kotlin注意事项</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/09/搭建基于hexo的博客以及如何迁移/">搭建基于hexo的博客以及如何迁移</a>
           </li>
         
       </ul>
