@@ -5,15 +5,18 @@
   
   <title>Effective Java笔记 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Java">
+  <meta name="description" content="一、创建和销毁对象1.静态工厂方法和公有构造函数示例代码： 123public static Boolean valueOf(boolean b) &amp;#123;	return b ? Boolean.TRUE : Boolean.FALSE;&amp;#125; 优点：  静态工厂方法名相对构造函数，方便指示使用者选择合适的方法。 静态工厂方法可以控制不创建新对象，而是重复使用一些对象。如示例代码所示。">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Effective Java笔记">
 <meta property="og:url" content="https://joking111111.github.io/2017/11/23/Effective-Java笔记/index.html">
 <meta property="og:site_name" content="JoKing">
+<meta property="og:description" content="一、创建和销毁对象1.静态工厂方法和公有构造函数示例代码： 123public static Boolean valueOf(boolean b) &amp;#123;	return b ? Boolean.TRUE : Boolean.FALSE;&amp;#125; 优点：  静态工厂方法名相对构造函数，方便指示使用者选择合适的方法。 静态工厂方法可以控制不创建新对象，而是重复使用一些对象。如示例代码所示。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-11-23T14:48:15.420Z">
+<meta property="og:updated_time" content="2017-11-29T15:11:58.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effective Java笔记">
+<meta name="twitter:description" content="一、创建和销毁对象1.静态工厂方法和公有构造函数示例代码： 123public static Boolean valueOf(boolean b) &amp;#123;	return b ? Boolean.TRUE : Boolean.FALSE;&amp;#125; 优点：  静态工厂方法名相对构造函数，方便指示使用者选择合适的方法。 静态工厂方法可以控制不创建新对象，而是重复使用一些对象。如示例代码所示。">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -84,11 +87,170 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="一、创建和销毁对象"><a href="#一、创建和销毁对象" class="headerlink" title="一、创建和销毁对象"></a>一、创建和销毁对象</h2><h3 id="1-静态工厂方法和公有构造函数"><a href="#1-静态工厂方法和公有构造函数" class="headerlink" title="1.静态工厂方法和公有构造函数"></a>1.静态工厂方法和公有构造函数</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public static Boolean valueOf(boolean b) &#123;</div><div class="line">	return b ? Boolean.TRUE : Boolean.FALSE;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>优点：</p>
+<ul>
+<li>静态工厂方法名相对构造函数，方便指示使用者选择合适的方法。</li>
+<li>静态工厂方法可以控制不创建新对象，而是重复使用一些对象。如示例代码所示。</li>
+<li>静态工厂方法可返回返回类型的子类对象，设计模式中的工厂模式。</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>静态工厂方法一般会把构造函数非公有，导致类不能被继承。但是这样鼓励我们使用组合而非继承。</li>
+</ul>
+<p>总结：</p>
+<ul>
+<li>如果需要重用对象（单例），请使用静态工厂方法。</li>
+<li>如果需要提供不同的具体实现（子类），或者说面向接口编程，请使用静态工厂方法。</li>
+</ul>
+<h3 id="2-多个构造函数与Builder（构建者）"><a href="#2-多个构造函数与Builder（构建者）" class="headerlink" title="2.多个构造函数与Builder（构建者）"></a>2.多个构造函数与Builder（构建者）</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public MyView(Context context) &#123;</div><div class="line">       this(context, 100, 100);</div><div class="line">&#125;</div><div class="line"></div><div class="line">public MyView(Context context, int width, int height) &#123;</div><div class="line">       this(context, width, height);</div><div class="line">&#125;</div><div class="line"></div><div class="line">public MyView(Context context, int width, int height, int margin) &#123;</div><div class="line">		...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>像这种参数比较多，并且有可选参数时，建议使用Builder模式。<br>另外，Builder不建议使用Java Bean的getter、setter形式，建议使用链式调用写法，代码更简洁。</p>
+<p>优点：</p>
+<ul>
+<li>将传入的参数处理职责分离出去，类专注于功能，Builder专注于构建类参数，这样代码可读性跟拓展性增强。</li>
+</ul>
+<h3 id="3-避免创建不必要的对象"><a href="#3-避免创建不必要的对象" class="headerlink" title="3.避免创建不必要的对象"></a>3.避免创建不必要的对象</h3><p>比如SimpleDateFormat对象。</p>
+<h3 id="4-清除过期的对象引用"><a href="#4-清除过期的对象引用" class="headerlink" title="4.清除过期的对象引用"></a>4.清除过期的对象引用</h3><ul>
+<li>适当的时候将引用置为null。</li>
+<li>使用WeakReference。</li>
+</ul>
+<h3 id="5-避免使用finalize方法"><a href="#5-避免使用finalize方法" class="headerlink" title="5.避免使用finalize方法"></a>5.避免使用finalize方法</h3><p>原因：</p>
+<ul>
+<li>jvm不保证对象的finalize方法及时执行。</li>
+<li>jvm不保证对象的finalize方法一定执行。</li>
+</ul>
+<p>建议：</p>
+<ul>
+<li>在适当的时机，如try-catch中finally代码块调用close、recycle等方法。</li>
+</ul>
+<h2 id="二、方法的实现"><a href="#二、方法的实现" class="headerlink" title="二、方法的实现"></a>二、方法的实现</h2><h3 id="1-重写equals"><a href="#1-重写equals" class="headerlink" title="1.重写equals"></a>1.重写equals</h3><p>性质：</p>
+<ul>
+<li>自反性（reflexive） x.equals(x) = true</li>
+<li>对称性（symmetric） x.equals(y) &lt;=&gt; y.equals(x)</li>
+<li>传递性（transitive） x.equals(y) = y.equals(z) 那么 x.equals(z)结果应为一样</li>
+<li>一致性（consistent）x,y不变时，x.equals(y)也不变</li>
+<li>非null的x，x.equals(null) = false</li>
+</ul>
+<p>由于参数固定为Object类型（否则就是方法重载了），有必要做类型检查（instanceOf）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">public boolean equals(Object o) &#123;</div><div class="line">       return super.equals(o);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-重写hashCode"><a href="#2-重写hashCode" class="headerlink" title="2.重写hashCode"></a>2.重写hashCode</h3><p>重写了equals方法后，最好也重写hashCode方法。</p>
+<p>原因：</p>
+<ul>
+<li>两个对象equals方法返回true，不代表两个对象的hashCode返回值相等。</li>
+<li>默认hashCode本质上是这个对象的散列值，是以整个对象所有对象生成的，而我们重写equals方法可能只用到对象的关键成员，并不是全体成员。</li>
+</ul>
+<p>常用的类比如HashMap，我们使用自定义的类作为key时，HashMap会调用key的hashCode方法作为判定key相等的依据之一，并不是重写了equals方法就万事大吉了。</p>
+<h3 id="3-重写toString"><a href="#3-重写toString" class="headerlink" title="3.重写toString"></a>3.重写toString</h3><p>可以准备好一份模版或者使用脚本，生成toString函数。<br>比如可以利用toString将Java Bean转换为json字符串。</p>
+<h2 id="三、类和接口"><a href="#三、类和接口" class="headerlink" title="三、类和接口"></a>三、类和接口</h2><h3 id="1-组合优于继承"><a href="#1-组合优于继承" class="headerlink" title="1.组合优于继承"></a>1.组合优于继承</h3><p>对于接口的实现和继承不适用这条。</p>
+<p>父类有可能因为版本迭代而修改某些方法，这样子类很可能也要做出改变，但是我们可能对具体实现不敏感，只是想增加额外方法。</p>
+<p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">* 接口定义</div><div class="line">*/</div><div class="line">public interface PriceCalculator &#123;</div><div class="line">	float getPrice(int sum);</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line">* 包装类</div><div class="line">*/</div><div class="line">public PriceCalculatorWrapper implements PriceCalculator &#123;</div><div class="line">	private PriceCalculator mCalculator;</div><div class="line">	</div><div class="line">	//唯一构造函数</div><div class="line">	public PriceCalculatorWrapper(PriceCalculator calculator) &#123;</div><div class="line">		this.mCalculator = calculator;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	@override</div><div class="line">	public float getPrice(int sum) &#123;</div><div class="line">		return mCalculator.getPrice(sum);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/**</div><div class="line">* 具体实现类</div><div class="line">*/</div><div class="line">public ShopPriceCalculator implements PriceCalculator &#123;</div><div class="line">	@override</div><div class="line">	public float getPrice(int sum) &#123;</div><div class="line">		...</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以跟设计模式中的策略模式关联起来。</p>
+<h3 id="2-接口优于抽象类"><a href="#2-接口优于抽象类" class="headerlink" title="2.接口优于抽象类"></a>2.接口优于抽象类</h3><ul>
+<li>一个类能实现多个接口，只能继承一个类。</li>
+<li>面向接口编程，外界知道得越少越好。</li>
+<li>接口定义了一类方法的集合，做一件事可能有几个步骤，但是是通过一个接口完成的。</li>
+</ul>
+<h3 id="3-接口最好只定义方法"><a href="#3-接口最好只定义方法" class="headerlink" title="3.接口最好只定义方法"></a>3.接口最好只定义方法</h3><p>接口虽然可以有静态常量成员变量，但是并不是每个接口的实现类都会用到这些变量。虽然这并不影响运行效率，但是从代码可读性而言，在接口定义静态常量成员变量不是明智之举。</p>
+<h3 id="4-使用函数对象实现策略模式"><a href="#4-使用函数对象实现策略模式" class="headerlink" title="4.使用函数对象实现策略模式"></a>4.使用函数对象实现策略模式</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">interface Comparator&lt;T&gt; &#123;</div><div class="line">	int compare(T t1, T t2);</div><div class="line">&#125;</div><div class="line"></div><div class="line">class StringLengthComparator implements Comparator&lt;String&gt; &#123;</div><div class="line">	@override</div><div class="line">	public int compare(String s1, String s2) &#123;</div><div class="line">		return s1.length() - s2.length();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//每一次排序均要创建一个比较函数对象</div><div class="line">Array.sort(stringArray, new StringLengthComparator());</div></pre></td></tr></table></figure>
+<p>C++支持函数指针，即把一个函数体用指针作为参数传入别的作用域。这样可以达到面向接口编程的效果，不关注方法的具体实现。而java中，最相似的案例就是回调监听的实现了，只不过java没有指针，而是通过一个实现了监听接口的对象来传入别的作用域。</p>
+<p>由于策略模式的方法具体实现是无状态的（上一次调用与下一次调用无关），所以可以考虑将函数对象做成单例。</p>
+<p>建议：</p>
+<ul>
+<li>如果需要频繁使用该函数，那么最好做成一个单例，而不是每一次都创建新对象。</li>
+<li>如果使用次数不多，做成单例会导致函数对象生命周期过长，对于内存敏感的程序要慎重，虽然这个单例占用内存可能不多。</li>
+</ul>
+<h3 id="5-慎用非静态内部类"><a href="#5-慎用非静态内部类" class="headerlink" title="5.慎用非静态内部类"></a>5.慎用非静态内部类</h3><p>匿名内部类也属于非静态内部类。</p>
+<p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class MainActivty extends ... &#123;</div><div class="line">	public void work() &#123;</div><div class="line">		new Thread() &#123;</div><div class="line">			Toast.makeText(MainActivity.this, &quot;hello world&quot; ,Toast.LENGTH_SHORT);</div><div class="line">			//do something</div><div class="line">			...</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在work函数里面，创建了一个匿名内部类，它持有了外部类的强引用（MainActivity.this）。如果内部类的生命周期比外部类长的话，就会发生内存泄漏。</p>
+<p>不仅是内存泄漏，由于内部类有外部类的强引用，也会占用一定内存空间。比如HashMap中的Entry如果不是静态内部类，那么每个Entry都会拥有HashMap的强引用，一旦节点数量多了，也会影响性能。</p>
+<p>建议：</p>
+<ul>
+<li>如果不需要外部类的引用（调用方法），请加上static关键字修饰内部类。</li>
+<li>如果需要使用非静态内部类，请谨慎管理非静态内部类对象的生命周期。</li>
+</ul>
+<h2 id="四、泛型"><a href="#四、泛型" class="headerlink" title="四、泛型"></a>四、泛型</h2><h3 id="1-不要使用原生态类型"><a href="#1-不要使用原生态类型" class="headerlink" title="1.不要使用原生态类型"></a>1.不要使用原生态类型</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//原生态类型</div><div class="line">List list = new ArrayList();</div><div class="line"></div><div class="line">//非原生态类型</div><div class="line">List&lt;String&gt; list = new ArrayList&lt;&gt;();</div><div class="line">--------------------------------------------------------------------</div><div class="line"></div><div class="line">//错误代码</div><div class="line">List&lt;String&gt; list = new ArrayList&lt;&gt;();</div><div class="line">unsafeAdd(list, new Integer(1));</div><div class="line">//crash</div><div class="line">list.get(0);</div><div class="line"></div><div class="line">--------------------------------------------------------------------</div><div class="line">public static void unsafeAdd(List list, Object o)&#123;</div><div class="line">	list.add(o);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>unsafeAdd方法参数list使用了原生态类型，并没有对插入元素做类型检查。所以在编译期不会报错。</li>
+<li>等到调用了get方法时，程序尝试将Integer强转为String，抛出异常。</li>
+</ul>
+<p>注意！有两种特殊情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//1.获取class类</div><div class="line">List.class,String[].class,int.class 合法</div><div class="line">List&lt;String&gt;,List&lt;?&gt;.class 不合法</div><div class="line"></div><div class="line">//2.类型判定</div><div class="line">if (o instanceOf Set) &#123;</div><div class="line">	Set&lt;?&gt; set = (Set&lt;?&gt;) o;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>总结：<br>我们应该使用带泛型参数的类，让编译器帮助我们暴露程序的问题，而不是等到程序运行异常才暴露问题。</p>
+<h3 id="2-泛型列表优于泛型数组"><a href="#2-泛型列表优于泛型数组" class="headerlink" title="2.泛型列表优于泛型数组"></a>2.泛型列表优于泛型数组</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//运行时报错</div><div class="line">Object[] objects = new Long[1];</div><div class="line">objects[0] = &quot;hello world&quot;;</div><div class="line"></div><div class="line">//编译不通过</div><div class="line">List&lt;Object&gt; list = new ArrayList&lt;Long&gt;();</div><div class="line">list.add(&quot;hello world&quot;);</div></pre></td></tr></table></figure>
+<p>原因：</p>
+<ul>
+<li>Object[]是Long[]的父类，因此分配内存给objects时不会抛异常。</li>
+<li>List<object>并不是ArrayList<long>的父类，也不是List<long>的父类，所以编译不通过。</long></long></object></li>
+<li>Java泛型使用的是类型擦除机制实现泛型的，运行时把具体类型替换掉。编译期在编译时会做类型检查，这也是使用非原生态类型的好处。</li>
+</ul>
+<h2 id="五、枚举和注解"><a href="#五、枚举和注解" class="headerlink" title="五、枚举和注解"></a>五、枚举和注解</h2><h3 id="1-用enum代替int常量"><a href="#1-用enum代替int常量" class="headerlink" title="1.用enum代替int常量"></a>1.用enum代替int常量</h3><p>Java枚举类型基本想法：通过public static final为每个枚举常量导出实例的类。</p>
+<ul>
+<li>枚举没有公有构造函数，所以程序员无法手动创建枚举实例。</li>
+<li>枚举是线程安全的（final），也是防序列化反序列化的，很适合做单例。</li>
+<li>枚举常量是一个个对象，功能上肯定比一个int常量要强多了，相对的开销也大了。</li>
+</ul>
+<p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public enum Sample &#123;</div><div class="line">	SOLO(1), DUET(2), TRIO(3);</div><div class="line">	</div><div class="line">	private final int order;</div><div class="line">	Sample(int order) &#123;</div><div class="line">		this.order = order;</div><div class="line">	&#125;</div><div class="line">	public int getOrder() &#123;</div><div class="line">		return order;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不要使用默认顺序和ordinal()函数，而是使用一个成员变量记录序号。因为这样便于维护和检查。</p>
+<h3 id="2-坚持使用override注解"><a href="#2-坚持使用override注解" class="headerlink" title="2.坚持使用override注解"></a>2.坚持使用override注解</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">public class Test &#123;</div><div class="line">	private int order;</div><div class="line">	public boolean equals (Test t) &#123;</div><div class="line">		return this.order == t.order;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>equals没有使用override注解，导致编译期编译时没有“检查”。事实上，这个equals方法看似是重写，实际上是重载。因为equals方法原型是<code>public boolean equals(Object o)</code>。</p>
+<h3 id="3-常用注解"><a href="#3-常用注解" class="headerlink" title="3.常用注解"></a>3.常用注解</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@callSuper //声明子类若重写该方法，必须调用父类方法</div></pre></td></tr></table></figure>
+<h2 id="六、函数方法"><a href="#六、函数方法" class="headerlink" title="六、函数方法"></a>六、函数方法</h2><h3 id="1-必要时进行保护性拷贝"><a href="#1-必要时进行保护性拷贝" class="headerlink" title="1.必要时进行保护性拷贝"></a>1.必要时进行保护性拷贝</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class Adapter &#123;</div><div class="line">	private List&lt;String&gt; mList;</div><div class="line">	public Adapter(List&lt;String&gt; list) &#123;</div><div class="line">		mList = list;//没有保护性拷贝</div><div class="line">		mList = new ArrayList(list);//进行保护性拷贝</div><div class="line">		...</div><div class="line">		//检查参数有效性</div><div class="line">		...</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这一条主要按业务逻辑分的，如果想共用同一个参数对象，那么保存它的引用就好，否则我们应该新创建一个对象对参数对象进行拷贝。</p>
+<p>保护性拷贝场景：</p>
+<ul>
+<li>不希望参数对象在类外部变化时能影响类时。</li>
+<li>对并发场景有要求。</li>
+</ul>
+<h3 id="2-检查参数有效性"><a href="#2-检查参数有效性" class="headerlink" title="2.检查参数有效性"></a>2.检查参数有效性</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@override</div><div class="line">public boolean equals(Object o) &#123;</div><div class="line">	if(o instanceOf String) &#123;</div><div class="line">		String s = (String) o;</div><div class="line">		...</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>检查参数有效性一般在保护性拷贝之后。方法调用前检查参数合法性，减少调试的复杂性。</p>
+<h3 id="3-谨慎增加快捷方法"><a href="#3-谨慎增加快捷方法" class="headerlink" title="3.谨慎增加快捷方法"></a>3.谨慎增加快捷方法</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public void showWindow(int width, int height, long time) &#123;</div><div class="line">	...</div><div class="line">&#125;</div><div class="line"></div><div class="line">//快捷方法，宽高默认100</div><div class="line">public void showWindow(long time) &#123;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>除非快捷方法经常被调用，否则最好不要写快捷方法。因为增加快捷方法会使类的方法数上升，对于用户的理解难度相对增加；对于维护者，增加了维护默认参数和文档的职责。</p>
+<h3 id="4-谨慎使用重载"><a href="#4-谨慎使用重载" class="headerlink" title="4.谨慎使用重载"></a>4.谨慎使用重载</h3><p>这里需要强调重载和重写的运行时机区别：</p>
+<ul>
+<li>重载方法运行时机是在编译期确定好的，一个参数对象编译期是什么类型，决定了它会走哪个重载方法，并不会它运行时是子类对象而发生改变。</li>
+<li>重写方法运行时机是在运行时才确定的，是根据对象的实际类型决定走哪个类的重写方法，不受编译时类型影响。</li>
+</ul>
+<h3 id="5-谨慎使用可变参数"><a href="#5-谨慎使用可变参数" class="headerlink" title="5.谨慎使用可变参数"></a>5.谨慎使用可变参数</h3><p>弊端：</p>
+<ul>
+<li>方法调用前得检查参数有效性稍麻烦。</li>
+<li>可变参数方法的每次调用都会导致进行一次数组分配和初始化。</li>
+</ul>
+<p>建议：</p>
+<ul>
+<li>根据调用频率，给频率高的方法提供单独方法，对于频率低的可以使用可变参数方法。</li>
+</ul>
+<p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public void foo() &#123; &#125;</div><div class="line">public void foo(int a1) &#123; &#125;</div><div class="line">public void foo(int a1, int a2) &#123; &#125;</div><div class="line">public void foo(int a1, int a2, int a3) &#123; &#125;</div><div class="line">public void foo(int a1, int a2, int a3, int... rest) &#123; &#125;</div></pre></td></tr></table></figure>
+<h3 id="6-返回长度为零的数组或集合，而不是null"><a href="#6-返回长度为零的数组或集合，而不是null" class="headerlink" title="6.返回长度为零的数组或集合，而不是null"></a>6.返回长度为零的数组或集合，而不是null</h3><p>原因：</p>
+<ul>
+<li>返回null调用者需要对null作额外处理。当然调用者也需要对零长度作处理。</li>
+<li>零长度的数组或集合创建开销并不大。</li>
+<li>零长度的数组属于不可变的（final），可以共享。</li>
+</ul>
+<h2 id="七、通用程序设计"><a href="#七、通用程序设计" class="headerlink" title="七、通用程序设计"></a>七、通用程序设计</h2><h3 id="1-尽量使用for-each而不是for循环和使用Iterator"><a href="#1-尽量使用for-each而不是for循环和使用Iterator" class="headerlink" title="1.尽量使用for-each而不是for循环和使用Iterator"></a>1.尽量使用for-each而不是for循环和使用Iterator</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">//for-each</div><div class="line">for(String s : list) &#123;</div><div class="line">	doSomething(s);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//for循环</div><div class="line">for(int i = 0;i &lt; a.length; i++) &#123;</div><div class="line">	doSomething(a[i]);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//Iterator</div><div class="line">for(Iterator&lt;String&gt; i = list.iterator(); i.hasNext(); ) &#123;</div><div class="line">	doSomething(i.next());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>优点：</p>
+<ul>
+<li>代码简洁。</li>
+<li>性能较好，只计算一次size。</li>
+</ul>
+<h3 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/23/Effective-Java笔记/" data-id="cjakvnqap0008t4vfyzt2a0ib" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/23/Effective-Java笔记/" data-id="cjal6y3kz0003agvfa89faatf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>

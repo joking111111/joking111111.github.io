@@ -5,15 +5,20 @@
   
   <title>CoordinatorLayout的使用 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Android">
+  <meta name="description" content="一、前言1.什么是嵌套滚动机制（NestedScrolling）？所谓嵌套滚动其实就是界面布局中包含 一个可滚动的列表 和 一个不可滚动的View，这样在滚动列表时，首先将不可滚动View移出屏幕或移进屏幕，待不可滚动View固定时，才会继续滚动滚动列表的内容。 2.为什么要有滑动嵌套机制？回想一下android系统事件分发机制，一个down事件到up事件为一个事件流，在这事件流之中一旦某个Vie">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CoordinatorLayout的使用">
 <meta property="og:url" content="https://joking111111.github.io/2017/11/27/CoordinatorLayout的使用/index.html">
 <meta property="og:site_name" content="JoKing">
+<meta property="og:description" content="一、前言1.什么是嵌套滚动机制（NestedScrolling）？所谓嵌套滚动其实就是界面布局中包含 一个可滚动的列表 和 一个不可滚动的View，这样在滚动列表时，首先将不可滚动View移出屏幕或移进屏幕，待不可滚动View固定时，才会继续滚动滚动列表的内容。 2.为什么要有滑动嵌套机制？回想一下android系统事件分发机制，一个down事件到up事件为一个事件流，在这事件流之中一旦某个Vie">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-11-27T15:06:23.479Z">
+<meta property="og:image" content="https://joking111111.github.io/2017/11/27/CoordinatorLayout的使用/结构图.png">
+<meta property="og:updated_time" content="2017-11-29T14:50:52.401Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CoordinatorLayout的使用">
+<meta name="twitter:description" content="一、前言1.什么是嵌套滚动机制（NestedScrolling）？所谓嵌套滚动其实就是界面布局中包含 一个可滚动的列表 和 一个不可滚动的View，这样在滚动列表时，首先将不可滚动View移出屏幕或移进屏幕，待不可滚动View固定时，才会继续滚动滚动列表的内容。 2.为什么要有滑动嵌套机制？回想一下android系统事件分发机制，一个down事件到up事件为一个事件流，在这事件流之中一旦某个Vie">
+<meta name="twitter:image" content="https://joking111111.github.io/2017/11/27/CoordinatorLayout的使用/结构图.png">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -84,11 +89,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><h3 id="1-什么是嵌套滚动机制（NestedScrolling）？"><a href="#1-什么是嵌套滚动机制（NestedScrolling）？" class="headerlink" title="1.什么是嵌套滚动机制（NestedScrolling）？"></a>1.什么是嵌套滚动机制（NestedScrolling）？</h3><p>所谓嵌套滚动其实就是界面布局中包含 一个可滚动的列表 和 一个不可滚动的View，这样在滚动列表时，首先将不可滚动View移出屏幕或移进屏幕，待不可滚动View固定时，才会继续滚动滚动列表的内容。</p>
+<h3 id="2-为什么要有滑动嵌套机制？"><a href="#2-为什么要有滑动嵌套机制？" class="headerlink" title="2.为什么要有滑动嵌套机制？"></a>2.为什么要有滑动嵌套机制？</h3><p>回想一下android系统事件分发机制，一个down事件到up事件为一个事件流，在这事件流之中一旦某个View拦截（处理）该Touch事件，那么后续这个事件流将统一交由它处理。</p>
+<p>有时候我们需要将一个事件流分开成几个事件片给不同的View处理，那么我们需要调配事件分发。滑动嵌套机制应运而生。</p>
+<h2 id="二、Android嵌套滚动机制"><a href="#二、Android嵌套滚动机制" class="headerlink" title="二、Android嵌套滚动机制"></a>二、Android嵌套滚动机制</h2><h3 id="1-重要的类"><a href="#1-重要的类" class="headerlink" title="1.重要的类"></a>1.重要的类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NestedScrollingChild接口</div><div class="line">NestedScrollingParent接口</div><div class="line">NestedScrollingChildHelper辅助类</div><div class="line">NestedScrollingParentHelper辅助类</div></pre></td></tr></table></figure>
+<h3 id="2-结构图"><a href="#2-结构图" class="headerlink" title="2.结构图"></a>2.结构图</h3><p><img src="/2017/11/27/CoordinatorLayout的使用/结构图.png" alt="结构图"></p>
+<h2 id="三、参考文章"><a href="#三、参考文章" class="headerlink" title="三、参考文章"></a>三、参考文章</h2><ul>
+<li><a href="https://mp.weixin.qq.com/s/GDC3YLLPYsoalr8sg38dmg" target="_blank" rel="external">CoordinatorLayout和Behavior详解</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-ldKAMGChfbvk8E8nzvuNw" target="_blank" rel="external">CoordinatorLayout高级用法-自定义Behavior</a></li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/27/CoordinatorLayout的使用/" data-id="cjakvnqal0004t4vfrc8jbj0d" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/27/CoordinatorLayout的使用/" data-id="cjal6y3l30005agvf8mbe4o4l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>

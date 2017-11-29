@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="一、JNI调用流程分析1.Java层示例代码： 12345678public class MediaScanner &amp;#123;	static &amp;#123;		System.loadLibrary(&amp;quot;media_jni&amp;quot;);		native_init();	&amp;#125;		private static native void native_init();&amp;#125;  加载对应">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-11-28T15:08:39.598Z">
+<meta property="og:updated_time" content="2017-11-29T14:59:09.054Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入理解Android卷一笔记">
 <meta name="twitter:description" content="一、JNI调用流程分析1.Java层示例代码： 12345678public class MediaScanner &amp;#123;	static &amp;#123;		System.loadLibrary(&amp;quot;media_jni&amp;quot;);		native_init();	&amp;#125;		private static native void native_init();&amp;#125;  加载对应">
@@ -112,12 +112,15 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">typedef struct &#123;</div><div class="line">	const char* signature;</div><div class="line">	void* fnPtr;</div><div class="line">&#125; JNINativeMethod;</div></pre></td></tr></table></figure>
 <p>AndroidRunTime.cpp提供了registerNativeMethods方法来注册；其中又通过JNIHelp.c的jniRegisterNativeMethods。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">jclass clazz = (*env) -&gt; FindClass(env, className);</div><div class="line">(*env) -&gt; RegisterNatives(env, clazz, gMethods, numMethods);</div></pre></td></tr></table></figure>
-<p>当Java层通过System.loadLibrary加载</p>
+<ul>
+<li>1.当Java层通过System.loadLibrary加载so库时，会先找是否有JNI_OnLoad函数，如果有就调用它；</li>
+<li>2.</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/25/深入理解Android卷一笔记/" data-id="cjakvnqba001bt4vf0jfqdv9g" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/25/深入理解Android卷一笔记/" data-id="cjal6y3ls001eagvf0pz11axz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
