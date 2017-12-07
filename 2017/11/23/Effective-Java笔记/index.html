@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="一、创建和销毁对象1.静态工厂方法和公有构造函数示例代码： 123public static Boolean valueOf(boolean b) &amp;#123;	return b ? Boolean.TRUE : Boolean.FALSE;&amp;#125; 优点：  静态工厂方法名相对构造函数，方便指示使用者选择合适的方法。 静态工厂方法可以控制不创建新对象，而是重复使用一些对象。如示例代码所示。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-11-29T15:11:58.918Z">
+<meta property="og:updated_time" content="2017-12-07T14:45:43.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effective Java笔记">
 <meta name="twitter:description" content="一、创建和销毁对象1.静态工厂方法和公有构造函数示例代码： 123public static Boolean valueOf(boolean b) &amp;#123;	return b ? Boolean.TRUE : Boolean.FALSE;&amp;#125; 优点：  静态工厂方法名相对构造函数，方便指示使用者选择合适的方法。 静态工厂方法可以控制不创建新对象，而是重复使用一些对象。如示例代码所示。">
@@ -246,11 +246,47 @@
 <li>代码简洁。</li>
 <li>性能较好，只计算一次size。</li>
 </ul>
-<h3 id="2"><a href="#2" class="headerlink" title="2."></a>2.</h3>
+<h3 id="2-基本类型优于装箱基本类型"><a href="#2-基本类型优于装箱基本类型" class="headerlink" title="2.基本类型优于装箱基本类型"></a>2.基本类型优于装箱基本类型</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//自动装箱</div><div class="line">Integer integer = 10;</div><div class="line">//自动拆箱</div><div class="line">int i = integer;</div></pre></td></tr></table></figure>
+<p>对照关系：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">byte - Byte</div><div class="line">int - Integer</div><div class="line">long - Long</div><div class="line">boolean - Boolean</div><div class="line">float - Float</div><div class="line">double - Double</div></pre></td></tr></table></figure>
+<ul>
+<li><p>自动装箱是基本数据类型自动转换为装箱基本类型，是java语法糖。它伴随着新对象的生成，当然有性能损耗。</p>
+</li>
+<li><p>自动拆箱是调用装箱基本类型对象的取值方法。</p>
+</li>
+</ul>
+<h3 id="3-如果需要精确值，避免使用float和double"><a href="#3-如果需要精确值，避免使用float和double" class="headerlink" title="3.如果需要精确值，避免使用float和double"></a>3.如果需要精确值，避免使用float和double</h3><ul>
+<li><p>float和double执行二进制浮点运算，这是为了在广泛的数值范围上提供较为精确的快速近似计算而精心设计的。</p>
+</li>
+<li><p>然而他们并没有提供完全精确的结果，所以不应该被用于需要精确结果的场合。</p>
+</li>
+</ul>
+<p>需要准确结果，请使用BigDecimal类，它额外提供了几种四舍五入的模式。</p>
+<h3 id="4-慎用String连接"><a href="#4-慎用String连接" class="headerlink" title="4.慎用String连接"></a>4.慎用String连接</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String str = &quot;hello&quot; + &quot;world&quot;;</div></pre></td></tr></table></figure>
+<p>这里涉及到三个对象生成。</p>
+<ul>
+<li><p>String是不可变的（final），一旦一个String对象生成，它本身是不会发生改变的。</p>
+</li>
+<li><p>String相加其实是语法糖，运算符重载。</p>
+</li>
+<li><p>三个对象分别为”hello”、”world”、”helloworld”。</p>
+</li>
+</ul>
+<h2 id="八、异常"><a href="#八、异常" class="headerlink" title="八、异常"></a>八、异常</h2><h3 id="1-不要滥用异常机制"><a href="#1-不要滥用异常机制" class="headerlink" title="1.不要滥用异常机制"></a>1.不要滥用异常机制</h3><p>有时代码抛出异常，如果无法快速找到修复方法，我们为了尽快修复，可能会使用try-catch来暂时避免程序崩溃。我们应尽量不使用try-catch来捕获处理异常，而是通过代码逻辑来判断异常发生。</p>
+<h3 id="2-使用try-catch时，请尽量缩小代码块范围"><a href="#2-使用try-catch时，请尽量缩小代码块范围" class="headerlink" title="2.使用try-catch时，请尽量缩小代码块范围"></a>2.使用try-catch时，请尽量缩小代码块范围</h3><p>异常机制是在jvm层面实现的，try-catch代码块会阻止jvm执行某些特定优化，导致程序运行效率下降。</p>
+<p>最常见的情况就是打开文件做文件操作时，某些程序员为了省事直接用try-catch把方法开始到方法结束包住，因为他们并不知道这样的写法会导致程序运行效率下降。</p>
+<p>正确的做法应该是尽量减少try-catch代码块的长度，宁愿多用几个try-catch代码块，也不要一个try-catch代码块将全部代码包住。</p>
+<h3 id="3-throw明确异常，catch明确异常"><a href="#3-throw明确异常，catch明确异常" class="headerlink" title="3.throw明确异常，catch明确异常"></a>3.throw明确异常，catch明确异常</h3><p>对异常进行分类抛出和处理，便于日后维护。</p>
+<h2 id="九、序列化"><a href="#九、序列化" class="headerlink" title="九、序列化"></a>九、序列化</h2><h3 id="1-Serializable"><a href="#1-Serializable" class="headerlink" title="1.Serializable"></a>1.Serializable</h3><p>需要序列化的类（如java bean）才实现Serializable，因为实现一个接口总是有代价的。</p>
+<h3 id="2-Parcelable"><a href="#2-Parcelable" class="headerlink" title="2.Parcelable"></a>2.Parcelable</h3><p>这个接口是android特有的，出现的原因之一是解决因为本地序列化反序列化耗时较长导致某些重要操作耗时变长。它不能本地化（序列化到本地文件），而是序列化到内存中。相对于Serializable，其实不能相提并论，因为使用场景不一样。</p>
+<p>比如，Activity#onSaveInstanceState(Bundle state)、Activity#onRestoreInstanceState(Bundle state)这两个方法，需要对Activity的状态保存或重建，对速度要求高，对本地化存储没有要求。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/23/Effective-Java笔记/" data-id="cjavs1tmh00050hvfvjsskb4k" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/23/Effective-Java笔记/" data-id="cjawlhnzj0004l3vfr0iuo5bb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
