@@ -89,7 +89,9 @@
 <p>有时候我们需要将一个事件流分开成几个事件片给不同的View处理，那么我们需要调配事件分发。滑动嵌套机制应运而生。</p>
 <h2 id="二、Android嵌套滚动机制"><a href="#二、Android嵌套滚动机制" class="headerlink" title="二、Android嵌套滚动机制"></a>二、Android嵌套滚动机制</h2><h3 id="1-重要的类"><a href="#1-重要的类" class="headerlink" title="1.重要的类"></a>1.重要的类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NestedScrollingChild接口</div><div class="line">NestedScrollingParent接口</div><div class="line">NestedScrollingChildHelper辅助类</div><div class="line">NestedScrollingParentHelper辅助类</div></pre></td></tr></table></figure>
 <h3 id="2-结构图"><a href="#2-结构图" class="headerlink" title="2.结构图"></a>2.结构图</h3><p><img src="/2017/11/27/CoordinatorLayout的使用/结构图.png" alt="结构图"></p>
-<h2 id="三、参考文章"><a href="#三、参考文章" class="headerlink" title="三、参考文章"></a>三、参考文章</h2><ul>
+<h2 id="三、注意事项"><a href="#三、注意事项" class="headerlink" title="三、注意事项"></a>三、注意事项</h2><h3 id="1-子类宽高"><a href="#1-子类宽高" class="headerlink" title="1.子类宽高"></a>1.子类宽高</h3><p>由于CoordinatorLayout是FrameLayout的增强版（官方文档），所以子View使用match_parent这个属性就需要注意了。</p>
+<p>如下图，View B使用了match_parent，然后CoordinatorLayout在layout的时候把它的位置下移了，并且超出CoordinatorLayout的区域了。使用clipChildren属性是无效的，clipChildren默认是true的。<br><img src="/2017/11/27/CoordinatorLayout的使用/layout.png" alt="layout"></p>
+<h2 id="四、参考文章"><a href="#四、参考文章" class="headerlink" title="四、参考文章"></a>四、参考文章</h2><ul>
 <li><a href="https://mp.weixin.qq.com/s/GDC3YLLPYsoalr8sg38dmg" target="_blank" rel="external">CoordinatorLayout和Behavior详解</a></li>
 <li><a href="https://mp.weixin.qq.com/s/-ldKAMGChfbvk8E8nzvuNw" target="_blank" rel="external">CoordinatorLayout高级用法-自定义Behavior</a></li>
 </ul>
@@ -97,7 +99,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/27/CoordinatorLayout的使用/" data-id="cjal6y3l30005agvf8mbe4o4l" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/27/CoordinatorLayout的使用/" data-id="cjavs1tmg00040hvfhycvhy10" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -158,13 +160,41 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">jclass clazz = (*env) -&gt; FindClass(env, className);</div><div class="line">(*env) -&gt; RegisterNatives(env, clazz, gMethods, numMethods);</div></pre></td></tr></table></figure>
 <ul>
 <li>1.当Java层通过System.loadLibrary加载so库时，会先找是否有JNI_OnLoad函数，如果有就调用它；</li>
-<li>2.</li>
+<li>2.动态注册调用一般写在这个函数里。</li>
 </ul>
-
+<p>提示：<br>Android提供了JNIHelp.h这个文件，它内部包含了jni.h，所以我们编写jni时可以直接引入JNIHelp.h。</p>
+<h3 id="4-什么是JNIEnv？"><a href="#4-什么是JNIEnv？" class="headerlink" title="4.什么是JNIEnv？"></a>4.什么是JNIEnv？</h3><p>JNIEnv是一个与线程相关的代表JNI环境的结构体。我们经常通过它来从native层回调java层函数，但由于它是线程相关的，所以我们不能在B线程调用A线程的JNIEnv。</p>
+<h3 id="5-什么是JavaVM？"><a href="#5-什么是JavaVM？" class="headerlink" title="5.什么是JavaVM？"></a>5.什么是JavaVM？</h3><p>JavaVM顾名思义，就是一个java虚拟机变量，可以比作进程。不管有多少个线程，单进程就单独一个JavaVM。在JNI_OnLoad函数可以获得JavaVM。</p>
+<ul>
+<li>调用JavaVM-&gt;AttachCurrentThread可以获得当前线程的JNIEnv，这样可以在子线程回调java层函数。</li>
+<li>在线程结束时，调用JavaVM-&gt;DetachCurrentThread来释放相关资源。</li>
+</ul>
+<h3 id="6-什么是jfieldID和jmethodID？"><a href="#6-什么是jfieldID和jmethodID？" class="headerlink" title="6.什么是jfieldID和jmethodID？"></a>6.什么是jfieldID和jmethodID？</h3><p>1.获取：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//JNIEnv方法</div><div class="line">jfieldID GetFieldID (jclass clazz, const char* name, const char* sig);</div><div class="line">jmethodID GetMethodID (jclass clazz, const char* name, const char* sig);</div></pre></td></tr></table></figure>
+<p>建议在初始化的时候获取并保存下来，提高下一次调用的运行效率。</p>
+<p>2.使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//JNIEnv方法</div><div class="line">NativeType Call&lt;type&gt;Method (jobject jobj, jmethodID methodID, ...);</div><div class="line">NativeType CallStatic&lt;type&gt;Method (jmethodID methodID, ...);</div><div class="line"></div><div class="line">NativeType Get&lt;type&gt;Field (jobject jobj, jfieldID fieldID);</div><div class="line">void Set&lt;type&gt;Field (jobject jobj, jfieldID fieldID, NativeType value);</div></pre></td></tr></table></figure>
+<h3 id="7-jstring"><a href="#7-jstring" class="headerlink" title="7.jstring"></a>7.jstring</h3><p>1.java层String与native层string的转换关系：<br><img src="/2017/11/25/深入理解Android卷一笔记/jstring.png" alt="jstring"></p>
+<p>2.释放资源：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//JNIEnv方法</div><div class="line">void ReleaseStringChars(jstring str, char* chs);</div><div class="line">void ReleaseStringUTFChars(jstring str, char* chs);</div></pre></td></tr></table></figure>
+<p>转换字符串和释放资源方法应该是成对出现的。</p>
+<h3 id="8-JNI类型签名"><a href="#8-JNI类型签名" class="headerlink" title="8.JNI类型签名"></a>8.JNI类型签名</h3><p>命令：<code>javap -s -p xxx.class</code></p>
+<p>意义：</p>
+<ul>
+<li>-s 表示输出内部数据类型的签名信息。 </li>
+<li>-p 表示打印所有函数和成员的签名信息。默认只打印public级别。</li>
+</ul>
+<h3 id="9-引用"><a href="#9-引用" class="headerlink" title="9.引用"></a>9.引用</h3><p>类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1.Local Reference 本地变量</div><div class="line">2.Global Reference 全局变量（强印用）</div><div class="line">3.Weak Global Reference 弱全局变量</div></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//JNIEnv方法</div><div class="line">NewGlobalRef(NativeType ref);</div><div class="line">NewWeakGlobalRef(NativeType ref);</div><div class="line"></div><div class="line">DeleteLoaclRef(NativeType ref);</div><div class="line">DeleteGlobalRef(NativeType ref);</div><div class="line">DeleteWeakGlobalRef(NativeType ref);</div></pre></td></tr></table></figure>
+<p>有时候我们可能创建太多LocalReference，这样内存占用可观，可以在方法结束调用前，提前手动回收LocalReference。</p>
+<h3 id="10-异常"><a href="#10-异常" class="headerlink" title="10.异常"></a>10.异常</h3><p>JNI层可以截获和修改异常。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//JNIEnv方法</div><div class="line">ExceptionOccured 判断是否发生异常</div><div class="line">ExceptionClear 清空当前JNI发生的异常</div><div class="line">ThrowNew 向java层抛异常</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/25/深入理解Android卷一笔记/" data-id="cjal6y3ls001eagvf0pz11axz" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/25/深入理解Android卷一笔记/" data-id="cjavs1tn3001e0hvfapqgnqcu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -361,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/23/Effective-Java笔记/" data-id="cjal6y3kz0003agvfa89faatf" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/23/Effective-Java笔记/" data-id="cjavs1tmh00050hvfvjsskb4k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -422,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cjal6y3l50008agvfh066gs6q" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cjavs1tmj00080hvfddkb68xk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -465,7 +495,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/19/android使用kotlin注意事项/" data-id="cjal6y3la000hagvfg0kuh1f1" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/19/android使用kotlin注意事项/" data-id="cjavs1tmp000k0hvf8lkk8l2d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/">Kotlin</a></li></ul>
@@ -520,7 +550,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/09/搭建基于hexo的博客以及如何迁移/" data-id="cjal6y3lr001cagvfk2v0gv36" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/09/搭建基于hexo的博客以及如何迁移/" data-id="cjavs1tn2001b0hvfi4emlcev" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
@@ -585,7 +615,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/08/mac下配置zsh/" data-id="cjal6y3ln0015agvfi9hbkw7i" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/08/mac下配置zsh/" data-id="cjavs1tmy00140hvfhhbh6uyq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
@@ -664,7 +694,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/07/常用Android工具命令/" data-id="cjal6y3lq001aagvf2nln3o7s" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/07/常用Android工具命令/" data-id="cjavs1tn100190hvf0gwqt9b1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -720,7 +750,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/07/管理多个ssh-key/" data-id="cjal6y3lu001gagvf64st2t9t" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/07/管理多个ssh-key/" data-id="cjavs1tn4001g0hvf76ccnrge" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
