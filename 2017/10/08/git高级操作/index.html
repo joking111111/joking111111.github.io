@@ -14,7 +14,7 @@
 <meta property="og:description" content="1.git cherry-pick A B C 假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？  方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C处。之后使用git merge D，git merge E。  12345git checkou">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://joking111111.github.io/2017/10/08/git高级操作/git%20cherry-pick.png">
-<meta property="og:updated_time" content="2017-12-07T01:15:39.972Z">
+<meta property="og:updated_time" content="2017-12-08T13:11:20.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git高级操作">
 <meta name="twitter:description" content="1.git cherry-pick A B C 假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？  方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C处。之后使用git merge D，git merge E。  12345git checkou">
@@ -108,19 +108,22 @@
 <h2 id="2-git-rebase"><a href="#2-git-rebase" class="headerlink" title="2.git rebase"></a>2.git rebase</h2><ul>
 <li><p>多人协作大家基本习惯了merge的方式进行提交代码。但是最大的弊端就是提交历史变得有许多平行线。实际的确也是并行开发，但是当要追踪修改历史的时候，嗯，你可以冲上一杯咖啡了哈哈哈。</p>
 </li>
-<li><p>先更新master分支，在dev分支上使用命令<br><code>git rebase master</code><br>这样看起来就像是在master上的节点检出的分支又再次合并回主分支，这样整个提交树就非常线性，易于追踪。</p>
-</li>
-<li><p>另一个操作是<br><code>git rebase -i commit-id</code><br>这个命令可以“可视化操作提交历史”，有丢弃，修改，排序等功能，可以使用上述的cherry-pick命令代替。本人觉得在命令行操作哪有什么可视化操作哈哈哈。</p>
-</li>
-<li><p>需要注意的是如何在vi下编辑，按i进入编辑状态，按esc进入命令状态，在命令状态中输入:wq回车是保存并退出，:q!回车是不保存退出。更多的搜索vi命令吧。</p>
+<li><p>先更新master分支，在dev分支上使用命令</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase master</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="3-git-stash"><a href="#3-git-stash" class="headerlink" title="3.git stash"></a>3.git stash</h2><p>这个命令挺有用，尤其是还没做完手头上的工作，又不得不做别的事（切换到别的分支治疗），并且不想因此commit，那么这系列命令对你很有用！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1.git stash 将当前未commit的修改压栈</div><div class="line">2.git stash list 查看栈有哪些stash</div><div class="line">3.git stash pop 弹出（恢复）栈顶修改</div><div class="line">4.git stash clear 清空栈</div></pre></td></tr></table></figure>
+<p>这样看起来就像是在master上的节点检出的分支又再次合并回主分支，这样整个提交树就非常线性，易于追踪。</p>
+<ul>
+<li><p>另一个操作是</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">	git rebase -i commit-id</div><div class="line">	```  </div><div class="line">这个命令可以“可视化操作提交历史”，有丢弃，修改，排序等功能，可以使用上述的cherry-pick命令代替。本人觉得在命令行操作哪有什么可视化操作哈哈哈。</div><div class="line"></div><div class="line">* 需要注意的是如何在vi下编辑，按i进入编辑状态，按esc进入命令状态，在命令状态中输入:wq回车是保存并退出，:q!回车是不保存退出。更多的搜索vi命令吧。</div><div class="line"></div><div class="line"></div><div class="line">## 3.git stash</div><div class="line">这个命令挺有用，尤其是还没做完手头上的工作，又不得不做别的事（切换到别的分支治疗），并且不想因此commit，那么这系列命令对你很有用！</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>1.git stash 将当前未commit的修改压栈<br>2.git stash list 查看栈有哪些stash<br>3.git stash pop 弹出（恢复）栈顶修改<br>4.git stash clear 清空栈<br>```</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cjawlho00000vl3vfqcbe5p4r" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cjaxxv9nr000ysnvfp3wnjtto" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -181,7 +184,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -194,6 +197,14 @@
       <ul>
         
           <li>
+            <a href="/2017/12/08/自定义View/">自定义View</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
           </li>
         
@@ -203,14 +214,6 @@
         
           <li>
             <a href="/2017/11/23/Effective-Java笔记/">Effective Java笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/19/Glide笔记/">Glide笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/19/android使用kotlin注意事项/">android使用kotlin注意事项</a>
           </li>
         
       </ul>

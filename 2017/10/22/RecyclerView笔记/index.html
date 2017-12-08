@@ -5,18 +5,18 @@
   
   <title>RecyclerView笔记 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml会提示新api）：recyclerView.setNestedScrollingEnabled(false);  2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有">
+  <meta name="description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml中设置lint会提示new api）：  1recyclerView.setNestedScrollingEnabled(false); 2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Ite">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RecyclerView笔记">
 <meta property="og:url" content="https://joking111111.github.io/2017/10/22/RecyclerView笔记/index.html">
 <meta property="og:site_name" content="JoKing">
-<meta property="og:description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml会提示新api）：recyclerView.setNestedScrollingEnabled(false);  2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有">
+<meta property="og:description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml中设置lint会提示new api）：  1recyclerView.setNestedScrollingEnabled(false); 2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Ite">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-11-29T01:10:24.060Z">
+<meta property="og:updated_time" content="2017-12-08T13:11:20.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RecyclerView笔记">
-<meta name="twitter:description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml会提示新api）：recyclerView.setNestedScrollingEnabled(false);  2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有">
+<meta name="twitter:description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml中设置lint会提示new api）：  1recyclerView.setNestedScrollingEnabled(false); 2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Ite">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -89,20 +89,22 @@
       
         <h2 id="1-全展开"><a href="#1-全展开" class="headerlink" title="1.全展开"></a>1.全展开</h2><ul>
 <li>确保父容器是NestedScrollView</li>
-<li>在代码中设置（在xml会提示新api）：<br><code>recyclerView.setNestedScrollingEnabled(false);</code></li>
+<li>在代码中设置（在xml中设置lint会提示new api）：</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">recyclerView.setNestedScrollingEnabled(false);</div></pre></td></tr></table></figure>
 <h2 id="2-刷新Item中的ProgressBar"><a href="#2-刷新Item中的ProgressBar" class="headerlink" title="2.刷新Item中的ProgressBar"></a>2.刷新Item中的ProgressBar</h2><ul>
-<li>RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有改变Alpha值的动画。所以刷新ProgressBar时会出现闪烁现象，因此要去掉或者自己实现ItemAnimator。<br><code>recyclerView.setItemAnimator(null);</code></li>
+<li>RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有改变Alpha值的动画。所以刷新ProgressBar时会出现闪烁现象，因此要去掉或者自己实现ItemAnimator。</li>
 </ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">recyclerView.setItemAnimator(null);</div></pre></td></tr></table></figure>
 <h2 id="3-滑到最底部"><a href="#3-滑到最底部" class="headerlink" title="3.滑到最底部"></a>3.滑到最底部</h2><ul>
-<li>这种场景默认方向是vertical，你也可以改成Horizontal，原理一样的。</li>
+<li>这种场景默认方向是Vertical，你也可以改成Horizontal，原理一样的。</li>
 <li>判断是否到底部：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">public static boolean isSlideToBottom(RecyclerView recyclerView) &#123;</div><div class="line">  if (recyclerView == null) return false;</div><div class="line">  if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()</div><div class="line">                &gt;= recyclerView.computeVerticalScrollRange())</div><div class="line">     return true;</div><div class="line">   return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public static boolean isSlideToBottom(RecyclerView recyclerView) &#123;</div><div class="line">  if (recyclerView == null) &#123;</div><div class="line">    return false;</div><div class="line">  &#125;</div><div class="line">  if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()</div><div class="line">                &gt;= recyclerView.computeVerticalScrollRange()) &#123;</div><div class="line">    return true;             </div><div class="line">  &#125;</div><div class="line">  return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
 <li>滑到最底部：</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (isSlideToBottom(content)) &#123;</div><div class="line">   recyclerView.smoothScrollToPosition(offset);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (isSlideToBottom(recyclerView)) &#123;</div><div class="line">   recyclerView.smoothScrollToPosition(offset);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>offset是系统常量。</p>
 <h2 id="4-记录和恢复滑动的状态"><a href="#4-记录和恢复滑动的状态" class="headerlink" title="4.记录和恢复滑动的状态"></a>4.记录和恢复滑动的状态</h2><p>参考Activtiy的onSaveInstanceState与onRestoreInstanceState，查看RecyclerView的这两个方法。</p>
 <p>以下为26.1.0版本源码：</p>
@@ -114,7 +116,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjawlhnzt000il3vfjw39cmh6" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjaxxv9nj000ksnvf8a8yq7i6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -175,7 +177,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -188,6 +190,14 @@
       <ul>
         
           <li>
+            <a href="/2017/12/08/自定义View/">自定义View</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
           </li>
         
@@ -197,14 +207,6 @@
         
           <li>
             <a href="/2017/11/23/Effective-Java笔记/">Effective Java笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/19/Glide笔记/">Glide笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/19/android使用kotlin注意事项/">android使用kotlin注意事项</a>
           </li>
         
       </ul>

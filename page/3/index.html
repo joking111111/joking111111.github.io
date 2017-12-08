@@ -62,6 +62,150 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-learn-git-branching参考答案" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/10/learn-git-branching参考答案/" class="article-date">
+  <time datetime="2017-10-10T02:15:14.000Z" itemprop="datePublished">2017-10-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/10/learn-git-branching参考答案/">learn git branching参考答案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="高级："><a href="#高级：" class="headerlink" title="高级："></a>高级：</h2><p>1:    git checkout C4</p>
+<p>2:    git checkout bugFix^</p>
+<p>3:    git branch –f bugFix C0<br>    git branch –f master C6<br>    git checkout HEAD^</p>
+<p>4:    git reset HEAD^<br>    git checkout pushed<br>    git revert HEAD</p>
+<h2 id="移动提交记录："><a href="#移动提交记录：" class="headerlink" title="移动提交记录："></a>移动提交记录：</h2><p>1:    git cherry-pick C3 C4 C7</p>
+<p>2:    git rebase –i HEAD~4</p>
+<h2 id="杂项："><a href="#杂项：" class="headerlink" title="杂项："></a>杂项：</h2><p>1:    git checkout master<br>    git cherry-pick C4</p>
+<p>2:    git rebase –i HEAD~2<br>    git commit –amend<br>    git rebase –i HEAD~2<br>    git branch –f master HEAD</p>
+<p>3:    git checkout master<br>    git cherry-pick C2<br>    git commit –amend<br>    git cherry-pick C3</p>
+<p>4:    git checkout C2<br>    git tag v1<br>    git tag v0 C1</p>
+<p>5:    git describe master<br>    git commit</p>
+<h2 id="高级话题"><a href="#高级话题" class="headerlink" title="高级话题:"></a>高级话题:</h2><p>1:    git rebase master bugFix<br>第一个参数是父节点，第二个参数是目标节点。<br>    git rebase bugFix side<br>    git rebase side another<br>    git rebase another master</p>
+<p>2:    git branch bugWork HEAD^^2^</p>
+<p>3:    git checkout one<br>    git cherry-pick C4 C3 C2<br>    git checkout two<br>    git cherry-pick C5 C4 C3 C2<br>    git branch –f three C2</p>
+<h2 id="远程仓库："><a href="#远程仓库：" class="headerlink" title="远程仓库："></a>远程仓库：</h2><p>2:    git commit<br>    git checkout o/master<br>    git commit</p>
+<p>3:    git fetch</p>
+<p>4:    git pull</p>
+<p>5:    git clone<br>    git fakeTeamwork master 2<br>    git commit<br>    git pull</p>
+<p>6:    git commit<br>    git commit<br>    git push</p>
+<p>7:    git clone<br>    git fakeTeamwork<br>    git commit<br>    git pull –rebase<br>    git push</p>
+<h2 id="远程仓库高级："><a href="#远程仓库高级：" class="headerlink" title="远程仓库高级："></a>远程仓库高级：</h2><p>1:    git fetch<br>    git rebase o/master side1<br>    git rebase side1 side2<br>    git rebase side2 side3<br>    git rebase side3 master<br>    git push</p>
+<p>2:    git checkout master<br>    git pull<br>    git merge side1<br>    git merge side2<br>    git merge side3<br>    git push</p>
+<p>3:    git checkout –b side o/master<br>    git commit<br>    git pull –rebase<br>    git push</p>
+<p>4:    git push origin master<br>    git push origin foo</p>
+<p>5:    git push origin master^:foo<br>    git push origin foo:master</p>
+<p>6:    git fetch origin master~1:foo<br>    git fetch origin foo:master<br>    git checkout foo<br>    git merge master  </p>
+<p>7:    git push origin :foo<br>    git fetch origin :bar</p>
+<p>8:    git pull origin bar:foo<br>    git pull origin master:side</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cjaxxv9nv0013snvfjlsg9ilv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git远程仓库" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/09/git远程仓库/" class="article-date">
+  <time datetime="2017-10-09T08:09:28.000Z" itemprop="datePublished">2017-10-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/09/git远程仓库/">git远程仓库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-git-clone"><a href="#1-git-clone" class="headerlink" title="1.git clone "></a>1.git clone <https ssh=""></https></h2><p>此命令克隆远程仓库到当前目录。</p>
+<ul>
+<li>执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！</li>
+</ul>
+<h2 id="2-git-fetch"><a href="#2-git-fetch" class="headerlink" title="2.git fetch"></a>2.git fetch</h2><ul>
+<li>这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区！</li>
+<li>比如仓库有master和bugFix分支，这个操作会更新origin/master和origin/bugFix，并不会改动master和bugFix。</li>
+</ul>
+<h2 id="3-git-merge-origin-master"><a href="#3-git-merge-origin-master" class="headerlink" title="3.git merge origin/master"></a>3.git merge origin/master</h2><p>此命令一般紧接着git fetch，将远程的更新合并到本地工作区。</p>
+<h2 id="4-git-pull"><a href="#4-git-pull" class="headerlink" title="4.git pull"></a>4.git pull</h2><p>此命令就是上两条命令的缩写，先fetch再merge。</p>
+<ul>
+<li>我们经常会先commit掉当前写的代码，然后pull下同事push的代码。</li>
+<li><p>不使用merge方式，采用rebase方式：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull --rebase</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="5-git-push"><a href="#5-git-push" class="headerlink" title="5.git push"></a>5.git push</h2><p>此命令会将本地commit推送到远程仓库，并且会更新origin/分支。</p>
+<ul>
+<li>有时候远程仓库已经改变了，但是你的本地分支（没有origin/前缀）不会修改。</li>
+</ul>
+<h2 id="6-git-push-origin-source：destination"><a href="#6-git-push-origin-source：destination" class="headerlink" title="6.git push origin source：destination"></a>6.git push origin source：destination</h2><ul>
+<li><p>这里重点介绍三个参数origin：远程仓库的名字（一般都命名为origin），source：本地仓库的节点，destination：远程仓库的分支名。</p>
+</li>
+<li><p>source参数可以不写同时把冒号去掉，如：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>意义是将本地仓库master分支推送到远程仓库origin的分支master，并且同步本地origin/master分支。</p>
+<ul>
+<li><p>source参数可以带～和^等移动符，如：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master^:foo</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此时将master上一个提交历史推送到origin仓库的foo分支。如果foo分支不存在，将直接创建foo分支。</p>
+<h2 id="7-git-fetch-origin-source-destination"><a href="#7-git-fetch-origin-source-destination" class="headerlink" title="7.git fetch origin source:destination"></a>7.git fetch origin source:destination</h2><p>同理git fetch也有这种形式的命令，从这里可以看出fetch跟push其实是方向相反的操作，更深一步你可以用fetch代替push，只是大家都习惯使用fetch拉，push推。</p>
+<ul>
+<li>注意，destination参数如果不加origin/，就表示更新本地分支中的工作区，而不是跟踪远程仓库的</li>
+</ul>
+<h2 id="8-跟踪远程分支"><a href="#8-跟踪远程分支" class="headerlink" title="8.跟踪远程分支"></a>8.跟踪远程分支</h2><p><code>git remote add origin &lt;https/ssh&gt;</code></p>
+<p>有时候我们需要将一个项目提交到远程仓库，那么该怎么操作呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git remote add origin &lt;https/ssh&gt;</div><div class="line">git push -u origin &lt;branch&gt;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cjaxxv9np000vsnvfc8j1z336" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-git高级操作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/08/git高级操作/" class="article-date">
@@ -103,19 +247,22 @@
 <h2 id="2-git-rebase"><a href="#2-git-rebase" class="headerlink" title="2.git rebase"></a>2.git rebase</h2><ul>
 <li><p>多人协作大家基本习惯了merge的方式进行提交代码。但是最大的弊端就是提交历史变得有许多平行线。实际的确也是并行开发，但是当要追踪修改历史的时候，嗯，你可以冲上一杯咖啡了哈哈哈。</p>
 </li>
-<li><p>先更新master分支，在dev分支上使用命令<br><code>git rebase master</code><br>这样看起来就像是在master上的节点检出的分支又再次合并回主分支，这样整个提交树就非常线性，易于追踪。</p>
-</li>
-<li><p>另一个操作是<br><code>git rebase -i commit-id</code><br>这个命令可以“可视化操作提交历史”，有丢弃，修改，排序等功能，可以使用上述的cherry-pick命令代替。本人觉得在命令行操作哪有什么可视化操作哈哈哈。</p>
-</li>
-<li><p>需要注意的是如何在vi下编辑，按i进入编辑状态，按esc进入命令状态，在命令状态中输入:wq回车是保存并退出，:q!回车是不保存退出。更多的搜索vi命令吧。</p>
+<li><p>先更新master分支，在dev分支上使用命令</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase master</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="3-git-stash"><a href="#3-git-stash" class="headerlink" title="3.git stash"></a>3.git stash</h2><p>这个命令挺有用，尤其是还没做完手头上的工作，又不得不做别的事（切换到别的分支治疗），并且不想因此commit，那么这系列命令对你很有用！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">1.git stash 将当前未commit的修改压栈</div><div class="line">2.git stash list 查看栈有哪些stash</div><div class="line">3.git stash pop 弹出（恢复）栈顶修改</div><div class="line">4.git stash clear 清空栈</div></pre></td></tr></table></figure>
+<p>这样看起来就像是在master上的节点检出的分支又再次合并回主分支，这样整个提交树就非常线性，易于追踪。</p>
+<ul>
+<li><p>另一个操作是</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">	git rebase -i commit-id</div><div class="line">	```  </div><div class="line">这个命令可以“可视化操作提交历史”，有丢弃，修改，排序等功能，可以使用上述的cherry-pick命令代替。本人觉得在命令行操作哪有什么可视化操作哈哈哈。</div><div class="line"></div><div class="line">* 需要注意的是如何在vi下编辑，按i进入编辑状态，按esc进入命令状态，在命令状态中输入:wq回车是保存并退出，:q!回车是不保存退出。更多的搜索vi命令吧。</div><div class="line"></div><div class="line"></div><div class="line">## 3.git stash</div><div class="line">这个命令挺有用，尤其是还没做完手头上的工作，又不得不做别的事（切换到别的分支治疗），并且不想因此commit，那么这系列命令对你很有用！</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>1.git stash 将当前未commit的修改压栈<br>2.git stash list 查看栈有哪些stash<br>3.git stash pop 弹出（恢复）栈顶修改<br>4.git stash clear 清空栈<br>```</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cjawlho00000vl3vfqcbe5p4r" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cjaxxv9nr000ysnvfp3wnjtto" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -155,8 +302,11 @@
 <h2 id="2-git-reset-hard-HEAD"><a href="#2-git-reset-hard-HEAD" class="headerlink" title="2.git reset --hard HEAD^"></a>2.git reset <code>--hard</code> HEAD^</h2><h3 id="版本库回退"><a href="#版本库回退" class="headerlink" title="版本库回退"></a>版本库回退</h3><ul>
 <li>首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。</li>
 <li>HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2表示上两个版本，以此类推。</li>
-<li>由于有<code>--hard</code>这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id，这时需要git reflog来找回commit-id。然后使用以下命令：<br><code>git reset --hard commit_id</code><br>即可找回原来的版本。</li>
+<li><p>由于有<code>--hard</code>这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id。然后使用以下命令：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//用git reflog来找回之前commit的commit-id</div><div class="line">git reflog</div><div class="line">git reset --hard commit_id</div></pre></td></tr></table></figure>
+</li>
 </ul>
+<p>即可找回原来的版本。</p>
 <h2 id="3-git-revert-HEAD"><a href="#3-git-revert-HEAD" class="headerlink" title="3.git revert HEAD"></a>3.git revert HEAD</h2><p>回退到上一版本的另一种方法，注意参数HEAD，是回退到上一版本。</p>
 <ul>
 <li>git reset是不会产生新的提交记录，反而有可能抹去提交记录，当我们要推送到远程仓库时，显然没有提交记录怎么推送呢？所以git reset适合操作本地仓库，不需要分享给远程仓库的。</li>
@@ -167,7 +317,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjawlhnzv000nl3vfqh5hlcel" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjaxxv9nl000psnvf0hsicu0l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -202,8 +352,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-git-init"><a href="#1-git-init" class="headerlink" title="1.git init"></a>1.git init</h2><p>初始化本地仓库。</p>
-<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区。可以使用通配符如</p>
+<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区，也称将文件加入追踪。可以使用通配符如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git add *.txt</div></pre></td></tr></table></figure>
+<p>如果不慎将无关文件加入追踪，那么可以使用以下命令撤销：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//将匹配到的文件恢复到HEAD节点的状态，这里是全部文件</div><div class="line">git reset HEAD .</div></pre></td></tr></table></figure>
 <h2 id="3-git-commit-m-“XXX”"><a href="#3-git-commit-m-“XXX”" class="headerlink" title="3.git commit -m “XXX”"></a>3.git commit -m “XXX”</h2><ul>
 <li>把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。</li>
 <li>追加修改到上次提交。</li>
@@ -227,7 +379,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cjawlhnzy000rl3vfk4260sb7" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cjaxxv9no000usnvfue3ikcn9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -316,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cjawlhnzh0003l3vfv2flnra2" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cjaxxv9n70004snvfqppdxarl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -363,7 +515,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cjawlhnzd0001l3vf1cjp8cg7" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cjaxxv9n60003snvf74gm8cpp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -403,7 +555,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cjawlho060016l3vf9tqfh9i8" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/学习git的教程资料/" data-id="cjaxxv9nx0018snvfg7vu1woc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -446,7 +598,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cjawlhnzw000pl3vfk0izn7ew" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/git的常用概念/" data-id="cjaxxv9nn000rsnvfqzj36set" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -493,7 +645,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -506,6 +658,14 @@
       <ul>
         
           <li>
+            <a href="/2017/12/08/自定义View/">自定义View</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
           </li>
         
@@ -515,14 +675,6 @@
         
           <li>
             <a href="/2017/11/23/Effective-Java笔记/">Effective Java笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/19/Glide笔记/">Glide笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/19/android使用kotlin注意事项/">android使用kotlin注意事项</a>
           </li>
         
       </ul>

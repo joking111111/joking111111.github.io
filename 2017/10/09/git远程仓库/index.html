@@ -5,18 +5,18 @@
   
   <title>git远程仓库 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.git clone ssh此命令克隆远程仓库到当前目录，ssh为https地址。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区">
+  <meta name="description" content="1.git clone 此命令克隆远程仓库到当前目录。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区！ 比如仓库有master和b">
 <meta name="keywords" content="Git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git远程仓库">
 <meta property="og:url" content="https://joking111111.github.io/2017/10/09/git远程仓库/index.html">
 <meta property="og:site_name" content="JoKing">
-<meta property="og:description" content="1.git clone ssh此命令克隆远程仓库到当前目录，ssh为https地址。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区">
+<meta property="og:description" content="1.git clone 此命令克隆远程仓库到当前目录。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区！ 比如仓库有master和b">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-07T00:59:25.853Z">
+<meta property="og:updated_time" content="2017-12-08T13:13:00.019Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git远程仓库">
-<meta name="twitter:description" content="1.git clone ssh此命令克隆远程仓库到当前目录，ssh为https地址。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区">
+<meta name="twitter:description" content="1.git clone 此命令克隆远程仓库到当前目录。  执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！  2.git fetch 这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区！ 比如仓库有master和b">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -87,7 +87,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-git-clone-ssh"><a href="#1-git-clone-ssh" class="headerlink" title="1.git clone ssh"></a>1.git clone ssh</h2><p>此命令克隆远程仓库到当前目录，ssh为https地址。</p>
+        <h2 id="1-git-clone"><a href="#1-git-clone" class="headerlink" title="1.git clone "></a>1.git clone <https ssh=""></https></h2><p>此命令克隆远程仓库到当前目录。</p>
 <ul>
 <li>执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！</li>
 </ul>
@@ -99,9 +99,10 @@
 <h2 id="4-git-pull"><a href="#4-git-pull" class="headerlink" title="4.git pull"></a>4.git pull</h2><p>此命令就是上两条命令的缩写，先fetch再merge。</p>
 <ul>
 <li>我们经常会先commit掉当前写的代码，然后pull下同事push的代码。</li>
-<li>不使用merge方式，采用rebase方式：</li>
+<li><p>不使用merge方式，采用rebase方式：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull --rebase</div></pre></td></tr></table></figure>
+</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull --rebase</div></pre></td></tr></table></figure>
 <h2 id="5-git-push"><a href="#5-git-push" class="headerlink" title="5.git push"></a>5.git push</h2><p>此命令会将本地commit推送到远程仓库，并且会更新origin/分支。</p>
 <ul>
 <li>有时候远程仓库已经改变了，但是你的本地分支（没有origin/前缀）不会修改。</li>
@@ -109,11 +110,17 @@
 <h2 id="6-git-push-origin-source：destination"><a href="#6-git-push-origin-source：destination" class="headerlink" title="6.git push origin source：destination"></a>6.git push origin source：destination</h2><ul>
 <li><p>这里重点介绍三个参数origin：远程仓库的名字（一般都命名为origin），source：本地仓库的节点，destination：远程仓库的分支名。</p>
 </li>
-<li><p>source参数可以不写同时把冒号去掉，如：<br><code>git push origin master</code><br>意义是将本地仓库master分支推送到远程仓库origin的分支master，并且同步本地origin/master分支。</p>
-</li>
-<li><p>source参数可以带～和^等移动符，如：<br><code>git push origin master^:foo</code><br>此时将master上一个提交历史推送到origin仓库的foo分支。如果foo分支不存在，将直接创建foo分支。</p>
+<li><p>source参数可以不写同时把冒号去掉，如：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
 </li>
 </ul>
+<p>意义是将本地仓库master分支推送到远程仓库origin的分支master，并且同步本地origin/master分支。</p>
+<ul>
+<li><p>source参数可以带～和^等移动符，如：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master^:foo</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>此时将master上一个提交历史推送到origin仓库的foo分支。如果foo分支不存在，将直接创建foo分支。</p>
 <h2 id="7-git-fetch-origin-source-destination"><a href="#7-git-fetch-origin-source-destination" class="headerlink" title="7.git fetch origin source:destination"></a>7.git fetch origin source:destination</h2><p>同理git fetch也有这种形式的命令，从这里可以看出fetch跟push其实是方向相反的操作，更深一步你可以用fetch代替push，只是大家都习惯使用fetch拉，push推。</p>
 <ul>
 <li>注意，destination参数如果不加origin/，就表示更新本地分支中的工作区，而不是跟踪远程仓库的</li>
@@ -124,7 +131,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cjawlhnzz000tl3vfoq8fle3d" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cjaxxv9np000vsnvfc8j1z336" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -185,7 +192,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -198,6 +205,14 @@
       <ul>
         
           <li>
+            <a href="/2017/12/08/自定义View/">自定义View</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
           </li>
         
@@ -207,14 +222,6 @@
         
           <li>
             <a href="/2017/11/23/Effective-Java笔记/">Effective Java笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/19/Glide笔记/">Glide笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/19/android使用kotlin注意事项/">android使用kotlin注意事项</a>
           </li>
         
       </ul>

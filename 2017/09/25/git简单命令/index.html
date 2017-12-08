@@ -5,18 +5,18 @@
   
   <title>git简单命令 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如 12git add .git add *.txt 3.git commit -m “XXX” 把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 追加修改到上次提交。  12git add .git commit --amend">
+  <meta name="description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区，也称将文件加入追踪。可以使用通配符如 12git add .git add *.txt 如果不慎将无关文件加入追踪，那么可以使用以下命令撤销： 12//将匹配到的文件恢复到HEAD节点的状态，这里是全部文件git reset HEAD . 3.git commit -m “XXX” 把暂存区保存的东西一次性">
 <meta name="keywords" content="Git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git简单命令">
 <meta property="og:url" content="https://joking111111.github.io/2017/09/25/git简单命令/index.html">
 <meta property="og:site_name" content="JoKing">
-<meta property="og:description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如 12git add .git add *.txt 3.git commit -m “XXX” 把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 追加修改到上次提交。  12git add .git commit --amend">
+<meta property="og:description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区，也称将文件加入追踪。可以使用通配符如 12git add .git add *.txt 如果不慎将无关文件加入追踪，那么可以使用以下命令撤销： 12//将匹配到的文件恢复到HEAD节点的状态，这里是全部文件git reset HEAD . 3.git commit -m “XXX” 把暂存区保存的东西一次性">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-11-24T00:46:46.715Z">
+<meta property="og:updated_time" content="2017-12-08T13:11:20.724Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git简单命令">
-<meta name="twitter:description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区。可以使用通配符如 12git add .git add *.txt 3.git commit -m “XXX” 把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。 追加修改到上次提交。  12git add .git commit --amend">
+<meta name="twitter:description" content="1.git init初始化本地仓库。 2.git add XXX从工作区提交某文件到暂存区，也称将文件加入追踪。可以使用通配符如 12git add .git add *.txt 如果不慎将无关文件加入追踪，那么可以使用以下命令撤销： 12//将匹配到的文件恢复到HEAD节点的状态，这里是全部文件git reset HEAD . 3.git commit -m “XXX” 把暂存区保存的东西一次性">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -88,8 +88,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="1-git-init"><a href="#1-git-init" class="headerlink" title="1.git init"></a>1.git init</h2><p>初始化本地仓库。</p>
-<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区。可以使用通配符如</p>
+<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区，也称将文件加入追踪。可以使用通配符如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git add *.txt</div></pre></td></tr></table></figure>
+<p>如果不慎将无关文件加入追踪，那么可以使用以下命令撤销：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//将匹配到的文件恢复到HEAD节点的状态，这里是全部文件</div><div class="line">git reset HEAD .</div></pre></td></tr></table></figure>
 <h2 id="3-git-commit-m-“XXX”"><a href="#3-git-commit-m-“XXX”" class="headerlink" title="3.git commit -m “XXX”"></a>3.git commit -m “XXX”</h2><ul>
 <li>把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。</li>
 <li>追加修改到上次提交。</li>
@@ -113,7 +115,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cjawlhnzy000rl3vfk4260sb7" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cjaxxv9no000usnvfue3ikcn9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -174,7 +176,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -187,6 +189,14 @@
       <ul>
         
           <li>
+            <a href="/2017/12/08/自定义View/">自定义View</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
           </li>
         
@@ -196,14 +206,6 @@
         
           <li>
             <a href="/2017/11/23/Effective-Java笔记/">Effective Java笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/19/Glide笔记/">Glide笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/19/android使用kotlin注意事项/">android使用kotlin注意事项</a>
           </li>
         
       </ul>

@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="JoKing">
 <meta property="og:description" content="1.git diff XXX 当我们使用git status查看工作区做了什么修改时，可以使用git diff XXX对修改过的文件XXX查看差异  2.git reset --hard HEAD^版本库回退 首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。 HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-11-27T13:42:50.136Z">
+<meta property="og:updated_time" content="2017-12-08T13:13:30.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git版本回退">
 <meta name="twitter:description" content="1.git diff XXX 当我们使用git status查看工作区做了什么修改时，可以使用git diff XXX对修改过的文件XXX查看差异  2.git reset --hard HEAD^版本库回退 首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。 HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~">
@@ -93,8 +93,11 @@
 <h2 id="2-git-reset-hard-HEAD"><a href="#2-git-reset-hard-HEAD" class="headerlink" title="2.git reset --hard HEAD^"></a>2.git reset <code>--hard</code> HEAD^</h2><h3 id="版本库回退"><a href="#版本库回退" class="headerlink" title="版本库回退"></a>版本库回退</h3><ul>
 <li>首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。</li>
 <li>HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2表示上两个版本，以此类推。</li>
-<li>由于有<code>--hard</code>这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id，这时需要git reflog来找回commit-id。然后使用以下命令：<br><code>git reset --hard commit_id</code><br>即可找回原来的版本。</li>
+<li><p>由于有<code>--hard</code>这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id。然后使用以下命令：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//用git reflog来找回之前commit的commit-id</div><div class="line">git reflog</div><div class="line">git reset --hard commit_id</div></pre></td></tr></table></figure>
+</li>
 </ul>
+<p>即可找回原来的版本。</p>
 <h2 id="3-git-revert-HEAD"><a href="#3-git-revert-HEAD" class="headerlink" title="3.git revert HEAD"></a>3.git revert HEAD</h2><p>回退到上一版本的另一种方法，注意参数HEAD，是回退到上一版本。</p>
 <ul>
 <li>git reset是不会产生新的提交记录，反而有可能抹去提交记录，当我们要推送到远程仓库时，显然没有提交记录怎么推送呢？所以git reset适合操作本地仓库，不需要分享给远程仓库的。</li>
@@ -105,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjawlhnzv000nl3vfqh5hlcel" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjaxxv9nl000psnvf0hsicu0l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -166,7 +169,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -179,6 +182,14 @@
       <ul>
         
           <li>
+            <a href="/2017/12/08/自定义View/">自定义View</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
           </li>
         
@@ -188,14 +199,6 @@
         
           <li>
             <a href="/2017/11/23/Effective-Java笔记/">Effective Java笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/19/Glide笔记/">Glide笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/19/android使用kotlin注意事项/">android使用kotlin注意事项</a>
           </li>
         
       </ul>
