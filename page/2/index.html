@@ -62,6 +62,71 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-mac下配置zsh" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/08/mac下配置zsh/" class="article-date">
+  <time datetime="2017-11-08T01:09:06.000Z" itemprop="datePublished">2017-11-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/08/mac下配置zsh/">mac下配置zsh</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-前期准备"><a href="#1-前期准备" class="headerlink" title="1.前期准备"></a>1.前期准备</h2><p>以下安装请自行搜索。</p>
+<ul>
+<li>安装homebrew。</li>
+<li>安装homebrew cask。</li>
+</ul>
+<h2 id="2-配置过程"><a href="#2-配置过程" class="headerlink" title="2.配置过程"></a>2.配置过程</h2><ul>
+<li><p>安装brew上的zsh <code>brew install zsh</code></p>
+</li>
+<li><p>安装iterm2（可选，只是换更好用的终端） <code>brew cask install iterm2</code></p>
+</li>
+<li><p>切换到zsh<br><code>chsh -s /bin/zsh</code><br>如果要切换回来，执行<br><code>chsh -s /bin/bash</code><br>查看当前使用哪种shell<br><code>echo $SHELL</code></p>
+</li>
+</ul>
+<h2 id="3-进阶配置"><a href="#3-进阶配置" class="headerlink" title="3.进阶配置"></a>3.进阶配置</h2><ul>
+<li><p>下载oh-my-zsh，不需要设置哪个目录，新开一个终端就可以了。 <code>git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</code></p>
+</li>
+<li><p>拷贝出oh-my-zsh中的文件作为自己的配置文件 <code>cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</code></p>
+</li>
+<li><p>在.zshrc文件中，追加<code>source .bash_profile</code>保留以前配置的环境变量。</p>
+</li>
+<li><p>zsh还有许多拓展插件，详细可以查看<br><a href="https://github.com/zsh-users" target="_blank" rel="external">https://github.com/zsh-users</a>。</p>
+</li>
+</ul>
+<h2 id="4-可能遇到的问题"><a href="#4-可能遇到的问题" class="headerlink" title="4.可能遇到的问题"></a>4.可能遇到的问题</h2><ul>
+<li>没有.bash_profile文件，请自行创建一个。</li>
+<li>没有.zshrc文件，请执行拷贝配置文件的命令。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/11/08/mac下配置zsh/" data-id="cjb3rybwx001brsvffvc7rxvn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-常用Android工具命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/07/常用Android工具命令/" class="article-date">
@@ -129,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/07/常用Android工具命令/" data-id="cjaxxv9nz001bsnvfeig8nkct" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/07/常用Android工具命令/" data-id="cjb3rybwz001grsvf6ajkbmqn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -185,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/07/管理多个ssh-key/" data-id="cjaxxv9o3001isnvf7oabtnki" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/07/管理多个ssh-key/" data-id="cjb3rybx3001mrsvfvtqxdwba" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -242,7 +307,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/03/Java集合容器之HashMap/" data-id="cjaxxv9ng000fsnvfm8xxivkx" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/03/Java集合容器之HashMap/" data-id="cjb3rybwi000irsvfgtw7xnsk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -298,7 +363,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/01/Java集合容器之LinkedHashMap/" data-id="cjaxxv9ni000isnvfzckj2vu1" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/01/Java集合容器之LinkedHashMap/" data-id="cjb3rybwk000mrsvfu012i8tl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -361,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjaxxv9nj000ksnvf8a8yq7i6" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjb3rybwl000prsvfmiyl3wm2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -412,7 +477,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cjaxxv9nd000asnvfltni14ut" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cjb3rybwh000frsvf277z7cqp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -460,7 +525,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cjaxxv9mx0000snvfr93s1781" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cjb3rybvz0000rsvfq6fhkr6m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -536,47 +601,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cjaxxv9nu0011snvf4i1vhcfj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/">Kotlin</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-kotlin学习资料" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/10/kotlin学习资料/" class="article-date">
-  <time datetime="2017-10-10T02:47:34.000Z" itemprop="datePublished">2017-10-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/10/kotlin学习资料/">Kotlin学习资料</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-官方网站"><a href="#1-官方网站" class="headerlink" title="1.官方网站"></a>1.官方网站</h2><p><a href="https://kotlinlang.org/" target="_blank" rel="external">https://kotlinlang.org/</a></p>
-<h2 id="2-微信公众号"><a href="#2-微信公众号" class="headerlink" title="2.微信公众号"></a>2.微信公众号</h2><p>KotlinX</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cjaxxv9ns000zsnvflucn0909" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cjb3rybwv0016rsvflq5wlte3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/">Kotlin</a></li></ul>
@@ -591,7 +616,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -636,6 +661,10 @@
       <ul>
         
           <li>
+            <a href="/2017/12/11/FlexboxLayout的使用/">FlexboxLayout的使用</a>
+          </li>
+        
+          <li>
             <a href="/2017/12/08/自定义View/">自定义View</a>
           </li>
         
@@ -649,10 +678,6 @@
         
           <li>
             <a href="/2017/11/25/深入理解Android卷一笔记/">深入理解Android卷一笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/23/Effective-Java笔记/">Effective Java笔记</a>
           </li>
         
       </ul>
