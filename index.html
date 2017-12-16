@@ -62,6 +62,165 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Android应用UI性能分析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/16/Android应用UI性能分析/" class="article-date">
+  <time datetime="2017-12-16T02:21:37.000Z" itemprop="datePublished">2017-12-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/16/Android应用UI性能分析/">Android应用UI性能分析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、UI性能分析概述"><a href="#一、UI性能分析概述" class="headerlink" title="一、UI性能分析概述"></a>一、UI性能分析概述</h2><p>目标：</p>
+<p>在中低端手机上UI帧率平稳连贯。</p>
+<h3 id="1-十六毫秒准则"><a href="#1-十六毫秒准则" class="headerlink" title="1.十六毫秒准则"></a>1.十六毫秒准则</h3><ul>
+<li><p>一般Android设备的屏幕刷新率为60帧每秒，那么一帧的时间为1/60fps = 16.6ms。</p>
+</li>
+<li><p>所谓的掉帧现象指的是，某一帧的等待数据时间加上绘制图像时间超过16.6ms时，这一帧会被放弃掉，不出现在频幕上，取而代之的是下一帧。</p>
+</li>
+</ul>
+<h3 id="2-系统对UI的优化"><a href="#2-系统对UI的优化" class="headerlink" title="2.系统对UI的优化"></a>2.系统对UI的优化</h3><ul>
+<li>软解时代：2.3及之前，所有绘图由CPU完成。</li>
+<li>硬解时代：2.3之后，系统增加了GPU，很多绘图操作交给GPU进行渲染。</li>
+<li>黄油时代：4.1之后，通过VSYNC垂直同步机制和多缓冲机制（three frame buffer）进一步提高绘制效率。</li>
+<li>异步绘制时代：5.0之后，系统增加了Render Thread。通过这个线程进行异步绘制，某一帧发生延迟也不会影响下一帧的绘制。</li>
+</ul>
+<h3 id="3-编写布局准则"><a href="#3-编写布局准则" class="headerlink" title="3.编写布局准则"></a>3.编写布局准则</h3><ul>
+<li><p>LinearLayout和RelativeLayout对比</p>
+<ul>
+<li>LinearLayout优点在于测量方式简单，测量耗时较短，但由于功能简单，通常需要嵌套布局才能实现想要的效果。</li>
+<li>RelativeLayout优点在于能实现扁平化布局，缺点在于布局越复杂，测量的耗时增加不少，并且有可能需要多次测量。</li>
+</ul>
+</li>
+<li><p>尽量少嵌套布局。<br>  因为系统绘制一个ViewGroup时，会采用深度优先遍历遍历每一个子View，所以层级越深，耗费时间是指数增长的。</p>
+</li>
+<li><p>尽量少编写测量复杂的布局。<br>  测量复杂的布局如RelativeLayout过多子View，会导致系统需要多次测量才能确定这些View的尺寸。所以极致扁平化布局有可能得不偿失。</p>
+</li>
+<li><p>终极目标：尽量减少View的数量。<br>  无论对应减少测量时间以及绘制时间还有内存占用都是有帮助的！</p>
+</li>
+</ul>
+<h2 id="二、性能检测工具"><a href="#二、性能检测工具" class="headerlink" title="二、性能检测工具"></a>二、性能检测工具</h2><h3 id="1-Hierarcy-Viewer"><a href="#1-Hierarcy-Viewer" class="headerlink" title="1.Hierarcy Viewer"></a>1.Hierarcy Viewer</h3><p>首先打开Android Device Monitor：SDK目录-&gt;tools-&gt;monitor。</p>
+<p>然后观察窗口顶栏有个带加号窗口按钮，点开发现有Hierarcy Viewer选项。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/12/16/Android应用UI性能分析/" data-id="cjb8v9bkd0003iivf4bpdco9u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-SpannableString及其相关类的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/15/SpannableString及其相关类的使用/" class="article-date">
+  <time datetime="2017-12-15T00:32:29.000Z" itemprop="datePublished">2017-12-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/15/SpannableString及其相关类的使用/">SpannableString及其相关类的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、继承关系"><a href="#一、继承关系" class="headerlink" title="一、继承关系"></a>一、继承关系</h2><p><img src="/2017/12/15/SpannableString及其相关类的使用/继承关系.png" alt="继承关系"><br>由于TextView.setText(CharSequence text)接收参数类型为CharSequence，所以他们都能作为setText的参数使用。</p>
+<h2 id="二、主要方法"><a href="#二、主要方法" class="headerlink" title="二、主要方法"></a>二、主要方法</h2><h3 id="1-setSpan-Object-what-int-start-int-end-int-flags"><a href="#1-setSpan-Object-what-int-start-int-end-int-flags" class="headerlink" title="1.setSpan(Object what, int start, int end, int flags)"></a>1.setSpan(Object what, int start, int end, int flags)</h3><p>参数含义：</p>
+<ul>
+<li>what 各种Span样式。</li>
+<li>start 改变样式的字符起点，就是要改的第一个下标。</li>
+<li>end 改变样式的字符终点，就是要改的最后一个下标的下一个下标。<br>通常end = start + length。</li>
+<li>flags 标记位，用于标记修改字符串前后的字符的变化规则。</li>
+<li>注意这里中文一个字算一个字符。</li>
+</ul>
+<p>what参数：</p>
+<ul>
+<li><p>常用类型</p>
+<ul>
+<li>ForegroundColorSpan 文本颜色</li>
+<li>BackgroundColorSpan 文本背景色</li>
+<li>URLSpan 文本超链接</li>
+<li>UnderlineSpan 下划线</li>
+<li>StrikethroughSpan 删除线</li>
+<li>ImageSpan 图片</li>
+<li>DynamicDrawableSpan 设置图片，基于文本基线或底部对齐。</li>
+<li>ClickableSpan 点击事件</li>
+</ul>
+</li>
+<li><p>其他类型</p>
+<ul>
+<li>StyleSpan 字体样式：粗体、斜体等</li>
+<li>MaskFilterSpan 修饰效果，如浮雕模糊(BlurMaskFilter)</li>
+<li>RasterizerSpan 光栅效果</li>
+<li>TextAppearanceSpan 文本外貌（包括字体、大小、样式和颜色）</li>
+<li>TypefaceSpan 文本字体</li>
+<li>SuggestionSpan 相当于占位符</li>
+<li>AbsoluteSizeSpan 文本字体（绝对大小）</li>
+<li>RelativeSizeSpan 相对大小（文本字体）</li>
+<li>ScaleXSpan 基于x轴缩放</li>
+<li>SubscriptSpan 下标（数学公式会用到）</li>
+<li>SuperscriptSpan 上标（数学公式会用到）</li>
+</ul>
+</li>
+</ul>
+<p>flags参数：</p>
+<ul>
+<li><p><code>Spannable.SPAN_EXCLUSIVE_INCLUSIVE</code><br>新增前插字符不应用效果，新增后插字符应用效果。</p>
+</li>
+<li><p><code>Spannable.SPAN_INCLUSIVE_EXCLUSIVE</code><br>新增前插字符应用效果，新增后插字符不应用效果。</p>
+</li>
+<li><p><code>Spannable.SPAN_INCUJSIVE_INCLUSIVE</code><br>前后新增的字符都应用效果。</p>
+</li>
+<li><p><code>Spannable.SPAN_EXCLUSIVE_EXCLUSIVE</code><br>前后新增的字符都不应用效果。</p>
+</li>
+</ul>
+<h2 id="三、图解参数"><a href="#三、图解参数" class="headerlink" title="三、图解参数"></a>三、图解参数</h2><h3 id="1-start、end、flags参数图解"><a href="#1-start、end、flags参数图解" class="headerlink" title="1.start、end、flags参数图解"></a>1.start、end、flags参数图解</h3><p><img src="/2017/12/15/SpannableString及其相关类的使用/图解参数.png" alt="图解参数"></p>
+<h3 id="2-what参数图解"><a href="#2-what参数图解" class="headerlink" title="2.what参数图解"></a>2.what参数图解</h3><p>由于种类过多就不做了。其实没必要做，你只需要知道你想做什么效果，然后点进该类源码，查看构造函数和其公有方法，自然就了解这个类有什么用了。</p>
+<p>了解一个类有什么功能的捷径就是查看源码，本篇文章仅辅助你去理解他们。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/12/15/SpannableString及其相关类的使用/" data-id="cjb8v9bl7001biivfx0acd5dr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-FlexboxLayout的使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/12/11/FlexboxLayout的使用/" class="article-date">
@@ -145,7 +304,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/12/11/FlexboxLayout的使用/" data-id="cjb3rybwa0005rsvfj7ip26bl" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/12/11/FlexboxLayout的使用/" data-id="cjb8v9bko000hiivff4v4r0d0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -188,8 +347,8 @@
 <li>onLayout</li>
 <li>onDraw</li>
 <li>setWillNotDraw<ul>
-<li>为true时，android系统会对此View进行优化。</li>
-<li>重写onDraw方法的同时，最好把这个开关关掉。</li>
+<li>该开关值为true时，android系统会对此View进行优化。</li>
+<li>重写onDraw方法的同时，最好在初始化时把这个开关关掉。</li>
 </ul>
 </li>
 </ul>
@@ -197,12 +356,13 @@
 <li>dispatchTouchEvent</li>
 <li>onInterceptTouchEvent</li>
 <li>onTouchEvent</li>
+<li>ViewParent#requestDisallowInterceptTouchEvent(boolean)</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/12/08/自定义View/" data-id="cjb3rybx5001orsvflzs6yaqj" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/12/08/自定义View/" data-id="cjb8v9blh001piivf0o5b7q5t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -245,7 +405,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/12/08/Android安全机制简介/" data-id="cjb3rybw40001rsvfve0wjntz" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/12/08/Android安全机制简介/" data-id="cjb8v9bke0004iivf82j0cxec" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -294,7 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/27/CoordinatorLayout的使用/" data-id="cjb3rybw80004rsvfazssk27n" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/27/CoordinatorLayout的使用/" data-id="cjb8v9bki0009iivf0m7v2q3r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -389,7 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/25/深入理解Android卷一笔记/" data-id="cjb3rybx1001krsvf9byovrfx" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/25/深入理解Android卷一笔记/" data-id="cjb8v9ble001niivf2uev7uwq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -622,7 +782,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/23/Effective-Java笔记/" data-id="cjb3rybwg000drsvf66mues7o" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/23/Effective-Java笔记/" data-id="cjb8v9bkl000ciivfyos2aw8c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -683,110 +843,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cjb3rybwe000arsvfbtjus8um" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cjb8v9bkv000siivfpju2ulvx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-android使用kotlin注意事项" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/19/android使用kotlin注意事项/" class="article-date">
-  <time datetime="2017-11-19T06:23:03.000Z" itemprop="datePublished">2017-11-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/19/android使用kotlin注意事项/">android使用kotlin注意事项</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、注意参数可空"><a href="#一、注意参数可空" class="headerlink" title="一、注意参数可空"></a>一、注意参数可空</h2><p>现在第三方库基本都用java写，使用kotlin调用三方库时，最常见的场景就是实现回调接口。实现回调接口的时候，注意接口方法参数如果可空一定要加上”?”修饰，否则崩溃时很难从日志发现问题所在。</p>
-<ul>
-<li>基本数据类型没必要加”?”，只有对象才需要加。</li>
-<li>使用kotlin设计接口时也要注意这一点。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/19/android使用kotlin注意事项/" data-id="cjb3rybwj000krsvfw591cm3f" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/">Kotlin</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-搭建基于hexo的博客以及如何迁移" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/09/搭建基于hexo的博客以及如何迁移/" class="article-date">
-  <time datetime="2017-11-09T13:22:17.000Z" itemprop="datePublished">2017-11-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/09/搭建基于hexo的博客以及如何迁移/">搭建基于hexo的博客以及如何迁移</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、搭建环境"><a href="#一、搭建环境" class="headerlink" title="一、搭建环境"></a>一、搭建环境</h2><h3 id="1-安装git"><a href="#1-安装git" class="headerlink" title="1.安装git"></a>1.安装git</h3><h3 id="2-安装Node-js"><a href="#2-安装Node-js" class="headerlink" title="2.安装Node.js"></a>2.安装Node.js</h3><h3 id="3-检查版本"><a href="#3-检查版本" class="headerlink" title="3.检查版本"></a>3.检查版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">node -v</div><div class="line">npm -v</div><div class="line">git --version</div></pre></td></tr></table></figure>
-<p>以上安装可以通过Homebrew。</p>
-<h3 id="4-安装hexo"><a href="#4-安装hexo" class="headerlink" title="4.安装hexo"></a>4.安装hexo</h3><p>终端所在位置就是安装位置。<br><code>npm install -g hexo-cli</code></p>
-<h3 id="5-初始化本地博客"><a href="#5-初始化本地博客" class="headerlink" title="5.初始化本地博客"></a>5.初始化本地博客</h3><p>首先新建一个合适的文件夹如hexo。注意这个文件夹必须为空，否则提示错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init &lt;文件夹名&gt;</div></pre></td></tr></table></figure>
-<p>期间请按照终端的提示操作就好了。</p>
-<h2 id="二、hexo的使用"><a href="#二、hexo的使用" class="headerlink" title="二、hexo的使用"></a>二、hexo的使用</h2><h3 id="1-主要文件和目录"><a href="#1-主要文件和目录" class="headerlink" title="1.主要文件和目录"></a>1.主要文件和目录</h3><ul>
-<li><code>_config.yml</code> 这个文件是这个博客的配置文件。<br>具体看<a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">官方文档</a>。</li>
-<li>source文件夹<br>这个文件夹存放你写的md文件。我一般在github创建一个仓库，利用git进行管理。当然你的博客原文件将被看到，有被抄袭的风险。</li>
-</ul>
-<h3 id="2-使用命令"><a href="#2-使用命令" class="headerlink" title="2.使用命令"></a>2.使用命令</h3><ul>
-<li><code>hexo n &quot;hello world&quot;</code>    创建名为hello world的博客。</li>
-<li><code>hexo g</code>  hexo生成html等文件。</li>
-<li><code>hexo s</code>  hexo使用node.js运行本地服务器进行预览。<br>在命令行会看到预览地址，用浏览器打开就是了。命令行control+c退出本地服务器。</li>
-</ul>
-<h2 id="三、迁移博客"><a href="#三、迁移博客" class="headerlink" title="三、迁移博客"></a>三、迁移博客</h2><p><a href="https://www.zhihu.com/question/21193762/answer/103097754" target="_blank" rel="external">使用hexo，如果换了电脑怎么更新博客？ - skycrown的回答</a></p>
-<h2 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h2><ul>
-<li>《Android群英传 神兵利器》徐宜生著</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/09/搭建基于hexo的博客以及如何迁移/" data-id="cjb3rybx0001irsvfrjuw83dv" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
 
     </footer>
   </div>
@@ -843,6 +903,14 @@
       <ul>
         
           <li>
+            <a href="/2017/12/16/Android应用UI性能分析/">Android应用UI性能分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/15/SpannableString及其相关类的使用/">SpannableString及其相关类的使用</a>
+          </li>
+        
+          <li>
             <a href="/2017/12/11/FlexboxLayout的使用/">FlexboxLayout的使用</a>
           </li>
         
@@ -852,14 +920,6 @@
         
           <li>
             <a href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/25/深入理解Android卷一笔记/">深入理解Android卷一笔记</a>
           </li>
         
       </ul>

@@ -14,7 +14,7 @@
 <meta property="og:description" content="1.继承关系1234public class HashMap&amp;lt;K,V&amp;gt; extends AbstractMap&amp;lt;K,V&amp;gt;    implements Map&amp;lt;K,V&amp;gt;, Cloneable, Serializable &amp;#123;    ...&amp;#125; 继承自AbstractMap。AbstractMap实现了Map接口的方法，如增删改查方法。 2.Entr">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://joking111111.github.io/2017/11/03/Java集合容器之HashMap/HashMap.png">
-<meta property="og:updated_time" content="2017-11-23T14:44:50.663Z">
+<meta property="og:updated_time" content="2017-12-15T13:50:16.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合容器之HashMap">
 <meta name="twitter:description" content="1.继承关系1234public class HashMap&amp;lt;K,V&amp;gt; extends AbstractMap&amp;lt;K,V&amp;gt;    implements Map&amp;lt;K,V&amp;gt;, Cloneable, Serializable &amp;#123;    ...&amp;#125; 继承自AbstractMap。AbstractMap实现了Map接口的方法，如增删改查方法。 2.Entr">
@@ -106,13 +106,13 @@
 <h3 id="get-key"><a href="#get-key" class="headerlink" title="get(key)"></a>get(key)</h3><p>大致流程是：<br>1.根据key的hash结果查找Hash表；<br>2.遍历单链表，如果找到，返回Entry的value值，否则返回null。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public V get(Object key) &#123;</div><div class="line">        Node&lt;K,V&gt; e;</div><div class="line">        return (e = getNode(hash(key), key)) == null ? null : e.value;</div><div class="line">&#125;</div><div class="line"></div><div class="line">final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</div><div class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</div><div class="line">        if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;</div><div class="line">            (first = tab[(n - 1) &amp; hash]) != null) &#123;</div><div class="line">            if (first.hash == hash &amp;&amp; // always check first node</div><div class="line">                ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                return first;</div><div class="line">            if ((e = first.next) != null) &#123;</div><div class="line">                if (first instanceof TreeNode)</div><div class="line">                    return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</div><div class="line">                do &#123;</div><div class="line">                    if (e.hash == hash &amp;&amp;</div><div class="line">                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                        return e;</div><div class="line">                &#125; while ((e = e.next) != null);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="5-补充"><a href="#5-补充" class="headerlink" title="5.补充"></a>5.补充</h2><ul>
-<li>HashMap后来追加了红黑树实现的Entry（代码中的TreeNode类），有兴趣的读者请自行查阅。</li>
+<li>Java8之后，HashMap追加了红黑树实现的Entry（代码中的TreeNode类），当链长超过8之后自动转换为红黑树。有兴趣的读者请自行查阅。</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/03/Java集合容器之HashMap/" data-id="cjb3rybwi000irsvfgtw7xnsk" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/03/Java集合容器之HashMap/" data-id="cjb8v9bkx000wiivf7un5xxqy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -186,6 +186,14 @@
       <ul>
         
           <li>
+            <a href="/2017/12/16/Android应用UI性能分析/">Android应用UI性能分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/15/SpannableString及其相关类的使用/">SpannableString及其相关类的使用</a>
+          </li>
+        
+          <li>
             <a href="/2017/12/11/FlexboxLayout的使用/">FlexboxLayout的使用</a>
           </li>
         
@@ -195,14 +203,6 @@
         
           <li>
             <a href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/25/深入理解Android卷一笔记/">深入理解Android卷一笔记</a>
           </li>
         
       </ul>

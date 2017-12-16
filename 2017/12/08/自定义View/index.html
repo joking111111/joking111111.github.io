@@ -5,18 +5,18 @@
   
   <title>自定义View | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、重要回调方法1.初始化时机选择 onFinishInflate    解析完xml后回调 onSizeChanged    组件大小发生改变时回调  2.塑形 onMeasure onLayout onDraw setWillNotDraw 为true时，android系统会对此View进行优化。 重写onDraw方法的同时，最好把这个开关关掉。    3.事件处理 dispatchTouch">
+  <meta name="description" content="一、重要回调方法1.初始化时机选择 onFinishInflate    解析完xml后回调 onSizeChanged    组件大小发生改变时回调  2.塑形 onMeasure onLayout onDraw setWillNotDraw 该开关值为true时，android系统会对此View进行优化。 重写onDraw方法的同时，最好在初始化时把这个开关关掉。    3.事件处理 disp">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="自定义View">
 <meta property="og:url" content="https://joking111111.github.io/2017/12/08/自定义View/index.html">
 <meta property="og:site_name" content="JoKing">
-<meta property="og:description" content="一、重要回调方法1.初始化时机选择 onFinishInflate    解析完xml后回调 onSizeChanged    组件大小发生改变时回调  2.塑形 onMeasure onLayout onDraw setWillNotDraw 为true时，android系统会对此View进行优化。 重写onDraw方法的同时，最好把这个开关关掉。    3.事件处理 dispatchTouch">
+<meta property="og:description" content="一、重要回调方法1.初始化时机选择 onFinishInflate    解析完xml后回调 onSizeChanged    组件大小发生改变时回调  2.塑形 onMeasure onLayout onDraw setWillNotDraw 该开关值为true时，android系统会对此View进行优化。 重写onDraw方法的同时，最好在初始化时把这个开关关掉。    3.事件处理 disp">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-08T13:18:31.274Z">
+<meta property="og:updated_time" content="2017-12-16T02:21:01.028Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自定义View">
-<meta name="twitter:description" content="一、重要回调方法1.初始化时机选择 onFinishInflate    解析完xml后回调 onSizeChanged    组件大小发生改变时回调  2.塑形 onMeasure onLayout onDraw setWillNotDraw 为true时，android系统会对此View进行优化。 重写onDraw方法的同时，最好把这个开关关掉。    3.事件处理 dispatchTouch">
+<meta name="twitter:description" content="一、重要回调方法1.初始化时机选择 onFinishInflate    解析完xml后回调 onSizeChanged    组件大小发生改变时回调  2.塑形 onMeasure onLayout onDraw setWillNotDraw 该开关值为true时，android系统会对此View进行优化。 重写onDraw方法的同时，最好在初始化时把这个开关关掉。    3.事件处理 disp">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -96,8 +96,8 @@
 <li>onLayout</li>
 <li>onDraw</li>
 <li>setWillNotDraw<ul>
-<li>为true时，android系统会对此View进行优化。</li>
-<li>重写onDraw方法的同时，最好把这个开关关掉。</li>
+<li>该开关值为true时，android系统会对此View进行优化。</li>
+<li>重写onDraw方法的同时，最好在初始化时把这个开关关掉。</li>
 </ul>
 </li>
 </ul>
@@ -105,12 +105,13 @@
 <li>dispatchTouchEvent</li>
 <li>onInterceptTouchEvent</li>
 <li>onTouchEvent</li>
+<li>ViewParent#requestDisallowInterceptTouchEvent(boolean)</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/12/08/自定义View/" data-id="cjb3rybx5001orsvflzs6yaqj" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/12/08/自定义View/" data-id="cjb8v9blh001piivf0o5b7q5t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -184,6 +185,14 @@
       <ul>
         
           <li>
+            <a href="/2017/12/16/Android应用UI性能分析/">Android应用UI性能分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/15/SpannableString及其相关类的使用/">SpannableString及其相关类的使用</a>
+          </li>
+        
+          <li>
             <a href="/2017/12/11/FlexboxLayout的使用/">FlexboxLayout的使用</a>
           </li>
         
@@ -193,14 +202,6 @@
         
           <li>
             <a href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/25/深入理解Android卷一笔记/">深入理解Android卷一笔记</a>
           </li>
         
       </ul>

@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Android安全机制简介 | JoKing</title>
+  <title>Android应用UI性能分析 | JoKing</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、代码混淆proguard由于java字节码可以被反编译，代码混淆可以混淆关键代码，增加阅读代码难度。同时proguard可以压缩代码、优化编译后的java字节码。 二、应用权限检查应用声明的权限需要得到系统和用户的认可 三、签名证书Android系统识别App的凭证，App的身份证。 四、Linux内核安全机制比如文件访问机制等，权限系统。 五、Android虚拟机沙箱机制每个App有与之对应">
+  <meta name="description" content="一、UI性能分析概述目标： 在中低端手机上UI帧率平稳连贯。 1.十六毫秒准则 一般Android设备的屏幕刷新率为60帧每秒，那么一帧的时间为1/60fps = 16.6ms。  所谓的掉帧现象指的是，某一帧的等待数据时间加上绘制图像时间超过16.6ms时，这一帧会被放弃掉，不出现在频幕上，取而代之的是下一帧。   2.系统对UI的优化 软解时代：2.3及之前，所有绘图由CPU完成。 硬解时代：">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android安全机制简介">
-<meta property="og:url" content="https://joking111111.github.io/2017/12/08/Android安全机制简介/index.html">
+<meta property="og:title" content="Android应用UI性能分析">
+<meta property="og:url" content="https://joking111111.github.io/2017/12/16/Android应用UI性能分析/index.html">
 <meta property="og:site_name" content="JoKing">
-<meta property="og:description" content="一、代码混淆proguard由于java字节码可以被反编译，代码混淆可以混淆关键代码，增加阅读代码难度。同时proguard可以压缩代码、优化编译后的java字节码。 二、应用权限检查应用声明的权限需要得到系统和用户的认可 三、签名证书Android系统识别App的凭证，App的身份证。 四、Linux内核安全机制比如文件访问机制等，权限系统。 五、Android虚拟机沙箱机制每个App有与之对应">
+<meta property="og:description" content="一、UI性能分析概述目标： 在中低端手机上UI帧率平稳连贯。 1.十六毫秒准则 一般Android设备的屏幕刷新率为60帧每秒，那么一帧的时间为1/60fps = 16.6ms。  所谓的掉帧现象指的是，某一帧的等待数据时间加上绘制图像时间超过16.6ms时，这一帧会被放弃掉，不出现在频幕上，取而代之的是下一帧。   2.系统对UI的优化 软解时代：2.3及之前，所有绘图由CPU完成。 硬解时代：">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-08T13:18:56.774Z">
+<meta property="og:updated_time" content="2017-12-16T04:12:57.396Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android安全机制简介">
-<meta name="twitter:description" content="一、代码混淆proguard由于java字节码可以被反编译，代码混淆可以混淆关键代码，增加阅读代码难度。同时proguard可以压缩代码、优化编译后的java字节码。 二、应用权限检查应用声明的权限需要得到系统和用户的认可 三、签名证书Android系统识别App的凭证，App的身份证。 四、Linux内核安全机制比如文件访问机制等，权限系统。 五、Android虚拟机沙箱机制每个App有与之对应">
+<meta name="twitter:title" content="Android应用UI性能分析">
+<meta name="twitter:description" content="一、UI性能分析概述目标： 在中低端手机上UI帧率平稳连贯。 1.十六毫秒准则 一般Android设备的屏幕刷新率为60帧每秒，那么一帧的时间为1/60fps = 16.6ms。  所谓的掉帧现象指的是，某一帧的等待数据时间加上绘制图像时间超过16.6ms时，这一帧会被放弃掉，不出现在频幕上，取而代之的是下一帧。   2.系统对UI的优化 软解时代：2.3及之前，所有绘图由CPU完成。 硬解时代：">
   
     <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
   
@@ -65,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Android安全机制简介" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Android应用UI性能分析" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/12/08/Android安全机制简介/" class="article-date">
-  <time datetime="2017-12-08T13:17:00.000Z" itemprop="datePublished">2017-12-08</time>
+    <a href="/2017/12/16/Android应用UI性能分析/" class="article-date">
+  <time datetime="2017-12-16T02:21:37.000Z" itemprop="datePublished">2017-12-16</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Android安全机制简介
+      Android应用UI性能分析
     </h1>
   
 
@@ -87,16 +87,41 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、代码混淆proguard"><a href="#一、代码混淆proguard" class="headerlink" title="一、代码混淆proguard"></a>一、代码混淆proguard</h2><p>由于java字节码可以被反编译，代码混淆可以混淆关键代码，增加阅读代码难度。同时proguard可以压缩代码、优化编译后的java字节码。</p>
-<h2 id="二、应用权限检查"><a href="#二、应用权限检查" class="headerlink" title="二、应用权限检查"></a>二、应用权限检查</h2><p>应用声明的权限需要得到系统和用户的认可</p>
-<h2 id="三、签名证书"><a href="#三、签名证书" class="headerlink" title="三、签名证书"></a>三、签名证书</h2><p>Android系统识别App的凭证，App的身份证。</p>
-<h2 id="四、Linux内核安全机制"><a href="#四、Linux内核安全机制" class="headerlink" title="四、Linux内核安全机制"></a>四、Linux内核安全机制</h2><p>比如文件访问机制等，权限系统。</p>
-<h2 id="五、Android虚拟机沙箱机制"><a href="#五、Android虚拟机沙箱机制" class="headerlink" title="五、Android虚拟机沙箱机制"></a>五、Android虚拟机沙箱机制</h2><p>每个App有与之对应的Uid，分别运行在单独的虚拟机中，与其他应用完全隔离。即使一个应用崩溃，也不会导致其他应用异常。</p>
+        <h2 id="一、UI性能分析概述"><a href="#一、UI性能分析概述" class="headerlink" title="一、UI性能分析概述"></a>一、UI性能分析概述</h2><p>目标：</p>
+<p>在中低端手机上UI帧率平稳连贯。</p>
+<h3 id="1-十六毫秒准则"><a href="#1-十六毫秒准则" class="headerlink" title="1.十六毫秒准则"></a>1.十六毫秒准则</h3><ul>
+<li><p>一般Android设备的屏幕刷新率为60帧每秒，那么一帧的时间为1/60fps = 16.6ms。</p>
+</li>
+<li><p>所谓的掉帧现象指的是，某一帧的等待数据时间加上绘制图像时间超过16.6ms时，这一帧会被放弃掉，不出现在频幕上，取而代之的是下一帧。</p>
+</li>
+</ul>
+<h3 id="2-系统对UI的优化"><a href="#2-系统对UI的优化" class="headerlink" title="2.系统对UI的优化"></a>2.系统对UI的优化</h3><ul>
+<li>软解时代：2.3及之前，所有绘图由CPU完成。</li>
+<li>硬解时代：2.3之后，系统增加了GPU，很多绘图操作交给GPU进行渲染。</li>
+<li>黄油时代：4.1之后，通过VSYNC垂直同步机制和多缓冲机制（three frame buffer）进一步提高绘制效率。</li>
+<li>异步绘制时代：5.0之后，系统增加了Render Thread。通过这个线程进行异步绘制，某一帧发生延迟也不会影响下一帧的绘制。</li>
+</ul>
+<h3 id="3-编写布局准则"><a href="#3-编写布局准则" class="headerlink" title="3.编写布局准则"></a>3.编写布局准则</h3><ul>
+<li><p>LinearLayout和RelativeLayout对比</p>
+<ul>
+<li>LinearLayout优点在于测量方式简单，测量耗时较短，但由于功能简单，通常需要嵌套布局才能实现想要的效果。</li>
+<li>RelativeLayout优点在于能实现扁平化布局，缺点在于布局越复杂，测量的耗时增加不少，并且有可能需要多次测量。</li>
+</ul>
+</li>
+<li><p>尽量少嵌套布局。<br>  因为系统绘制一个ViewGroup时，会采用深度优先遍历遍历每一个子View，所以层级越深，耗费时间是指数增长的。</p>
+</li>
+<li><p>尽量少编写测量复杂的布局。<br>  测量复杂的布局如RelativeLayout过多子View，会导致系统需要多次测量才能确定这些View的尺寸。所以极致扁平化布局有可能得不偿失。</p>
+</li>
+<li><p>终极目标：尽量减少View的数量。<br>  无论对应减少测量时间以及绘制时间还有内存占用都是有帮助的！</p>
+</li>
+</ul>
+<h2 id="二、性能检测工具"><a href="#二、性能检测工具" class="headerlink" title="二、性能检测工具"></a>二、性能检测工具</h2><h3 id="1-Hierarcy-Viewer"><a href="#1-Hierarcy-Viewer" class="headerlink" title="1.Hierarcy Viewer"></a>1.Hierarcy Viewer</h3><p>首先打开Android Device Monitor：SDK目录-&gt;tools-&gt;monitor。</p>
+<p>然后观察窗口顶栏有个带加号窗口按钮，点开发现有Hierarcy Viewer选项。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/12/08/Android安全机制简介/" data-id="cjb8v9bke0004iivf82j0cxec" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/12/16/Android应用UI性能分析/" data-id="cjb8v9bkd0003iivf4bpdco9u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -107,19 +132,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/12/08/自定义View/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          自定义View
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/27/CoordinatorLayout的使用/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2017/12/15/SpannableString及其相关类的使用/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">CoordinatorLayout的使用</div>
+      <div class="article-nav-title">SpannableString及其相关类的使用</div>
     </a>
   
 </nav>

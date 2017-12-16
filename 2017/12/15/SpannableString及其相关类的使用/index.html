@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>SpannableString及其相关类的使用 | JoKing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、继承关系由于TextView.setText(CharSequence text)接收参数类型为CharSequence，所以他们都能作为setText的参数使用。 二、主要方法1.setSpan(Object what, int start, int end, int flags)参数含义：  what 各种Span样式。 start 改变样式的字符起点，就是要改的第一个下标。 end 改变">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpannableString及其相关类的使用">
+<meta property="og:url" content="https://joking111111.github.io/2017/12/15/SpannableString及其相关类的使用/index.html">
+<meta property="og:site_name" content="JoKing">
+<meta property="og:description" content="一、继承关系由于TextView.setText(CharSequence text)接收参数类型为CharSequence，所以他们都能作为setText的参数使用。 二、主要方法1.setSpan(Object what, int start, int end, int flags)参数含义：  what 各种Span样式。 start 改变样式的字符起点，就是要改的第一个下标。 end 改变">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://joking111111.github.io/2017/12/15/SpannableString及其相关类的使用/继承关系.png">
+<meta property="og:image" content="https://joking111111.github.io/2017/12/15/SpannableString及其相关类的使用/图解参数.png">
+<meta property="og:updated_time" content="2017-12-16T04:48:08.574Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpannableString及其相关类的使用">
+<meta name="twitter:description" content="一、继承关系由于TextView.setText(CharSequence text)接收参数类型为CharSequence，所以他们都能作为setText的参数使用。 二、主要方法1.setSpan(Object what, int start, int end, int flags)参数含义：  what 各种Span样式。 start 改变样式的字符起点，就是要改的第一个下标。 end 改变">
+<meta name="twitter:image" content="https://joking111111.github.io/2017/12/15/SpannableString及其相关类的使用/继承关系.png">
+  
+    <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">JoKing</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://joking111111.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-SpannableString及其相关类的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/15/SpannableString及其相关类的使用/" class="article-date">
+  <time datetime="2017-12-15T00:32:29.000Z" itemprop="datePublished">2017-12-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SpannableString及其相关类的使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、继承关系"><a href="#一、继承关系" class="headerlink" title="一、继承关系"></a>一、继承关系</h2><p><img src="/2017/12/15/SpannableString及其相关类的使用/继承关系.png" alt="继承关系"><br>由于TextView.setText(CharSequence text)接收参数类型为CharSequence，所以他们都能作为setText的参数使用。</p>
+<h2 id="二、主要方法"><a href="#二、主要方法" class="headerlink" title="二、主要方法"></a>二、主要方法</h2><h3 id="1-setSpan-Object-what-int-start-int-end-int-flags"><a href="#1-setSpan-Object-what-int-start-int-end-int-flags" class="headerlink" title="1.setSpan(Object what, int start, int end, int flags)"></a>1.setSpan(Object what, int start, int end, int flags)</h3><p>参数含义：</p>
+<ul>
+<li>what 各种Span样式。</li>
+<li>start 改变样式的字符起点，就是要改的第一个下标。</li>
+<li>end 改变样式的字符终点，就是要改的最后一个下标的下一个下标。<br>通常end = start + length。</li>
+<li>flags 标记位，用于标记修改字符串前后的字符的变化规则。</li>
+<li>注意这里中文一个字算一个字符。</li>
+</ul>
+<p>what参数：</p>
+<ul>
+<li><p>常用类型</p>
+<ul>
+<li>ForegroundColorSpan 文本颜色</li>
+<li>BackgroundColorSpan 文本背景色</li>
+<li>URLSpan 文本超链接</li>
+<li>UnderlineSpan 下划线</li>
+<li>StrikethroughSpan 删除线</li>
+<li>ImageSpan 图片</li>
+<li>DynamicDrawableSpan 设置图片，基于文本基线或底部对齐。</li>
+<li>ClickableSpan 点击事件</li>
+</ul>
+</li>
+<li><p>其他类型</p>
+<ul>
+<li>StyleSpan 字体样式：粗体、斜体等</li>
+<li>MaskFilterSpan 修饰效果，如浮雕模糊(BlurMaskFilter)</li>
+<li>RasterizerSpan 光栅效果</li>
+<li>TextAppearanceSpan 文本外貌（包括字体、大小、样式和颜色）</li>
+<li>TypefaceSpan 文本字体</li>
+<li>SuggestionSpan 相当于占位符</li>
+<li>AbsoluteSizeSpan 文本字体（绝对大小）</li>
+<li>RelativeSizeSpan 相对大小（文本字体）</li>
+<li>ScaleXSpan 基于x轴缩放</li>
+<li>SubscriptSpan 下标（数学公式会用到）</li>
+<li>SuperscriptSpan 上标（数学公式会用到）</li>
+</ul>
+</li>
+</ul>
+<p>flags参数：</p>
+<ul>
+<li><p><code>Spannable.SPAN_EXCLUSIVE_INCLUSIVE</code><br>新增前插字符不应用效果，新增后插字符应用效果。</p>
+</li>
+<li><p><code>Spannable.SPAN_INCLUSIVE_EXCLUSIVE</code><br>新增前插字符应用效果，新增后插字符不应用效果。</p>
+</li>
+<li><p><code>Spannable.SPAN_INCUJSIVE_INCLUSIVE</code><br>前后新增的字符都应用效果。</p>
+</li>
+<li><p><code>Spannable.SPAN_EXCLUSIVE_EXCLUSIVE</code><br>前后新增的字符都不应用效果。</p>
+</li>
+</ul>
+<h2 id="三、图解参数"><a href="#三、图解参数" class="headerlink" title="三、图解参数"></a>三、图解参数</h2><h3 id="1-start、end、flags参数图解"><a href="#1-start、end、flags参数图解" class="headerlink" title="1.start、end、flags参数图解"></a>1.start、end、flags参数图解</h3><p><img src="/2017/12/15/SpannableString及其相关类的使用/图解参数.png" alt="图解参数"></p>
+<h3 id="2-what参数图解"><a href="#2-what参数图解" class="headerlink" title="2.what参数图解"></a>2.what参数图解</h3><p>由于种类过多就不做了。其实没必要做，你只需要知道你想做什么效果，然后点进该类源码，查看构造函数和其公有方法，自然就了解这个类有什么用了。</p>
+<p>了解一个类有什么功能的捷径就是查看源码，本篇文章仅辅助你去理解他们。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/12/15/SpannableString及其相关类的使用/" data-id="cjb8v9bl7001biivfx0acd5dr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/12/16/Android应用UI性能分析/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android应用UI性能分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/12/11/FlexboxLayout的使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">FlexboxLayout的使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kotlin/">Kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Git/" style="font-size: 16.67px;">Git</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 13.33px;">Kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/12/16/Android应用UI性能分析/">Android应用UI性能分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/15/SpannableString及其相关类的使用/">SpannableString及其相关类的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/11/FlexboxLayout的使用/">FlexboxLayout的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/08/自定义View/">自定义View</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 JoKing<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
