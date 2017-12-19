@@ -3,20 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>RecyclerView笔记 | Stay Hungry</title>
+  <title>Stay Hungry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml中设置lint会提示new api）：  1recyclerView.setNestedScrollingEnabled(false); 2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Ite">
-<meta name="keywords" content="Android">
-<meta property="og:type" content="article">
-<meta property="og:title" content="RecyclerView笔记">
-<meta property="og:url" content="https://joking111111.github.io/2017/10/22/RecyclerView笔记/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Stay Hungry">
+<meta property="og:url" content="https://joking111111.github.io/page/6/index.html">
 <meta property="og:site_name" content="Stay Hungry">
-<meta property="og:description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml中设置lint会提示new api）：  1recyclerView.setNestedScrollingEnabled(false); 2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Ite">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-08T13:11:20.723Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RecyclerView笔记">
-<meta name="twitter:description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml中设置lint会提示new api）：  1recyclerView.setNestedScrollingEnabled(false); 2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Ite">
+<meta name="twitter:title" content="Stay Hungry">
   
     <link rel="alternate" href="/atom.xml" title="Stay Hungry" type="application/atom+xml">
   
@@ -65,7 +60,65 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-RecyclerView笔记" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-Java集合容器之LinkedHashMap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/01/Java集合容器之LinkedHashMap/" class="article-date">
+  <time datetime="2017-11-01T05:58:10.000Z" itemprop="datePublished">2017-11-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/01/Java集合容器之LinkedHashMap/">Java集合容器之LinkedHashMap</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-继承关系"><a href="#1-继承关系" class="headerlink" title="1.继承关系"></a>1.继承关系</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public class LinkedHashMap&lt;K,V&gt;</div><div class="line">    extends HashMap&lt;K,V&gt;</div><div class="line">    implements Map&lt;K,V&gt; &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>LinkedHashMap是HashMap的子类，从面向对象设计思想上讲，LinkedHashMap更多的是增加或改写HashMap的方法。</p>
+<h2 id="2-Entry类"><a href="#2-Entry类" class="headerlink" title="2.Entry类"></a>2.Entry类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">static class LinkedHashMapEntry&lt;K,V&gt; extends HashMap.Node&lt;K,V&gt; &#123;</div><div class="line">        LinkedHashMapEntry&lt;K,V&gt; before, after;</div><div class="line">        LinkedHashMapEntry(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</div><div class="line">            super(hash, key, value, next);</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>LinkedHashMapEntry是HashMap.Node的子类，构造方法直接调用父类构造方法，额外加多两个前后引用。</p>
+<ul>
+<li>next引用是提供给父类HashMap.Node构建HashMap的单链表的！</li>
+<li>before, after是构建一个双向回环链表！</li>
+<li>两者并无关联，也不冲突！</li>
+</ul>
+<h2 id="3-图像理解数据结构"><a href="#3-图像理解数据结构" class="headerlink" title="3.图像理解数据结构"></a>3.图像理解数据结构</h2><ul>
+<li>上一节提及到，双链表和HashMap并不冲突，所以HashMap部分可以参考HashMap。</li>
+<li>以下为双向回环链表部分。<br><img src="/2017/11/01/Java集合容器之LinkedHashMap/双向回环链表.png" alt="双向回环链表"></li>
+</ul>
+<h2 id="4-与HashMap比较"><a href="#4-与HashMap比较" class="headerlink" title="4.与HashMap比较"></a>4.与HashMap比较</h2><ul>
+<li>遍历集合时，LinkedHashMap保留元素进入顺序，HashMap则无法保证元素进入顺序。当然要耗费一点性能。</li>
+<li>LinkedHashMap每次都将元素加入至双向链表的尾部，利用这个特性实现LruCache，并不是因为LruCache的需要而实现了LinkedHashMap。</li>
+</ul>
+<h2 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5.参考资料"></a>5.参考资料</h2><p><a href="http://www.cnblogs.com/xrq730/p/5052323.html" target="_blank" rel="external">http://www.cnblogs.com/xrq730/p/5052323.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/11/01/Java集合容器之LinkedHashMap/" data-id="cjb8vcgbb0011k5vfx8c41q4x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-RecyclerView笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/22/RecyclerView笔记/" class="article-date">
   <time datetime="2017-10-22T01:45:58.000Z" itemprop="datePublished">2017-10-22</time>
@@ -78,8 +131,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      RecyclerView笔记
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/22/RecyclerView笔记/">RecyclerView笔记</a>
     </h1>
   
 
@@ -124,29 +177,66 @@
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2017/11/01/Java集合容器之LinkedHashMap/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Java集合容器之LinkedHashMap
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/10/22/Handler的存在意义/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Handler的存在意义</div>
-    </a>
-  
-</nav>
+</article>
 
+
+  
+    <article id="post-Handler的存在意义" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/22/Handler的存在意义/" class="article-date">
+  <time datetime="2017-10-22T01:06:27.000Z" itemprop="datePublished">2017-10-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/22/Handler的存在意义/">Handler的存在意义</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、Handler的实现"><a href="#一、Handler的实现" class="headerlink" title="一、Handler的实现"></a>一、Handler的实现</h2><ul>
+<li>创建：获取当前线程，通过线程的ThreadLocalMap获取Looper，关联Looper和Looper里面的MessageQueue。</li>
+<li>投递：每次封装成Message对象投递进MessageQueue。</li>
+<li>处理：这部分工作由Looper完成，它不断从MessageQueue中取Message。Message中有Callback就执行，没有就调用Message中的target.dispatchMessage(Message)方法投递给这个消息产生的Handler。</li>
+</ul>
+<h2 id="二、Handler的作用"><a href="#二、Handler的作用" class="headerlink" title="二、Handler的作用"></a>二、Handler的作用</h2><h3 id="1-切换线程，线程间通信"><a href="#1-切换线程，线程间通信" class="headerlink" title="1.切换线程，线程间通信"></a>1.切换线程，线程间通信</h3><p>开发中经常使用到这个功能。</p>
+<h3 id="2-将事件或任务序列化"><a href="#2-将事件或任务序列化" class="headerlink" title="2.将事件或任务序列化"></a>2.将事件或任务序列化</h3><p>序列化最大的好处就是顺序执行，便于维护，不会出现任务错乱的情况，并且在单线程内不需要并发。以下举一个经典的例子：</p>
+<ul>
+<li>为什么我们可以使用View.post(Runnable)这种方式获取一个View的实际宽高？</li>
+<li>View的宽高至少要通过Measure方法执行完之后才能获取，并且有可能在Layout的时候被触发重新测量。所以只有View真正显示的时候获取的宽高是最准确的。</li>
+<li>View的绘制流程是借助Handler的事件处理机制。</li>
+<li>View.post(Runnable)将这个任务投递到串行队列中去，因此当这个任务被执行时，前面的View绘制任务已经执行完，这时候调用View.getWidth(),View.getHeight()肯定是有值并且准确的。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cjb8vcgb8000wk5vfun4jbg0b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
   
 </article>
 
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">

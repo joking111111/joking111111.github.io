@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Android应用UI性能分析 | JoKing</title>
+  <title>Android应用UI性能分析 | Stay Hungry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、UI性能分析概述目标： 在中低端手机上UI帧率平稳连贯。 1.十六毫秒准则 一般Android设备的屏幕刷新率为60帧每秒，那么一帧的时间为1/60fps = 16.6ms。  所谓的掉帧现象指的是，某一帧的等待数据时间加上绘制图像时间超过16.6ms时，这一帧会被放弃掉，不出现在频幕上，取而代之的是下一帧。   2.系统对UI的优化 软解时代：2.3及之前，所有绘图由CPU完成。 硬解时代：">
+  <meta name="description" content="一、UI性能分析概述目标：在中低端手机上UI帧率平稳连贯。 1.十六毫秒准则 一般Android设备的屏幕刷新率为60帧每秒，那么一帧的时间为1/60fps = 16.6ms。  所谓的掉帧现象指的是，某一帧的等待数据时间加上绘制图像时间超过16.6ms时，这一帧会被放弃掉，不出现在频幕上，取而代之的是下一帧。   2.系统对UI的优化 软解时代：2.3及之前，所有绘图由CPU完成。 硬解时代：2">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android应用UI性能分析">
 <meta property="og:url" content="https://joking111111.github.io/2017/12/16/Android应用UI性能分析/index.html">
-<meta property="og:site_name" content="JoKing">
-<meta property="og:description" content="一、UI性能分析概述目标： 在中低端手机上UI帧率平稳连贯。 1.十六毫秒准则 一般Android设备的屏幕刷新率为60帧每秒，那么一帧的时间为1/60fps = 16.6ms。  所谓的掉帧现象指的是，某一帧的等待数据时间加上绘制图像时间超过16.6ms时，这一帧会被放弃掉，不出现在频幕上，取而代之的是下一帧。   2.系统对UI的优化 软解时代：2.3及之前，所有绘图由CPU完成。 硬解时代：">
+<meta property="og:site_name" content="Stay Hungry">
+<meta property="og:description" content="一、UI性能分析概述目标：在中低端手机上UI帧率平稳连贯。 1.十六毫秒准则 一般Android设备的屏幕刷新率为60帧每秒，那么一帧的时间为1/60fps = 16.6ms。  所谓的掉帧现象指的是，某一帧的等待数据时间加上绘制图像时间超过16.6ms时，这一帧会被放弃掉，不出现在频幕上，取而代之的是下一帧。   2.系统对UI的优化 软解时代：2.3及之前，所有绘图由CPU完成。 硬解时代：2">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-16T04:12:57.396Z">
+<meta property="og:updated_time" content="2017-12-17T14:10:53.727Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android应用UI性能分析">
-<meta name="twitter:description" content="一、UI性能分析概述目标： 在中低端手机上UI帧率平稳连贯。 1.十六毫秒准则 一般Android设备的屏幕刷新率为60帧每秒，那么一帧的时间为1/60fps = 16.6ms。  所谓的掉帧现象指的是，某一帧的等待数据时间加上绘制图像时间超过16.6ms时，这一帧会被放弃掉，不出现在频幕上，取而代之的是下一帧。   2.系统对UI的优化 软解时代：2.3及之前，所有绘图由CPU完成。 硬解时代：">
+<meta name="twitter:description" content="一、UI性能分析概述目标：在中低端手机上UI帧率平稳连贯。 1.十六毫秒准则 一般Android设备的屏幕刷新率为60帧每秒，那么一帧的时间为1/60fps = 16.6ms。  所谓的掉帧现象指的是，某一帧的等待数据时间加上绘制图像时间超过16.6ms时，这一帧会被放弃掉，不出现在频幕上，取而代之的是下一帧。   2.系统对UI的优化 软解时代：2.3及之前，所有绘图由CPU完成。 硬解时代：2">
   
-    <link rel="alternate" href="/atom.xml" title="JoKing" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Stay Hungry" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -39,7 +39,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">JoKing</a>
+        <a href="/" id="logo">Stay Hungry</a>
       </h1>
       
     </div>
@@ -87,8 +87,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、UI性能分析概述"><a href="#一、UI性能分析概述" class="headerlink" title="一、UI性能分析概述"></a>一、UI性能分析概述</h2><p>目标：</p>
-<p>在中低端手机上UI帧率平稳连贯。</p>
+        <h2 id="一、UI性能分析概述"><a href="#一、UI性能分析概述" class="headerlink" title="一、UI性能分析概述"></a>一、UI性能分析概述</h2><p>目标：在中低端手机上UI帧率平稳连贯。</p>
 <h3 id="1-十六毫秒准则"><a href="#1-十六毫秒准则" class="headerlink" title="1.十六毫秒准则"></a>1.十六毫秒准则</h3><ul>
 <li><p>一般Android设备的屏幕刷新率为60帧每秒，那么一帧的时间为1/60fps = 16.6ms。</p>
 </li>
@@ -102,17 +101,23 @@
 <li>异步绘制时代：5.0之后，系统增加了Render Thread。通过这个线程进行异步绘制，某一帧发生延迟也不会影响下一帧的绘制。</li>
 </ul>
 <h3 id="3-编写布局准则"><a href="#3-编写布局准则" class="headerlink" title="3.编写布局准则"></a>3.编写布局准则</h3><ul>
-<li><p>LinearLayout和RelativeLayout对比</p>
-<ul>
-<li>LinearLayout优点在于测量方式简单，测量耗时较短，但由于功能简单，通常需要嵌套布局才能实现想要的效果。</li>
-<li>RelativeLayout优点在于能实现扁平化布局，缺点在于布局越复杂，测量的耗时增加不少，并且有可能需要多次测量。</li>
-</ul>
-</li>
 <li><p>尽量少嵌套布局。<br>  因为系统绘制一个ViewGroup时，会采用深度优先遍历遍历每一个子View，所以层级越深，耗费时间是指数增长的。</p>
 </li>
 <li><p>尽量少编写测量复杂的布局。<br>  测量复杂的布局如RelativeLayout过多子View，会导致系统需要多次测量才能确定这些View的尺寸。所以极致扁平化布局有可能得不偿失。</p>
 </li>
 <li><p>终极目标：尽量减少View的数量。<br>  无论对应减少测量时间以及绘制时间还有内存占用都是有帮助的！</p>
+</li>
+</ul>
+<h3 id="4-一些建议"><a href="#4-一些建议" class="headerlink" title="4.一些建议"></a>4.一些建议</h3><ul>
+<li><p>LinearLayout和RelativeLayout对比。</p>
+<ul>
+<li>LinearLayout优点在于测量方式简单，测量耗时较短，但由于功能简单，通常需要嵌套布局才能实现想要的效果。</li>
+<li>RelativeLayout优点在于能实现扁平化布局，缺点在于布局越复杂，测量的耗时增加不少，并且有可能需要多次测量。</li>
+</ul>
+</li>
+<li><p>使用Merge标签去掉多余层级。</p>
+</li>
+<li><p>使用ViewStub延时渲染。</p>
 </li>
 </ul>
 <h2 id="二、性能检测工具"><a href="#二、性能检测工具" class="headerlink" title="二、性能检测工具"></a>二、性能检测工具</h2><h3 id="1-Hierarcy-Viewer"><a href="#1-Hierarcy-Viewer" class="headerlink" title="1.Hierarcy Viewer"></a>1.Hierarcy Viewer</h3><p>首先打开Android Device Monitor：SDK目录-&gt;tools-&gt;monitor。</p>
@@ -121,7 +126,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/12/16/Android应用UI性能分析/" data-id="cjb8v9bkd0003iivf4bpdco9u" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/12/16/Android应用UI性能分析/" data-id="cjb8vcgak0004k5vfzxlihkoh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
