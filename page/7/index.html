@@ -62,6 +62,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Handler的存在意义" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/22/Handler的存在意义/" class="article-date">
+  <time datetime="2017-10-22T01:06:27.000Z" itemprop="datePublished">2017-10-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/22/Handler的存在意义/">Handler的存在意义</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、Handler的实现"><a href="#一、Handler的实现" class="headerlink" title="一、Handler的实现"></a>一、Handler的实现</h2><ul>
+<li>创建：获取当前线程，通过线程的ThreadLocalMap获取Looper，关联Looper和Looper里面的MessageQueue。</li>
+<li>投递：每次封装成Message对象投递进MessageQueue。</li>
+<li>处理：这部分工作由Looper完成，它不断从MessageQueue中取Message。Message中有Callback就执行，没有就调用Message中的target.dispatchMessage(Message)方法投递给这个消息产生的Handler。</li>
+</ul>
+<h2 id="二、Handler的作用"><a href="#二、Handler的作用" class="headerlink" title="二、Handler的作用"></a>二、Handler的作用</h2><h3 id="1-切换线程，线程间通信"><a href="#1-切换线程，线程间通信" class="headerlink" title="1.切换线程，线程间通信"></a>1.切换线程，线程间通信</h3><p>开发中经常使用到这个功能。</p>
+<h3 id="2-将事件或任务序列化"><a href="#2-将事件或任务序列化" class="headerlink" title="2.将事件或任务序列化"></a>2.将事件或任务序列化</h3><p>序列化最大的好处就是顺序执行，便于维护，不会出现任务错乱的情况，并且在单线程内不需要并发。以下举一个经典的例子：</p>
+<ul>
+<li>为什么我们可以使用View.post(Runnable)这种方式获取一个View的实际宽高？</li>
+<li>View的宽高至少要通过Measure方法执行完之后才能获取，并且有可能在Layout的时候被触发重新测量。所以只有View真正显示的时候获取的宽高是最准确的。</li>
+<li>View的绘制流程是借助Handler的事件处理机制。</li>
+<li>View.post(Runnable)将这个任务投递到串行队列中去，因此当这个任务被执行时，前面的View绘制任务已经执行完，这时候调用View.getWidth(),View.getHeight()肯定是有值并且准确的。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cjckncjnq000k3evffgaf0gul" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Activity生命周期与finish方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/22/Activity生命周期与finish方法/" class="article-date">
@@ -98,7 +149,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cjbqlf4il0000vqvf1wplqmc8" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cjckncjn500003evf12kud95u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -174,47 +225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cjbqlf4jj0018vqvfovuebpqg" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-kotlin学习资料" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/10/kotlin学习资料/" class="article-date">
-  <time datetime="2017-10-10T02:47:34.000Z" itemprop="datePublished">2017-10-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/10/kotlin学习资料/">Kotlin学习资料</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-官方网站"><a href="#1-官方网站" class="headerlink" title="1.官方网站"></a>1.官方网站</h2><p><a href="https://kotlinlang.org/" target="_blank" rel="external">https://kotlinlang.org/</a></p>
-<h2 id="2-微信公众号"><a href="#2-微信公众号" class="headerlink" title="2.微信公众号"></a>2.微信公众号</h2><p>KotlinX</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cjbqlf4jh0015vqvfavmuq7wo" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cjckncjo5001a3evffckymmww" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -229,7 +240,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/6/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -261,7 +272,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -272,6 +283,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/18/FlatBuffers在Mac-OS的安装步骤/">FlatBuffers在Mac OS的安装步骤</a>
+          </li>
         
           <li>
             <a href="/2017/12/16/Android应用UI性能分析/">Android应用UI性能分析</a>
@@ -289,10 +304,6 @@
             <a href="/2017/12/08/自定义View/">自定义View</a>
           </li>
         
-          <li>
-            <a href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -305,7 +316,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 JoKing<br>
+      &copy; 2018 JoKing<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

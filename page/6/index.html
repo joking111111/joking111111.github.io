@@ -62,6 +62,63 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Java集合容器之HashMap" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/03/Java集合容器之HashMap/" class="article-date">
+  <time datetime="2017-11-03T07:31:19.000Z" itemprop="datePublished">2017-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/03/Java集合容器之HashMap/">Java集合容器之HashMap</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-继承关系"><a href="#1-继承关系" class="headerlink" title="1.继承关系"></a>1.继承关系</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public class HashMap&lt;K,V&gt; extends AbstractMap&lt;K,V&gt;</div><div class="line">    implements Map&lt;K,V&gt;, Cloneable, Serializable &#123;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>继承自AbstractMap。AbstractMap实现了Map接口的方法，如增删改查方法。</p>
+<h2 id="2-Entry类"><a href="#2-Entry类" class="headerlink" title="2.Entry类"></a>2.Entry类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">static class Node&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;</div><div class="line">        final int hash;</div><div class="line">        final K key;</div><div class="line">        V value;</div><div class="line">        Node&lt;K,V&gt; next;</div><div class="line"></div><div class="line">        Node(int hash, K key, V value, Node&lt;K,V&gt; next) &#123;</div><div class="line">          ...</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public final K getKey()        &#123; return key; &#125;</div><div class="line">        public final V getValue()      &#123; return value; &#125;</div><div class="line">        public final String toString() &#123; return key + &quot;=&quot; + value; &#125;</div><div class="line"></div><div class="line">        public final int hashCode() &#123;</div><div class="line">            return Objects.hashCode(key) ^ Objects.hashCode(value);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public final V setValue(V newValue) &#123;</div><div class="line">		    ...</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public final boolean equals(Object o) &#123;</div><div class="line">            if (o == this)</div><div class="line">                return true;</div><div class="line">            if (o instanceof Map.Entry) &#123;</div><div class="line">                Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</div><div class="line">                if (Objects.equals(key, e.getKey()) &amp;&amp;</div><div class="line">                    Objects.equals(value, e.getValue()))</div><div class="line">                    return true;</div><div class="line">            &#125;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>final int hash;这个变量代表这个Entry的key的hash结果。</li>
+<li>Node<k,v> next;这个变量表明这是一个单链表。</k,v></li>
+</ul>
+<h2 id="3-图像理解数据结构"><a href="#3-图像理解数据结构" class="headerlink" title="3.图像理解数据结构"></a>3.图像理解数据结构</h2><p><img src="/2017/11/03/Java集合容器之HashMap/HashMap.png" alt="HashMap"></p>
+<ul>
+<li>左侧是一个一位数组，Hash表。Entry中的hash指的的就是这个数组的下标，用于快速查找或插入。</li>
+<li>从数组的每个节点开始延伸一条单链表。Entry中的next构成这条单链表。</li>
+</ul>
+<h2 id="4-重要方法"><a href="#4-重要方法" class="headerlink" title="4.重要方法"></a>4.重要方法</h2><h3 id="put-key，value"><a href="#put-key，value" class="headerlink" title="put(key，value)"></a>put(key，value)</h3><p>大致流程是：<br>1.判断是否要扩容（resize方法）；<br>2.根据key的hash值找到一维数组的下标从而找到链表的头，当然key为null时要特殊处理；<br>3.遍历单链表，判断是否有Entry的key与参数key一摸一样，如果一样直接更新Entry，返回旧的value值，否则遍历到链尾追加节点；<br>4.更新成员变量如size，调用resize方法，返回null，说明时增加了新节点，而不是更新节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line">public V put(K key, V value) &#123;</div><div class="line">        return putVal(hash(key), key, value, false, true);</div><div class="line">&#125;</div><div class="line"></div><div class="line">final V putVal(int hash, K key, V value, boolean onlyIfAbsent,</div><div class="line">                   boolean evict) &#123;</div><div class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; p; int n, i;</div><div class="line">        if ((tab = table) == null || (n = tab.length) == 0)</div><div class="line">            n = (tab = resize()).length;</div><div class="line">        if ((p = tab[i = (n - 1) &amp; hash]) == null)</div><div class="line">            tab[i] = newNode(hash, key, value, null);</div><div class="line">        else &#123;</div><div class="line">            Node&lt;K,V&gt; e; K k;</div><div class="line">            if (p.hash == hash &amp;&amp;</div><div class="line">                ((k = p.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                e = p;</div><div class="line">            else if (p instanceof TreeNode)</div><div class="line">                e = ((TreeNode&lt;K,V&gt;)p).putTreeVal(this, tab, hash, key, value);</div><div class="line">            else &#123;</div><div class="line">                for (int binCount = 0; ; ++binCount) &#123;</div><div class="line">                    if ((e = p.next) == null) &#123;</div><div class="line">                        p.next = newNode(hash, key, value, null);</div><div class="line">                        if (binCount &gt;= TREEIFY_THRESHOLD - 1) // -1 for 1st</div><div class="line">                            treeifyBin(tab, hash);</div><div class="line">                        break;</div><div class="line">                    &#125;</div><div class="line">                    if (e.hash == hash &amp;&amp;</div><div class="line">                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                        break;</div><div class="line">                    p = e;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            if (e != null) &#123; // existing mapping for key</div><div class="line">                V oldValue = e.value;</div><div class="line">                if (!onlyIfAbsent || oldValue == null)</div><div class="line">                    e.value = value;</div><div class="line">                afterNodeAccess(e);</div><div class="line">                return oldValue;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        ++modCount;</div><div class="line">        if (++size &gt; threshold)</div><div class="line">            resize();</div><div class="line">        afterNodeInsertion(evict);</div><div class="line">        return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="get-key"><a href="#get-key" class="headerlink" title="get(key)"></a>get(key)</h3><p>大致流程是：<br>1.根据key的hash结果查找Hash表；<br>2.遍历单链表，如果找到，返回Entry的value值，否则返回null。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">public V get(Object key) &#123;</div><div class="line">        Node&lt;K,V&gt; e;</div><div class="line">        return (e = getNode(hash(key), key)) == null ? null : e.value;</div><div class="line">&#125;</div><div class="line"></div><div class="line">final Node&lt;K,V&gt; getNode(int hash, Object key) &#123;</div><div class="line">        Node&lt;K,V&gt;[] tab; Node&lt;K,V&gt; first, e; int n; K k;</div><div class="line">        if ((tab = table) != null &amp;&amp; (n = tab.length) &gt; 0 &amp;&amp;</div><div class="line">            (first = tab[(n - 1) &amp; hash]) != null) &#123;</div><div class="line">            if (first.hash == hash &amp;&amp; // always check first node</div><div class="line">                ((k = first.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                return first;</div><div class="line">            if ((e = first.next) != null) &#123;</div><div class="line">                if (first instanceof TreeNode)</div><div class="line">                    return ((TreeNode&lt;K,V&gt;)first).getTreeNode(hash, key);</div><div class="line">                do &#123;</div><div class="line">                    if (e.hash == hash &amp;&amp;</div><div class="line">                        ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))</div><div class="line">                        return e;</div><div class="line">                &#125; while ((e = e.next) != null);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        return null;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="5-补充"><a href="#5-补充" class="headerlink" title="5.补充"></a>5.补充</h2><ul>
+<li>Java8之后，HashMap追加了红黑树实现的Entry（代码中的TreeNode类），当链长超过8之后自动转换为红黑树。有兴趣的读者请自行查阅。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/11/03/Java集合容器之HashMap/" data-id="cjckncjnr000m3evfm0sgplso" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Java集合容器之LinkedHashMap" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/01/Java集合容器之LinkedHashMap/" class="article-date">
@@ -106,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/01/Java集合容器之LinkedHashMap/" data-id="cjbqlf4j7000ovqvfzjtevm6b" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/01/Java集合容器之LinkedHashMap/" data-id="cjckncjns000o3evffjhhdjws" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -169,58 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjbqlf4j6000mvqvf9yiqssw6" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Handler的存在意义" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/22/Handler的存在意义/" class="article-date">
-  <time datetime="2017-10-22T01:06:27.000Z" itemprop="datePublished">2017-10-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/22/Handler的存在意义/">Handler的存在意义</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、Handler的实现"><a href="#一、Handler的实现" class="headerlink" title="一、Handler的实现"></a>一、Handler的实现</h2><ul>
-<li>创建：获取当前线程，通过线程的ThreadLocalMap获取Looper，关联Looper和Looper里面的MessageQueue。</li>
-<li>投递：每次封装成Message对象投递进MessageQueue。</li>
-<li>处理：这部分工作由Looper完成，它不断从MessageQueue中取Message。Message中有Callback就执行，没有就调用Message中的target.dispatchMessage(Message)方法投递给这个消息产生的Handler。</li>
-</ul>
-<h2 id="二、Handler的作用"><a href="#二、Handler的作用" class="headerlink" title="二、Handler的作用"></a>二、Handler的作用</h2><h3 id="1-切换线程，线程间通信"><a href="#1-切换线程，线程间通信" class="headerlink" title="1.切换线程，线程间通信"></a>1.切换线程，线程间通信</h3><p>开发中经常使用到这个功能。</p>
-<h3 id="2-将事件或任务序列化"><a href="#2-将事件或任务序列化" class="headerlink" title="2.将事件或任务序列化"></a>2.将事件或任务序列化</h3><p>序列化最大的好处就是顺序执行，便于维护，不会出现任务错乱的情况，并且在单线程内不需要并发。以下举一个经典的例子：</p>
-<ul>
-<li>为什么我们可以使用View.post(Runnable)这种方式获取一个View的实际宽高？</li>
-<li>View的宽高至少要通过Measure方法执行完之后才能获取，并且有可能在Layout的时候被触发重新测量。所以只有View真正显示的时候获取的宽高是最准确的。</li>
-<li>View的绘制流程是借助Handler的事件处理机制。</li>
-<li>View.post(Runnable)将这个任务投递到串行队列中去，因此当这个任务被执行时，前面的View绘制任务已经执行完，这时候调用View.getWidth(),View.getHeight()肯定是有值并且准确的。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cjbqlf4j4000ivqvfxosc91a8" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjckncjnt000q3evfy6t7gd3z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -235,7 +241,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/5/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/7/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/5/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -267,7 +273,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -278,6 +284,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/01/18/FlatBuffers在Mac-OS的安装步骤/">FlatBuffers在Mac OS的安装步骤</a>
+          </li>
         
           <li>
             <a href="/2017/12/16/Android应用UI性能分析/">Android应用UI性能分析</a>
@@ -295,10 +305,6 @@
             <a href="/2017/12/08/自定义View/">自定义View</a>
           </li>
         
-          <li>
-            <a href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -311,7 +317,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2017 JoKing<br>
+      &copy; 2018 JoKing<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
