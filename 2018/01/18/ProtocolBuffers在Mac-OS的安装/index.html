@@ -3,15 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: 环境配置 | Stay Hungry</title>
+  <title>ProtocolBuffers在Mac OS的安装 | Stay Hungry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Stay Hungry">
-<meta property="og:url" content="https://joking111111.github.io/tags/环境配置/index.html">
+  <meta name="description" content="一、检查环境12//安装autoconf、automake、libtool工具brew install autoconf automake libtool 二、安装步骤1234567891011121314151617181920//1.clone源码git clone https://github.com/google/protobuf.git//2.进入项目目录cd protobuf//3.生">
+<meta name="keywords" content="环境配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ProtocolBuffers在Mac OS的安装">
+<meta property="og:url" content="https://joking111111.github.io/2018/01/18/ProtocolBuffers在Mac-OS的安装/index.html">
 <meta property="og:site_name" content="Stay Hungry">
+<meta property="og:description" content="一、检查环境12//安装autoconf、automake、libtool工具brew install autoconf automake libtool 二、安装步骤1234567891011121314151617181920//1.clone源码git clone https://github.com/google/protobuf.git//2.进入项目目录cd protobuf//3.生">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-11T12:55:50.742Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Stay Hungry">
+<meta name="twitter:title" content="ProtocolBuffers在Mac OS的安装">
+<meta name="twitter:description" content="一、检查环境12//安装autoconf、automake、libtool工具brew install autoconf automake libtool 二、安装步骤1234567891011121314151617181920//1.clone源码git clone https://github.com/google/protobuf.git//2.进入项目目录cd protobuf//3.生">
   
     <link rel="alternate" href="/atom.xml" title="Stay Hungry" type="application/atom+xml">
   
@@ -60,106 +65,64 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/18/ProtocolBuffers在Mac-OS的安装/" class="archive-article-date">
-  <time datetime="2018-01-18T15:26:26.000Z" itemprop="datePublished">Jan 18</time>
+        <section id="main"><article id="post-ProtocolBuffers在Mac-OS的安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/18/ProtocolBuffers在Mac-OS的安装/" class="article-date">
+  <time datetime="2018-01-18T15:26:26.000Z" itemprop="datePublished">2018-01-18</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/18/ProtocolBuffers在Mac-OS的安装/">ProtocolBuffers在Mac OS的安装</a>
+    <h1 class="article-title" itemprop="name">
+      ProtocolBuffers在Mac OS的安装
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/01/18/FlatBuffers在Mac-OS的安装步骤/" class="archive-article-date">
-  <time datetime="2018-01-18T15:15:27.000Z" itemprop="datePublished">Jan 18</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/01/18/FlatBuffers在Mac-OS的安装步骤/">FlatBuffers在Mac OS的安装步骤</a>
-    </h1>
-  
+        <h2 id="一、检查环境"><a href="#一、检查环境" class="headerlink" title="一、检查环境"></a>一、检查环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//安装autoconf、automake、libtool工具</div><div class="line">brew install autoconf automake libtool</div></pre></td></tr></table></figure>
+<h2 id="二、安装步骤"><a href="#二、安装步骤" class="headerlink" title="二、安装步骤"></a>二、安装步骤</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//1.clone源码</div><div class="line">git clone https://github.com/google/protobuf.git</div><div class="line"></div><div class="line">//2.进入项目目录</div><div class="line">cd protobuf</div><div class="line"></div><div class="line">//3.生成configure脚本</div><div class="line">./autogen.sh</div><div class="line"></div><div class="line">//4.安装</div><div class="line">./configure</div><div class="line">make</div><div class="line">make check</div><div class="line">sudo make install</div><div class="line"></div><div class="line">//5.配置protoc的环境变量，即protobuf项目的目录路径</div><div class="line">略。</div><div class="line"></div><div class="line">//6.可略过</div><div class="line">sudo ldconfig # refresh shared library cache.</div></pre></td></tr></table></figure>
+<h2 id="三、检查是否安装成功"><a href="#三、检查是否安装成功" class="headerlink" title="三、检查是否安装成功"></a>三、检查是否安装成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">protoc --version</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2018/01/18/ProtocolBuffers在Mac-OS的安装/" data-id="cjemszeha000tt3vfjvowz9oe" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/11/09/搭建基于hexo的博客以及如何迁移/" class="archive-article-date">
-  <time datetime="2017-11-09T13:22:17.000Z" itemprop="datePublished">Nov 9</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/09/搭建基于hexo的博客以及如何迁移/">搭建基于hexo的博客以及如何迁移</a>
-    </h1>
+    <a href="/2018/01/19/FlatBuffers的介绍和使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          FlatBuffers的介绍和使用
+        
+      </div>
+    </a>
   
+  
+    <a href="/2018/01/18/FlatBuffers在Mac-OS的安装步骤/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">FlatBuffers在Mac OS的安装步骤</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/11/08/mac下配置zsh/" class="archive-article-date">
-  <time datetime="2017-11-08T01:09:06.000Z" itemprop="datePublished">Nov 8</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/11/08/mac下配置zsh/">Mac下配置zsh</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
 </section>
         

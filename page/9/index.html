@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-git高级操作" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-kotlin笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/10/08/git高级操作/" class="article-date">
-  <time datetime="2017-10-08T12:49:21.000Z" itemprop="datePublished">2017-10-08</time>
+    <a href="/2017/10/11/kotlin笔记/" class="article-date">
+  <time datetime="2017-10-11T02:07:05.000Z" itemprop="datePublished">2017-10-11</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/08/git高级操作/">Git高级操作</a>
+      <a class="article-title" href="/2017/10/11/kotlin笔记/">Kotlin笔记</a>
     </h1>
   
 
@@ -84,44 +84,52 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-git-cherry-pick-A-B-C"><a href="#1-git-cherry-pick-A-B-C" class="headerlink" title="1.git cherry-pick A B C"></a>1.git cherry-pick A B C</h2><p><img src="/2017/10/08/git高级操作/git cherry-pick.png" alt="git cherry-pick"></p>
-<p>假如我们有两条分支master和dev，现在我们要将dev分支上的feature D和feature E合并到master上要怎么办呢？</p>
+        <h2 id="1-val与var"><a href="#1-val与var" class="headerlink" title="1.val与var"></a>1.val与var</h2><ul>
+<li>val —–&gt; value 不可变值，相当于java中final变量。</li>
+<li>var —–&gt; variable 可变值，相当于java普通变量。</li>
+</ul>
+<h2 id="2-object与companion-object"><a href="#2-object与companion-object" class="headerlink" title="2.object与companion object"></a>2.object与companion object</h2><ul>
+<li>object : 声明static对象，常用作单例。<br>特点：不可定义构造函数。使用时才立即初始化。  </li>
+<li>companion object : 译作伴随对象，可以理解为类静态成员。</li>
+</ul>
+<h2 id="3-open与abstract"><a href="#3-open与abstract" class="headerlink" title="3.open与abstract"></a>3.open与abstract</h2><ul>
+<li>open : 声明此类非final，可以继承。如果一个class没有同时声明open，则此类不能被继承，相当于final类。</li>
+<li>abstract : 跟java抽象类一样，可以有未实现方法。而open不能有未实现方法。</li>
+<li>题外话：那么单例object能不能被继承呢？<br>答案是不能的，因为object类没有共有构造函数，只有私有构造函数，子类无法调用父类的构造函数，因而无法被继承。这与java是一样的。</li>
+</ul>
+<h2 id="4-操作符"><a href="#4-操作符" class="headerlink" title="4.操作符==,!=,===,!==,[]"></a>4.操作符==,!=,===,!==,[]</h2><h3 id="以下均为在kotlin的意义"><a href="#以下均为在kotlin的意义" class="headerlink" title="以下均为在kotlin的意义"></a>以下均为在kotlin的意义</h3><ul>
+<li>==：重载为a?.equals(b) ?: (b===null) ，即调用equals。</li>
+<li>===：判断两个引用是否相等。</li>
+<li>[]：重载get，set方法。</li>
+</ul>
+<h3 id="特别注意"><a href="#特别注意" class="headerlink" title="特别注意"></a>特别注意</h3><ul>
+<li>以上操作符使用均针对对象，而像int等基本数据类型的操作符，是没有改变的。</li>
+</ul>
+<h2 id="5-匿名内部类"><a href="#5-匿名内部类" class="headerlink" title="5.匿名内部类"></a>5.匿名内部类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">user.login(object : SaveListener&lt;BmobUser&gt;() &#123;</div><div class="line">     override fun done(b: BmobUser?, e: BmobException?) &#123;</div><div class="line">         hideLoading()</div><div class="line">         if (e != null) &#123;</div><div class="line">             toast(&quot;登陆成功！&quot;)</div><div class="line">             MainActivity.start(this@LoginActivity)</div><div class="line">             finish()</div><div class="line">         &#125; else &#123;</div><div class="line">             toast(e.toString())</div><div class="line">         &#125;</div><div class="line">     &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="6-静态代码块与非静态代码块"><a href="#6-静态代码块与非静态代码块" class="headerlink" title="6.静态代码块与非静态代码块"></a>6.静态代码块与非静态代码块</h2><ul>
+<li>静态代码块</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">companion object &#123;</div><div class="line">    init &#123;</div><div class="line">    	...       </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
-<li>方法一：首先切换到dev分支，查看各项commit-id，然后切换到master分支上，也是master的最新提交C处。之后使用git merge D，git merge E。</li>
+<li>非静态代码块</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git checkout dev</div><div class="line">git log</div><div class="line">git checkout master</div><div class="line">git merge D</div><div class="line">git merge E</div></pre></td></tr></table></figure>
-<ul>
-<li>方法二：首先也要查看dev上的commit-id，然后在C上使用git cherry-pick D E。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git checkout dev</div><div class="line">git log</div><div class="line">git checkout master</div><div class="line">git cherry-pick D E</div></pre></td></tr></table></figure>
-<ul>
-<li><p>好像两个方法优劣对比不是很强，但是cherry-pick后跟的commit-id可以有很多个，当需要抓取的feature较多时方法二的优势就出来了。</p>
-</li>
-<li><p>注意，如果是 HEAD 上游的提交，那就不能用cherry-pick抓取过来，因为很明显不能将同一分支上的历史提交再次提交。</p>
-</li>
-</ul>
-<h2 id="2-git-rebase"><a href="#2-git-rebase" class="headerlink" title="2.git rebase"></a>2.git rebase</h2><ul>
-<li><p>多人协作大家基本习惯了merge的方式进行提交代码。但是最大的弊端就是提交历史变得有许多平行线。实际的确也是并行开发，但是当要追踪修改历史的时候，嗯，你可以冲上一杯咖啡了哈哈哈。</p>
-</li>
-<li><p>先更新master分支，在dev分支上使用命令</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase master</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这样看起来就像是在master上的节点检出的分支又再次合并回主分支，这样整个提交树就非常线性，易于追踪。</p>
-<ul>
-<li><p>另一个操作是</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">	git rebase -i commit-id</div><div class="line">	```  </div><div class="line">这个命令可以“可视化操作提交历史”，有丢弃，修改，排序等功能，可以使用上述的cherry-pick命令代替。本人觉得在命令行操作哪有什么可视化操作哈哈哈。</div><div class="line"></div><div class="line">* 需要注意的是如何在vi下编辑，按i进入编辑状态，按esc进入命令状态，在命令状态中输入:wq回车是保存并退出，:q!回车是不保存退出。更多的搜索vi命令吧。</div><div class="line"></div><div class="line"></div><div class="line">## 3.git stash</div><div class="line">这个命令挺有用，尤其是还没做完手头上的工作，又不得不做别的事（切换到别的分支治疗），并且不想因此commit，那么这系列命令对你很有用！</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>1.git stash 将当前未commit的修改压栈<br>2.git stash list 查看栈有哪些stash<br>3.git stash pop 弹出（恢复）栈顶修改<br>4.git stash clear 清空栈<br>```</p>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">init &#123;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="7-for循环"><a href="#7-for循环" class="headerlink" title="7.for循环"></a>7.for循环</h2><h3 id="1-普通循环"><a href="#1-普通循环" class="headerlink" title="(1)普通循环"></a>(1)普通循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">for(i in 0..9)&#123;</div><div class="line">    println(i)</div><div class="line">&#125;</div><div class="line">i范围是0到9</div><div class="line"></div><div class="line">for(i until 0..9)&#123;</div><div class="line">    println(i)</div><div class="line">&#125;</div><div class="line">i范围是0到8</div></pre></td></tr></table></figure>
+<h3 id="2-迭代器"><a href="#2-迭代器" class="headerlink" title="(2)迭代器"></a>(2)迭代器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">val list = listOf(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)</div><div class="line"></div><div class="line">for(s in list)&#123;</div><div class="line">    print(s)</div><div class="line">&#125;</div><div class="line"></div><div class="line">for((index, item) in list.withIndex())&#123;</div><div class="line">    print(index + &quot;:&quot; + item)</div><div class="line">&#125;</div><div class="line">带下标的循环，index、item名称可以改。</div><div class="line"></div><div class="line">list.forEach&#123;</div><div class="line">    print(it)</div><div class="line">&#125;</div><div class="line">这里的it相当于迭代器。</div></pre></td></tr></table></figure>
+<h2 id="8-data-class"><a href="#8-data-class" class="headerlink" title="8.data class"></a>8.data class</h2><p>写java bean很easy。</p>
+<h3 id="有参构造函数"><a href="#有参构造函数" class="headerlink" title="有参构造函数"></a>有参构造函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">data class Violation(var username: String?,</div><div class="line">                     var location: String?,</div><div class="line">                     var date: String?,</div><div class="line">                     var car_type: String?,</div><div class="line">                     var car_color: String?,</div><div class="line">                     var car_number: String?,</div><div class="line">                     var reason: String?,</div><div class="line">                     var urls: List&lt;String&gt;?) &#123;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="无参构造函数"><a href="#无参构造函数" class="headerlink" title="无参构造函数"></a>无参构造函数</h3><p>给参数加默认值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">data class Violation(var username: String? = null,</div><div class="line">                      var location: String? = null,</div><div class="line">                      var date: String? = null,</div><div class="line">                      var car_type: String? = null,</div><div class="line">                      var car_color: String? = null,</div><div class="line">                      var car_number: String? = null,</div><div class="line">                      var reason: String? = null,</div><div class="line">                      var urls: List&lt;String&gt;? = null) &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="9-数组"><a href="#9-数组" class="headerlink" title="9.数组"></a>9.数组</h2><h3 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">val intArr = intArrayOf(1, 2, 3) </div><div class="line">val booleanArr = booleanArrayOf(false, true, false)</div></pre></td></tr></table></figure>
+<h3 id="对象数组"><a href="#对象数组" class="headerlink" title="对象数组"></a>对象数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">val arr = arrayOf(&quot;1&quot;, &quot;2&quot;, &quot;3&quot;)</div></pre></td></tr></table></figure>
+<h3 id="空数组"><a href="#空数组" class="headerlink" title="空数组"></a>空数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">val empty = emptyArray&lt;Int&gt;()</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cjckncjo200163evf7cizw5jl" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cjemszehl001kt3vf8xub62y0" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
 
     </footer>
   </div>
@@ -130,10 +138,10 @@
 
 
   
-    <article id="post-git版本回退" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-kotlin学习资料" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/09/25/git版本回退/" class="article-date">
-  <time datetime="2017-09-25T14:35:22.000Z" itemprop="datePublished">2017-09-25</time>
+    <a href="/2017/10/10/kotlin学习资料/" class="article-date">
+  <time datetime="2017-10-10T02:47:34.000Z" itemprop="datePublished">2017-10-10</time>
 </a>
     
   </div>
@@ -144,7 +152,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/25/git版本回退/">Git版本回退</a>
+      <a class="article-title" href="/2017/10/10/kotlin学习资料/">Kotlin学习资料</a>
     </h1>
   
 
@@ -152,31 +160,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-git-diff-XXX"><a href="#1-git-diff-XXX" class="headerlink" title="1.git diff XXX"></a>1.git diff XXX</h2><ul>
-<li>当我们使用git status查看工作区做了什么修改时，可以使用git diff XXX对修改过的文件XXX查看差异</li>
-</ul>
-<h2 id="2-git-reset-hard-HEAD"><a href="#2-git-reset-hard-HEAD" class="headerlink" title="2.git reset --hard HEAD^"></a>2.git reset <code>--hard</code> HEAD^</h2><h3 id="版本库回退"><a href="#版本库回退" class="headerlink" title="版本库回退"></a>版本库回退</h3><ul>
-<li>首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。</li>
-<li>HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2表示上两个版本，以此类推。</li>
-<li><p>由于有<code>--hard</code>这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id。然后使用以下命令：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//用git reflog来找回之前commit的commit-id</div><div class="line">git reflog</div><div class="line">git reset --hard commit_id</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>即可找回原来的版本。</p>
-<h2 id="3-git-revert-HEAD"><a href="#3-git-revert-HEAD" class="headerlink" title="3.git revert HEAD"></a>3.git revert HEAD</h2><p>回退到上一版本的另一种方法，注意参数HEAD，是回退到上一版本。</p>
-<ul>
-<li>git reset是不会产生新的提交记录，反而有可能抹去提交记录，当我们要推送到远程仓库时，显然没有提交记录怎么推送呢？所以git reset适合操作本地仓库，不需要分享给远程仓库的。</li>
-<li>git revert是会在HEAD节点基础上生成一个提交节点的，也就是新的提交，所以可以推送到远程仓库，别人也能查看到远程记录。</li>
-</ul>
-<h2 id="4-git-branch-f-master-HEAD"><a href="#4-git-branch-f-master-HEAD" class="headerlink" title="4.git branch -f master HEAD^"></a>4.git branch -f master HEAD^</h2><p>在git branch命令后加上参数-f和分支名master以及节点名HEAD^，这样就把master分支强制指向了HEAD的上一版本。即使当前HEAD不在master分支上，使用这个命令也能强制移动master分支的最新提交节点。</p>
+        <h2 id="1-官方网站"><a href="#1-官方网站" class="headerlink" title="1.官方网站"></a>1.官方网站</h2><p><a href="https://kotlinlang.org/" target="_blank" rel="external">https://kotlinlang.org/</a></p>
+<h2 id="2-微信公众号"><a href="#2-微信公众号" class="headerlink" title="2.微信公众号"></a>2.微信公众号</h2><p>KotlinX</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjckncjnw000w3evfn3oreo1b" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cjemszehk001ht3vfto5k39ju" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
 
     </footer>
   </div>
@@ -185,10 +178,10 @@
 
 
   
-    <article id="post-git简单命令" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-learn-git-branching参考答案" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/09/25/git简单命令/" class="article-date">
-  <time datetime="2017-09-25T00:17:14.000Z" itemprop="datePublished">2017-09-25</time>
+    <a href="/2017/10/10/learn-git-branching参考答案/" class="article-date">
+  <time datetime="2017-10-10T02:15:14.000Z" itemprop="datePublished">2017-10-10</time>
 </a>
     
   </div>
@@ -199,7 +192,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/25/git简单命令/">Git简单命令</a>
+      <a class="article-title" href="/2017/10/10/learn-git-branching参考答案/">Learn git branching参考答案</a>
     </h1>
   
 
@@ -207,35 +200,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-git-init"><a href="#1-git-init" class="headerlink" title="1.git init"></a>1.git init</h2><p>初始化本地仓库。</p>
-<h2 id="2-git-add-XXX"><a href="#2-git-add-XXX" class="headerlink" title="2.git add XXX"></a>2.git add XXX</h2><p>从工作区提交某文件到暂存区，也称将文件加入追踪。可以使用通配符如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git add *.txt</div></pre></td></tr></table></figure>
-<p>如果不慎将无关文件加入追踪，那么可以使用以下命令撤销：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//将匹配到的文件恢复到HEAD节点的状态，这里是全部文件</div><div class="line">git reset HEAD .</div></pre></td></tr></table></figure>
-<h2 id="3-git-commit-m-“XXX”"><a href="#3-git-commit-m-“XXX”" class="headerlink" title="3.git commit -m “XXX”"></a>3.git commit -m “XXX”</h2><ul>
-<li>把暂存区保存的东西一次性提交到版本库reposity中，-m表示message，后面的参数指的是这次提交的信息。</li>
-<li>追加修改到上次提交。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git add .</div><div class="line">git commit --amend</div></pre></td></tr></table></figure>
-<h2 id="4-git-status"><a href="#4-git-status" class="headerlink" title="4.git status"></a>4.git status</h2><p>将工作区与版本库对比，提示差异的信息。</p>
-<h2 id="5-git-log"><a href="#5-git-log" class="headerlink" title="5.git log"></a>5.git log</h2><p>输出每次版本库的变动，从最近开始输出。可以查看每个版本的SHA1数值。</p>
-<h2 id="6-git-reflog"><a href="#6-git-reflog" class="headerlink" title="6.git reflog"></a>6.git reflog</h2><p>查看命令历史，log命令是查看提交历史，这两个命令有所不同。</p>
-<h2 id="7-git-checkout-dev"><a href="#7-git-checkout-dev" class="headerlink" title="7.git checkout dev"></a>7.git checkout dev</h2><ul>
-<li>将HEAD指向dev分支最近节点。</li>
-<li>参数也可以使用SHA1数值，这样可以准确地切到想要的节点。</li>
-<li>参数也可以使用HEAD^、HEAD~2、dev^、dev~2等。</li>
-</ul>
-<h2 id="8-git-branch-b-dev"><a href="#8-git-branch-b-dev" class="headerlink" title="8.git branch -b dev"></a>8.git branch -b dev</h2><p>这条指令相当于：<br>git branch dev<br>git checkout dev<br>在当前HEAD指向的节点创建名为dev的分支并且将HEAD指向它。</p>
-<h2 id="9-git-branch-d-dev"><a href="#9-git-branch-d-dev" class="headerlink" title="9.git branch -d dev"></a>9.git branch -d dev</h2><p>删除dev分支。</p>
-<h2 id="10-git-merge-dev"><a href="#10-git-merge-dev" class="headerlink" title="10.git merge dev"></a>10.git merge dev</h2><ul>
-<li>在HEAD指向节点基础上合并dev的内容，生成新的一次提交。</li>
-<li>同理，参数也可以使用SHA1，HEAD^、HEAD~2等。</li>
-</ul>
+        <h2 id="高级："><a href="#高级：" class="headerlink" title="高级："></a>高级：</h2><p>1:    git checkout C4</p>
+<p>2:    git checkout bugFix^</p>
+<p>3:    git branch –f bugFix C0<br>    git branch –f master C6<br>    git checkout HEAD^</p>
+<p>4:    git reset HEAD^<br>    git checkout pushed<br>    git revert HEAD</p>
+<h2 id="移动提交记录："><a href="#移动提交记录：" class="headerlink" title="移动提交记录："></a>移动提交记录：</h2><p>1:    git cherry-pick C3 C4 C7</p>
+<p>2:    git rebase –i HEAD~4</p>
+<h2 id="杂项："><a href="#杂项：" class="headerlink" title="杂项："></a>杂项：</h2><p>1:    git checkout master<br>    git cherry-pick C4</p>
+<p>2:    git rebase –i HEAD~2<br>    git commit –amend<br>    git rebase –i HEAD~2<br>    git branch –f master HEAD</p>
+<p>3:    git checkout master<br>    git cherry-pick C2<br>    git commit –amend<br>    git cherry-pick C3</p>
+<p>4:    git checkout C2<br>    git tag v1<br>    git tag v0 C1</p>
+<p>5:    git describe master<br>    git commit</p>
+<h2 id="高级话题"><a href="#高级话题" class="headerlink" title="高级话题:"></a>高级话题:</h2><p>1:    git rebase master bugFix<br>第一个参数是父节点，第二个参数是目标节点。<br>    git rebase bugFix side<br>    git rebase side another<br>    git rebase another master</p>
+<p>2:    git branch bugWork HEAD^^2^</p>
+<p>3:    git checkout one<br>    git cherry-pick C4 C3 C2<br>    git checkout two<br>    git cherry-pick C5 C4 C3 C2<br>    git branch –f three C2</p>
+<h2 id="远程仓库："><a href="#远程仓库：" class="headerlink" title="远程仓库："></a>远程仓库：</h2><p>2:    git commit<br>    git checkout o/master<br>    git commit</p>
+<p>3:    git fetch</p>
+<p>4:    git pull</p>
+<p>5:    git clone<br>    git fakeTeamwork master 2<br>    git commit<br>    git pull</p>
+<p>6:    git commit<br>    git commit<br>    git push</p>
+<p>7:    git clone<br>    git fakeTeamwork<br>    git commit<br>    git pull –rebase<br>    git push</p>
+<h2 id="远程仓库高级："><a href="#远程仓库高级：" class="headerlink" title="远程仓库高级："></a>远程仓库高级：</h2><p>1:    git fetch<br>    git rebase o/master side1<br>    git rebase side1 side2<br>    git rebase side2 side3<br>    git rebase side3 master<br>    git push</p>
+<p>2:    git checkout master<br>    git pull<br>    git merge side1<br>    git merge side2<br>    git merge side3<br>    git push</p>
+<p>3:    git checkout –b side o/master<br>    git commit<br>    git pull –rebase<br>    git push</p>
+<p>4:    git push origin master<br>    git push origin foo</p>
+<p>5:    git push origin master^:foo<br>    git push origin foo:master</p>
+<p>6:    git fetch origin master~1:foo<br>    git fetch origin foo:master<br>    git checkout foo<br>    git merge master  </p>
+<p>7:    git push origin :foo<br>    git fetch origin :bar</p>
+<p>8:    git pull origin bar:foo<br>    git pull origin master:side</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cjckncjo100133evfuw8108jj" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cjemszehm001mt3vfzdluylw2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -250,7 +247,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/8/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/10/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -273,7 +270,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/kotlin/" style="font-size: 13.33px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/kotlin/" style="font-size: 10px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 13.33px;">环境配置</a>
     </div>
   </div>
 
@@ -282,7 +279,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -295,23 +292,23 @@
       <ul>
         
           <li>
+            <a href="/2018/03/11/Android移动性能实战笔记/">Android移动性能实战笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/ProtocolBuffers的介绍和使用/">ProtocolBuffers的介绍和使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/FlatBuffers的介绍和使用/">FlatBuffers的介绍和使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/18/ProtocolBuffers在Mac-OS的安装/">ProtocolBuffers在Mac OS的安装</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/18/FlatBuffers在Mac-OS的安装步骤/">FlatBuffers在Mac OS的安装步骤</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/16/Android应用UI性能分析/">Android应用UI性能分析</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/15/SpannableString及其相关类的使用/">SpannableString及其相关类的使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/11/FlexboxLayout的使用/">FlexboxLayout的使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/08/自定义View/">自定义View</a>
           </li>
         
       </ul>

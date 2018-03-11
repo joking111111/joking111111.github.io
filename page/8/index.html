@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-kotlin学习资料" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-RecyclerView笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/10/10/kotlin学习资料/" class="article-date">
-  <time datetime="2017-10-10T02:47:34.000Z" itemprop="datePublished">2017-10-10</time>
+    <a href="/2017/10/22/RecyclerView笔记/" class="article-date">
+  <time datetime="2017-10-22T01:45:58.000Z" itemprop="datePublished">2017-10-22</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/10/kotlin学习资料/">Kotlin学习资料</a>
+      <a class="article-title" href="/2017/10/22/RecyclerView笔记/">RecyclerView笔记</a>
     </h1>
   
 
@@ -84,16 +84,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-官方网站"><a href="#1-官方网站" class="headerlink" title="1.官方网站"></a>1.官方网站</h2><p><a href="https://kotlinlang.org/" target="_blank" rel="external">https://kotlinlang.org/</a></p>
-<h2 id="2-微信公众号"><a href="#2-微信公众号" class="headerlink" title="2.微信公众号"></a>2.微信公众号</h2><p>KotlinX</p>
+        <h2 id="1-全展开"><a href="#1-全展开" class="headerlink" title="1.全展开"></a>1.全展开</h2><ul>
+<li>确保父容器是NestedScrollView</li>
+<li>在代码中设置（在xml中设置lint会提示new api）：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">recyclerView.setNestedScrollingEnabled(false);</div></pre></td></tr></table></figure>
+<h2 id="2-刷新Item中的ProgressBar"><a href="#2-刷新Item中的ProgressBar" class="headerlink" title="2.刷新Item中的ProgressBar"></a>2.刷新Item中的ProgressBar</h2><ul>
+<li>RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有改变Alpha值的动画。所以刷新ProgressBar时会出现闪烁现象，因此要去掉或者自己实现ItemAnimator。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">recyclerView.setItemAnimator(null);</div></pre></td></tr></table></figure>
+<h2 id="3-滑到最底部"><a href="#3-滑到最底部" class="headerlink" title="3.滑到最底部"></a>3.滑到最底部</h2><ul>
+<li>这种场景默认方向是Vertical，你也可以改成Horizontal，原理一样的。</li>
+<li>判断是否到底部：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public static boolean isSlideToBottom(RecyclerView recyclerView) &#123;</div><div class="line">  if (recyclerView == null) &#123;</div><div class="line">    return false;</div><div class="line">  &#125;</div><div class="line">  if (recyclerView.computeVerticalScrollExtent() + recyclerView.computeVerticalScrollOffset()</div><div class="line">                &gt;= recyclerView.computeVerticalScrollRange()) &#123;</div><div class="line">    return true;             </div><div class="line">  &#125;</div><div class="line">  return false;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>滑到最底部：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (isSlideToBottom(recyclerView)) &#123;</div><div class="line">   recyclerView.smoothScrollToPosition(offset);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>offset是系统常量。</p>
+<h2 id="4-记录和恢复滑动的状态"><a href="#4-记录和恢复滑动的状态" class="headerlink" title="4.记录和恢复滑动的状态"></a>4.记录和恢复滑动的状态</h2><p>参考Activtiy的onSaveInstanceState与onRestoreInstanceState，查看RecyclerView的这两个方法。</p>
+<p>以下为26.1.0版本源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">protected Parcelable onSaveInstanceState() &#123;</div><div class="line">        SavedState state = new SavedState(super.onSaveInstanceState());</div><div class="line">        if (mPendingSavedState != null) &#123;</div><div class="line">            state.copyFrom(mPendingSavedState);</div><div class="line">        &#125; else if (mLayout != null) &#123;</div><div class="line">            state.mLayoutState = mLayout.onSaveInstanceState();</div><div class="line">        &#125; else &#123;</div><div class="line">            state.mLayoutState = null;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        return state;</div><div class="line">&#125;</div><div class="line"></div><div class="line">protected void onRestoreInstanceState(Parcelable state) &#123;</div><div class="line">        if (!(state instanceof SavedState)) &#123;</div><div class="line">            super.onRestoreInstanceState(state);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        mPendingSavedState = (SavedState) state;</div><div class="line">        super.onRestoreInstanceState(mPendingSavedState.getSuperState());</div><div class="line">        if (mLayout != null &amp;&amp; mPendingSavedState.mLayoutState != null) &#123;</div><div class="line">            mLayout.onRestoreInstanceState(mPendingSavedState.mLayoutState);</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最重要的变量就是mLayout，它就是LayoutManager。LayoutManager顾名思义，就是管理布局状态的，所以保存布局状态当然要使用它了。</p>
+<p>获取状态和保存状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Parcelable state = mLayout.onSaveInstanceState();</div><div class="line"></div><div class="line">if (state != null) &#123;</div><div class="line">	mLayout.onRestoreInstanceState(state);</div><div class="line">&#125; else &#123;</div><div class="line">	//null处理</div><div class="line">	mRecyclerView.smoothScrollToPosition(0);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//smoothScrollToPosition源码</div><div class="line">public void smoothScrollToPosition(int position) &#123;</div><div class="line">        if (mLayoutFrozen) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        if (mLayout == null) &#123;</div><div class="line">            Log.e(TAG, &quot;Cannot smooth scroll without a LayoutManager set. &quot;</div><div class="line">                    + &quot;Call setLayoutManager with a non-null argument.&quot;);</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line">        mLayout.smoothScrollToPosition(this, mState, position);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cjckncjo300173evfbje4zw8d" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjemszehc000zt3vfaymw2few" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -102,10 +125,10 @@
 
 
   
-    <article id="post-learn-git-branching参考答案" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Handler的存在意义" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/10/10/learn-git-branching参考答案/" class="article-date">
-  <time datetime="2017-10-10T02:15:14.000Z" itemprop="datePublished">2017-10-10</time>
+    <a href="/2017/10/22/Handler的存在意义/" class="article-date">
+  <time datetime="2017-10-22T01:06:27.000Z" itemprop="datePublished">2017-10-22</time>
 </a>
     
   </div>
@@ -116,7 +139,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/10/learn-git-branching参考答案/">Learn git branching参考答案</a>
+      <a class="article-title" href="/2017/10/22/Handler的存在意义/">Handler的存在意义</a>
     </h1>
   
 
@@ -124,42 +147,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="高级："><a href="#高级：" class="headerlink" title="高级："></a>高级：</h2><p>1:    git checkout C4</p>
-<p>2:    git checkout bugFix^</p>
-<p>3:    git branch –f bugFix C0<br>    git branch –f master C6<br>    git checkout HEAD^</p>
-<p>4:    git reset HEAD^<br>    git checkout pushed<br>    git revert HEAD</p>
-<h2 id="移动提交记录："><a href="#移动提交记录：" class="headerlink" title="移动提交记录："></a>移动提交记录：</h2><p>1:    git cherry-pick C3 C4 C7</p>
-<p>2:    git rebase –i HEAD~4</p>
-<h2 id="杂项："><a href="#杂项：" class="headerlink" title="杂项："></a>杂项：</h2><p>1:    git checkout master<br>    git cherry-pick C4</p>
-<p>2:    git rebase –i HEAD~2<br>    git commit –amend<br>    git rebase –i HEAD~2<br>    git branch –f master HEAD</p>
-<p>3:    git checkout master<br>    git cherry-pick C2<br>    git commit –amend<br>    git cherry-pick C3</p>
-<p>4:    git checkout C2<br>    git tag v1<br>    git tag v0 C1</p>
-<p>5:    git describe master<br>    git commit</p>
-<h2 id="高级话题"><a href="#高级话题" class="headerlink" title="高级话题:"></a>高级话题:</h2><p>1:    git rebase master bugFix<br>第一个参数是父节点，第二个参数是目标节点。<br>    git rebase bugFix side<br>    git rebase side another<br>    git rebase another master</p>
-<p>2:    git branch bugWork HEAD^^2^</p>
-<p>3:    git checkout one<br>    git cherry-pick C4 C3 C2<br>    git checkout two<br>    git cherry-pick C5 C4 C3 C2<br>    git branch –f three C2</p>
-<h2 id="远程仓库："><a href="#远程仓库：" class="headerlink" title="远程仓库："></a>远程仓库：</h2><p>2:    git commit<br>    git checkout o/master<br>    git commit</p>
-<p>3:    git fetch</p>
-<p>4:    git pull</p>
-<p>5:    git clone<br>    git fakeTeamwork master 2<br>    git commit<br>    git pull</p>
-<p>6:    git commit<br>    git commit<br>    git push</p>
-<p>7:    git clone<br>    git fakeTeamwork<br>    git commit<br>    git pull –rebase<br>    git push</p>
-<h2 id="远程仓库高级："><a href="#远程仓库高级：" class="headerlink" title="远程仓库高级："></a>远程仓库高级：</h2><p>1:    git fetch<br>    git rebase o/master side1<br>    git rebase side1 side2<br>    git rebase side2 side3<br>    git rebase side3 master<br>    git push</p>
-<p>2:    git checkout master<br>    git pull<br>    git merge side1<br>    git merge side2<br>    git merge side3<br>    git push</p>
-<p>3:    git checkout –b side o/master<br>    git commit<br>    git pull –rebase<br>    git push</p>
-<p>4:    git push origin master<br>    git push origin foo</p>
-<p>5:    git push origin master^:foo<br>    git push origin foo:master</p>
-<p>6:    git fetch origin master~1:foo<br>    git fetch origin foo:master<br>    git checkout foo<br>    git merge master  </p>
-<p>7:    git push origin :foo<br>    git fetch origin :bar</p>
-<p>8:    git pull origin bar:foo<br>    git pull origin master:side</p>
+        <h2 id="一、Handler的实现"><a href="#一、Handler的实现" class="headerlink" title="一、Handler的实现"></a>一、Handler的实现</h2><ul>
+<li>创建：获取当前线程，通过线程的ThreadLocalMap获取Looper，关联Looper和Looper里面的MessageQueue。</li>
+<li>投递：每次封装成Message对象投递进MessageQueue。</li>
+<li>处理：这部分工作由Looper完成，它不断从MessageQueue中取Message。Message中有Callback就执行，没有就调用Message中的target.dispatchMessage(Message)方法投递给这个消息产生的Handler。</li>
+</ul>
+<h2 id="二、Handler的作用"><a href="#二、Handler的作用" class="headerlink" title="二、Handler的作用"></a>二、Handler的作用</h2><h3 id="1-切换线程，线程间通信"><a href="#1-切换线程，线程间通信" class="headerlink" title="1.切换线程，线程间通信"></a>1.切换线程，线程间通信</h3><p>开发中经常使用到这个功能。</p>
+<h3 id="2-将事件或任务序列化"><a href="#2-将事件或任务序列化" class="headerlink" title="2.将事件或任务序列化"></a>2.将事件或任务序列化</h3><p>序列化最大的好处就是顺序执行，便于维护，不会出现任务错乱的情况，并且在单线程内不需要并发。以下举一个经典的例子：</p>
+<ul>
+<li>为什么我们可以使用View.post(Runnable)这种方式获取一个View的实际宽高？</li>
+<li>View的宽高至少要通过Measure方法执行完之后才能获取，并且有可能在Layout的时候被触发重新测量。所以只有View真正显示的时候获取的宽高是最准确的。</li>
+<li>View的绘制流程是借助Handler的事件处理机制。</li>
+<li>View.post(Runnable)将这个任务投递到串行队列中去，因此当这个任务被执行时，前面的View绘制任务已经执行完，这时候调用View.getWidth(),View.getHeight()肯定是有值并且准确的。</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cjckncjo6001c3evfui2r0rga" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Handler的存在意义/" data-id="cjemszeh8000pt3vfohszz12i" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -168,10 +176,10 @@
 
 
   
-    <article id="post-git远程仓库" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Activity生命周期与finish方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/10/09/git远程仓库/" class="article-date">
-  <time datetime="2017-10-09T08:09:28.000Z" itemprop="datePublished">2017-10-09</time>
+    <a href="/2017/10/22/Activity生命周期与finish方法/" class="article-date">
+  <time datetime="2017-10-22T01:05:44.000Z" itemprop="datePublished">2017-10-22</time>
 </a>
     
   </div>
@@ -182,7 +190,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/09/git远程仓库/">Git远程仓库</a>
+      <a class="article-title" href="/2017/10/22/Activity生命周期与finish方法/">Activity生命周期与finish方法</a>
     </h1>
   
 
@@ -190,54 +198,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-git-clone"><a href="#1-git-clone" class="headerlink" title="1.git clone "></a>1.git clone <https ssh=""></https></h2><p>此命令克隆远程仓库到当前目录。</p>
-<ul>
-<li>执行此命令后，本地仓库中每个分支都会分为两个，比如master会变成master 和origin/master，其中origin/master表示远程仓库的副本，它只跟踪远程仓库，理解这一点很重要！</li>
+        <h2 id="1-Activity的生命周期"><a href="#1-Activity的生命周期" class="headerlink" title="1.Activity的生命周期"></a>1.Activity的生命周期</h2><p>图片源自官方文档<br><img src="/2017/10/22/Activity生命周期与finish方法/activity_lifecycle.png" alt="activity_lifecycle"></p>
+<h2 id="2-finish方法"><a href="#2-finish方法" class="headerlink" title="2.finish方法"></a>2.finish方法</h2><ul>
+<li>在onCreate()中调用finish()，会走onDestroy()。</li>
+<li>在onStart()中调用finish()，会走onStop()。</li>
+<li>在onResume()中调用finish()，会走onPause()。</li>
 </ul>
-<h2 id="2-git-fetch"><a href="#2-git-fetch" class="headerlink" title="2.git fetch"></a>2.git fetch</h2><ul>
-<li>这命令会将远程仓库同步到本地仓库的带origin标记的各个分支，但不会改变我们的工作区！</li>
-<li>比如仓库有master和bugFix分支，这个操作会更新origin/master和origin/bugFix，并不会改动master和bugFix。</li>
+<h2 id="3-解释"><a href="#3-解释" class="headerlink" title="3.解释"></a>3.解释</h2><ul>
+<li>结合生命周期图，要重点理解生命周期是成对的，或者说是不同级别的。比如：onCreate和onDestroy为第一阶梯，onStart和onStop是第二阶梯，onResume和onPause是第三阶梯。对于finish方法来说，应该是尽快完成调用，从用户体验来说，这是最优策略。所以如果在第一阶梯上，那么直接走下第一阶梯就可以了，没必要再走上第二第三阶梯。</li>
+<li>为什么生命周期周期要是成对的？我的理解有两点：<br>一、确保资源的正确释放。成对能保证资源生命周期正常。<br>二、便于系统处理维护生命周期。</li>
 </ul>
-<h2 id="3-git-merge-origin-master"><a href="#3-git-merge-origin-master" class="headerlink" title="3.git merge origin/master"></a>3.git merge origin/master</h2><p>此命令一般紧接着git fetch，将远程的更新合并到本地工作区。</p>
-<h2 id="4-git-pull"><a href="#4-git-pull" class="headerlink" title="4.git pull"></a>4.git pull</h2><p>此命令就是上两条命令的缩写，先fetch再merge。</p>
-<ul>
-<li>我们经常会先commit掉当前写的代码，然后pull下同事push的代码。</li>
-<li><p>不使用merge方式，采用rebase方式：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git pull --rebase</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="5-git-push"><a href="#5-git-push" class="headerlink" title="5.git push"></a>5.git push</h2><p>此命令会将本地commit推送到远程仓库，并且会更新origin/分支。</p>
-<ul>
-<li>有时候远程仓库已经改变了，但是你的本地分支（没有origin/前缀）不会修改。</li>
-</ul>
-<h2 id="6-git-push-origin-source：destination"><a href="#6-git-push-origin-source：destination" class="headerlink" title="6.git push origin source：destination"></a>6.git push origin source：destination</h2><ul>
-<li><p>这里重点介绍三个参数origin：远程仓库的名字（一般都命名为origin），source：本地仓库的节点，destination：远程仓库的分支名。</p>
-</li>
-<li><p>source参数可以不写同时把冒号去掉，如：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>意义是将本地仓库master分支推送到远程仓库origin的分支master，并且同步本地origin/master分支。</p>
-<ul>
-<li><p>source参数可以带～和^等移动符，如：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master^:foo</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>此时将master上一个提交历史推送到origin仓库的foo分支。如果foo分支不存在，将直接创建foo分支。</p>
-<h2 id="7-git-fetch-origin-source-destination"><a href="#7-git-fetch-origin-source-destination" class="headerlink" title="7.git fetch origin source:destination"></a>7.git fetch origin source:destination</h2><p>同理git fetch也有这种形式的命令，从这里可以看出fetch跟push其实是方向相反的操作，更深一步你可以用fetch代替push，只是大家都习惯使用fetch拉，push推。</p>
-<ul>
-<li>注意，destination参数如果不加origin/，就表示更新本地分支中的工作区，而不是跟踪远程仓库的</li>
-</ul>
-<h2 id="8-跟踪远程分支"><a href="#8-跟踪远程分支" class="headerlink" title="8.跟踪远程分支"></a>8.跟踪远程分支</h2><p><code>git remote add origin &lt;https/ssh&gt;</code></p>
-<p>有时候我们需要将一个项目提交到远程仓库，那么该怎么操作呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git remote add origin &lt;https/ssh&gt;</div><div class="line">git push -u origin &lt;branch&gt;</div></pre></td></tr></table></figure>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cjckncjo000113evftsfmh07k" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cjemszego0000t3vfgqeiy3sc" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -249,7 +227,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/9/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/9/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -272,7 +250,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/kotlin/" style="font-size: 13.33px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/kotlin/" style="font-size: 10px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 13.33px;">环境配置</a>
     </div>
   </div>
 
@@ -281,7 +259,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -294,23 +272,23 @@
       <ul>
         
           <li>
+            <a href="/2018/03/11/Android移动性能实战笔记/">Android移动性能实战笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/ProtocolBuffers的介绍和使用/">ProtocolBuffers的介绍和使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/FlatBuffers的介绍和使用/">FlatBuffers的介绍和使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/18/ProtocolBuffers在Mac-OS的安装/">ProtocolBuffers在Mac OS的安装</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/18/FlatBuffers在Mac-OS的安装步骤/">FlatBuffers在Mac OS的安装步骤</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/16/Android应用UI性能分析/">Android应用UI性能分析</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/15/SpannableString及其相关类的使用/">SpannableString及其相关类的使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/11/FlexboxLayout的使用/">FlexboxLayout的使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/08/自定义View/">自定义View</a>
           </li>
         
       </ul>

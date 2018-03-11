@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Glide笔记" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android安全机制简介" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/11/19/Glide笔记/" class="article-date">
-  <time datetime="2017-11-19T06:23:15.000Z" itemprop="datePublished">2017-11-19</time>
+    <a href="/2017/12/08/Android安全机制简介/" class="article-date">
+  <time datetime="2017-12-08T13:17:00.000Z" itemprop="datePublished">2017-12-08</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/19/Glide笔记/">Glide笔记</a>
+      <a class="article-title" href="/2017/12/08/Android安全机制简介/">Android安全机制简介</a>
     </h1>
   
 
@@ -84,34 +84,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一-基本组件"><a href="#一-基本组件" class="headerlink" title="一.基本组件"></a>一.基本组件</h2><h3 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1.基本使用"></a>1.基本使用</h3><p>以下均基于Glide4.x版本。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//加载图片</div><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.into(imageView);</div><div class="line"></div><div class="line">//取消加载</div><div class="line">Glide.with(getContext())</div><div class="line">.clear(imageView);</div></pre></td></tr></table></figure>
-<h3 id="2-RequestOptions"><a href="#2-RequestOptions" class="headerlink" title="2.RequestOptions"></a>2.RequestOptions</h3><p>Glide的常用选项</p>
-<ul>
-<li>裁剪样式circleCrop、circleCrop等。</li>
-<li>加载中占位图placeholder</li>
-<li>加载失败图error</li>
-<li>…</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">RequestOptions centerCropOptions = new RequestOptions()</div><div class="line">            .centerCrop()</div><div class="line">            .placeholder(R.drawable.img_loading)</div><div class="line">            .error(R.drawable.img_failed);</div></pre></td></tr></table></figure>
-<h3 id="3-RequestBuilder"><a href="#3-RequestBuilder" class="headerlink" title="3.RequestBuilder"></a>3.RequestBuilder</h3><p>可以理解为一个个的请求。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder = Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options);</div></pre></td></tr></table></figure>
-<p>当调用RequestBuilder.into(target)时开始加载。这个方法的返回值类型不再是RequestBuilder了。</p>
-<h2 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h2><h3 id="1-加载失败回调监听"><a href="#1-加载失败回调监听" class="headerlink" title="1.加载失败回调监听"></a>1.加载失败回调监听</h3><p>RequestBuilder.listen(RequestListener)方法监听load成功还是失败。</p>
-<ul>
-<li>注意这里不能在监听里对同一个target（imageView）发起加载请求，因为当前请求尚未结束，会抛出异常。</li>
-<li>所以无法使用这个监听实现加载失败时加载备用url的需求。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.listener(new RequestListener() &#123;</div><div class="line">	@Override</div><div class="line">	public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target, boolean isFirstResource) &#123;</div><div class="line">		//false：事件继续往下传递</div><div class="line">		//true：事件不再往下传递</div><div class="line">   		return false;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public boolean onResourceReady(Object resource, Object model, Target target, DataSource dataSource, boolean isFirstResource) &#123;</div><div class="line">		//false：事件继续往下传递</div><div class="line">		//true：事件不再往下传递</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">&#125;)</div><div class="line">.into(imageView);</div></pre></td></tr></table></figure>
-<h3 id="2-请求失败后启用备用请求"><a href="#2-请求失败后启用备用请求" class="headerlink" title="2.请求失败后启用备用请求"></a>2.请求失败后启用备用请求</h3><p>RequestBuilder.error(RequestBuilder)方法可以在这个request失败后启用备用的request。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder1 = Glide.with(getContext())</div><div class="line">.load(url1)</div><div class="line">.apply(options);</div><div class="line"></div><div class="line">RequestBuilder builder2 = Glide.with(getContext())</div><div class="line">.load(url2)</div><div class="line">.apply(options)</div><div class="line">.error(builder1);</div><div class="line"></div><div class="line">builder2.into(imageView);</div></pre></td></tr></table></figure>
-<p>这段代码意义为当url2加载失败后，会启用builder1这个请求，加载url1。这样我们就可以实现多级url加载了。</p>
-<p>以下为多级加载url方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public static void loadUrls(String[] urls, RequestOptions options, ImageView imageView) &#123;</div><div class="line">        if (urls == null || urls.length == 0) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        RequestBuilder&lt;Drawable&gt; frontBuilder = Glide.with(getContext()).load(urls[0]).apply(options);</div><div class="line">        RequestBuilder&lt;Drawable&gt; prevBuilder = frontBuilder;</div><div class="line">        </div><div class="line">        for (int i = 1; i &lt; urls.length; i++) &#123;</div><div class="line">            RequestBuilder&lt;Drawable&gt; nextBuilder = Glide.with(getContext()).load(urls[i]).apply(options);</div><div class="line">            prevBuilder.error(nextBuilder);</div><div class="line">            prevBuilder = nextBuilder;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        frontBuilder.into(imageView);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        <h2 id="一、代码混淆proguard"><a href="#一、代码混淆proguard" class="headerlink" title="一、代码混淆proguard"></a>一、代码混淆proguard</h2><p>由于java字节码可以被反编译，代码混淆可以混淆关键代码，增加阅读代码难度。同时proguard可以压缩代码、优化编译后的java字节码。</p>
+<h2 id="二、应用权限检查"><a href="#二、应用权限检查" class="headerlink" title="二、应用权限检查"></a>二、应用权限检查</h2><p>应用声明的权限需要得到系统和用户的认可</p>
+<h2 id="三、签名证书"><a href="#三、签名证书" class="headerlink" title="三、签名证书"></a>三、签名证书</h2><p>Android系统识别App的凭证，App的身份证。</p>
+<h2 id="四、Linux内核安全机制"><a href="#四、Linux内核安全机制" class="headerlink" title="四、Linux内核安全机制"></a>四、Linux内核安全机制</h2><p>比如文件访问机制等，权限系统。</p>
+<h2 id="五、Android虚拟机沙箱机制"><a href="#五、Android虚拟机沙箱机制" class="headerlink" title="五、Android虚拟机沙箱机制"></a>五、Android虚拟机沙箱机制</h2><p>每个App有与之对应的Uid，分别运行在单独的虚拟机中，与其他应用完全隔离。即使一个应用崩溃，也不会导致其他应用异常。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cjckncjnp000i3evfrrvxo1eh" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/12/08/Android安全机制简介/" data-id="cjemszegv0003t3vf3ir0ruyg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -123,10 +105,10 @@
 
 
   
-    <article id="post-android使用kotlin注意事项" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-CoordinatorLayout的使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/11/19/android使用kotlin注意事项/" class="article-date">
-  <time datetime="2017-11-19T06:23:03.000Z" itemprop="datePublished">2017-11-19</time>
+    <a href="/2017/11/27/CoordinatorLayout的使用/" class="article-date">
+  <time datetime="2017-11-27T13:45:51.000Z" itemprop="datePublished">2017-11-27</time>
 </a>
     
   </div>
@@ -137,7 +119,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/19/android使用kotlin注意事项/">Android使用kotlin注意事项</a>
+      <a class="article-title" href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
     </h1>
   
 
@@ -145,19 +127,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、注意参数可空"><a href="#一、注意参数可空" class="headerlink" title="一、注意参数可空"></a>一、注意参数可空</h2><p>现在第三方库基本都用java写，使用kotlin调用三方库时，最常见的场景就是实现回调接口。实现回调接口的时候，注意接口方法参数如果可空一定要加上”?”修饰，否则崩溃时很难从日志发现问题所在。</p>
-<ul>
-<li>基本数据类型没必要加”?”，只有对象才需要加。</li>
-<li>使用kotlin设计接口时也要注意这一点。</li>
+        <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><h3 id="1-什么是嵌套滚动机制（NestedScrolling）？"><a href="#1-什么是嵌套滚动机制（NestedScrolling）？" class="headerlink" title="1.什么是嵌套滚动机制（NestedScrolling）？"></a>1.什么是嵌套滚动机制（NestedScrolling）？</h3><p>所谓嵌套滚动其实就是界面布局中包含 一个可滚动的列表 和 一个不可滚动的View，这样在滚动列表时，首先将不可滚动View移出屏幕或移进屏幕，待不可滚动View固定时，才会继续滚动滚动列表的内容。</p>
+<h3 id="2-为什么要有滑动嵌套机制？"><a href="#2-为什么要有滑动嵌套机制？" class="headerlink" title="2.为什么要有滑动嵌套机制？"></a>2.为什么要有滑动嵌套机制？</h3><p>回想一下android系统事件分发机制，一个down事件到up事件为一个事件流，在这事件流之中一旦某个View拦截（处理）该Touch事件，那么后续这个事件流将统一交由它处理。</p>
+<p>有时候我们需要将一个事件流分开成几个事件片给不同的View处理，那么我们需要调配事件分发。滑动嵌套机制应运而生。</p>
+<h2 id="二、Android嵌套滚动机制"><a href="#二、Android嵌套滚动机制" class="headerlink" title="二、Android嵌套滚动机制"></a>二、Android嵌套滚动机制</h2><h3 id="1-重要的类"><a href="#1-重要的类" class="headerlink" title="1.重要的类"></a>1.重要的类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NestedScrollingChild接口</div><div class="line">NestedScrollingParent接口</div><div class="line">NestedScrollingChildHelper辅助类</div><div class="line">NestedScrollingParentHelper辅助类</div></pre></td></tr></table></figure>
+<h3 id="2-结构图"><a href="#2-结构图" class="headerlink" title="2.结构图"></a>2.结构图</h3><p><img src="/2017/11/27/CoordinatorLayout的使用/结构图.png" alt="结构图"></p>
+<h2 id="三、注意事项"><a href="#三、注意事项" class="headerlink" title="三、注意事项"></a>三、注意事项</h2><h3 id="1-子类宽高"><a href="#1-子类宽高" class="headerlink" title="1.子类宽高"></a>1.子类宽高</h3><p>由于CoordinatorLayout是FrameLayout的增强版（官方文档），所以子View使用match_parent这个属性就需要注意了。</p>
+<p>如下图，View B使用了match_parent，然后CoordinatorLayout在layout的时候把它的位置下移了，并且超出CoordinatorLayout的区域了。使用clipChildren属性是无效的，clipChildren默认是true的。<br><img src="/2017/11/27/CoordinatorLayout的使用/layout.png" alt="layout"></p>
+<h2 id="四、参考文章"><a href="#四、参考文章" class="headerlink" title="四、参考文章"></a>四、参考文章</h2><ul>
+<li><a href="https://mp.weixin.qq.com/s/GDC3YLLPYsoalr8sg38dmg" target="_blank" rel="external">CoordinatorLayout和Behavior详解</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-ldKAMGChfbvk8E8nzvuNw" target="_blank" rel="external">CoordinatorLayout高级用法-自定义Behavior</a></li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/19/android使用kotlin注意事项/" data-id="cjckncjnv000u3evfnpxou1e0" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/27/CoordinatorLayout的使用/" data-id="cjemszeh1000at3vfdloyf3zz" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -166,10 +154,10 @@
 
 
   
-    <article id="post-搭建基于hexo的博客以及如何迁移" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-深入理解Android卷一笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/11/09/搭建基于hexo的博客以及如何迁移/" class="article-date">
-  <time datetime="2017-11-09T13:22:17.000Z" itemprop="datePublished">2017-11-09</time>
+    <a href="/2017/11/25/深入理解Android卷一笔记/" class="article-date">
+  <time datetime="2017-11-25T14:52:35.000Z" itemprop="datePublished">2017-11-25</time>
 </a>
     
   </div>
@@ -180,7 +168,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/09/搭建基于hexo的博客以及如何迁移/">搭建基于hexo的博客以及如何迁移</a>
+      <a class="article-title" href="/2017/11/25/深入理解Android卷一笔记/">深入理解Android卷一笔记</a>
     </h1>
   
 
@@ -188,33 +176,71 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、搭建环境"><a href="#一、搭建环境" class="headerlink" title="一、搭建环境"></a>一、搭建环境</h2><h3 id="1-安装git"><a href="#1-安装git" class="headerlink" title="1.安装git"></a>1.安装git</h3><h3 id="2-安装Node-js"><a href="#2-安装Node-js" class="headerlink" title="2.安装Node.js"></a>2.安装Node.js</h3><h3 id="3-检查版本"><a href="#3-检查版本" class="headerlink" title="3.检查版本"></a>3.检查版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">node -v</div><div class="line">npm -v</div><div class="line">git --version</div></pre></td></tr></table></figure>
-<p>以上安装可以通过Homebrew。</p>
-<h3 id="4-安装hexo"><a href="#4-安装hexo" class="headerlink" title="4.安装hexo"></a>4.安装hexo</h3><p>终端所在位置就是安装位置。<br><code>npm install -g hexo-cli</code></p>
-<h3 id="5-初始化本地博客"><a href="#5-初始化本地博客" class="headerlink" title="5.初始化本地博客"></a>5.初始化本地博客</h3><p>首先新建一个合适的文件夹如hexo。注意这个文件夹必须为空，否则提示错误。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init &lt;文件夹名&gt;</div></pre></td></tr></table></figure>
-<p>期间请按照终端的提示操作就好了。</p>
-<h2 id="二、hexo的使用"><a href="#二、hexo的使用" class="headerlink" title="二、hexo的使用"></a>二、hexo的使用</h2><h3 id="1-主要文件和目录"><a href="#1-主要文件和目录" class="headerlink" title="1.主要文件和目录"></a>1.主要文件和目录</h3><ul>
-<li><code>_config.yml</code> 这个文件是这个博客的配置文件。<br>具体看<a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">官方文档</a>。</li>
-<li>source文件夹<br>这个文件夹存放你写的md文件。我一般在github创建一个仓库，利用git进行管理。当然你的博客原文件将被看到，有被抄袭的风险。</li>
+        <h2 id="一、JNI调用流程分析"><a href="#一、JNI调用流程分析" class="headerlink" title="一、JNI调用流程分析"></a>一、JNI调用流程分析</h2><h3 id="1-Java层"><a href="#1-Java层" class="headerlink" title="1.Java层"></a>1.Java层</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class MediaScanner &#123;</div><div class="line">	static &#123;</div><div class="line">		System.loadLibrary(&quot;media_jni&quot;);</div><div class="line">		native_init();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	private static native void native_init();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>加载对应的JNI库。</li>
+<li>声明native函数。</li>
 </ul>
-<h3 id="2-使用命令"><a href="#2-使用命令" class="headerlink" title="2.使用命令"></a>2.使用命令</h3><ul>
-<li><code>hexo n &quot;hello world&quot;</code>    创建名为hello world的博客。</li>
-<li><code>hexo g</code>  hexo生成html等文件。</li>
-<li><code>hexo s</code>  hexo使用node.js运行本地服务器进行预览。<br>在命令行会看到预览地址，用浏览器打开就是了。命令行control+c退出本地服务器。</li>
+<h3 id="2-JNI层"><a href="#2-JNI层" class="headerlink" title="2.JNI层"></a>2.JNI层</h3><p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//cpp</div><div class="line">static void android_media_MediaScanner_native_init(JNIEnv *env) &#123;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那么Java层调用native函数，系统是如何找到JNI层的对应函数的呢？</p>
+<h4 id="一、静态注册"><a href="#一、静态注册" class="headerlink" title="一、静态注册"></a>一、静态注册</h4><p>流程：</p>
+<ul>
+<li>编写java层native函数声明，并javac编译为class文件。</li>
+<li>使用<code>javah -o output packagename.classname</code>生成.h头文件。</li>
+<li>JNI层cpp或者c文件实现该头文件。</li>
 </ul>
-<h2 id="三、迁移博客"><a href="#三、迁移博客" class="headerlink" title="三、迁移博客"></a>三、迁移博客</h2><p><a href="https://www.zhihu.com/question/21193762/answer/103097754" target="_blank" rel="external">使用hexo，如果换了电脑怎么更新博客？ - skycrown的回答</a></p>
-<h2 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h2><ul>
-<li>《Android群英传 神兵利器》徐宜生著</li>
+<p>当Java层第一次调用该native方法时，jvm会从对应库找对应的头文件。如果找到，保存这个函数指针供下次调用；如果没找到就抛异常。</p>
+<p>弊端：</p>
+<ul>
+<li>修改Java层的native方式后需要重新生成头文件，因为函数签名可能改变了。</li>
+<li>初次调用native函数才会去建立关联，有懒加载特性，有利有弊。</li>
 </ul>
-
+<h4 id="二、动态注册"><a href="#二、动态注册" class="headerlink" title="二、动态注册"></a>二、动态注册</h4><p>JNI中有一个数据结构专门来记录这种一一对应关系的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">typedef struct &#123;</div><div class="line">	const char* signature;</div><div class="line">	void* fnPtr;</div><div class="line">&#125; JNINativeMethod;</div></pre></td></tr></table></figure>
+<p>AndroidRunTime.cpp提供了registerNativeMethods方法来注册；其中又通过JNIHelp.c的jniRegisterNativeMethods。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">jclass clazz = (*env) -&gt; FindClass(env, className);</div><div class="line">(*env) -&gt; RegisterNatives(env, clazz, gMethods, numMethods);</div></pre></td></tr></table></figure>
+<ul>
+<li>1.当Java层通过System.loadLibrary加载so库时，会先找是否有JNI_OnLoad函数，如果有就调用它；</li>
+<li>2.动态注册调用一般写在这个函数里。</li>
+</ul>
+<p>提示：<br>Android提供了JNIHelp.h这个文件，它内部包含了jni.h，所以我们编写jni时可以直接引入JNIHelp.h。</p>
+<h3 id="4-什么是JNIEnv？"><a href="#4-什么是JNIEnv？" class="headerlink" title="4.什么是JNIEnv？"></a>4.什么是JNIEnv？</h3><p>JNIEnv是一个与线程相关的代表JNI环境的结构体。我们经常通过它来从native层回调java层函数，但由于它是线程相关的，所以我们不能在B线程调用A线程的JNIEnv。</p>
+<h3 id="5-什么是JavaVM？"><a href="#5-什么是JavaVM？" class="headerlink" title="5.什么是JavaVM？"></a>5.什么是JavaVM？</h3><p>JavaVM顾名思义，就是一个java虚拟机变量，可以比作进程。不管有多少个线程，单进程就单独一个JavaVM。在JNI_OnLoad函数可以获得JavaVM。</p>
+<ul>
+<li>调用JavaVM-&gt;AttachCurrentThread可以获得当前线程的JNIEnv，这样可以在子线程回调java层函数。</li>
+<li>在线程结束时，调用JavaVM-&gt;DetachCurrentThread来释放相关资源。</li>
+</ul>
+<h3 id="6-什么是jfieldID和jmethodID？"><a href="#6-什么是jfieldID和jmethodID？" class="headerlink" title="6.什么是jfieldID和jmethodID？"></a>6.什么是jfieldID和jmethodID？</h3><p>1.获取：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//JNIEnv方法</div><div class="line">jfieldID GetFieldID (jclass clazz, const char* name, const char* sig);</div><div class="line">jmethodID GetMethodID (jclass clazz, const char* name, const char* sig);</div></pre></td></tr></table></figure>
+<p>建议在初始化的时候获取并保存下来，提高下一次调用的运行效率。</p>
+<p>2.使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//JNIEnv方法</div><div class="line">NativeType Call&lt;type&gt;Method (jobject jobj, jmethodID methodID, ...);</div><div class="line">NativeType CallStatic&lt;type&gt;Method (jmethodID methodID, ...);</div><div class="line"></div><div class="line">NativeType Get&lt;type&gt;Field (jobject jobj, jfieldID fieldID);</div><div class="line">void Set&lt;type&gt;Field (jobject jobj, jfieldID fieldID, NativeType value);</div></pre></td></tr></table></figure>
+<h3 id="7-jstring"><a href="#7-jstring" class="headerlink" title="7.jstring"></a>7.jstring</h3><p>1.java层String与native层string的转换关系：<br><img src="/2017/11/25/深入理解Android卷一笔记/jstring.png" alt="jstring"></p>
+<p>2.释放资源：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//JNIEnv方法</div><div class="line">void ReleaseStringChars(jstring str, char* chs);</div><div class="line">void ReleaseStringUTFChars(jstring str, char* chs);</div></pre></td></tr></table></figure>
+<p>转换字符串和释放资源方法应该是成对出现的。</p>
+<h3 id="8-JNI类型签名"><a href="#8-JNI类型签名" class="headerlink" title="8.JNI类型签名"></a>8.JNI类型签名</h3><p>命令：<code>javap -s -p xxx.class</code></p>
+<p>意义：</p>
+<ul>
+<li>-s 表示输出内部数据类型的签名信息。 </li>
+<li>-p 表示打印所有函数和成员的签名信息。默认只打印public级别。</li>
+</ul>
+<h3 id="9-引用"><a href="#9-引用" class="headerlink" title="9.引用"></a>9.引用</h3><p>类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1.Local Reference 本地变量</div><div class="line">2.Global Reference 全局变量（强印用）</div><div class="line">3.Weak Global Reference 弱全局变量</div></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//JNIEnv方法</div><div class="line">NewGlobalRef(NativeType ref);</div><div class="line">NewWeakGlobalRef(NativeType ref);</div><div class="line"></div><div class="line">DeleteLoaclRef(NativeType ref);</div><div class="line">DeleteGlobalRef(NativeType ref);</div><div class="line">DeleteWeakGlobalRef(NativeType ref);</div></pre></td></tr></table></figure>
+<p>有时候我们可能创建太多LocalReference，这样内存占用可观，可以在方法结束调用前，提前手动回收LocalReference。</p>
+<h3 id="10-异常"><a href="#10-异常" class="headerlink" title="10.异常"></a>10.异常</h3><p>JNI层可以截获和修改异常。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//JNIEnv方法</div><div class="line">ExceptionOccured 判断是否发生异常</div><div class="line">ExceptionClear 清空当前JNI发生的异常</div><div class="line">ThrowNew 向java层抛异常</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/09/搭建基于hexo的博客以及如何迁移/" data-id="cjckncjoc001m3evftq7eb57u" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/25/深入理解Android卷一笔记/" data-id="cjemszeht001wt3vfyf2pkv80" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
 
     </footer>
   </div>
@@ -226,7 +252,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/5/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -249,7 +275,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/kotlin/" style="font-size: 13.33px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/kotlin/" style="font-size: 10px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 13.33px;">环境配置</a>
     </div>
   </div>
 
@@ -258,7 +284,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -271,23 +297,23 @@
       <ul>
         
           <li>
+            <a href="/2018/03/11/Android移动性能实战笔记/">Android移动性能实战笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/ProtocolBuffers的介绍和使用/">ProtocolBuffers的介绍和使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/19/FlatBuffers的介绍和使用/">FlatBuffers的介绍和使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/18/ProtocolBuffers在Mac-OS的安装/">ProtocolBuffers在Mac OS的安装</a>
+          </li>
+        
+          <li>
             <a href="/2018/01/18/FlatBuffers在Mac-OS的安装步骤/">FlatBuffers在Mac OS的安装步骤</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/16/Android应用UI性能分析/">Android应用UI性能分析</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/15/SpannableString及其相关类的使用/">SpannableString及其相关类的使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/11/FlexboxLayout的使用/">FlexboxLayout的使用</a>
-          </li>
-        
-          <li>
-            <a href="/2017/12/08/自定义View/">自定义View</a>
           </li>
         
       </ul>
