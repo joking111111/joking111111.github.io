@@ -3,15 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2017/10 | Stay Hungry</title>
+  <title>submodule用法 | Stay Hungry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Stay Hungry">
-<meta property="og:url" content="https://joking111111.github.io/archives/2017/10/index.html">
+  <meta name="description" content="一、当前仓库下添加submodule仓库1git submodule add &amp;lt;remote_url&amp;gt; &amp;lt;local_path&amp;gt; 二、clone一个有submodule的仓库对于clone一个有submodule的仓库，是不会把submodule也clone下来的。 123456789101. 注册submodule到.git/config里	git submodule i">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="submodule用法">
+<meta property="og:url" content="https://joking111111.github.io/2018/03/13/submodule用法/index.html">
 <meta property="og:site_name" content="Stay Hungry">
+<meta property="og:description" content="一、当前仓库下添加submodule仓库1git submodule add &amp;lt;remote_url&amp;gt; &amp;lt;local_path&amp;gt; 二、clone一个有submodule的仓库对于clone一个有submodule的仓库，是不会把submodule也clone下来的。 123456789101. 注册submodule到.git/config里	git submodule i">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-03-13T00:35:51.561Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Stay Hungry">
+<meta name="twitter:title" content="submodule用法">
+<meta name="twitter:description" content="一、当前仓库下添加submodule仓库1git submodule add &amp;lt;remote_url&amp;gt; &amp;lt;local_path&amp;gt; 二、clone一个有submodule的仓库对于clone一个有submodule的仓库，是不会把submodule也clone下来的。 123456789101. 注册submodule到.git/config里	git submodule i">
   
     <link rel="alternate" href="/atom.xml" title="Stay Hungry" type="application/atom+xml">
   
@@ -60,172 +65,56 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/22/RecyclerView笔记/" class="archive-article-date">
-  <time datetime="2017-10-22T01:45:58.000Z" itemprop="datePublished">Oct 22</time>
+        <section id="main"><article id="post-submodule用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/13/submodule用法/" class="article-date">
+  <time datetime="2018-03-13T00:35:22.000Z" itemprop="datePublished">2018-03-13</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/22/RecyclerView笔记/">RecyclerView笔记</a>
+    <h1 class="article-title" itemprop="name">
+      submodule用法
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/22/Handler的存在意义/" class="archive-article-date">
-  <time datetime="2017-10-22T01:06:27.000Z" itemprop="datePublished">Oct 22</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/22/Handler的存在意义/">Handler的存在意义</a>
-    </h1>
-  
+        <h2 id="一、当前仓库下添加submodule仓库"><a href="#一、当前仓库下添加submodule仓库" class="headerlink" title="一、当前仓库下添加submodule仓库"></a>一、当前仓库下添加submodule仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git submodule add &lt;remote_url&gt; &lt;local_path&gt;</div></pre></td></tr></table></figure>
+<h2 id="二、clone一个有submodule的仓库"><a href="#二、clone一个有submodule的仓库" class="headerlink" title="二、clone一个有submodule的仓库"></a>二、clone一个有submodule的仓库</h2><p>对于clone一个有submodule的仓库，是不会把submodule也clone下来的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1. 注册submodule到.git/config里</div><div class="line">	git submodule init</div><div class="line">2. clone submodule</div><div class="line">	git submodule update --recursive</div><div class="line"></div><div class="line">上面两步等价于下面</div><div class="line">	git submodule update --init --recursive</div><div class="line">	</div><div class="line">如果修改了.gitmodule的remote url，使用下面的命令更新submodule的remote url</div><div class="line">	git submodule sync</div></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/22/Activity生命周期与finish方法/" class="archive-article-date">
-  <time datetime="2017-10-22T01:05:44.000Z" itemprop="datePublished">Oct 22</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/22/Activity生命周期与finish方法/">Activity生命周期与finish方法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/11/kotlin笔记/" class="archive-article-date">
-  <time datetime="2017-10-11T02:07:05.000Z" itemprop="datePublished">Oct 11</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2018/03/13/submodule用法/" data-id="cjeoxekib001orjvf3nzomm0m" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/11/kotlin笔记/">Kotlin笔记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/10/kotlin学习资料/" class="archive-article-date">
-  <time datetime="2017-10-10T02:47:34.000Z" itemprop="datePublished">Oct 10</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/10/kotlin学习资料/">Kotlin学习资料</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 
-    </header>
+    </footer>
   </div>
-</article>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/10/learn-git-branching参考答案/" class="archive-article-date">
-  <time datetime="2017-10-10T02:15:14.000Z" itemprop="datePublished">Oct 10</time>
-</a>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/10/learn-git-branching参考答案/">Learn git branching参考答案</a>
-    </h1>
   
+    <a href="/2018/03/11/Android移动性能实战笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android移动性能实战笔记</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/09/git远程仓库/" class="archive-article-date">
-  <time datetime="2017-10-09T08:09:28.000Z" itemprop="datePublished">Oct 9</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/09/git远程仓库/">Git远程仓库</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2017/10/08/git高级操作/" class="archive-article-date">
-  <time datetime="2017-10-08T12:49:21.000Z" itemprop="datePublished">Oct 8</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/08/git高级操作/">Git高级操作</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
 
 </section>
         
