@@ -3,20 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Android安全机制简介 | Stay Hungry</title>
+  <title>AndroidStudio使用技巧 | Stay Hungry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、代码混淆proguard由于java字节码可以被反编译，代码混淆可以混淆关键代码，增加阅读代码难度。同时proguard可以压缩代码、优化编译后的java字节码。 二、应用权限检查应用声明的权限需要得到系统和用户的认可 三、签名证书Android系统识别App的凭证，App的身份证。 四、Linux内核安全机制比如文件访问机制等，权限系统。 五、Android虚拟机沙箱机制每个App有与之对应">
+  <meta name="description" content="一、快捷键IntelliJ快捷键PDF Mac下常用快捷键 double shift = 查找文件 command + F = 文件内查找 command + enter = 查看提示 command + alt + L = 代码整理 command + L = 跳转到文件的某一行 alt + F7 = Find Usages shift + F6 = 改名 F2 = 逐个跳转到当前文件Lint提">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android安全机制简介">
-<meta property="og:url" content="https://joking111111.github.io/2017/12/08/Android安全机制简介/index.html">
+<meta property="og:title" content="AndroidStudio使用技巧">
+<meta property="og:url" content="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/index.html">
 <meta property="og:site_name" content="Stay Hungry">
-<meta property="og:description" content="一、代码混淆proguard由于java字节码可以被反编译，代码混淆可以混淆关键代码，增加阅读代码难度。同时proguard可以压缩代码、优化编译后的java字节码。 二、应用权限检查应用声明的权限需要得到系统和用户的认可 三、签名证书Android系统识别App的凭证，App的身份证。 四、Linux内核安全机制比如文件访问机制等，权限系统。 五、Android虚拟机沙箱机制每个App有与之对应">
+<meta property="og:description" content="一、快捷键IntelliJ快捷键PDF Mac下常用快捷键 double shift = 查找文件 command + F = 文件内查找 command + enter = 查看提示 command + alt + L = 代码整理 command + L = 跳转到文件的某一行 alt + F7 = Find Usages shift + F6 = 改名 F2 = 逐个跳转到当前文件Lint提">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-08T13:18:56.000Z">
+<meta property="og:image" content="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/AutoScrollFromSource.png">
+<meta property="og:image" content="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/LineNumber&Annotations.png">
+<meta property="og:updated_time" content="2018-03-16T00:07:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android安全机制简介">
-<meta name="twitter:description" content="一、代码混淆proguard由于java字节码可以被反编译，代码混淆可以混淆关键代码，增加阅读代码难度。同时proguard可以压缩代码、优化编译后的java字节码。 二、应用权限检查应用声明的权限需要得到系统和用户的认可 三、签名证书Android系统识别App的凭证，App的身份证。 四、Linux内核安全机制比如文件访问机制等，权限系统。 五、Android虚拟机沙箱机制每个App有与之对应">
+<meta name="twitter:title" content="AndroidStudio使用技巧">
+<meta name="twitter:description" content="一、快捷键IntelliJ快捷键PDF Mac下常用快捷键 double shift = 查找文件 command + F = 文件内查找 command + enter = 查看提示 command + alt + L = 代码整理 command + L = 跳转到文件的某一行 alt + F7 = Find Usages shift + F6 = 改名 F2 = 逐个跳转到当前文件Lint提">
+<meta name="twitter:image" content="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/AutoScrollFromSource.png">
   
     <link rel="alternate" href="/atom.xml" title="Stay Hungry" type="application/atom+xml">
   
@@ -65,10 +68,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Android安全机制简介" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-AndroidStudio使用技巧" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/12/08/Android安全机制简介/" class="article-date">
-  <time datetime="2017-12-08T13:17:00.000Z" itemprop="datePublished">2017-12-08</time>
+    <a href="/2018/03/15/AndroidStudio使用技巧/" class="article-date">
+  <time datetime="2018-03-15T15:09:45.000Z" itemprop="datePublished">2018-03-15</time>
 </a>
     
   </div>
@@ -79,7 +82,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Android安全机制简介
+      AndroidStudio使用技巧
     </h1>
   
 
@@ -87,16 +90,37 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、代码混淆proguard"><a href="#一、代码混淆proguard" class="headerlink" title="一、代码混淆proguard"></a>一、代码混淆proguard</h2><p>由于java字节码可以被反编译，代码混淆可以混淆关键代码，增加阅读代码难度。同时proguard可以压缩代码、优化编译后的java字节码。</p>
-<h2 id="二、应用权限检查"><a href="#二、应用权限检查" class="headerlink" title="二、应用权限检查"></a>二、应用权限检查</h2><p>应用声明的权限需要得到系统和用户的认可</p>
-<h2 id="三、签名证书"><a href="#三、签名证书" class="headerlink" title="三、签名证书"></a>三、签名证书</h2><p>Android系统识别App的凭证，App的身份证。</p>
-<h2 id="四、Linux内核安全机制"><a href="#四、Linux内核安全机制" class="headerlink" title="四、Linux内核安全机制"></a>四、Linux内核安全机制</h2><p>比如文件访问机制等，权限系统。</p>
-<h2 id="五、Android虚拟机沙箱机制"><a href="#五、Android虚拟机沙箱机制" class="headerlink" title="五、Android虚拟机沙箱机制"></a>五、Android虚拟机沙箱机制</h2><p>每个App有与之对应的Uid，分别运行在单独的虚拟机中，与其他应用完全隔离。即使一个应用崩溃，也不会导致其他应用异常。</p>
+        <h2 id="一、快捷键"><a href="#一、快捷键" class="headerlink" title="一、快捷键"></a>一、快捷键</h2><p><a href="https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA_ReferenceCard.pdf" target="_blank" rel="external">IntelliJ快捷键PDF</a></p>
+<h3 id="Mac下常用快捷键"><a href="#Mac下常用快捷键" class="headerlink" title="Mac下常用快捷键"></a>Mac下常用快捷键</h3><ul>
+<li>double shift = 查找文件</li>
+<li>command + F = 文件内查找</li>
+<li>command + enter = 查看提示</li>
+<li>command + alt + L = 代码整理</li>
+<li>command + L = 跳转到文件的某一行</li>
+<li>alt + F7 = Find Usages</li>
+<li>shift + F6 = 改名</li>
+<li>F2 = 逐个跳转到当前文件Lint提示位置</li>
+<li>F3 = 增加/删除书签</li>
+</ul>
+<h2 id="二、设置"><a href="#二、设置" class="headerlink" title="二、设置"></a>二、设置</h2><h3 id="1-文件列表自动滑到对应位置"><a href="#1-文件列表自动滑到对应位置" class="headerlink" title="1.文件列表自动滑到对应位置"></a>1.文件列表自动滑到对应位置</h3><p><img src="/2018/03/15/AndroidStudio使用技巧/AutoScrollFromSource.png" alt="AutoScrollFromSource"></p>
+<h3 id="2-设置显示行号和显示修改记录"><a href="#2-设置显示行号和显示修改记录" class="headerlink" title="2.设置显示行号和显示修改记录"></a>2.设置显示行号和显示修改记录</h3><p><img src="/2018/03/15/AndroidStudio使用技巧/LineNumber&amp;Annotations.png" alt="LineNumber&amp;Annotations"></p>
+<h2 id="三、插件"><a href="#三、插件" class="headerlink" title="三、插件"></a>三、插件</h2><ul>
+<li>.ignore</li>
+<li>ADB Idea</li>
+<li><a href="https://github.com/layerlre/ADBWIFI layerlre@gmail.com" target="_blank" rel="external">ADB WIFI</a></li>
+<li>Alibaba Java Coding Guidelines</li>
+<li>Android BufferKnife Zelezny</li>
+<li>Android Code Generator</li>
+<li>Android Material Design Icon Generator</li>
+<li><a href="http://www.github.com/pedrovgs pedrovicente.gomez at gmail dot com" target="_blank" rel="external">Android WiFi ADB</a></li>
+<li><a href="https://github.com/Skykai521 daqingkai@boohee.com" target="_blank" rel="external">ECTranslation</a></li>
+<li><a href="http://github.com/scana scanarch@gmail.com" target="_blank" rel="external">OK,Gradle!</a></li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/12/08/Android安全机制简介/" data-id="cjet7o4kn0003a2x7xw2t3uoj" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/" data-id="cjet7o4kl0001a2x78wy7u338" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -107,19 +131,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/12/08/自定义View/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          自定义View
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/27/CoordinatorLayout的使用/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/03/13/submodule用法/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">CoordinatorLayout的使用</div>
+      <div class="article-nav-title">submodule用法</div>
     </a>
   
 </nav>
