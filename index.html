@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-AndroidStudio使用技巧" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Android开发者建议尽量不使用Fragment" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/15/AndroidStudio使用技巧/" class="article-date">
-  <time datetime="2018-03-15T15:09:45.000Z" itemprop="datePublished">2018-03-15</time>
+    <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/" class="article-date">
+  <time datetime="2018-03-23T00:55:32.000Z" itemprop="datePublished">2018-03-23</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/15/AndroidStudio使用技巧/">AndroidStudio使用技巧</a>
+      <a class="article-title" href="/2018/03/23/Android开发者建议尽量不使用Fragment/">Android开发者建议尽量不使用Fragment</a>
     </h1>
   
 
@@ -84,37 +84,29 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、快捷键"><a href="#一、快捷键" class="headerlink" title="一、快捷键"></a>一、快捷键</h2><p><a href="https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA_ReferenceCard.pdf" target="_blank" rel="external">IntelliJ快捷键PDF</a></p>
-<h3 id="Mac下常用快捷键"><a href="#Mac下常用快捷键" class="headerlink" title="Mac下常用快捷键"></a>Mac下常用快捷键</h3><ul>
-<li>double shift = 查找文件</li>
-<li>command + F = 文件内查找</li>
-<li>command + enter = 查看提示</li>
-<li>command + alt + L = 代码整理</li>
-<li>command + L = 跳转到文件的某一行</li>
-<li>alt + F7 = Find Usages</li>
-<li>shift + F6 = 改名</li>
-<li>F2 = 逐个跳转到当前文件Lint提示位置</li>
-<li>F3 = 增加/删除书签</li>
+        <h2 id="一、Fragment的优劣"><a href="#一、Fragment的优劣" class="headerlink" title="一、Fragment的优劣"></a>一、Fragment的优劣</h2><ul>
+<li>优点<ul>
+<li>可以对手机和平板分别适配。</li>
+<li>将生命周期交给系统管理。</li>
 </ul>
-<h2 id="二、设置"><a href="#二、设置" class="headerlink" title="二、设置"></a>二、设置</h2><h3 id="1-文件列表自动滑到对应位置"><a href="#1-文件列表自动滑到对应位置" class="headerlink" title="1.文件列表自动滑到对应位置"></a>1.文件列表自动滑到对应位置</h3><p><img src="/2018/03/15/AndroidStudio使用技巧/AutoScrollFromSource.png" alt="AutoScrollFromSource"></p>
-<h3 id="2-设置显示行号和显示修改记录"><a href="#2-设置显示行号和显示修改记录" class="headerlink" title="2.设置显示行号和显示修改记录"></a>2.设置显示行号和显示修改记录</h3><p><img src="/2018/03/15/AndroidStudio使用技巧/LineNumber&amp;Annotations.png" alt="LineNumber&amp;Annotations"></p>
-<h2 id="三、插件"><a href="#三、插件" class="headerlink" title="三、插件"></a>三、插件</h2><ul>
-<li>.ignore</li>
-<li>ADB Idea</li>
-<li><a href="https://github.com/layerlre/ADBWIFI layerlre@gmail.com" target="_blank" rel="external">ADB WIFI</a></li>
-<li>Alibaba Java Coding Guidelines</li>
-<li>Android BufferKnife Zelezny</li>
-<li>Android Code Generator</li>
-<li>Android Material Design Icon Generator</li>
-<li><a href="http://www.github.com/pedrovgs pedrovicente.gomez at gmail dot com" target="_blank" rel="external">Android WiFi ADB</a></li>
-<li><a href="https://github.com/Skykai521 daqingkai@boohee.com" target="_blank" rel="external">ECTranslation</a></li>
-<li><a href="http://github.com/scana scanarch@gmail.com" target="_blank" rel="external">OK,Gradle!</a></li>
+</li>
+<li>缺点<ul>
+<li>将生命周期交给系统管理。</li>
+</ul>
+</li>
+</ul>
+<p>对，你没看错，将生命周期交给系统管理在开发者不需要关注太多Fragment的生命周期时，这是非常方便的。但当开发者需要精确控制Fragment时，开发成本大大提高。</p>
+<h2 id="二、解决方案"><a href="#二、解决方案" class="headerlink" title="二、解决方案"></a>二、解决方案</h2><p>经过上述讨论，关键点无非在于开发者是否需要精确控制一个界面的生命周期。<br>即使不需要精确控制生命周期，使用Fragment也会存在系统级别的Bug，并不建议使用。</p>
+<p>生命周期无非是一个返回栈和场景切换操作，而场景用View即可实现。Activity最好只负责分发生命周期事件，返回栈和切换场景操作交由一个Controler管理，不同场景自身逻辑自己实现。这样，既把各自职责厘清，亦方便解耦和复用。</p>
+<h2 id="三、参考资料"><a href="#三、参考资料" class="headerlink" title="三、参考资料"></a>三、参考资料</h2><ul>
+<li><a href="https://corner.squareup.com/2014/10/advocating-against-android-fragments.html" target="_blank" rel="external">Square开发者的博客原文</a></li>
+<li><a href="https://asce1885.gitbooks.io/android-rd-senior-advanced/content/wo_wei_shi_yao_zhu_zhang_fan_dui_shi_yong_android_fragment.html" target="_blank" rel="external">国内开发者译文</a></li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/" data-id="cjet7o4kl0001a2x78wy7u338" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/23/Android开发者建议尽量不使用Fragment/" data-id="cjfhx8bam000843zwmxfr44f7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -126,10 +118,10 @@
 
 
   
-    <article id="post-submodule用法" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-git标签" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/13/submodule用法/" class="article-date">
-  <time datetime="2018-03-13T00:35:22.000Z" itemprop="datePublished">2018-03-13</time>
+    <a href="/2018/03/19/git标签/" class="article-date">
+  <time datetime="2018-03-19T15:09:57.000Z" itemprop="datePublished">2018-03-19</time>
 </a>
     
   </div>
@@ -140,7 +132,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/13/submodule用法/">submodule用法</a>
+      <a class="article-title" href="/2018/03/19/git标签/">git标签</a>
     </h1>
   
 
@@ -148,14 +140,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、当前仓库下添加submodule仓库"><a href="#一、当前仓库下添加submodule仓库" class="headerlink" title="一、当前仓库下添加submodule仓库"></a>一、当前仓库下添加submodule仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git submodule add &lt;remote_url&gt; &lt;local_path&gt;</div></pre></td></tr></table></figure>
-<h2 id="二、clone一个有submodule的仓库"><a href="#二、clone一个有submodule的仓库" class="headerlink" title="二、clone一个有submodule的仓库"></a>二、clone一个有submodule的仓库</h2><p>对于clone一个有submodule的仓库，是不会把submodule也clone下来的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1. 注册submodule到.git/config里</div><div class="line">	git submodule init</div><div class="line">2. clone submodule</div><div class="line">	git submodule update --recursive</div><div class="line"></div><div class="line">上面两步等价于下面</div><div class="line">	git submodule update --init --recursive</div><div class="line">	</div><div class="line">如果修改了.gitmodule的remote url，使用下面的命令更新submodule的remote url</div><div class="line">	git submodule sync</div></pre></td></tr></table></figure>
-
+        <h2 id="一、创建标签"><a href="#一、创建标签" class="headerlink" title="一、创建标签"></a>一、创建标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag -a &lt;Tag Name&gt; -m &lt;Message&gt;</div></pre></td></tr></table></figure>
+<h2 id="二、查看Tag"><a href="#二、查看Tag" class="headerlink" title="二、查看Tag"></a>二、查看Tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag</div></pre></td></tr></table></figure>
+<h2 id="三、删除Tag"><a href="#三、删除Tag" class="headerlink" title="三、删除Tag"></a>三、删除Tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag -d &lt;Tag Name&gt;</div></pre></td></tr></table></figure>
+<h2 id="四、推送到远程仓库"><a href="#四、推送到远程仓库" class="headerlink" title="四、推送到远程仓库"></a>四、推送到远程仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//推送某一Tag</div><div class="line">git push origin &lt;Tag Name&gt;</div><div class="line">//推送所有Tag</div><div class="line">git push origin --tags</div></pre></td></tr></table></figure>
+<h2 id="五、删除远程仓库的Tag"><a href="#五、删除远程仓库的Tag" class="headerlink" title="五、删除远程仓库的Tag"></a>五、删除远程仓库的Tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//先本地删除Tag</div><div class="line">git tag -d &lt;Tag Name&gt;</div><div class="line">//再推送到远程仓库</div><div class="line">git push origin :refs/tags/&lt;Tag Name&gt;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/13/submodule用法/" data-id="cjet7o4lc001ta2x70n2j4nmc" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/19/git标签/" data-id="cjfhx8bb0001943zwqsqw2x83" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -167,10 +160,10 @@
 
 
   
-    <article id="post-Android移动性能实战笔记" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-git文件回退" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/11/Android移动性能实战笔记/" class="article-date">
-  <time datetime="2018-03-11T12:52:33.000Z" itemprop="datePublished">2018-03-11</time>
+    <a href="/2018/03/19/git文件回退/" class="article-date">
+  <time datetime="2018-03-19T14:34:28.000Z" itemprop="datePublished">2018-03-19</time>
 </a>
     
   </div>
@@ -181,7 +174,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/11/Android移动性能实战笔记/">Android移动性能实战笔记</a>
+      <a class="article-title" href="/2018/03/19/git文件回退/">git文件回退</a>
     </h1>
   
 
@@ -189,37 +182,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、磁盘"><a href="#一、磁盘" class="headerlink" title="一、磁盘"></a>一、磁盘</h2><h3 id="1-如果需要频繁读某个文件，请做缓存操作。"><a href="#1-如果需要频繁读某个文件，请做缓存操作。" class="headerlink" title="1.如果需要频繁读某个文件，请做缓存操作。"></a>1.如果需要频繁读某个文件，请做缓存操作。</h3><h3 id="2-SharePreferences的commit对应一次文件的打开与关闭。"><a href="#2-SharePreferences的commit对应一次文件的打开与关闭。" class="headerlink" title="2.SharePreferences的commit对应一次文件的打开与关闭。"></a>2.SharePreferences的commit对应一次文件的打开与关闭。</h3><p>另外，apply是异步操作，commit为同步操作。</p>
-<h3 id="3-主线程I-O与子线程I-O之争。"><a href="#3-主线程I-O与子线程I-O之争。" class="headerlink" title="3.主线程I/O与子线程I/O之争。"></a>3.主线程I/O与子线程I/O之争。</h3><ul>
-<li>若I/O操作放在主线程，将会影响UI的绘制。</li>
-<li>若I/O操作放在子线程，虽然不影响UI线程，但由于子线程优先级不高，I/O耗时会变长。</li>
-</ul>
-<h3 id="4-对象序列化最佳实践。"><a href="#4-对象序列化最佳实践。" class="headerlink" title="4.对象序列化最佳实践。"></a>4.对象序列化最佳实践。</h3><ul>
-<li>序列化写：BufferedOutputStream/ByteArrayOutputStream + ObjectOutputStream</li>
-<li>序列化读：BufferedInputStream/ByteArrayInputStream + ObjectInputStream</li>
-<li>原理：ObjectOutputStream在序列化的时候，会把内存中的每个对象保存到磁盘中，在保存对象时，每个数据成员都会带来一次I/O操作。使用缓冲区，可有效减少磁盘I/O次数。比如3K的大对象，使用2K的缓冲区，两次I/O即可。</li>
-</ul>
-<h3 id="5-使用Buffer太小或太小，也会影响I-O效率。"><a href="#5-使用Buffer太小或太小，也会影响I-O效率。" class="headerlink" title="5.使用Buffer太小或太小，也会影响I/O效率。"></a>5.使用Buffer太小或太小，也会影响I/O效率。</h3><ul>
-<li>在读写时候使用缓冲区可以减少读写次数，从而减少了切换内核态的次数，提高读写效率。</li>
-<li>Buffer也不是越大越好，因为Buffer过大，申请时间会变长。</li>
-<li>经验值8KB = 8192byte。</li>
-</ul>
-<h3 id="6-解压文件的最佳实践。"><a href="#6-解压文件的最佳实践。" class="headerlink" title="6.解压文件的最佳实践。"></a>6.解压文件的最佳实践。</h3><h4 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h4><ul>
-<li>如果Zip文件已在磁盘（已下载），且解压所有Zip中所有文件，建议使用ZipFile，效率较ZipInputStream提升15%-27%。</li>
-<li>仅解压Zip某些文件，建议使用ZipFile，因为ZipFile有RandomAccessFile特性。</li>
-<li>如果Zip不在磁盘上，或顺序解压一小部分文件，或Zip文件目录遭到损害，建议使用ZipInputStream。</li>
-</ul>
-<h4 id="最佳实践代码："><a href="#最佳实践代码：" class="headerlink" title="最佳实践代码："></a>最佳实践代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">-----------------------------ZipInputStream-----------------------------</div><div class="line">ZipInputStream zis = new ZipInputStream(new BufferedInputStream(fis));</div><div class="line">BufferedInputStream bis = new BufferedInputStream(zis);</div><div class="line">byte[] buffer = new byte[8192];</div><div class="line">while ((ze = zis.getNextEntry()) != null) &#123;</div><div class="line">	while ((count = bis.read(buffer)) != -1) &#123;</div><div class="line">		fos.write(buffer, 0, count);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">--------------------------------ZipFile---------------------------------</div><div class="line">Enumeration e = ZipFile.entries();</div><div class="line">while (e.hasMoreElements()) &#123;</div><div class="line">	entry = (ZipEntry) e.nextElement();</div><div class="line">	if (低压缩率文件，如文本) &#123;</div><div class="line">		is = new BufferedInputStream(zipFile.getInputStream(entry));</div><div class="line">	&#125; else if (高压缩文件，如图片) &#123;</div><div class="line">		is = zipFile.getInputStream(entry);</div><div class="line">		byte[] buffer = new byte[8192];</div><div class="line">		while ((count = is.read(buffer, 0, buffer.length)) != -1) &#123;</div><div class="line">			fos.write(buffer, 0, count);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="7-请勿重复打开数据库。"><a href="#7-请勿重复打开数据库。" class="headerlink" title="7.请勿重复打开数据库。"></a>7.请勿重复打开数据库。</h3><p>由SQLiteDatabase的#getWriteableDatabase()方法的注释：一旦打开数据库，该链接会被缓存，以供下一次使用，只有当真正不需要时，调用close()关闭。</p>
-<h3 id="8-减少使用select-。"><a href="#8-减少使用select-。" class="headerlink" title="8.减少使用select *。"></a>8.减少使用select *。</h3><h3 id="9-请勿滥用AUTOINCREMENT关键字。"><a href="#9-请勿滥用AUTOINCREMENT关键字。" class="headerlink" title="9.请勿滥用AUTOINCREMENT关键字。"></a>9.请勿滥用AUTOINCREMENT关键字。</h3><p>AUTOINCREMENT用于数据库主键唯一性、递增性，会增加CPU、内存、磁盘空间和磁盘I/O的负担，所以尽量不要用。因为AUTOINCREMENT实现原理是维护另一张表，表记录了已使用的最大行号等信息。</p>
-
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>虽然git stash很好使,但是如果只想舍弃某个文件修改，git stash的代价太大了。因此我们可以使用单文件回退操作。</p>
+<h2 id="一、文件修改，但未进行git-add操作"><a href="#一、文件修改，但未进行git-add操作" class="headerlink" title="一、文件修改，但未进行git add操作"></a>一、文件修改，但未进行git add操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//使用版本库内容替换工作区</div><div class="line">git checkout &lt;file相对路径&gt;</div></pre></td></tr></table></figure>
+<h2 id="二、文件修改，已git-add，但未进行git-commit操作"><a href="#二、文件修改，已git-add，但未进行git-commit操作" class="headerlink" title="二、文件修改，已git add，但未进行git commit操作"></a>二、文件修改，已git add，但未进行git commit操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//将修改内容移除暂存区</div><div class="line">git reset HEAD &lt;file相对路径&gt;</div><div class="line">//使用版本库内容替换工作区</div><div class="line">git checkout &lt;file相对路径&gt;</div></pre></td></tr></table></figure>
+<h2 id="三、已将文件修改commit了"><a href="#三、已将文件修改commit了" class="headerlink" title="三、已将文件修改commit了"></a>三、已将文件修改commit了</h2><p>找到你想要舍弃所在的commit SHA，使用以下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset &lt;commit SHA&gt; &lt;file相对路径&gt;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/11/Android移动性能实战笔记/" data-id="cjet7o4kp0005a2x7slpw5tt0" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/19/git文件回退/" data-id="cjfhx8bb1001c43zwpsg2y35n" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 
     </footer>
   </div>
@@ -231,7 +205,7 @@
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -276,23 +250,23 @@
       <ul>
         
           <li>
+            <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/">Android开发者建议尽量不使用Fragment</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git标签/">git标签</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git文件回退/">git文件回退</a>
+          </li>
+        
+          <li>
             <a href="/2018/03/15/AndroidStudio使用技巧/">AndroidStudio使用技巧</a>
           </li>
         
           <li>
             <a href="/2018/03/13/submodule用法/">submodule用法</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/11/Android移动性能实战笔记/">Android移动性能实战笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/19/ProtocolBuffers的介绍和使用/">ProtocolBuffers的介绍和使用</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/19/FlatBuffers的介绍和使用/">FlatBuffers的介绍和使用</a>
           </li>
         
       </ul>

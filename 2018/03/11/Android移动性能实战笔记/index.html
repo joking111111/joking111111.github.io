@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Stay Hungry">
 <meta property="og:description" content="一、磁盘1.如果需要频繁读某个文件，请做缓存操作。2.SharePreferences的commit对应一次文件的打开与关闭。另外，apply是异步操作，commit为同步操作。 3.主线程I/O与子线程I/O之争。 若I/O操作放在主线程，将会影响UI的绘制。 若I/O操作放在子线程，虽然不影响UI线程，但由于子线程优先级不高，I/O耗时会变长。  4.对象序列化最佳实践。 序列化写：Buffe">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-03-11T12:56:15.000Z">
+<meta property="og:updated_time" content="2018-04-02T07:36:26.116Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android移动性能实战笔记">
 <meta name="twitter:description" content="一、磁盘1.如果需要频繁读某个文件，请做缓存操作。2.SharePreferences的commit对应一次文件的打开与关闭。另外，apply是异步操作，commit为同步操作。 3.主线程I/O与子线程I/O之争。 若I/O操作放在主线程，将会影响UI的绘制。 若I/O操作放在子线程，虽然不影响UI线程，但由于子线程优先级不高，I/O耗时会变长。  4.对象序列化最佳实践。 序列化写：Buffe">
@@ -110,11 +110,34 @@
 <h4 id="最佳实践代码："><a href="#最佳实践代码：" class="headerlink" title="最佳实践代码："></a>最佳实践代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">-----------------------------ZipInputStream-----------------------------</div><div class="line">ZipInputStream zis = new ZipInputStream(new BufferedInputStream(fis));</div><div class="line">BufferedInputStream bis = new BufferedInputStream(zis);</div><div class="line">byte[] buffer = new byte[8192];</div><div class="line">while ((ze = zis.getNextEntry()) != null) &#123;</div><div class="line">	while ((count = bis.read(buffer)) != -1) &#123;</div><div class="line">		fos.write(buffer, 0, count);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">--------------------------------ZipFile---------------------------------</div><div class="line">Enumeration e = ZipFile.entries();</div><div class="line">while (e.hasMoreElements()) &#123;</div><div class="line">	entry = (ZipEntry) e.nextElement();</div><div class="line">	if (低压缩率文件，如文本) &#123;</div><div class="line">		is = new BufferedInputStream(zipFile.getInputStream(entry));</div><div class="line">	&#125; else if (高压缩文件，如图片) &#123;</div><div class="line">		is = zipFile.getInputStream(entry);</div><div class="line">		byte[] buffer = new byte[8192];</div><div class="line">		while ((count = is.read(buffer, 0, buffer.length)) != -1) &#123;</div><div class="line">			fos.write(buffer, 0, count);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="7-请勿重复打开数据库。"><a href="#7-请勿重复打开数据库。" class="headerlink" title="7.请勿重复打开数据库。"></a>7.请勿重复打开数据库。</h3><p>由SQLiteDatabase的#getWriteableDatabase()方法的注释：一旦打开数据库，该链接会被缓存，以供下一次使用，只有当真正不需要时，调用close()关闭。</p>
 <h3 id="8-减少使用select-。"><a href="#8-减少使用select-。" class="headerlink" title="8.减少使用select *。"></a>8.减少使用select *。</h3><h3 id="9-请勿滥用AUTOINCREMENT关键字。"><a href="#9-请勿滥用AUTOINCREMENT关键字。" class="headerlink" title="9.请勿滥用AUTOINCREMENT关键字。"></a>9.请勿滥用AUTOINCREMENT关键字。</h3><p>AUTOINCREMENT用于数据库主键唯一性、递增性，会增加CPU、内存、磁盘空间和磁盘I/O的负担，所以尽量不要用。因为AUTOINCREMENT实现原理是维护另一张表，表记录了已使用的最大行号等信息。</p>
-
+<h2 id="二、内存"><a href="#二、内存" class="headerlink" title="二、内存"></a>二、内存</h2><p>获取虚拟机分配的内存大小：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">long maxMemory = Runtime.getRuntime().maxMemory();</div></pre></td></tr></table></figure>
+<p>那么什么是管理好内存呢？</p>
+<ul>
+<li>减少内存的申请回收。</li>
+<li>减少常驻内存。</li>
+<li>避免内存泄漏。</li>
+</ul>
+<p>实用工具：</p>
+<ul>
+<li>LeakCanary<ul>
+<li>定义了许多系统级内存泄漏问题<a href="https://github.com/square/leakcanary/blob/master/leakcanary-android/src/main/java/com/squareup/leakcanary/AndroidExcludedRefs.java" target="_blank" rel="external">https://github.com/square/leakcanary/blob/master/leakcanary-android/src/main/java/com/squareup/leakcanary/AndroidExcludedRefs.java</a></li>
+</ul>
+</li>
+<li>LeakInspector</li>
+<li>Android Allocation Tracer</li>
+</ul>
+<h3 id="1-内类是危险的编码方式"><a href="#1-内类是危险的编码方式" class="headerlink" title="1.内类是危险的编码方式"></a>1.内类是危险的编码方式</h3><p>java的非静态类对象会持有外部类的强引用。在Android中，某些类是具有特殊的生命周期的，比如Context、Fragment。一旦他们与非静态类对象生命周期不同步，就会出现内存泄漏问题，甚至是crash。</p>
+<p>解决方案：</p>
+<ul>
+<li>尽量不用非静态内部类。</li>
+<li>若需要外部类引用，请使用弱引用。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public abstract class WeakContainer&lt;T&gt; &#123;</div><div class="line"></div><div class="line">    private WeakReference&lt;T&gt; mContainer;</div><div class="line"></div><div class="line">    public WeakContainer(T ref) &#123;</div><div class="line">        mContainer = new WeakReference&lt;&gt;(ref);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public T getRef() &#123;</div><div class="line">        return mContainer.get();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">使用时继承它实现需要的接口就可以了。</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/11/Android移动性能实战笔记/" data-id="cjet7o4kp0005a2x7slpw5tt0" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/11/Android移动性能实战笔记/" data-id="cjfhx8bal000543zwrbmtu2f4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -188,23 +211,23 @@
       <ul>
         
           <li>
+            <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/">Android开发者建议尽量不使用Fragment</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git标签/">git标签</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git文件回退/">git文件回退</a>
+          </li>
+        
+          <li>
             <a href="/2018/03/15/AndroidStudio使用技巧/">AndroidStudio使用技巧</a>
           </li>
         
           <li>
             <a href="/2018/03/13/submodule用法/">submodule用法</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/11/Android移动性能实战笔记/">Android移动性能实战笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/19/ProtocolBuffers的介绍和使用/">ProtocolBuffers的介绍和使用</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/19/FlatBuffers的介绍和使用/">FlatBuffers的介绍和使用</a>
           </li>
         
       </ul>

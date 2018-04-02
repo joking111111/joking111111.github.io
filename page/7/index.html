@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-mac下配置zsh" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Glide笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/11/08/mac下配置zsh/" class="article-date">
-  <time datetime="2017-11-08T01:09:06.000Z" itemprop="datePublished">2017-11-08</time>
+    <a href="/2017/11/19/Glide笔记/" class="article-date">
+  <time datetime="2017-11-19T06:23:15.000Z" itemprop="datePublished">2017-11-19</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/08/mac下配置zsh/">Mac下配置zsh</a>
+      <a class="article-title" href="/2017/11/19/Glide笔记/">Glide笔记</a>
     </h1>
   
 
@@ -84,117 +84,34 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-前期准备"><a href="#1-前期准备" class="headerlink" title="1.前期准备"></a>1.前期准备</h2><p>以下安装请自行搜索。</p>
+        <h2 id="一-基本组件"><a href="#一-基本组件" class="headerlink" title="一.基本组件"></a>一.基本组件</h2><h3 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1.基本使用"></a>1.基本使用</h3><p>以下均基于Glide4.x版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//加载图片</div><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.into(imageView);</div><div class="line"></div><div class="line">//取消加载</div><div class="line">Glide.with(getContext())</div><div class="line">.clear(imageView);</div></pre></td></tr></table></figure>
+<h3 id="2-RequestOptions"><a href="#2-RequestOptions" class="headerlink" title="2.RequestOptions"></a>2.RequestOptions</h3><p>Glide的常用选项</p>
 <ul>
-<li>安装homebrew。</li>
-<li>安装homebrew cask。</li>
+<li>裁剪样式circleCrop、circleCrop等。</li>
+<li>加载中占位图placeholder</li>
+<li>加载失败图error</li>
+<li>…</li>
 </ul>
-<h2 id="2-配置过程"><a href="#2-配置过程" class="headerlink" title="2.配置过程"></a>2.配置过程</h2><ul>
-<li><p>安装brew上的zsh <code>brew install zsh</code></p>
-</li>
-<li><p>安装iterm2（可选，只是换更好用的终端） <code>brew cask install iterm2</code></p>
-</li>
-<li><p>切换到zsh<br><code>chsh -s /bin/zsh</code><br>如果要切换回来，执行<br><code>chsh -s /bin/bash</code><br>查看当前使用哪种shell<br><code>echo $SHELL</code></p>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">RequestOptions centerCropOptions = new RequestOptions()</div><div class="line">            .centerCrop()</div><div class="line">            .placeholder(R.drawable.img_loading)</div><div class="line">            .error(R.drawable.img_failed);</div></pre></td></tr></table></figure>
+<h3 id="3-RequestBuilder"><a href="#3-RequestBuilder" class="headerlink" title="3.RequestBuilder"></a>3.RequestBuilder</h3><p>可以理解为一个个的请求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder = Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options);</div></pre></td></tr></table></figure>
+<p>当调用RequestBuilder.into(target)时开始加载。这个方法的返回值类型不再是RequestBuilder了。</p>
+<h2 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h2><h3 id="1-加载失败回调监听"><a href="#1-加载失败回调监听" class="headerlink" title="1.加载失败回调监听"></a>1.加载失败回调监听</h3><p>RequestBuilder.listen(RequestListener)方法监听load成功还是失败。</p>
+<ul>
+<li>注意这里不能在监听里对同一个target（imageView）发起加载请求，因为当前请求尚未结束，会抛出异常。</li>
+<li>所以无法使用这个监听实现加载失败时加载备用url的需求。</li>
 </ul>
-<h2 id="3-进阶配置"><a href="#3-进阶配置" class="headerlink" title="3.进阶配置"></a>3.进阶配置</h2><ul>
-<li><p>下载oh-my-zsh，不需要设置哪个目录，新开一个终端就可以了。 <code>git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</code></p>
-</li>
-<li><p>拷贝出oh-my-zsh中的文件作为自己的配置文件 <code>cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</code></p>
-</li>
-<li><p>在.zshrc文件中，追加<code>source .bash_profile</code>保留以前配置的环境变量。</p>
-</li>
-<li><p>zsh还有许多拓展插件，详细可以查看<br><a href="https://github.com/zsh-users" target="_blank" rel="external">https://github.com/zsh-users</a>。</p>
-</li>
-</ul>
-<h2 id="4-可能遇到的问题"><a href="#4-可能遇到的问题" class="headerlink" title="4.可能遇到的问题"></a>4.可能遇到的问题</h2><ul>
-<li>没有.bash_profile文件，请自行创建一个。</li>
-<li>没有.zshrc文件，请执行拷贝配置文件的命令。</li>
-</ul>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.listener(new RequestListener() &#123;</div><div class="line">	@Override</div><div class="line">	public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target, boolean isFirstResource) &#123;</div><div class="line">		//false：事件继续往下传递</div><div class="line">		//true：事件不再往下传递</div><div class="line">   		return false;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public boolean onResourceReady(Object resource, Object model, Target target, DataSource dataSource, boolean isFirstResource) &#123;</div><div class="line">		//false：事件继续往下传递</div><div class="line">		//true：事件不再往下传递</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">&#125;)</div><div class="line">.into(imageView);</div></pre></td></tr></table></figure>
+<h3 id="2-请求失败后启用备用请求"><a href="#2-请求失败后启用备用请求" class="headerlink" title="2.请求失败后启用备用请求"></a>2.请求失败后启用备用请求</h3><p>RequestBuilder.error(RequestBuilder)方法可以在这个request失败后启用备用的request。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder1 = Glide.with(getContext())</div><div class="line">.load(url1)</div><div class="line">.apply(options);</div><div class="line"></div><div class="line">RequestBuilder builder2 = Glide.with(getContext())</div><div class="line">.load(url2)</div><div class="line">.apply(options)</div><div class="line">.error(builder1);</div><div class="line"></div><div class="line">builder2.into(imageView);</div></pre></td></tr></table></figure>
+<p>这段代码意义为当url2加载失败后，会启用builder1这个请求，加载url1。这样我们就可以实现多级url加载了。</p>
+<p>以下为多级加载url方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public static void loadUrls(String[] urls, RequestOptions options, ImageView imageView) &#123;</div><div class="line">        if (urls == null || urls.length == 0) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        RequestBuilder&lt;Drawable&gt; frontBuilder = Glide.with(getContext()).load(urls[0]).apply(options);</div><div class="line">        RequestBuilder&lt;Drawable&gt; prevBuilder = frontBuilder;</div><div class="line">        </div><div class="line">        for (int i = 1; i &lt; urls.length; i++) &#123;</div><div class="line">            RequestBuilder&lt;Drawable&gt; nextBuilder = Glide.with(getContext()).load(urls[i]).apply(options);</div><div class="line">            prevBuilder.error(nextBuilder);</div><div class="line">            prevBuilder = nextBuilder;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        frontBuilder.into(imageView);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/08/mac下配置zsh/" data-id="cjet7o4lb001ra2x73z7654k1" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-常用Android工具命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/07/常用Android工具命令/" class="article-date">
-  <time datetime="2017-11-07T01:02:57.000Z" itemprop="datePublished">2017-11-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/07/常用Android工具命令/">常用Android工具命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、Gradle"><a href="#一、Gradle" class="headerlink" title="一、Gradle"></a>一、Gradle</h2><ul>
-<li>gradlew是gradle wrapper中的可执行命令。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">1、查看gradle版本</div><div class="line">./gradlew -v</div><div class="line">  </div><div class="line">2、清空build文件夹下所有东西</div><div class="line">./gradlew clean</div><div class="line"></div><div class="line">3、检查依赖并编译打包。一般按照build type打出所有包</div><div class="line">./gradlew build</div><div class="line"></div><div class="line">4、打出Debug版本apk，文件在build/output/apk目录下,对应地有assmbleRelease命令</div><div class="line">./gradlew assembleDebug</div><div class="line"></div><div class="line">5、相比上一个命令，清理了编译缓存</div><div class="line">./gradlew clean assembleDebug</div><div class="line"></div><div class="line">6、Release模式打包并安装</div><div class="line">./gradlew installRelease</div><div class="line"></div><div class="line">7、卸载Release模式包</div><div class="line">./gradlew uninstallRelease</div></pre></td></tr></table></figure>
-<h2 id="二、aapt"><a href="#二、aapt" class="headerlink" title="二、aapt"></a>二、aapt</h2><p>aapt全名android asset packaging tool。</p>
-<ul>
-<li>列举apk里有什么文件。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">list可以简写为l</div><div class="line">aapt list [apk path]		在命令行输出</div><div class="line">appt list [apk path] &gt; [file path]		输出到文件</div></pre></td></tr></table></figure>
-<ul>
-<li>查看指定文件信息。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">dump可以简写为d</div><div class="line">aapt dump [value] [apk path]</div><div class="line"></div><div class="line">value的取值有：</div><div class="line">badging</div><div class="line">permissions</div><div class="line">resources</div><div class="line">configurations</div><div class="line">xmltree</div><div class="line">xmlstrings</div><div class="line"></div><div class="line">xmltree,xmlstrings这两个value在命令后面需要加文件相对路径：</div><div class="line">aapt dump xmltree [apk path] [file path]</div></pre></td></tr></table></figure>
-<ul>
-<li>修改apk包</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">aapt package		打成压缩包</div><div class="line">aapt remove		从压缩包中删除</div><div class="line">aapt add		向压缩包添加指定文件</div></pre></td></tr></table></figure>
-<ul>
-<li>显示aapt工具的版本<code>aapt version</code></li>
-</ul>
-<h2 id="三、adb"><a href="#三、adb" class="headerlink" title="三、adb"></a>三、adb</h2><p>adb全名android debug bridge。<br>在不知道某个指令怎么使用时，如adb shell pm，在指令后加上help，这样会输出提示信息。</p>
-<ul>
-<li>常用</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//进入shell模式</div><div class="line">adb shell</div><div class="line"></div><div class="line">//退出shell模式</div><div class="line">exit</div><div class="line"></div><div class="line">//查看连接上的devices</div><div class="line">adb devices</div><div class="line"></div><div class="line">//安装apk</div><div class="line">adb install -r &lt;path&gt;</div><div class="line"></div><div class="line">//从设备拉取文件</div><div class="line">adb pull &lt;remote&gt; &lt;local&gt;从设备拉取文件</div><div class="line"></div><div class="line">//推送文件到设备</div><div class="line">adb push &lt;local&gt; &lt;remote&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>无线调试</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//获取设备IP，确保在同一局域网中</div><div class="line">设置-&gt;关于-&gt;状态选项</div><div class="line"></div><div class="line">//连接设备</div><div class="line">adb connect [IP]</div><div class="line"></div><div class="line">//断开连接</div><div class="line">adb disconnect [IP]</div></pre></td></tr></table></figure>
-<ul>
-<li>帧率分析</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">//打开手机设置</div><div class="line">开发者选项-&gt;GPU显示模式分析-&gt;在adb shell dumpsys gfxinfo中</div><div class="line"></div><div class="line">//终端命令</div><div class="line">adb shell dumpsys gfxinfo [package name] &gt; [file path]</div><div class="line"></div><div class="line">//三列数据：</div><div class="line">draw		绘制时间</div><div class="line">process		渲染计算时间</div><div class="line">execute		Cpu等待Gpu处理的时间</div></pre></td></tr></table></figure>
-<ul>
-<li>dumpsys</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">adb shell dumpsys [value]</div><div class="line"></div><div class="line">value取值：</div><div class="line">Activity</div><div class="line">cpuinfo</div><div class="line">meminfo</div><div class="line">package</div><div class="line">window</div><div class="line">statusbar</div><div class="line">battery/batteryinfo</div><div class="line">alarm</div><div class="line"></div><div class="line">查看帮助：</div><div class="line">1.进入shell模式</div><div class="line">2. dumpsys meminfo -h</div></pre></td></tr></table></figure>
-<ul>
-<li>logcat</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">adb logcat --help</div><div class="line">1、-s</div><div class="line">adb logcat -s [tag]</div><div class="line">只输出特定的tag日志</div><div class="line"></div><div class="line">2、-f</div><div class="line">adb logcat -f [file path]</div><div class="line">保存日志到手机中，注意是手机</div><div class="line"></div><div class="line">3、-v time</div><div class="line">adb logcat -v time</div><div class="line">输出日志包含具体的时间</div><div class="line"></div><div class="line">4、grep</div><div class="line">过滤指令</div><div class="line"></div><div class="line">5、&gt;</div><div class="line">重定向符，保存日志到PC上，注意是PC</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/07/常用Android工具命令/" data-id="cjet7o4le001xa2x70e3c48wf" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cjfhx8bat000r43zw5muwyzt8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -206,10 +123,10 @@
 
 
   
-    <article id="post-管理多个ssh-key" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-android使用kotlin注意事项" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/11/07/管理多个ssh-key/" class="article-date">
-  <time datetime="2017-11-07T00:37:03.000Z" itemprop="datePublished">2017-11-07</time>
+    <a href="/2017/11/19/android使用kotlin注意事项/" class="article-date">
+  <time datetime="2017-11-19T06:23:03.000Z" itemprop="datePublished">2017-11-19</time>
 </a>
     
   </div>
@@ -220,7 +137,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/07/管理多个ssh-key/">管理多个ssh key</a>
+      <a class="article-title" href="/2017/11/19/android使用kotlin注意事项/">Android使用Kotlin注意事项</a>
     </h1>
   
 
@@ -228,32 +145,76 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、生成key"><a href="#一、生成key" class="headerlink" title="一、生成key"></a>一、生成key</h2><h3 id="1-命令行执行"><a href="#1-命令行执行" class="headerlink" title="1.命令行执行"></a>1.命令行执行</h3><p><code>ssh-keygen -t rsa -C &quot;yourmail@gmail.com&quot;</code> </p>
-<h3 id="2-接着提示存储文件名字"><a href="#2-接着提示存储文件名字" class="headerlink" title="2.接着提示存储文件名字"></a>2.接着提示存储文件名字</h3><p>我的命名规则为<code>id_rsa_xxx</code>。<br><img src="/2017/11/07/管理多个ssh-key/ssh-keygen.png" alt="ssh-keygen"></p>
-<h3 id="3-之后可以一直回车结束"><a href="#3-之后可以一直回车结束" class="headerlink" title="3.之后可以一直回车结束"></a>3.之后可以一直回车结束</h3><h2 id="二、配置key"><a href="#二、配置key" class="headerlink" title="二、配置key"></a>二、配置key</h2><h3 id="1-命令行执行-1"><a href="#1-命令行执行-1" class="headerlink" title="1.命令行执行"></a>1.命令行执行</h3><p><code>ssh-add ~/.ssh/id_rsa_xxx</code><br><code>id_rsa_xxx</code>是指你在上述步骤生成的密钥文件名。</p>
-<h3 id="2-创建config文件"><a href="#2-创建config文件" class="headerlink" title="2.创建config文件"></a>2.创建config文件</h3><ul>
-<li>进入.ssh文件夹，创建一个文本文件，命名为config。</li>
-<li>每一个key可以按照一下格式加到config文件，#号代表注释。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># github</div><div class="line">Host github</div><div class="line">HostName github.com</div><div class="line">User git</div><div class="line">IdentityFile ~/.ssh/id_rsa_github</div></pre></td></tr></table></figure>
-<h2 id="三、测试key"><a href="#三、测试key" class="headerlink" title="三、测试key"></a>三、测试key</h2><h3 id="1-远程仓库配置ssh-key"><a href="#1-远程仓库配置ssh-key" class="headerlink" title="1.远程仓库配置ssh key"></a>1.远程仓库配置ssh key</h3><p>这个请自行搜索。</p>
-<h3 id="2-本地测试是否连通"><a href="#2-本地测试是否连通" class="headerlink" title="2.本地测试是否连通"></a>2.本地测试是否连通</h3><ul>
-<li>命令行执行<code>ssh -T github</code></li>
-<li><code>github</code>是在config文件中定义的Host字段。</li>
-<li>测试成功会出现以下提示：<br><img src="/2017/11/07/管理多个ssh-key/ssh -T.png" alt="ssh -T"></li>
-</ul>
-<h2 id="四、补充"><a href="#四、补充" class="headerlink" title="四、补充"></a>四、补充</h2><ul>
-<li>如何在finder中查看.ssh，请搜索mac如何显示隐藏文件。</li>
-<li>查看ssh版本<code>ssh -V</code>。</li>
+        <h2 id="一、注意参数可空"><a href="#一、注意参数可空" class="headerlink" title="一、注意参数可空"></a>一、注意参数可空</h2><p>现在第三方库基本都用java写，使用kotlin调用三方库时，最常见的场景就是实现回调接口。实现回调接口的时候，注意接口方法参数如果可空一定要加上”?”修饰，否则崩溃时很难从日志发现问题所在。</p>
+<ul>
+<li>基本数据类型没必要加”?”，只有对象才需要加。</li>
+<li>使用kotlin设计接口时也要注意这一点。</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/07/管理多个ssh-key/" data-id="cjet7o4lg0023a2x738ru9zps" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/19/android使用kotlin注意事项/" data-id="cjfhx8baz001743zwrs7kwkni" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-搭建基于hexo的博客以及如何迁移" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/09/搭建基于hexo的博客以及如何迁移/" class="article-date">
+  <time datetime="2017-11-09T13:22:17.000Z" itemprop="datePublished">2017-11-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/09/搭建基于hexo的博客以及如何迁移/">搭建基于hexo的博客以及如何迁移</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、搭建环境"><a href="#一、搭建环境" class="headerlink" title="一、搭建环境"></a>一、搭建环境</h2><h3 id="1-安装git"><a href="#1-安装git" class="headerlink" title="1.安装git"></a>1.安装git</h3><h3 id="2-安装Node-js"><a href="#2-安装Node-js" class="headerlink" title="2.安装Node.js"></a>2.安装Node.js</h3><h3 id="3-检查版本"><a href="#3-检查版本" class="headerlink" title="3.检查版本"></a>3.检查版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">node -v</div><div class="line">npm -v</div><div class="line">git --version</div></pre></td></tr></table></figure>
+<p>以上安装可以通过Homebrew。</p>
+<h3 id="4-安装hexo"><a href="#4-安装hexo" class="headerlink" title="4.安装hexo"></a>4.安装hexo</h3><p>终端所在位置就是安装位置。<br><code>npm install -g hexo-cli</code></p>
+<h3 id="5-初始化本地博客"><a href="#5-初始化本地博客" class="headerlink" title="5.初始化本地博客"></a>5.初始化本地博客</h3><p>首先新建一个合适的文件夹如hexo。注意这个文件夹必须为空，否则提示错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init &lt;文件夹名&gt;</div></pre></td></tr></table></figure>
+<p>期间请按照终端的提示操作就好了。</p>
+<h2 id="二、hexo的使用"><a href="#二、hexo的使用" class="headerlink" title="二、hexo的使用"></a>二、hexo的使用</h2><h3 id="1-主要文件和目录"><a href="#1-主要文件和目录" class="headerlink" title="1.主要文件和目录"></a>1.主要文件和目录</h3><ul>
+<li><code>_config.yml</code> 这个文件是这个博客的配置文件。<br>具体看<a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">官方文档</a>。</li>
+<li>source文件夹<br>这个文件夹存放你写的md文件。我一般在github创建一个仓库，利用git进行管理。当然你的博客原文件将被看到，有被抄袭的风险。</li>
+</ul>
+<h3 id="2-使用命令"><a href="#2-使用命令" class="headerlink" title="2.使用命令"></a>2.使用命令</h3><ul>
+<li><code>hexo n &quot;hello world&quot;</code>    创建名为hello world的博客。</li>
+<li><code>hexo g</code>  hexo生成html等文件。</li>
+<li><code>hexo s</code>  hexo使用node.js运行本地服务器进行预览。<br>在命令行会看到预览地址，用浏览器打开就是了。命令行control+c退出本地服务器。</li>
+</ul>
+<h2 id="三、迁移博客"><a href="#三、迁移博客" class="headerlink" title="三、迁移博客"></a>三、迁移博客</h2><p><a href="https://www.zhihu.com/question/21193762/answer/103097754" target="_blank" rel="external">使用hexo，如果换了电脑怎么更新博客？ - skycrown的回答</a></p>
+<h2 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h2><ul>
+<li>《Android群英传 神兵利器》徐宜生著</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/11/09/搭建基于hexo的博客以及如何迁移/" data-id="cjfhx8bbb002343zwmmwe93uj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
 
     </footer>
   </div>
@@ -265,7 +226,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/6/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/8/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/8/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -310,23 +271,23 @@
       <ul>
         
           <li>
+            <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/">Android开发者建议尽量不使用Fragment</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git标签/">git标签</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git文件回退/">git文件回退</a>
+          </li>
+        
+          <li>
             <a href="/2018/03/15/AndroidStudio使用技巧/">AndroidStudio使用技巧</a>
           </li>
         
           <li>
             <a href="/2018/03/13/submodule用法/">submodule用法</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/11/Android移动性能实战笔记/">Android移动性能实战笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/19/ProtocolBuffers的介绍和使用/">ProtocolBuffers的介绍和使用</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/19/FlatBuffers的介绍和使用/">FlatBuffers的介绍和使用</a>
           </li>
         
       </ul>

@@ -15,7 +15,11 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/AutoScrollFromSource.png">
 <meta property="og:image" content="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/LineNumber&Annotations.png">
-<meta property="og:updated_time" content="2018-03-16T00:07:59.000Z">
+<meta property="og:image" content="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/EnterPresentation.png">
+<meta property="og:image" content="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/JumpToFinder1.png">
+<meta property="og:image" content="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/JumpToFinder2.png">
+<meta property="og:image" content="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/SplitWindow.png">
+<meta property="og:updated_time" content="2018-04-02T07:36:26.110Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AndroidStudio使用技巧">
 <meta name="twitter:description" content="一、快捷键IntelliJ快捷键PDF Mac下常用快捷键 double shift = 查找文件 command + F = 文件内查找 command + enter = 查看提示 command + alt + L = 代码整理 command + L = 跳转到文件的某一行 alt + F7 = Find Usages shift + F6 = 改名 F2 = 逐个跳转到当前文件Lint提">
@@ -101,9 +105,14 @@
 <li>shift + F6 = 改名</li>
 <li>F2 = 逐个跳转到当前文件Lint提示位置</li>
 <li>F3 = 增加/删除书签</li>
+<li>control + alt + H = 查看方法的调用栈</li>
 </ul>
 <h2 id="二、设置"><a href="#二、设置" class="headerlink" title="二、设置"></a>二、设置</h2><h3 id="1-文件列表自动滑到对应位置"><a href="#1-文件列表自动滑到对应位置" class="headerlink" title="1.文件列表自动滑到对应位置"></a>1.文件列表自动滑到对应位置</h3><p><img src="/2018/03/15/AndroidStudio使用技巧/AutoScrollFromSource.png" alt="AutoScrollFromSource"></p>
 <h3 id="2-设置显示行号和显示修改记录"><a href="#2-设置显示行号和显示修改记录" class="headerlink" title="2.设置显示行号和显示修改记录"></a>2.设置显示行号和显示修改记录</h3><p><img src="/2018/03/15/AndroidStudio使用技巧/LineNumber&amp;Annotations.png" alt="LineNumber&amp;Annotations"></p>
+<h3 id="3-进入演示模式（可双指放缩）"><a href="#3-进入演示模式（可双指放缩）" class="headerlink" title="3.进入演示模式（可双指放缩）"></a>3.进入演示模式（可双指放缩）</h3><p><img src="/2018/03/15/AndroidStudio使用技巧/EnterPresentation.png" alt="EnterPresentation"></p>
+<h3 id="4-跳转到文件系统"><a href="#4-跳转到文件系统" class="headerlink" title="4.跳转到文件系统"></a>4.跳转到文件系统</h3><p>方法一、在树目录右键文件<br><img src="/2018/03/15/AndroidStudio使用技巧/JumpToFinder1.png" alt="JumpToFinder1"></p>
+<p>方法二、按住command键，左键单击上部文件Tab<br><img src="/2018/03/15/AndroidStudio使用技巧/JumpToFinder2.png" alt="JumpToFinder2"></p>
+<h3 id="5-分屏"><a href="#5-分屏" class="headerlink" title="5.分屏"></a>5.分屏</h3><p>右键单击上部Tab<br><img src="/2018/03/15/AndroidStudio使用技巧/SplitWindow.png" alt="SplitWindow"></p>
 <h2 id="三、插件"><a href="#三、插件" class="headerlink" title="三、插件"></a>三、插件</h2><ul>
 <li>.ignore</li>
 <li>ADB Idea</li>
@@ -113,14 +122,25 @@
 <li>Android Code Generator</li>
 <li>Android Material Design Icon Generator</li>
 <li><a href="http://www.github.com/pedrovgs pedrovicente.gomez at gmail dot com" target="_blank" rel="external">Android WiFi ADB</a></li>
+<li>GsonFormat</li>
 <li><a href="https://github.com/Skykai521 daqingkai@boohee.com" target="_blank" rel="external">ECTranslation</a></li>
 <li><a href="http://github.com/scana scanarch@gmail.com" target="_blank" rel="external">OK,Gradle!</a></li>
+</ul>
+<h2 id="四、xml中tools工具"><a href="#四、xml中tools工具" class="headerlink" title="四、xml中tools工具"></a>四、xml中tools工具</h2><p>首先，要声明tools命名空间。</p>
+<h3 id="1-根布局"><a href="#1-根布局" class="headerlink" title="1.根布局"></a>1.根布局</h3><ul>
+<li>tools:context = 该视图附着的Activity</li>
+<li>tools:showIn = 当前是内部布局，想预览到外层布局</li>
+<li>tools:parentTag = 使用merge标签时，可以用这属性告诉preview该用什么布局渲染。</li>
+</ul>
+<h3 id="2-子元素"><a href="#2-子元素" class="headerlink" title="2.子元素"></a>2.子元素</h3><ul>
+<li>tools:text = 文本内容</li>
+<li>元素属性都可以通过这个命名空间弄出预览效果</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/" data-id="cjet7o4kl0001a2x78wy7u338" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/" data-id="cjfhx8bae000043zwlfxhhmit" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -130,6 +150,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2018/03/19/git文件回退/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          git文件回退
+        
+      </div>
+    </a>
   
   
     <a href="/2018/03/13/submodule用法/" id="article-nav-older" class="article-nav-link-wrap">
@@ -185,23 +214,23 @@
       <ul>
         
           <li>
+            <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/">Android开发者建议尽量不使用Fragment</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git标签/">git标签</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/19/git文件回退/">git文件回退</a>
+          </li>
+        
+          <li>
             <a href="/2018/03/15/AndroidStudio使用技巧/">AndroidStudio使用技巧</a>
           </li>
         
           <li>
             <a href="/2018/03/13/submodule用法/">submodule用法</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/11/Android移动性能实战笔记/">Android移动性能实战笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/19/ProtocolBuffers的介绍和使用/">ProtocolBuffers的介绍和使用</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/19/FlatBuffers的介绍和使用/">FlatBuffers的介绍和使用</a>
           </li>
         
       </ul>
