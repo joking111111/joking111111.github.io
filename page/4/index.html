@@ -62,6 +62,46 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ProtocolBuffers在Mac-OS的安装" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/18/ProtocolBuffers在Mac-OS的安装/" class="article-date">
+  <time datetime="2018-01-18T15:26:26.000Z" itemprop="datePublished">2018-01-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/18/ProtocolBuffers在Mac-OS的安装/">ProtocolBuffers在Mac OS的安装</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、检查环境"><a href="#一、检查环境" class="headerlink" title="一、检查环境"></a>一、检查环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//安装autoconf、automake、libtool工具</div><div class="line">brew install autoconf automake libtool</div></pre></td></tr></table></figure>
+<h2 id="二、安装步骤"><a href="#二、安装步骤" class="headerlink" title="二、安装步骤"></a>二、安装步骤</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//1.clone源码</div><div class="line">git clone https://github.com/google/protobuf.git</div><div class="line"></div><div class="line">//2.进入项目目录</div><div class="line">cd protobuf</div><div class="line"></div><div class="line">//3.生成configure脚本</div><div class="line">./autogen.sh</div><div class="line"></div><div class="line">//4.安装</div><div class="line">./configure</div><div class="line">make</div><div class="line">make check</div><div class="line">sudo make install</div><div class="line"></div><div class="line">//5.配置protoc的环境变量，即protobuf项目的目录路径</div><div class="line">略。</div><div class="line"></div><div class="line">//6.可略过</div><div class="line">sudo ldconfig # refresh shared library cache.</div></pre></td></tr></table></figure>
+<h2 id="三、检查是否安装成功"><a href="#三、检查是否安装成功" class="headerlink" title="三、检查是否安装成功"></a>三、检查是否安装成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">protoc --version</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2018/01/18/ProtocolBuffers在Mac-OS的安装/" data-id="cjjasxry50010r9zwthllmg5o" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-FlatBuffers在Mac-OS的安装步骤" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/18/FlatBuffers在Mac-OS的安装步骤/" class="article-date">
@@ -90,7 +130,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/01/18/FlatBuffers在Mac-OS的安装步骤/" data-id="cjfhx8bar000k43zwfg1c9o1g" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/01/18/FlatBuffers在Mac-OS的安装步骤/" data-id="cjjasxrxy000hr9zwh7dz3r59" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
@@ -201,98 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/12/16/Android应用UI性能分析/" data-id="cjfhx8bak000443zwyhmcydbb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SpannableString及其相关类的使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/12/15/SpannableString及其相关类的使用/" class="article-date">
-  <time datetime="2017-12-15T00:32:29.000Z" itemprop="datePublished">2017-12-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/15/SpannableString及其相关类的使用/">SpannableString及其相关类的使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、继承关系"><a href="#一、继承关系" class="headerlink" title="一、继承关系"></a>一、继承关系</h2><p><img src="/2017/12/15/SpannableString及其相关类的使用/继承关系.png" alt="继承关系"><br>由于TextView.setText(CharSequence text)接收参数类型为CharSequence，所以他们都能作为setText的参数使用。</p>
-<h2 id="二、主要方法"><a href="#二、主要方法" class="headerlink" title="二、主要方法"></a>二、主要方法</h2><h3 id="1-setSpan-Object-what-int-start-int-end-int-flags"><a href="#1-setSpan-Object-what-int-start-int-end-int-flags" class="headerlink" title="1.setSpan(Object what, int start, int end, int flags)"></a>1.setSpan(Object what, int start, int end, int flags)</h3><p>参数含义：</p>
-<ul>
-<li>what 各种Span样式。</li>
-<li>start 改变样式的字符起点，就是要改的第一个下标。</li>
-<li>end 改变样式的字符终点，就是要改的最后一个下标的下一个下标。<br>通常end = start + length。</li>
-<li>flags 标记位，用于标记修改字符串前后的字符的变化规则。</li>
-<li>注意这里中文一个字算一个字符。</li>
-</ul>
-<p>what参数：</p>
-<ul>
-<li><p>常用类型</p>
-<ul>
-<li>ForegroundColorSpan 文本颜色</li>
-<li>BackgroundColorSpan 文本背景色</li>
-<li>URLSpan 文本超链接</li>
-<li>UnderlineSpan 下划线</li>
-<li>StrikethroughSpan 删除线</li>
-<li>ImageSpan 图片</li>
-<li>DynamicDrawableSpan 设置图片，基于文本基线或底部对齐。</li>
-<li>ClickableSpan 点击事件</li>
-</ul>
-</li>
-<li><p>其他类型</p>
-<ul>
-<li>StyleSpan 字体样式：粗体、斜体等</li>
-<li>MaskFilterSpan 修饰效果，如浮雕模糊(BlurMaskFilter)</li>
-<li>RasterizerSpan 光栅效果</li>
-<li>TextAppearanceSpan 文本外貌（包括字体、大小、样式和颜色）</li>
-<li>TypefaceSpan 文本字体</li>
-<li>SuggestionSpan 相当于占位符</li>
-<li>AbsoluteSizeSpan 文本字体（绝对大小）</li>
-<li>RelativeSizeSpan 相对大小（文本字体）</li>
-<li>ScaleXSpan 基于x轴缩放</li>
-<li>SubscriptSpan 下标（数学公式会用到）</li>
-<li>SuperscriptSpan 上标（数学公式会用到）</li>
-</ul>
-</li>
-</ul>
-<p>flags参数：</p>
-<ul>
-<li><p><code>Spannable.SPAN_EXCLUSIVE_INCLUSIVE</code><br>新增前插字符不应用效果，新增后插字符应用效果。</p>
-</li>
-<li><p><code>Spannable.SPAN_INCLUSIVE_EXCLUSIVE</code><br>新增前插字符应用效果，新增后插字符不应用效果。</p>
-</li>
-<li><p><code>Spannable.SPAN_INCUJSIVE_INCLUSIVE</code><br>前后新增的字符都应用效果。</p>
-</li>
-<li><p><code>Spannable.SPAN_EXCLUSIVE_EXCLUSIVE</code><br>前后新增的字符都不应用效果。</p>
-</li>
-</ul>
-<h2 id="三、图解参数"><a href="#三、图解参数" class="headerlink" title="三、图解参数"></a>三、图解参数</h2><h3 id="1-start、end、flags参数图解"><a href="#1-start、end、flags参数图解" class="headerlink" title="1.start、end、flags参数图解"></a>1.start、end、flags参数图解</h3><p><img src="/2017/12/15/SpannableString及其相关类的使用/图解参数.png" alt="图解参数"></p>
-<h3 id="2-what参数图解"><a href="#2-what参数图解" class="headerlink" title="2.what参数图解"></a>2.what参数图解</h3><p>由于种类过多就不做了。其实没必要做，你只需要知道你想做什么效果，然后点进该类源码，查看构造函数和其公有方法，自然就了解这个类有什么用了。</p>
-<p>了解一个类有什么功能的捷径就是查看源码，本篇文章仅辅助你去理解他们。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/12/15/SpannableString及其相关类的使用/" data-id="cjfhx8bay001343zwqo4jivqi" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/12/16/Android应用UI性能分析/" data-id="cjjasxrxu0008r9zwmhqjvk2d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -320,7 +269,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
     </div>
   </div>
 
@@ -330,7 +279,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/kotlin/" style="font-size: 10px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 13.33px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
     </div>
   </div>
 
@@ -352,6 +301,10 @@
       <ul>
         
           <li>
+            <a href="/2018/03/24/AndroidGradle权威指南笔记/">AndroidGradle权威指南笔记</a>
+          </li>
+        
+          <li>
             <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/">Android开发者建议尽量不使用Fragment</a>
           </li>
         
@@ -365,10 +318,6 @@
         
           <li>
             <a href="/2018/03/15/AndroidStudio使用技巧/">AndroidStudio使用技巧</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/13/submodule用法/">submodule用法</a>
           </li>
         
       </ul>

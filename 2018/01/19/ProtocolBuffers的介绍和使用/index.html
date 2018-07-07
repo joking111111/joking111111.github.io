@@ -5,15 +5,18 @@
   
   <title>ProtocolBuffers的介绍和使用 | Stay Hungry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Android">
+  <meta name="description" content="一、介绍1.官网https://developers.google.com/protocol-buffers/ 2.优势使用ProtocolBuffers代替JSON的五个原因（译文） 二、使用1.安装1brew install protobuf 安装成功后可以使用protoc --help查看帮助。 2.编写.proto文件按照ProtocolBuffers的规范编写数据结构，一般由后端开发人员">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ProtocolBuffers的介绍和使用">
 <meta property="og:url" content="https://joking111111.github.io/2018/01/19/ProtocolBuffers的介绍和使用/index.html">
 <meta property="og:site_name" content="Stay Hungry">
+<meta property="og:description" content="一、介绍1.官网https://developers.google.com/protocol-buffers/ 2.优势使用ProtocolBuffers代替JSON的五个原因（译文） 二、使用1.安装1brew install protobuf 安装成功后可以使用protoc --help查看帮助。 2.编写.proto文件按照ProtocolBuffers的规范编写数据结构，一般由后端开发人员">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-01-19T00:56:01.000Z">
+<meta property="og:updated_time" content="2018-07-07T02:21:10.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ProtocolBuffers的介绍和使用">
+<meta name="twitter:description" content="一、介绍1.官网https://developers.google.com/protocol-buffers/ 2.优势使用ProtocolBuffers代替JSON的五个原因（译文） 二、使用1.安装1brew install protobuf 安装成功后可以使用protoc --help查看帮助。 2.编写.proto文件按照ProtocolBuffers的规范编写数据结构，一般由后端开发人员">
   
     <link rel="alternate" href="/atom.xml" title="Stay Hungry" type="application/atom+xml">
   
@@ -84,11 +87,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><h3 id="1-官网"><a href="#1-官网" class="headerlink" title="1.官网"></a>1.官网</h3><p><a href="https://developers.google.com/protocol-buffers/" target="_blank" rel="external">https://developers.google.com/protocol-buffers/</a></p>
+<h3 id="2-优势"><a href="#2-优势" class="headerlink" title="2.优势"></a>2.优势</h3><p><a href="https://www.oschina.net/translate/choose-protocol-buffers" target="_blank" rel="external">使用ProtocolBuffers代替JSON的五个原因（译文）</a></p>
+<h2 id="二、使用"><a href="#二、使用" class="headerlink" title="二、使用"></a>二、使用</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install protobuf</div></pre></td></tr></table></figure>
+<p>安装成功后可以使用<code>protoc --help</code>查看帮助。</p>
+<h3 id="2-编写-proto文件"><a href="#2-编写-proto文件" class="headerlink" title="2.编写.proto文件"></a>2.编写.proto文件</h3><p>按照ProtocolBuffers的规范编写数据结构，一般由后端开发人员编写。</p>
+<h3 id="3-生产-java文件"><a href="#3-生产-java文件" class="headerlink" title="3.生产.java文件"></a>3.生产.java文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">protoc -I=[.proto文件所在目录] --javanano_out=[输出java文件的目录] [需要编译的.proto文件名]</div></pre></td></tr></table></figure>
+<p>推荐输出目录使用javanano文件夹，不过并非必需的。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/01/19/ProtocolBuffers的介绍和使用/" data-id="cjfhx8bax001143zwk8occd9o" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/01/19/ProtocolBuffers的介绍和使用/" data-id="cjjasxry50012r9zwxfty3w7d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -130,7 +140,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
     </div>
   </div>
 
@@ -140,7 +150,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/kotlin/" style="font-size: 10px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 13.33px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
     </div>
   </div>
 
@@ -162,6 +172,10 @@
       <ul>
         
           <li>
+            <a href="/2018/03/24/AndroidGradle权威指南笔记/">AndroidGradle权威指南笔记</a>
+          </li>
+        
+          <li>
             <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/">Android开发者建议尽量不使用Fragment</a>
           </li>
         
@@ -175,10 +189,6 @@
         
           <li>
             <a href="/2018/03/15/AndroidStudio使用技巧/">AndroidStudio使用技巧</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/13/submodule用法/">submodule用法</a>
           </li>
         
       </ul>

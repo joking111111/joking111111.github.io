@@ -62,6 +62,46 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-AndroidGradle权威指南笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/24/AndroidGradle权威指南笔记/" class="article-date">
+  <time datetime="2018-03-24T01:22:11.000Z" itemprop="datePublished">2018-03-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/24/AndroidGradle权威指南笔记/">AndroidGradle权威指南笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、常用特性"><a href="#一、常用特性" class="headerlink" title="一、常用特性"></a>一、常用特性</h2><h3 id="1-强制刷新Maven库"><a href="#1-强制刷新Maven库" class="headerlink" title="1.强制刷新Maven库"></a>1.强制刷新Maven库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./gradlew --refresh-dependencies assemble</div></pre></td></tr></table></figure>
+<h3 id="2-多任务串行执行"><a href="#2-多任务串行执行" class="headerlink" title="2.多任务串行执行"></a>2.多任务串行执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">./gradlew clean assembleDebug</div><div class="line">先执行clean然后执行assembleDebug。</div></pre></td></tr></table></figure>
+<h3 id="3-任务缩写执行"><a href="#3-任务缩写执行" class="headerlink" title="3.任务缩写执行"></a>3.任务缩写执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">./gradlew connectCheck</div><div class="line">等价：</div><div class="line">./gradlew cc</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2018/03/24/AndroidGradle权威指南笔记/" data-id="cjjasxrxl0000r9zw9gdbke9w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Android开发者建议尽量不使用Fragment" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/" class="article-date">
@@ -106,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/23/Android开发者建议尽量不使用Fragment/" data-id="cjfhx8bam000843zwmxfr44f7" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/23/Android开发者建议尽量不使用Fragment/" data-id="cjjasxrxv0009r9zwjhsid4d3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -148,49 +188,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/19/git标签/" data-id="cjfhx8bb0001943zwqsqw2x83" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git文件回退" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/19/git文件回退/" class="article-date">
-  <time datetime="2018-03-19T14:34:28.000Z" itemprop="datePublished">2018-03-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/19/git文件回退/">git文件回退</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>虽然git stash很好使,但是如果只想舍弃某个文件修改，git stash的代价太大了。因此我们可以使用单文件回退操作。</p>
-<h2 id="一、文件修改，但未进行git-add操作"><a href="#一、文件修改，但未进行git-add操作" class="headerlink" title="一、文件修改，但未进行git add操作"></a>一、文件修改，但未进行git add操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//使用版本库内容替换工作区</div><div class="line">git checkout &lt;file相对路径&gt;</div></pre></td></tr></table></figure>
-<h2 id="二、文件修改，已git-add，但未进行git-commit操作"><a href="#二、文件修改，已git-add，但未进行git-commit操作" class="headerlink" title="二、文件修改，已git add，但未进行git commit操作"></a>二、文件修改，已git add，但未进行git commit操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//将修改内容移除暂存区</div><div class="line">git reset HEAD &lt;file相对路径&gt;</div><div class="line">//使用版本库内容替换工作区</div><div class="line">git checkout &lt;file相对路径&gt;</div></pre></td></tr></table></figure>
-<h2 id="三、已将文件修改commit了"><a href="#三、已将文件修改commit了" class="headerlink" title="三、已将文件修改commit了"></a>三、已将文件修改commit了</h2><p>找到你想要舍弃所在的commit SHA，使用以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset &lt;commit SHA&gt; &lt;file相对路径&gt;</div></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/19/git文件回退/" data-id="cjfhx8bb1001c43zwpsg2y35n" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/19/git标签/" data-id="cjjasxryc001fr9zwv54zablb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -218,7 +216,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
     </div>
   </div>
 
@@ -228,7 +226,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/kotlin/" style="font-size: 10px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 13.33px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
     </div>
   </div>
 
@@ -250,6 +248,10 @@
       <ul>
         
           <li>
+            <a href="/2018/03/24/AndroidGradle权威指南笔记/">AndroidGradle权威指南笔记</a>
+          </li>
+        
+          <li>
             <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/">Android开发者建议尽量不使用Fragment</a>
           </li>
         
@@ -263,10 +265,6 @@
         
           <li>
             <a href="/2018/03/15/AndroidStudio使用技巧/">AndroidStudio使用技巧</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/13/submodule用法/">submodule用法</a>
           </li>
         
       </ul>
