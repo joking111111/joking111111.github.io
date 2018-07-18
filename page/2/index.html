@@ -62,6 +62,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git标签" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/19/git标签/" class="article-date">
+  <time datetime="2018-03-19T15:09:57.000Z" itemprop="datePublished">2018-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/19/git标签/">git标签</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、创建标签"><a href="#一、创建标签" class="headerlink" title="一、创建标签"></a>一、创建标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag -a &lt;Tag Name&gt; -m &lt;Message&gt;</div></pre></td></tr></table></figure>
+<h2 id="二、查看Tag"><a href="#二、查看Tag" class="headerlink" title="二、查看Tag"></a>二、查看Tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag</div></pre></td></tr></table></figure>
+<h2 id="三、删除Tag"><a href="#三、删除Tag" class="headerlink" title="三、删除Tag"></a>三、删除Tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag -d &lt;Tag Name&gt;</div></pre></td></tr></table></figure>
+<h2 id="四、推送到远程仓库"><a href="#四、推送到远程仓库" class="headerlink" title="四、推送到远程仓库"></a>四、推送到远程仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//推送某一Tag</div><div class="line">git push origin &lt;Tag Name&gt;</div><div class="line">//推送所有Tag</div><div class="line">git push origin --tags</div></pre></td></tr></table></figure>
+<h2 id="五、删除远程仓库的Tag"><a href="#五、删除远程仓库的Tag" class="headerlink" title="五、删除远程仓库的Tag"></a>五、删除远程仓库的Tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//先本地删除Tag</div><div class="line">git tag -d &lt;Tag Name&gt;</div><div class="line">//再推送到远程仓库</div><div class="line">git push origin :refs/tags/&lt;Tag Name&gt;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2018/03/19/git标签/" data-id="cjjr5bmu1001lhwfy7e7swe6t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-git文件回退" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/19/git文件回退/" class="article-date">
@@ -92,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/19/git文件回退/" data-id="cjjasxrya001cr9zwdgoodth4" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/19/git文件回退/" data-id="cjjr5bmtz001ehwfykoc60twf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -169,55 +211,18 @@
 <li>tools:text = 文本内容</li>
 <li>元素属性都可以通过这个命名空间弄出预览效果</li>
 </ul>
+<h2 id="五、Studio运行内存配置"><a href="#五、Studio运行内存配置" class="headerlink" title="五、Studio运行内存配置"></a>五、Studio运行内存配置</h2><h3 id="1-配置堆内存大小"><a href="#1-配置堆内存大小" class="headerlink" title="1.配置堆内存大小"></a>1.配置堆内存大小</h3><p><a href="https://developer.android.com/studio/intro/studio-config" target="_blank" rel="external">官方文档</a></p>
+<h3 id="2-实时内存占用"><a href="#2-实时内存占用" class="headerlink" title="2.实时内存占用"></a>2.实时内存占用</h3><p><img src="/2018/03/15/AndroidStudio使用技巧/MemoryWatch.png" alt="MemoryWatch"></p>
+<p>之后右下角出现了内存占用窗口。</p>
+<p><img src="/2018/03/15/AndroidStudio使用技巧/MemoryWatchWindow.png" alt="MemoryWatchWindow"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/" data-id="cjjasxrxs0003r9zwi4jaohkt" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/" data-id="cjjr5bmtg0003hwfyx5ce26ku" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-submodule用法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/13/submodule用法/" class="article-date">
-  <time datetime="2018-03-13T00:35:22.000Z" itemprop="datePublished">2018-03-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/13/submodule用法/">submodule用法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、当前仓库下添加submodule仓库"><a href="#一、当前仓库下添加submodule仓库" class="headerlink" title="一、当前仓库下添加submodule仓库"></a>一、当前仓库下添加submodule仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git submodule add &lt;remote_url&gt; &lt;local_path&gt;</div></pre></td></tr></table></figure>
-<h2 id="二、clone一个有submodule的仓库"><a href="#二、clone一个有submodule的仓库" class="headerlink" title="二、clone一个有submodule的仓库"></a>二、clone一个有submodule的仓库</h2><p>对于clone一个有submodule的仓库，是不会把submodule也clone下来的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1. 注册submodule到.git/config里</div><div class="line">	git submodule init</div><div class="line">2. clone submodule</div><div class="line">	git submodule update --recursive</div><div class="line"></div><div class="line">上面两步等价于下面</div><div class="line">	git submodule update --init --recursive</div><div class="line">	</div><div class="line">如果修改了.gitmodule的remote url，使用下面的命令更新submodule的remote url</div><div class="line">	git submodule sync</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/13/submodule用法/" data-id="cjjasxryn0023r9zwy525gzoa" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 
     </footer>
   </div>
@@ -261,7 +266,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -272,6 +277,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/07/16/Android调试技巧/">Android调试技巧</a>
+          </li>
         
           <li>
             <a href="/2018/03/24/AndroidGradle权威指南笔记/">AndroidGradle权威指南笔记</a>
@@ -287,10 +296,6 @@
         
           <li>
             <a href="/2018/03/19/git文件回退/">git文件回退</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/15/AndroidStudio使用技巧/">AndroidStudio使用技巧</a>
           </li>
         
       </ul>

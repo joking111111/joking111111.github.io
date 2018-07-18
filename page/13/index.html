@@ -62,6 +62,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-git版本回退" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/25/git版本回退/" class="article-date">
+  <time datetime="2017-09-25T14:35:22.000Z" itemprop="datePublished">2017-09-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/25/git版本回退/">Git版本回退</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-git-diff-XXX"><a href="#1-git-diff-XXX" class="headerlink" title="1.git diff XXX"></a>1.git diff XXX</h2><ul>
+<li>当我们使用git status查看工作区做了什么修改时，可以使用git diff XXX对修改过的文件XXX查看差异</li>
+</ul>
+<h2 id="2-git-reset-hard-HEAD"><a href="#2-git-reset-hard-HEAD" class="headerlink" title="2.git reset --hard HEAD^"></a>2.git reset <code>--hard</code> HEAD^</h2><h3 id="版本库回退"><a href="#版本库回退" class="headerlink" title="版本库回退"></a>版本库回退</h3><ul>
+<li>首先HEAD是指向当前版本的指针，我们提交的所有操作都建立在这个指针上。</li>
+<li>HEAD是可以移动的，这条命令就是移动HEAD指针在历史版本中移动，HEAD^表示上一版本，HEAD^^和HEAD~2表示上两个版本，以此类推。</li>
+<li><p>由于有<code>--hard</code>这个参数，版本库相当于不知道有未来版本了，使用git log也没法查找到未来版本的commit-id。然后使用以下命令：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//用git reflog来找回之前commit的commit-id</div><div class="line">git reflog</div><div class="line">git reset --hard commit_id</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>即可找回原来的版本。</p>
+<h2 id="3-git-revert-HEAD"><a href="#3-git-revert-HEAD" class="headerlink" title="3.git revert HEAD"></a>3.git revert HEAD</h2><p>回退到上一版本的另一种方法，注意参数HEAD，是回退到上一版本。</p>
+<ul>
+<li>git reset是不会产生新的提交记录，反而有可能抹去提交记录，当我们要推送到远程仓库时，显然没有提交记录怎么推送呢？所以git reset适合操作本地仓库，不需要分享给远程仓库的。</li>
+<li>git revert是会在HEAD节点基础上生成一个提交节点的，也就是新的提交，所以可以推送到远程仓库，别人也能查看到远程记录。</li>
+</ul>
+<h2 id="4-git-branch-f-master-HEAD"><a href="#4-git-branch-f-master-HEAD" class="headerlink" title="4.git branch -f master HEAD^"></a>4.git branch -f master HEAD^</h2><p>在git branch命令后加上参数-f和分支名master以及节点名HEAD^，这样就把master分支强制指向了HEAD的上一版本。即使当前HEAD不在master分支上，使用这个命令也能强制移动master分支的最新提交节点。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjjr5bmu0001hhwfyjdf9kvni" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-git简单命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/25/git简单命令/" class="article-date">
@@ -112,7 +167,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cjjasxrye001mr9zwe0y7bsjl" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git简单命令/" data-id="cjjr5bmu2001qhwfy8p4asght" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -201,54 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cjjasxrxx000er9zwevz3cbwr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Android系统架构概述" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/24/Android系统架构概述/" class="article-date">
-  <time datetime="2017-09-24T08:53:22.000Z" itemprop="datePublished">2017-09-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/24/Android系统架构概述/">Android系统架构概述</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Android系统架构分为五层"><a href="#Android系统架构分为五层" class="headerlink" title="Android系统架构分为五层"></a>Android系统架构分为五层</h2><p><img src="/2017/09/24/Android系统架构概述/android-stack.png" alt="Android系统架构"><br>图为Android官方文档上的。</p>
-<h2 id="1-应用层"><a href="#1-应用层" class="headerlink" title="1.应用层"></a>1.应用层</h2><p>我们编写的APP和系统的APP属于这层。</p>
-<h2 id="2-Java-Framework"><a href="#2-Java-Framework" class="headerlink" title="2.Java Framework"></a>2.Java Framework</h2><p>开发人员使用的java api属于这层。</p>
-<h2 id="3-Native"><a href="#3-Native" class="headerlink" title="3.Native"></a>3.Native</h2><ul>
-<li>(1)C/C++库：OpenGL ES,Media Framework,SQLite,SSL,FreeType</li>
-<li>(2)Android运行时库：Dalvik虚拟机、ART虚拟机。</li>
-</ul>
-<h2 id="4-HAL硬件抽象层"><a href="#4-HAL硬件抽象层" class="headerlink" title="4.HAL硬件抽象层"></a>4.HAL硬件抽象层</h2><p>操作系统与硬件电路打交道的接口层。</p>
-<h2 id="5-Linux内核层"><a href="#5-Linux内核层" class="headerlink" title="5.Linux内核层"></a>5.Linux内核层</h2><p>一些移动设备的驱动跟Linux内核。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/24/Android系统架构概述/" data-id="cjjasxrxw000cr9zw3zzpfy85" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/24/ConstraintLayout的使用/" data-id="cjjr5bmtm000hhwfywj654dfe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -295,7 +303,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -306,6 +314,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/07/16/Android调试技巧/">Android调试技巧</a>
+          </li>
         
           <li>
             <a href="/2018/03/24/AndroidGradle权威指南笔记/">AndroidGradle权威指南笔记</a>
@@ -321,10 +333,6 @@
         
           <li>
             <a href="/2018/03/19/git文件回退/">git文件回退</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/15/AndroidStudio使用技巧/">AndroidStudio使用技巧</a>
           </li>
         
       </ul>
