@@ -62,6 +62,67 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Glide笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/19/Glide笔记/" class="article-date">
+  <time datetime="2017-11-19T06:23:15.000Z" itemprop="datePublished">2017-11-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/19/Glide笔记/">Glide笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-基本组件"><a href="#一-基本组件" class="headerlink" title="一.基本组件"></a>一.基本组件</h2><h3 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1.基本使用"></a>1.基本使用</h3><p>以下均基于Glide4.x版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//加载图片</div><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.into(imageView);</div><div class="line"></div><div class="line">//取消加载</div><div class="line">Glide.with(getContext())</div><div class="line">.clear(imageView);</div></pre></td></tr></table></figure>
+<h3 id="2-RequestOptions"><a href="#2-RequestOptions" class="headerlink" title="2.RequestOptions"></a>2.RequestOptions</h3><p>Glide的常用选项</p>
+<ul>
+<li>裁剪样式circleCrop、circleCrop等。</li>
+<li>加载中占位图placeholder</li>
+<li>加载失败图error</li>
+<li>…</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">RequestOptions centerCropOptions = new RequestOptions()</div><div class="line">            .centerCrop()</div><div class="line">            .placeholder(R.drawable.img_loading)</div><div class="line">            .error(R.drawable.img_failed);</div></pre></td></tr></table></figure>
+<h3 id="3-RequestBuilder"><a href="#3-RequestBuilder" class="headerlink" title="3.RequestBuilder"></a>3.RequestBuilder</h3><p>可以理解为一个个的请求。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder = Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options);</div></pre></td></tr></table></figure>
+<p>当调用RequestBuilder.into(target)时开始加载。这个方法的返回值类型不再是RequestBuilder了。</p>
+<h2 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h2><h3 id="1-加载失败回调监听"><a href="#1-加载失败回调监听" class="headerlink" title="1.加载失败回调监听"></a>1.加载失败回调监听</h3><p>RequestBuilder.listen(RequestListener)方法监听load成功还是失败。</p>
+<ul>
+<li>注意这里不能在监听里对同一个target（imageView）发起加载请求，因为当前请求尚未结束，会抛出异常。</li>
+<li>所以无法使用这个监听实现加载失败时加载备用url的需求。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.listener(new RequestListener() &#123;</div><div class="line">	@Override</div><div class="line">	public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target, boolean isFirstResource) &#123;</div><div class="line">		//false：事件继续往下传递</div><div class="line">		//true：事件不再往下传递</div><div class="line">   		return false;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public boolean onResourceReady(Object resource, Object model, Target target, DataSource dataSource, boolean isFirstResource) &#123;</div><div class="line">		//false：事件继续往下传递</div><div class="line">		//true：事件不再往下传递</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">&#125;)</div><div class="line">.into(imageView);</div></pre></td></tr></table></figure>
+<h3 id="2-请求失败后启用备用请求"><a href="#2-请求失败后启用备用请求" class="headerlink" title="2.请求失败后启用备用请求"></a>2.请求失败后启用备用请求</h3><p>RequestBuilder.error(RequestBuilder)方法可以在这个request失败后启用备用的request。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder1 = Glide.with(getContext())</div><div class="line">.load(url1)</div><div class="line">.apply(options);</div><div class="line"></div><div class="line">RequestBuilder builder2 = Glide.with(getContext())</div><div class="line">.load(url2)</div><div class="line">.apply(options)</div><div class="line">.error(builder1);</div><div class="line"></div><div class="line">builder2.into(imageView);</div></pre></td></tr></table></figure>
+<p>这段代码意义为当url2加载失败后，会启用builder1这个请求，加载url1。这样我们就可以实现多级url加载了。</p>
+<p>以下为多级加载url方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public static void loadUrls(String[] urls, RequestOptions options, ImageView imageView) &#123;</div><div class="line">        if (urls == null || urls.length == 0) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        RequestBuilder&lt;Drawable&gt; frontBuilder = Glide.with(getContext()).load(urls[0]).apply(options);</div><div class="line">        RequestBuilder&lt;Drawable&gt; prevBuilder = frontBuilder;</div><div class="line">        </div><div class="line">        for (int i = 1; i &lt; urls.length; i++) &#123;</div><div class="line">            RequestBuilder&lt;Drawable&gt; nextBuilder = Glide.with(getContext()).load(urls[i]).apply(options);</div><div class="line">            prevBuilder.error(nextBuilder);</div><div class="line">            prevBuilder = nextBuilder;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        frontBuilder.into(imageView);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cjnmsb787000uxxfyf1wj1es6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-android使用kotlin注意事项" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/19/android使用kotlin注意事项/" class="article-date">
@@ -93,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/19/android使用kotlin注意事项/" data-id="cjkb4erig001b57fyu6j9fwfj" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/19/android使用kotlin注意事项/" data-id="cjnmsb78d0019xxfypkx0x8or" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -150,72 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/09/搭建基于hexo的博客以及如何迁移/" data-id="cjkb4eriv002957fyjj4lm2ms" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-mac下配置zsh" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/08/mac下配置zsh/" class="article-date">
-  <time datetime="2017-11-08T01:09:06.000Z" itemprop="datePublished">2017-11-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/08/mac下配置zsh/">Mac下配置zsh</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-前期准备"><a href="#1-前期准备" class="headerlink" title="1.前期准备"></a>1.前期准备</h2><p>以下安装请自行搜索。</p>
-<ul>
-<li>安装homebrew。</li>
-<li>安装homebrew cask。</li>
-</ul>
-<h2 id="2-配置过程"><a href="#2-配置过程" class="headerlink" title="2.配置过程"></a>2.配置过程</h2><ul>
-<li><p>安装brew上的zsh <code>brew install zsh</code></p>
-</li>
-<li><p>安装iterm2（可选，只是换更好用的终端） <code>brew cask install iterm2</code></p>
-</li>
-<li><p>切换到zsh<br><code>chsh -s /bin/zsh</code><br>如果要切换回来，执行<br><code>chsh -s /bin/bash</code><br>查看当前使用哪种shell<br><code>echo $SHELL</code></p>
-</li>
-</ul>
-<h2 id="3-进阶配置"><a href="#3-进阶配置" class="headerlink" title="3.进阶配置"></a>3.进阶配置</h2><ul>
-<li><p>下载oh-my-zsh，不需要设置哪个目录，新开一个终端就可以了。 <code>git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh</code></p>
-</li>
-<li><p>拷贝出oh-my-zsh中的文件作为自己的配置文件 <code>cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc</code></p>
-</li>
-<li><p>在.zshrc文件中，追加<code>source .bash_profile</code>保留以前配置的环境变量。</p>
-</li>
-<li><p>zsh还有许多拓展插件，详细可以查看<br><a href="https://github.com/zsh-users" target="_blank" rel="external">https://github.com/zsh-users</a>。</p>
-</li>
-</ul>
-<h2 id="4-可能遇到的问题"><a href="#4-可能遇到的问题" class="headerlink" title="4.可能遇到的问题"></a>4.可能遇到的问题</h2><ul>
-<li>没有.bash_profile文件，请自行创建一个。</li>
-<li>没有.zshrc文件，请执行拷贝配置文件的命令。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/08/mac下配置zsh/" data-id="cjkb4eris002157fyms2detsb" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/09/搭建基于hexo的博客以及如何迁移/" data-id="cjnmsb78u0029xxfy8i2n2bl0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
@@ -230,7 +226,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/9/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/9/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -253,7 +249,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
     </div>
   </div>
 
@@ -262,7 +258,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -273,6 +269,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/08/09/深入理解Java虚拟机笔记/">深入理解Java虚拟机笔记</a>
+          </li>
         
           <li>
             <a href="/2018/07/16/Android调试技巧/">Android调试技巧</a>
@@ -288,10 +288,6 @@
         
           <li>
             <a href="/2018/03/19/git标签/">git标签</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/19/git文件回退/">git文件回退</a>
           </li>
         
       </ul>

@@ -62,6 +62,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ProtocolBuffers的介绍和使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/19/ProtocolBuffers的介绍和使用/" class="article-date">
+  <time datetime="2018-01-19T00:55:33.000Z" itemprop="datePublished">2018-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/19/ProtocolBuffers的介绍和使用/">ProtocolBuffers的介绍和使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><h3 id="1-官网"><a href="#1-官网" class="headerlink" title="1.官网"></a>1.官网</h3><p><a href="https://developers.google.com/protocol-buffers/" target="_blank" rel="external">https://developers.google.com/protocol-buffers/</a></p>
+<h3 id="2-优势"><a href="#2-优势" class="headerlink" title="2.优势"></a>2.优势</h3><p><a href="https://www.oschina.net/translate/choose-protocol-buffers" target="_blank" rel="external">使用ProtocolBuffers代替JSON的五个原因（译文）</a></p>
+<h2 id="二、使用"><a href="#二、使用" class="headerlink" title="二、使用"></a>二、使用</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install protobuf</div></pre></td></tr></table></figure>
+<p>安装成功后可以使用<code>protoc --help</code>查看帮助。</p>
+<h3 id="2-编写-proto文件"><a href="#2-编写-proto文件" class="headerlink" title="2.编写.proto文件"></a>2.编写.proto文件</h3><p>按照ProtocolBuffers的规范编写数据结构，一般由后端开发人员编写。</p>
+<h3 id="3-生产-java文件"><a href="#3-生产-java文件" class="headerlink" title="3.生产.java文件"></a>3.生产.java文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">protoc -I=[.proto文件所在目录] --javanano_out=[输出java文件的目录] [需要编译的.proto文件名]</div></pre></td></tr></table></figure>
+<p>推荐输出目录使用javanano文件夹，不过并非必需的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2018/01/19/ProtocolBuffers的介绍和使用/" data-id="cjnmsb78c0017xxfyi6jsvhz4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-FlatBuffers的介绍和使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/19/FlatBuffers的介绍和使用/" class="article-date">
@@ -95,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/01/19/FlatBuffers的介绍和使用/" data-id="cjkb4eri7000l57fy6yej76om" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/01/19/FlatBuffers的介绍和使用/" data-id="cjnmsb786000qxxfywf145fji" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -135,47 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/01/18/ProtocolBuffers在Mac-OS的安装/" data-id="cjkb4eric001157fybvdt388v" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-FlatBuffers在Mac-OS的安装步骤" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/18/FlatBuffers在Mac-OS的安装步骤/" class="article-date">
-  <time datetime="2018-01-18T15:15:27.000Z" itemprop="datePublished">2018-01-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/18/FlatBuffers在Mac-OS的安装步骤/">FlatBuffers在Mac OS的安装步骤</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、检查环境"><a href="#一、检查环境" class="headerlink" title="一、检查环境"></a>一、检查环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//需要安装cmake</div><div class="line">brew install cmake</div></pre></td></tr></table></figure>
-<h2 id="二、安装步骤"><a href="#二、安装步骤" class="headerlink" title="二、安装步骤"></a>二、安装步骤</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">//1.下载源码</div><div class="line">git clone https://github.com/google/flatbuffers.git</div><div class="line"></div><div class="line">//2.生产makefile文件</div><div class="line">cd flatbuffers</div><div class="line">cmake -G &quot;Unix Makefiles&quot;</div><div class="line"></div><div class="line">//3.安装</div><div class="line">make</div><div class="line">make install</div><div class="line"></div><div class="line">//4.将当前文件夹路径加入环境变量</div><div class="line">略。</div></pre></td></tr></table></figure>
-<h2 id="三、检查是否安装成功"><a href="#三、检查是否安装成功" class="headerlink" title="三、检查是否安装成功"></a>三、检查是否安装成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//使用命令</div><div class="line">flatc --version</div><div class="line"></div><div class="line">//输出结果</div><div class="line">flatc version ......(略)</div></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/01/18/FlatBuffers在Mac-OS的安装步骤/" data-id="cjkb4eri8000q57fyfjq0nooe" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/01/18/ProtocolBuffers在Mac-OS的安装/" data-id="cjnmsb78c0015xxfyvh9s054i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
@@ -190,7 +195,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/5/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -213,7 +218,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
     </div>
   </div>
 
@@ -222,7 +227,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -233,6 +238,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/08/09/深入理解Java虚拟机笔记/">深入理解Java虚拟机笔记</a>
+          </li>
         
           <li>
             <a href="/2018/07/16/Android调试技巧/">Android调试技巧</a>
@@ -248,10 +257,6 @@
         
           <li>
             <a href="/2018/03/19/git标签/">git标签</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/19/git文件回退/">git文件回退</a>
           </li>
         
       </ul>

@@ -62,6 +62,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-CoordinatorLayout的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/27/CoordinatorLayout的使用/" class="article-date">
+  <time datetime="2017-11-27T13:45:51.000Z" itemprop="datePublished">2017-11-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/27/CoordinatorLayout的使用/">CoordinatorLayout的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><h3 id="1-什么是嵌套滚动机制（NestedScrolling）？"><a href="#1-什么是嵌套滚动机制（NestedScrolling）？" class="headerlink" title="1.什么是嵌套滚动机制（NestedScrolling）？"></a>1.什么是嵌套滚动机制（NestedScrolling）？</h3><p>所谓嵌套滚动其实就是界面布局中包含 一个可滚动的列表 和 一个不可滚动的View，这样在滚动列表时，首先将不可滚动View移出屏幕或移进屏幕，待不可滚动View固定时，才会继续滚动滚动列表的内容。</p>
+<h3 id="2-为什么要有滑动嵌套机制？"><a href="#2-为什么要有滑动嵌套机制？" class="headerlink" title="2.为什么要有滑动嵌套机制？"></a>2.为什么要有滑动嵌套机制？</h3><p>回想一下android系统事件分发机制，一个down事件到up事件为一个事件流，在这事件流之中一旦某个View拦截（处理）该Touch事件，那么后续这个事件流将统一交由它处理。</p>
+<p>有时候我们需要将一个事件流分开成几个事件片给不同的View处理，那么我们需要调配事件分发。滑动嵌套机制应运而生。</p>
+<h2 id="二、Android嵌套滚动机制"><a href="#二、Android嵌套滚动机制" class="headerlink" title="二、Android嵌套滚动机制"></a>二、Android嵌套滚动机制</h2><h3 id="1-重要的类"><a href="#1-重要的类" class="headerlink" title="1.重要的类"></a>1.重要的类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">NestedScrollingChild接口</div><div class="line">NestedScrollingParent接口</div><div class="line">NestedScrollingChildHelper辅助类</div><div class="line">NestedScrollingParentHelper辅助类</div></pre></td></tr></table></figure>
+<h3 id="2-结构图"><a href="#2-结构图" class="headerlink" title="2.结构图"></a>2.结构图</h3><p><img src="/2017/11/27/CoordinatorLayout的使用/结构图.png" alt="结构图"></p>
+<h2 id="三、注意事项"><a href="#三、注意事项" class="headerlink" title="三、注意事项"></a>三、注意事项</h2><h3 id="1-子类宽高"><a href="#1-子类宽高" class="headerlink" title="1.子类宽高"></a>1.子类宽高</h3><p>由于CoordinatorLayout是FrameLayout的增强版（官方文档），所以子View使用match_parent这个属性就需要注意了。</p>
+<p>如下图，View B使用了match_parent，然后CoordinatorLayout在layout的时候把它的位置下移了，并且超出CoordinatorLayout的区域了。使用clipChildren属性是无效的，clipChildren默认是true的。<br><img src="/2017/11/27/CoordinatorLayout的使用/layout.png" alt="layout"></p>
+<h2 id="四、参考文章"><a href="#四、参考文章" class="headerlink" title="四、参考文章"></a>四、参考文章</h2><ul>
+<li><a href="https://mp.weixin.qq.com/s/GDC3YLLPYsoalr8sg38dmg" target="_blank" rel="external">CoordinatorLayout和Behavior详解</a></li>
+<li><a href="https://mp.weixin.qq.com/s/-ldKAMGChfbvk8E8nzvuNw" target="_blank" rel="external">CoordinatorLayout高级用法-自定义Behavior</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/11/27/CoordinatorLayout的使用/" data-id="cjnmsb783000hxxfygjj2v3r4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-深入理解Android卷一笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/25/深入理解Android卷一笔记/" class="article-date">
@@ -145,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/25/深入理解Android卷一笔记/" data-id="cjkb4eriw002b57fyo5aixuba" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/25/深入理解Android卷一笔记/" data-id="cjnmsb78v002dxxfy9yboa3rv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -378,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/23/Effective-Java笔记/" data-id="cjkb4eri6000j57fy13rz0wrk" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/11/23/Effective-Java笔记/" data-id="cjnmsb785000lxxfybb7p67ez" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
@@ -390,71 +439,10 @@
 
 
   
-    <article id="post-Glide笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/19/Glide笔记/" class="article-date">
-  <time datetime="2017-11-19T06:23:15.000Z" itemprop="datePublished">2017-11-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/19/Glide笔记/">Glide笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一-基本组件"><a href="#一-基本组件" class="headerlink" title="一.基本组件"></a>一.基本组件</h2><h3 id="1-基本使用"><a href="#1-基本使用" class="headerlink" title="1.基本使用"></a>1.基本使用</h3><p>以下均基于Glide4.x版本。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//加载图片</div><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.into(imageView);</div><div class="line"></div><div class="line">//取消加载</div><div class="line">Glide.with(getContext())</div><div class="line">.clear(imageView);</div></pre></td></tr></table></figure>
-<h3 id="2-RequestOptions"><a href="#2-RequestOptions" class="headerlink" title="2.RequestOptions"></a>2.RequestOptions</h3><p>Glide的常用选项</p>
-<ul>
-<li>裁剪样式circleCrop、circleCrop等。</li>
-<li>加载中占位图placeholder</li>
-<li>加载失败图error</li>
-<li>…</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">RequestOptions centerCropOptions = new RequestOptions()</div><div class="line">            .centerCrop()</div><div class="line">            .placeholder(R.drawable.img_loading)</div><div class="line">            .error(R.drawable.img_failed);</div></pre></td></tr></table></figure>
-<h3 id="3-RequestBuilder"><a href="#3-RequestBuilder" class="headerlink" title="3.RequestBuilder"></a>3.RequestBuilder</h3><p>可以理解为一个个的请求。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder = Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options);</div></pre></td></tr></table></figure>
-<p>当调用RequestBuilder.into(target)时开始加载。这个方法的返回值类型不再是RequestBuilder了。</p>
-<h2 id="二、常用操作"><a href="#二、常用操作" class="headerlink" title="二、常用操作"></a>二、常用操作</h2><h3 id="1-加载失败回调监听"><a href="#1-加载失败回调监听" class="headerlink" title="1.加载失败回调监听"></a>1.加载失败回调监听</h3><p>RequestBuilder.listen(RequestListener)方法监听load成功还是失败。</p>
-<ul>
-<li>注意这里不能在监听里对同一个target（imageView）发起加载请求，因为当前请求尚未结束，会抛出异常。</li>
-<li>所以无法使用这个监听实现加载失败时加载备用url的需求。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Glide.with(getContext())</div><div class="line">.load(url)</div><div class="line">.apply(options)</div><div class="line">.listener(new RequestListener() &#123;</div><div class="line">	@Override</div><div class="line">	public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target, boolean isFirstResource) &#123;</div><div class="line">		//false：事件继续往下传递</div><div class="line">		//true：事件不再往下传递</div><div class="line">   		return false;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	@Override</div><div class="line">	public boolean onResourceReady(Object resource, Object model, Target target, DataSource dataSource, boolean isFirstResource) &#123;</div><div class="line">		//false：事件继续往下传递</div><div class="line">		//true：事件不再往下传递</div><div class="line">		return false;</div><div class="line">	&#125;</div><div class="line">&#125;)</div><div class="line">.into(imageView);</div></pre></td></tr></table></figure>
-<h3 id="2-请求失败后启用备用请求"><a href="#2-请求失败后启用备用请求" class="headerlink" title="2.请求失败后启用备用请求"></a>2.请求失败后启用备用请求</h3><p>RequestBuilder.error(RequestBuilder)方法可以在这个request失败后启用备用的request。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">RequestBuilder builder1 = Glide.with(getContext())</div><div class="line">.load(url1)</div><div class="line">.apply(options);</div><div class="line"></div><div class="line">RequestBuilder builder2 = Glide.with(getContext())</div><div class="line">.load(url2)</div><div class="line">.apply(options)</div><div class="line">.error(builder1);</div><div class="line"></div><div class="line">builder2.into(imageView);</div></pre></td></tr></table></figure>
-<p>这段代码意义为当url2加载失败后，会启用builder1这个请求，加载url1。这样我们就可以实现多级url加载了。</p>
-<p>以下为多级加载url方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public static void loadUrls(String[] urls, RequestOptions options, ImageView imageView) &#123;</div><div class="line">        if (urls == null || urls.length == 0) &#123;</div><div class="line">            return;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        RequestBuilder&lt;Drawable&gt; frontBuilder = Glide.with(getContext()).load(urls[0]).apply(options);</div><div class="line">        RequestBuilder&lt;Drawable&gt; prevBuilder = frontBuilder;</div><div class="line">        </div><div class="line">        for (int i = 1; i &lt; urls.length; i++) &#123;</div><div class="line">            RequestBuilder&lt;Drawable&gt; nextBuilder = Glide.with(getContext()).load(urls[i]).apply(options);</div><div class="line">            prevBuilder.error(nextBuilder);</div><div class="line">            prevBuilder = nextBuilder;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        frontBuilder.into(imageView);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/11/19/Glide笔记/" data-id="cjkb4eria000v57fyesuulhgq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/6/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/8/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/6/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/8/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -477,7 +465,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
     </div>
   </div>
 
@@ -486,7 +474,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -497,6 +485,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/08/09/深入理解Java虚拟机笔记/">深入理解Java虚拟机笔记</a>
+          </li>
         
           <li>
             <a href="/2018/07/16/Android调试技巧/">Android调试技巧</a>
@@ -512,10 +504,6 @@
         
           <li>
             <a href="/2018/03/19/git标签/">git标签</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/19/git文件回退/">git文件回退</a>
           </li>
         
       </ul>

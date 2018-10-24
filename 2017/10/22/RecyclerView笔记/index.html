@@ -5,18 +5,18 @@
   
   <title>RecyclerView笔记 | Stay Hungry</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml中设置lint会提示new api）：  1recyclerView.setNestedScrollingEnabled(false); 2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Ite">
+  <meta name="description" content="1.嵌套在ScrollView的滑动冲突1234//方式一：recyclerView.setNestedScrollingEnabled(false);//方式二：重写LayoutManager的canScrollVertical，return false。 以上两种方式都是禁止RecyclerView滑动，这是非常愚蠢的做法。RecyclerView不能滑动的话，它的复用机制完全失效，一次性加载">
 <meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RecyclerView笔记">
 <meta property="og:url" content="https://joking111111.github.io/2017/10/22/RecyclerView笔记/index.html">
 <meta property="og:site_name" content="Stay Hungry">
-<meta property="og:description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml中设置lint会提示new api）：  1recyclerView.setNestedScrollingEnabled(false); 2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Ite">
+<meta property="og:description" content="1.嵌套在ScrollView的滑动冲突1234//方式一：recyclerView.setNestedScrollingEnabled(false);//方式二：重写LayoutManager的canScrollVertical，return false。 以上两种方式都是禁止RecyclerView滑动，这是非常愚蠢的做法。RecyclerView不能滑动的话，它的复用机制完全失效，一次性加载">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2017-12-08T13:11:20.000Z">
+<meta property="og:updated_time" content="2018-10-24T06:34:07.543Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="RecyclerView笔记">
-<meta name="twitter:description" content="1.全展开 确保父容器是NestedScrollView 在代码中设置（在xml中设置lint会提示new api）：  1recyclerView.setNestedScrollingEnabled(false); 2.刷新Item中的ProgressBar RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Ite">
+<meta name="twitter:description" content="1.嵌套在ScrollView的滑动冲突1234//方式一：recyclerView.setNestedScrollingEnabled(false);//方式二：重写LayoutManager的canScrollVertical，return false。 以上两种方式都是禁止RecyclerView滑动，这是非常愚蠢的做法。RecyclerView不能滑动的话，它的复用机制完全失效，一次性加载">
   
     <link rel="alternate" href="/atom.xml" title="Stay Hungry" type="application/atom+xml">
   
@@ -87,11 +87,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="1-全展开"><a href="#1-全展开" class="headerlink" title="1.全展开"></a>1.全展开</h2><ul>
-<li>确保父容器是NestedScrollView</li>
-<li>在代码中设置（在xml中设置lint会提示new api）：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">recyclerView.setNestedScrollingEnabled(false);</div></pre></td></tr></table></figure>
+        <h2 id="1-嵌套在ScrollView的滑动冲突"><a href="#1-嵌套在ScrollView的滑动冲突" class="headerlink" title="1.嵌套在ScrollView的滑动冲突"></a>1.嵌套在ScrollView的滑动冲突</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//方式一：</div><div class="line">recyclerView.setNestedScrollingEnabled(false);</div><div class="line">//方式二：</div><div class="line">重写LayoutManager的canScrollVertical，return false。</div></pre></td></tr></table></figure>
+<p>以上两种方式都是禁止RecyclerView滑动，这是非常愚蠢的做法。RecyclerView不能滑动的话，它的复用机制完全失效，一次性加载所有item，跟一个ScrollView一次加载所有item没什么区别。<br>忠告：ScrollView与RecyclerView尽量不要嵌套使用。</p>
 <h2 id="2-刷新Item中的ProgressBar"><a href="#2-刷新Item中的ProgressBar" class="headerlink" title="2.刷新Item中的ProgressBar"></a>2.刷新Item中的ProgressBar</h2><ul>
 <li>RecyclerView的ItemAnimator默认设置了DefaultItemAnimator，查看里面的源码可以发现局部刷新某Item是有些动画的，其中就有改变Alpha值的动画。所以刷新ProgressBar时会出现闪烁现象，因此要去掉或者自己实现ItemAnimator。</li>
 </ul>
@@ -116,7 +113,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjkb4erie001757fyirvofvfw" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/22/RecyclerView笔记/" data-id="cjnmsb78b0013xxfykafd5y7w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -168,7 +165,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
     </div>
   </div>
 
@@ -177,7 +174,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -188,6 +185,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/08/09/深入理解Java虚拟机笔记/">深入理解Java虚拟机笔记</a>
+          </li>
         
           <li>
             <a href="/2018/07/16/Android调试技巧/">Android调试技巧</a>
@@ -203,10 +204,6 @@
         
           <li>
             <a href="/2018/03/19/git标签/">git标签</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/19/git文件回退/">git文件回退</a>
           </li>
         
       </ul>

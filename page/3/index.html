@@ -62,6 +62,91 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-AndroidStudio使用技巧" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/15/AndroidStudio使用技巧/" class="article-date">
+  <time datetime="2018-03-15T15:09:45.000Z" itemprop="datePublished">2018-03-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/15/AndroidStudio使用技巧/">AndroidStudio使用技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、快捷键"><a href="#一、快捷键" class="headerlink" title="一、快捷键"></a>一、快捷键</h2><p><a href="https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA_ReferenceCard.pdf" target="_blank" rel="external">IntelliJ快捷键PDF</a></p>
+<h3 id="Mac下常用快捷键"><a href="#Mac下常用快捷键" class="headerlink" title="Mac下常用快捷键"></a>Mac下常用快捷键</h3><ul>
+<li>double shift = 查找文件</li>
+<li>command + F = 文件内查找</li>
+<li>command + enter = 查看提示</li>
+<li>command + alt + L = 代码整理</li>
+<li>command + Y = 弹出小窗，显示该方法的具体实现</li>
+<li>command + L = 跳转到文件的某一行</li>
+<li>alt + F7 = Find Usages</li>
+<li>shift + F6 = 改名</li>
+<li>F2 = 逐个跳转到当前文件Lint提示位置</li>
+<li>F3 = 增加/删除书签</li>
+<li>control + alt + H = 查看方法的调用栈</li>
+</ul>
+<h2 id="二、设置"><a href="#二、设置" class="headerlink" title="二、设置"></a>二、设置</h2><h3 id="1-文件列表自动滑到对应位置"><a href="#1-文件列表自动滑到对应位置" class="headerlink" title="1.文件列表自动滑到对应位置"></a>1.文件列表自动滑到对应位置</h3><p><img src="/2018/03/15/AndroidStudio使用技巧/AutoScrollFromSource.png" alt="AutoScrollFromSource"></p>
+<h3 id="2-设置显示行号和显示修改记录"><a href="#2-设置显示行号和显示修改记录" class="headerlink" title="2.设置显示行号和显示修改记录"></a>2.设置显示行号和显示修改记录</h3><p><img src="/2018/03/15/AndroidStudio使用技巧/LineNumber&amp;Annotations.png" alt="LineNumber&amp;Annotations"></p>
+<h3 id="3-进入演示模式（可双指放缩）"><a href="#3-进入演示模式（可双指放缩）" class="headerlink" title="3.进入演示模式（可双指放缩）"></a>3.进入演示模式（可双指放缩）</h3><p><img src="/2018/03/15/AndroidStudio使用技巧/EnterPresentation.png" alt="EnterPresentation"></p>
+<h3 id="4-跳转到文件系统"><a href="#4-跳转到文件系统" class="headerlink" title="4.跳转到文件系统"></a>4.跳转到文件系统</h3><p>方法一、在树目录右键文件<br><img src="/2018/03/15/AndroidStudio使用技巧/JumpToFinder1.png" alt="JumpToFinder1"></p>
+<p>方法二、按住command键，左键单击上部文件Tab<br><img src="/2018/03/15/AndroidStudio使用技巧/JumpToFinder2.png" alt="JumpToFinder2"></p>
+<h3 id="5-分屏"><a href="#5-分屏" class="headerlink" title="5.分屏"></a>5.分屏</h3><p>右键单击上部Tab<br><img src="/2018/03/15/AndroidStudio使用技巧/SplitWindow.png" alt="SplitWindow"></p>
+<h2 id="三、插件"><a href="#三、插件" class="headerlink" title="三、插件"></a>三、插件</h2><ul>
+<li>.ignore</li>
+<li>ADB Idea</li>
+<li><a href="https://github.com/layerlre/ADBWIFI layerlre@gmail.com" target="_blank" rel="external">ADB WIFI</a></li>
+<li>Alibaba Java Coding Guidelines</li>
+<li>Android BufferKnife Zelezny</li>
+<li>Android Code Generator</li>
+<li>Android Material Design Icon Generator</li>
+<li><a href="http://www.github.com/pedrovgs pedrovicente.gomez at gmail dot com" target="_blank" rel="external">Android WiFi ADB</a></li>
+<li>GsonFormat</li>
+<li><a href="https://github.com/Skykai521 daqingkai@boohee.com" target="_blank" rel="external">ECTranslation</a></li>
+<li><a href="http://github.com/scana scanarch@gmail.com" target="_blank" rel="external">OK,Gradle!</a></li>
+</ul>
+<h2 id="四、xml中tools工具"><a href="#四、xml中tools工具" class="headerlink" title="四、xml中tools工具"></a>四、xml中tools工具</h2><p>首先，要声明tools命名空间。</p>
+<h3 id="1-根布局"><a href="#1-根布局" class="headerlink" title="1.根布局"></a>1.根布局</h3><ul>
+<li>tools:context = 该视图附着的Activity</li>
+<li>tools:showIn = 当前是内部布局，想预览到外层布局</li>
+<li>tools:parentTag = 使用merge标签时，可以用这属性告诉preview该用什么布局渲染。</li>
+</ul>
+<h3 id="2-子元素"><a href="#2-子元素" class="headerlink" title="2.子元素"></a>2.子元素</h3><ul>
+<li>tools:text = 文本内容</li>
+<li>元素属性都可以通过这个命名空间弄出预览效果</li>
+</ul>
+<h2 id="五、Studio运行内存配置"><a href="#五、Studio运行内存配置" class="headerlink" title="五、Studio运行内存配置"></a>五、Studio运行内存配置</h2><h3 id="1-配置堆内存大小"><a href="#1-配置堆内存大小" class="headerlink" title="1.配置堆内存大小"></a>1.配置堆内存大小</h3><p><a href="https://developer.android.com/studio/intro/studio-config" target="_blank" rel="external">官方文档</a></p>
+<h3 id="2-实时内存占用"><a href="#2-实时内存占用" class="headerlink" title="2.实时内存占用"></a>2.实时内存占用</h3><p><img src="/2018/03/15/AndroidStudio使用技巧/MemoryWatch.png" alt="MemoryWatch"></p>
+<p>之后右下角出现了内存占用窗口。</p>
+<p><img src="/2018/03/15/AndroidStudio使用技巧/MemoryWatchWindow.png" alt="MemoryWatchWindow"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2018/03/15/AndroidStudio使用技巧/" data-id="cjnmsb77y0004xxfy8snop046" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-submodule用法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/13/submodule用法/" class="article-date">
@@ -91,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/13/submodule用法/" data-id="cjkb4erit002357fyofwrrcs3" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/13/submodule用法/" data-id="cjnmsb78r0023xxfyv9bjjgpn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -222,52 +307,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/11/Android移动性能实战笔记/" data-id="cjkb4eri3000a57fyeihkrwol" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-ProtocolBuffers的介绍和使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/19/ProtocolBuffers的介绍和使用/" class="article-date">
-  <time datetime="2018-01-19T00:55:33.000Z" itemprop="datePublished">2018-01-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/19/ProtocolBuffers的介绍和使用/">ProtocolBuffers的介绍和使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><h3 id="1-官网"><a href="#1-官网" class="headerlink" title="1.官网"></a>1.官网</h3><p><a href="https://developers.google.com/protocol-buffers/" target="_blank" rel="external">https://developers.google.com/protocol-buffers/</a></p>
-<h3 id="2-优势"><a href="#2-优势" class="headerlink" title="2.优势"></a>2.优势</h3><p><a href="https://www.oschina.net/translate/choose-protocol-buffers" target="_blank" rel="external">使用ProtocolBuffers代替JSON的五个原因（译文）</a></p>
-<h2 id="二、使用"><a href="#二、使用" class="headerlink" title="二、使用"></a>二、使用</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install protobuf</div></pre></td></tr></table></figure>
-<p>安装成功后可以使用<code>protoc --help</code>查看帮助。</p>
-<h3 id="2-编写-proto文件"><a href="#2-编写-proto文件" class="headerlink" title="2.编写.proto文件"></a>2.编写.proto文件</h3><p>按照ProtocolBuffers的规范编写数据结构，一般由后端开发人员编写。</p>
-<h3 id="3-生产-java文件"><a href="#3-生产-java文件" class="headerlink" title="3.生产.java文件"></a>3.生产.java文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">protoc -I=[.proto文件所在目录] --javanano_out=[输出java文件的目录] [需要编译的.proto文件名]</div></pre></td></tr></table></figure>
-<p>推荐输出目录使用javanano文件夹，不过并非必需的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/01/19/ProtocolBuffers的介绍和使用/" data-id="cjkb4erid001357fyamp4cc6a" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/11/Android移动性能实战笔记/" data-id="cjnmsb77z0008xxfy7g8fe67b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -282,7 +322,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/4/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/4/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -305,7 +345,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 12.5px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
     </div>
   </div>
 
@@ -314,7 +354,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -325,6 +365,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/08/09/深入理解Java虚拟机笔记/">深入理解Java虚拟机笔记</a>
+          </li>
         
           <li>
             <a href="/2018/07/16/Android调试技巧/">Android调试技巧</a>
@@ -340,10 +384,6 @@
         
           <li>
             <a href="/2018/03/19/git标签/">git标签</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/19/git文件回退/">git文件回退</a>
           </li>
         
       </ul>
