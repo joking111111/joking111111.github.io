@@ -128,7 +128,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cjsixrfc5001oxl9kw7odvv7s" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/09/git远程仓库/" data-id="cjsiyir1i001oma9ki2wj8rcz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -195,7 +195,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cjsixrfc6001rxl9kjti88qpt" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/08/git高级操作/" data-id="cjsiyir1j001rma9ko68v6s2e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -246,11 +246,21 @@
 <li>git revert是会在HEAD节点基础上生成一个提交节点的，也就是新的提交，所以可以推送到远程仓库，别人也能查看到远程记录。</li>
 </ul>
 <h2 id="4-git-branch-f-master-HEAD"><a href="#4-git-branch-f-master-HEAD" class="headerlink" title="4.git branch -f master HEAD^"></a>4.git branch -f master HEAD^</h2><p>在git branch命令后加上参数-f和分支名master以及节点名HEAD^，这样就把master分支强制指向了HEAD的上一版本。即使当前HEAD不在master分支上，使用这个命令也能强制移动master分支的最新提交节点。</p>
+<h2 id="5-清空提交记录（慎重）"><a href="#5-清空提交记录（慎重）" class="headerlink" title="5.清空提交记录（慎重）"></a>5.清空提交记录（慎重）</h2><p>有时候不小心把敏感信息上传到远程仓库怎么办？别怕按照以下步骤来，代价是以前的提交历史都没了。</p>
+<ul>
+<li>将敏感信息删除并生成一个commit。</li>
+<li>创建并切换到临时无提交分支temp：git checkout –orphan temp</li>
+<li>添加所有文件：git add -A</li>
+<li>提交更改：git commit -am “init”</li>
+<li>删除master分支：git branch -D master</li>
+<li>将temp分支重命名为master：git branch -m master</li>
+<li>强制推送到远程仓库：git push -f origin master</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjsixrfc2001ixl9kzsxvfyjt" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/09/25/git版本回退/" data-id="cjsiyir1f001ima9k5gpz4fj2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
