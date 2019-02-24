@@ -62,47 +62,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Android调试技巧" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/16/Android调试技巧/" class="article-date">
-  <time datetime="2018-07-16T06:19:20.000Z" itemprop="datePublished">2018-07-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/16/Android调试技巧/">Android调试技巧</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、方法调用栈"><a href="#一、方法调用栈" class="headerlink" title="一、方法调用栈"></a>一、方法调用栈</h2><h3 id="1-方法一：断点运行查看调用栈"><a href="#1-方法一：断点运行查看调用栈" class="headerlink" title="1.方法一：断点运行查看调用栈"></a>1.方法一：断点运行查看调用栈</h3><p>如下图所示。<br><img src="/2018/07/16/Android调试技巧/断点.png" alt="断点"></p>
-<h3 id="2-方法二：打Log出调用堆栈"><a href="#2-方法二：打Log出调用堆栈" class="headerlink" title="2.方法二：打Log出调用堆栈"></a>2.方法二：打Log出调用堆栈</h3><p>在方法里加入以下代码。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">StackTraceElement[] elements = Thread.currentThread().getStackTrace();</div><div class="line">for (StackTraceElement element : elements) &#123;</div><div class="line">    Log.i(&quot;TAG&quot;, String.format(Locale.getDefault(), </div><div class="line">    &quot;%s-----&gt;%s\tline: %d&quot;,</div><div class="line">    element.getClassName(),</div><div class="line">    element.getMethodName(),</div><div class="line">    element.getLineNumber()));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/07/16/Android调试技巧/" data-id="cjsiwqhdr000f9t9kdndzuiok" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-AndroidGradle权威指南笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/24/AndroidGradle权威指南笔记/" class="article-date">
@@ -261,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/24/AndroidGradle权威指南笔记/" data-id="cjsiwqhdl00039t9ksz8hlvoi" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/24/AndroidGradle权威指南笔记/" data-id="cjsiwxhbz00013k9k2mcnaelh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
@@ -317,10 +276,52 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/23/Android开发者建议尽量不使用Fragment/" data-id="cjsiwqhdo00089t9keiewlhw7" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/23/Android开发者建议尽量不使用Fragment/" data-id="cjsiwxhc400083k9kygyoi7k4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git标签" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/19/git标签/" class="article-date">
+  <time datetime="2018-03-19T15:09:57.000Z" itemprop="datePublished">2018-03-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/19/git标签/">git标签</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、创建标签"><a href="#一、创建标签" class="headerlink" title="一、创建标签"></a>一、创建标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag -a &lt;Tag Name&gt; -m &lt;Message&gt;</div></pre></td></tr></table></figure>
+<h2 id="二、查看Tag"><a href="#二、查看Tag" class="headerlink" title="二、查看Tag"></a>二、查看Tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag</div></pre></td></tr></table></figure>
+<h2 id="三、删除Tag"><a href="#三、删除Tag" class="headerlink" title="三、删除Tag"></a>三、删除Tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag -d &lt;Tag Name&gt;</div></pre></td></tr></table></figure>
+<h2 id="四、推送到远程仓库"><a href="#四、推送到远程仓库" class="headerlink" title="四、推送到远程仓库"></a>四、推送到远程仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//推送某一Tag</div><div class="line">git push origin &lt;Tag Name&gt;</div><div class="line">//推送所有Tag</div><div class="line">git push origin --tags</div></pre></td></tr></table></figure>
+<h2 id="五、删除远程仓库的Tag"><a href="#五、删除远程仓库的Tag" class="headerlink" title="五、删除远程仓库的Tag"></a>五、删除远程仓库的Tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//先本地删除Tag</div><div class="line">git tag -d &lt;Tag Name&gt;</div><div class="line">//再推送到远程仓库</div><div class="line">git push origin :refs/tags/&lt;Tag Name&gt;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2018/03/19/git标签/" data-id="cjsiwxhcj001g3k9kqz1tpcqx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 
     </footer>
   </div>
@@ -364,7 +365,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -381,10 +382,6 @@
           </li>
         
           <li>
-            <a href="/2018/11/14/未命名/">(no title)</a>
-          </li>
-        
-          <li>
             <a href="/2018/08/09/深入理解Java虚拟机笔记/">深入理解Java虚拟机笔记</a>
           </li>
         
@@ -394,6 +391,10 @@
         
           <li>
             <a href="/2018/03/24/AndroidGradle权威指南笔记/">AndroidGradle权威指南笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/">Android开发者建议尽量不使用Fragment</a>
           </li>
         
       </ul>

@@ -62,54 +62,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Activity生命周期与finish方法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/22/Activity生命周期与finish方法/" class="article-date">
-  <time datetime="2017-10-22T01:05:44.000Z" itemprop="datePublished">2017-10-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/22/Activity生命周期与finish方法/">Activity生命周期与finish方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-Activity的生命周期"><a href="#1-Activity的生命周期" class="headerlink" title="1.Activity的生命周期"></a>1.Activity的生命周期</h2><p>图片源自官方文档<br><img src="/2017/10/22/Activity生命周期与finish方法/activity_lifecycle.png" alt="activity_lifecycle"></p>
-<h2 id="2-finish方法"><a href="#2-finish方法" class="headerlink" title="2.finish方法"></a>2.finish方法</h2><ul>
-<li>在onCreate()中调用finish()，会走onDestroy()。</li>
-<li>在onStart()中调用finish()，会走onStop()。</li>
-<li>在onResume()中调用finish()，会走onPause()。</li>
-</ul>
-<h2 id="3-解释"><a href="#3-解释" class="headerlink" title="3.解释"></a>3.解释</h2><ul>
-<li>结合生命周期图，要重点理解生命周期是成对的，或者说是不同级别的。比如：onCreate和onDestroy为第一阶梯，onStart和onStop是第二阶梯，onResume和onPause是第三阶梯。对于finish方法来说，应该是尽快完成调用，从用户体验来说，这是最优策略。所以如果在第一阶梯上，那么直接走下第一阶梯就可以了，没必要再走上第二第三阶梯。</li>
-<li>为什么生命周期周期要是成对的？我的理解有两点：<br>一、确保资源的正确释放。成对能保证资源生命周期正常。<br>二、便于系统处理维护生命周期。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/22/Activity生命周期与finish方法/" data-id="cjsiwqhdg00009t9k0e9sun55" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-kotlin笔记" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/11/kotlin笔记/" class="article-date">
@@ -174,7 +126,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cjsiwqheb001y9t9kjukuvthv" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/11/kotlin笔记/" data-id="cjsiwxhcp001w3k9kr5zij66y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
@@ -214,10 +166,76 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cjsiwqhe9001t9t9k549yv4d8" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2017/10/10/kotlin学习资料/" data-id="cjsiwxhcn001q3k9k5metgkay" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kotlin/">kotlin</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-learn-git-branching参考答案" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/10/learn-git-branching参考答案/" class="article-date">
+  <time datetime="2017-10-10T02:15:14.000Z" itemprop="datePublished">2017-10-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/10/learn-git-branching参考答案/">Learn git branching参考答案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="高级："><a href="#高级：" class="headerlink" title="高级："></a>高级：</h2><p>1:    git checkout C4</p>
+<p>2:    git checkout bugFix^</p>
+<p>3:    git branch –f bugFix C0<br>    git branch –f master C6<br>    git checkout HEAD^</p>
+<p>4:    git reset HEAD^<br>    git checkout pushed<br>    git revert HEAD</p>
+<h2 id="移动提交记录："><a href="#移动提交记录：" class="headerlink" title="移动提交记录："></a>移动提交记录：</h2><p>1:    git cherry-pick C3 C4 C7</p>
+<p>2:    git rebase –i HEAD~4</p>
+<h2 id="杂项："><a href="#杂项：" class="headerlink" title="杂项："></a>杂项：</h2><p>1:    git checkout master<br>    git cherry-pick C4</p>
+<p>2:    git rebase –i HEAD~2<br>    git commit –amend<br>    git rebase –i HEAD~2<br>    git branch –f master HEAD</p>
+<p>3:    git checkout master<br>    git cherry-pick C2<br>    git commit –amend<br>    git cherry-pick C3</p>
+<p>4:    git checkout C2<br>    git tag v1<br>    git tag v0 C1</p>
+<p>5:    git describe master<br>    git commit</p>
+<h2 id="高级话题"><a href="#高级话题" class="headerlink" title="高级话题:"></a>高级话题:</h2><p>1:    git rebase master bugFix<br>第一个参数是父节点，第二个参数是目标节点。<br>    git rebase bugFix side<br>    git rebase side another<br>    git rebase another master</p>
+<p>2:    git branch bugWork HEAD^^2^</p>
+<p>3:    git checkout one<br>    git cherry-pick C4 C3 C2<br>    git checkout two<br>    git cherry-pick C5 C4 C3 C2<br>    git branch –f three C2</p>
+<h2 id="远程仓库："><a href="#远程仓库：" class="headerlink" title="远程仓库："></a>远程仓库：</h2><p>2:    git commit<br>    git checkout o/master<br>    git commit</p>
+<p>3:    git fetch</p>
+<p>4:    git pull</p>
+<p>5:    git clone<br>    git fakeTeamwork master 2<br>    git commit<br>    git pull</p>
+<p>6:    git commit<br>    git commit<br>    git push</p>
+<p>7:    git clone<br>    git fakeTeamwork<br>    git commit<br>    git pull –rebase<br>    git push</p>
+<h2 id="远程仓库高级："><a href="#远程仓库高级：" class="headerlink" title="远程仓库高级："></a>远程仓库高级：</h2><p>1:    git fetch<br>    git rebase o/master side1<br>    git rebase side1 side2<br>    git rebase side2 side3<br>    git rebase side3 master<br>    git push</p>
+<p>2:    git checkout master<br>    git pull<br>    git merge side1<br>    git merge side2<br>    git merge side3<br>    git push</p>
+<p>3:    git checkout –b side o/master<br>    git commit<br>    git pull –rebase<br>    git push</p>
+<p>4:    git push origin master<br>    git push origin foo</p>
+<p>5:    git push origin master^:foo<br>    git push origin foo:master</p>
+<p>6:    git fetch origin master~1:foo<br>    git fetch origin foo:master<br>    git checkout foo<br>    git merge master  </p>
+<p>7:    git push origin :foo<br>    git fetch origin :bar</p>
+<p>8:    git pull origin bar:foo<br>    git pull origin master:side</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2017/10/10/learn-git-branching参考答案/" data-id="cjsiwxhcq001y3k9k8glhrztc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 
     </footer>
   </div>
@@ -261,7 +279,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -278,10 +296,6 @@
           </li>
         
           <li>
-            <a href="/2018/11/14/未命名/">(no title)</a>
-          </li>
-        
-          <li>
             <a href="/2018/08/09/深入理解Java虚拟机笔记/">深入理解Java虚拟机笔记</a>
           </li>
         
@@ -291,6 +305,10 @@
         
           <li>
             <a href="/2018/03/24/AndroidGradle权威指南笔记/">AndroidGradle权威指南笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/">Android开发者建议尽量不使用Fragment</a>
           </li>
         
       </ul>
