@@ -62,6 +62,178 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-submodule用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/13/submodule用法/" class="article-date">
+  <time datetime="2018-03-13T00:35:22.000Z" itemprop="datePublished">2018-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/13/submodule用法/">submodule用法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、当前仓库下添加submodule仓库"><a href="#一、当前仓库下添加submodule仓库" class="headerlink" title="一、当前仓库下添加submodule仓库"></a>一、当前仓库下添加submodule仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git submodule add &lt;remote_url&gt; &lt;local_path&gt;</div></pre></td></tr></table></figure>
+<h2 id="二、clone一个有submodule的仓库"><a href="#二、clone一个有submodule的仓库" class="headerlink" title="二、clone一个有submodule的仓库"></a>二、clone一个有submodule的仓库</h2><p>对于clone一个有submodule的仓库，是不会把submodule也clone下来的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">1. 注册submodule到.git/config里</div><div class="line">	git submodule init</div><div class="line">2. clone submodule</div><div class="line">	git submodule update --recursive</div><div class="line"></div><div class="line">上面两步等价于下面</div><div class="line">	git submodule update --init --recursive</div><div class="line">	</div><div class="line">如果修改了.gitmodule的remote url，使用下面的命令更新submodule的remote url</div><div class="line">	git submodule sync</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2018/03/13/submodule用法/" data-id="cjsiwqhee00289t9kuvqs6wt8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Android移动性能实战笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/11/Android移动性能实战笔记/" class="article-date">
+  <time datetime="2018-03-11T12:52:33.000Z" itemprop="datePublished">2018-03-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/11/Android移动性能实战笔记/">Android移动性能实战笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、磁盘"><a href="#一、磁盘" class="headerlink" title="一、磁盘"></a>一、磁盘</h2><h3 id="1-如果需要频繁读某个文件，请做缓存操作。"><a href="#1-如果需要频繁读某个文件，请做缓存操作。" class="headerlink" title="1.如果需要频繁读某个文件，请做缓存操作。"></a>1.如果需要频繁读某个文件，请做缓存操作。</h3><h3 id="2-SharePreferences的commit对应一次文件的打开与关闭。"><a href="#2-SharePreferences的commit对应一次文件的打开与关闭。" class="headerlink" title="2.SharePreferences的commit对应一次文件的打开与关闭。"></a>2.SharePreferences的commit对应一次文件的打开与关闭。</h3><p>另外，apply是异步操作，commit为同步操作。</p>
+<h3 id="3-主线程I-O与子线程I-O之争。"><a href="#3-主线程I-O与子线程I-O之争。" class="headerlink" title="3.主线程I/O与子线程I/O之争。"></a>3.主线程I/O与子线程I/O之争。</h3><ul>
+<li>若I/O操作放在主线程，将会影响UI的绘制。</li>
+<li>若I/O操作放在子线程，虽然不影响UI线程，但由于子线程优先级不高，I/O耗时会变长。</li>
+</ul>
+<h3 id="4-对象序列化最佳实践。"><a href="#4-对象序列化最佳实践。" class="headerlink" title="4.对象序列化最佳实践。"></a>4.对象序列化最佳实践。</h3><ul>
+<li>序列化写：BufferedOutputStream/ByteArrayOutputStream + ObjectOutputStream</li>
+<li>序列化读：BufferedInputStream/ByteArrayInputStream + ObjectInputStream</li>
+<li>原理：ObjectOutputStream在序列化的时候，会把内存中的每个对象保存到磁盘中，在保存对象时，每个数据成员都会带来一次I/O操作。使用缓冲区，可有效减少磁盘I/O次数。比如3K的大对象，使用2K的缓冲区，两次I/O即可。</li>
+</ul>
+<h3 id="5-使用Buffer太小或太小，也会影响I-O效率。"><a href="#5-使用Buffer太小或太小，也会影响I-O效率。" class="headerlink" title="5.使用Buffer太小或太小，也会影响I/O效率。"></a>5.使用Buffer太小或太小，也会影响I/O效率。</h3><ul>
+<li>在读写时候使用缓冲区可以减少读写次数，从而减少了切换内核态的次数，提高读写效率。</li>
+<li>Buffer也不是越大越好，因为Buffer过大，申请时间会变长。</li>
+<li>经验值8KB = 8192byte。</li>
+</ul>
+<h3 id="6-解压文件的最佳实践。"><a href="#6-解压文件的最佳实践。" class="headerlink" title="6.解压文件的最佳实践。"></a>6.解压文件的最佳实践。</h3><h4 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h4><ul>
+<li>如果Zip文件已在磁盘（已下载），且解压所有Zip中所有文件，建议使用ZipFile，效率较ZipInputStream提升15%-27%。</li>
+<li>仅解压Zip某些文件，建议使用ZipFile，因为ZipFile有RandomAccessFile特性。</li>
+<li>如果Zip不在磁盘上，或顺序解压一小部分文件，或Zip文件目录遭到损害，建议使用ZipInputStream。</li>
+</ul>
+<h4 id="最佳实践代码："><a href="#最佳实践代码：" class="headerlink" title="最佳实践代码："></a>最佳实践代码：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">-----------------------------ZipInputStream-----------------------------</div><div class="line">ZipInputStream zis = new ZipInputStream(new BufferedInputStream(fis));</div><div class="line">BufferedInputStream bis = new BufferedInputStream(zis);</div><div class="line">byte[] buffer = new byte[8192];</div><div class="line">while ((ze = zis.getNextEntry()) != null) &#123;</div><div class="line">	while ((count = bis.read(buffer)) != -1) &#123;</div><div class="line">		fos.write(buffer, 0, count);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">--------------------------------ZipFile---------------------------------</div><div class="line">Enumeration e = ZipFile.entries();</div><div class="line">while (e.hasMoreElements()) &#123;</div><div class="line">	entry = (ZipEntry) e.nextElement();</div><div class="line">	if (低压缩率文件，如文本) &#123;</div><div class="line">		is = new BufferedInputStream(zipFile.getInputStream(entry));</div><div class="line">	&#125; else if (高压缩文件，如图片) &#123;</div><div class="line">		is = zipFile.getInputStream(entry);</div><div class="line">		byte[] buffer = new byte[8192];</div><div class="line">		while ((count = is.read(buffer, 0, buffer.length)) != -1) &#123;</div><div class="line">			fos.write(buffer, 0, count);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="7-请勿重复打开数据库。"><a href="#7-请勿重复打开数据库。" class="headerlink" title="7.请勿重复打开数据库。"></a>7.请勿重复打开数据库。</h3><p>由SQLiteDatabase的#getWriteableDatabase()方法的注释：一旦打开数据库，该链接会被缓存，以供下一次使用，只有当真正不需要时，调用close()关闭。</p>
+<h3 id="8-减少使用select-。"><a href="#8-减少使用select-。" class="headerlink" title="8.减少使用select *。"></a>8.减少使用select *。</h3><h3 id="9-请勿滥用AUTOINCREMENT关键字。"><a href="#9-请勿滥用AUTOINCREMENT关键字。" class="headerlink" title="9.请勿滥用AUTOINCREMENT关键字。"></a>9.请勿滥用AUTOINCREMENT关键字。</h3><p>AUTOINCREMENT用于数据库主键唯一性、递增性，会增加CPU、内存、磁盘空间和磁盘I/O的负担，所以尽量不要用。因为AUTOINCREMENT实现原理是维护另一张表，表记录了已使用的最大行号等信息。</p>
+<h2 id="二、内存"><a href="#二、内存" class="headerlink" title="二、内存"></a>二、内存</h2><p>获取虚拟机分配的内存大小：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">long maxMemory = Runtime.getRuntime().maxMemory();</div></pre></td></tr></table></figure>
+<p>那么什么是管理好内存呢？</p>
+<ul>
+<li>减少内存的申请回收。</li>
+<li>减少常驻内存。</li>
+<li>避免内存泄漏。</li>
+</ul>
+<p>实用工具：</p>
+<ul>
+<li>LeakCanary<ul>
+<li>定义了许多系统级内存泄漏问题<a href="https://github.com/square/leakcanary/blob/master/leakcanary-android/src/main/java/com/squareup/leakcanary/AndroidExcludedRefs.java" target="_blank" rel="external">https://github.com/square/leakcanary/blob/master/leakcanary-android/src/main/java/com/squareup/leakcanary/AndroidExcludedRefs.java</a></li>
+</ul>
+</li>
+<li>LeakInspector</li>
+<li>Android Allocation Tracer</li>
+</ul>
+<h3 id="1-内类是危险的编码方式"><a href="#1-内类是危险的编码方式" class="headerlink" title="1.内类是危险的编码方式"></a>1.内类是危险的编码方式</h3><p>java的非静态类对象会持有外部类的强引用。在Android中，某些类是具有特殊的生命周期的，比如Context、Fragment。一旦他们与非静态类对象生命周期不同步，就会出现内存泄漏问题，甚至是crash。</p>
+<p>解决方案：</p>
+<ul>
+<li>尽量不用非静态内部类。</li>
+<li>若需要外部类引用，请使用弱引用。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public abstract class WeakContainer&lt;T&gt; &#123;</div><div class="line"></div><div class="line">    private WeakReference&lt;T&gt; mContainer;</div><div class="line"></div><div class="line">    public WeakContainer(T ref) &#123;</div><div class="line">        mContainer = new WeakReference&lt;&gt;(ref);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public T getRef() &#123;</div><div class="line">        return mContainer.get();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">使用时继承它实现需要的接口就可以了。</div></pre></td></tr></table></figure>
+<h3 id="2-适当选择图片解码方式"><a href="#2-适当选择图片解码方式" class="headerlink" title="2.适当选择图片解码方式"></a>2.适当选择图片解码方式</h3><p>头像、缩略图等小图，如果没必要高清显示，那么可以选择RGB_565。</p>
+<ul>
+<li>RGB_565 每个像素使用2字节16位保存颜色信息，其中红色5位，绿色6位，蓝色5位。</li>
+<li>Android默认使用ARGB_8888，包含透明通道，共4字节32位。</li>
+</ul>
+<h3 id="3-大图裁剪压缩"><a href="#3-大图裁剪压缩" class="headerlink" title="3.大图裁剪压缩"></a>3.大图裁剪压缩</h3><p>大图解码往往是OOM的元凶。</p>
+<h3 id="4-提高Bitmap的缓存命中率"><a href="#4-提高Bitmap的缓存命中率" class="headerlink" title="4.提高Bitmap的缓存命中率"></a>4.提高Bitmap的缓存命中率</h3><p>比如社交类产品一般有默认头像，url一般均为同一个，在做图片缓存时，应使用url作为key。</p>
+<h2 id="三、网络"><a href="#三、网络" class="headerlink" title="三、网络"></a>三、网络</h2><h3 id="1-业务成功率"><a href="#1-业务成功率" class="headerlink" title="1.业务成功率"></a>1.业务成功率</h3><ul>
+<li>弱网</li>
+<li>网络拥塞</li>
+</ul>
+<h3 id="2-业务网络延时"><a href="#2-业务网络延时" class="headerlink" title="2.业务网络延时"></a>2.业务网络延时</h3><ul>
+<li>DNS解析</li>
+<li>长连接</li>
+<li>短连接</li>
+<li>接收窗口</li>
+</ul>
+<h3 id="3-业务带宽成本"><a href="#3-业务带宽成本" class="headerlink" title="3.业务带宽成本"></a>3.业务带宽成本</h3><ul>
+<li>图片、大数据压缩</li>
+<li>数据增量，比如好友列表应采用增量更新，需要制定协议</li>
+<li>资源去重，主要是压缩包和非压缩包之间去重</li>
+</ul>
+<h3 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h3><ul>
+<li>避免重复上传下载</li>
+<li>JS/CSS/HTML需要压缩</li>
+<li>图片压缩</li>
+<li>定时网络请求尽量合并在一个时间</li>
+<li>网络重试必须有明显结束条件</li>
+<li>流量兜底能力，避免流量偷跑，服务端控制终止数据传输。</li>
+</ul>
+<h2 id="四、CPU"><a href="#四、CPU" class="headerlink" title="四、CPU"></a>四、CPU</h2><h3 id="1-争夺CPU资源"><a href="#1-争夺CPU资源" class="headerlink" title="1.争夺CPU资源"></a>1.争夺CPU资源</h3><ul>
+<li>计算密集型</li>
+<li>I/O密集型</li>
+</ul>
+<h3 id="2-建议"><a href="#2-建议" class="headerlink" title="2.建议"></a>2.建议</h3><ul>
+<li>能用int不要用float</li>
+<li>容器类选择合适的，比如ArrayMap,SparseArray,ConcurrentHashMap</li>
+<li>容器类如果可以，请构建的时候设置它的容量，避免不必要的扩容</li>
+<li>根据CPU核心数选择合适线程数</li>
+<li>优化算法</li>
+</ul>
+<h2 id="五、电量"><a href="#五、电量" class="headerlink" title="五、电量"></a>五、电量</h2><p>针对CPU唤醒优化。</p>
+<ul>
+<li>锁屏，灭屏，后台停止耗电操作：动画、SurfaceView绘制。</li>
+<li>锁屏，灭屏正确释放WakeLock，否则导致CPU无法休眠。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2018/03/11/Android移动性能实战笔记/" data-id="cjsiwqhdp000a9t9ksvb7r215" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ProtocolBuffers的介绍和使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/19/ProtocolBuffers的介绍和使用/" class="article-date">
@@ -95,95 +267,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/01/19/ProtocolBuffers的介绍和使用/" data-id="cjnmsb78c0017xxfyi6jsvhz4" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/01/19/ProtocolBuffers的介绍和使用/" data-id="cjsiwqhe100189t9kzcc87n3x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-FlatBuffers的介绍和使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/19/FlatBuffers的介绍和使用/" class="article-date">
-  <time datetime="2018-01-19T00:55:20.000Z" itemprop="datePublished">2018-01-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/19/FlatBuffers的介绍和使用/">FlatBuffers的介绍和使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><h3 id="1-官网"><a href="#1-官网" class="headerlink" title="1.官网"></a>1.官网</h3><p><a href="https://google.github.io/flatbuffers/" target="_blank" rel="external">https://google.github.io/flatbuffers/</a></p>
-<h3 id="2-博客"><a href="#2-博客" class="headerlink" title="2.博客"></a>2.博客</h3><p><a href="https://race604.com/flatbuffers-intro/" target="_blank" rel="external">https://race604.com/flatbuffers-intro/</a></p>
-<h2 id="二、使用"><a href="#二、使用" class="headerlink" title="二、使用"></a>二、使用</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1.安装"></a>1.安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install flatbuffers</div></pre></td></tr></table></figure>
-<p>安装成功后，可使用<code>flatc --help</code>查看帮助。</p>
-<h3 id="2-编写-fbs文件"><a href="#2-编写-fbs文件" class="headerlink" title="2.编写.fbs文件"></a>2.编写.fbs文件</h3><p>按照数据结构和规范编写.fbs文件。</p>
-<h3 id="3-生成-java文件"><a href="#3-生成-java文件" class="headerlink" title="3.生成.java文件"></a>3.生成.java文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flatc -j -b [.fbs文件文件绝对路径]</div></pre></td></tr></table></figure>
-<p>其中-j -b这两个参数的意义可以通过<code>flatc --help</code>查看。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/01/19/FlatBuffers的介绍和使用/" data-id="cjnmsb786000qxxfywf145fji" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-ProtocolBuffers在Mac-OS的安装" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/18/ProtocolBuffers在Mac-OS的安装/" class="article-date">
-  <time datetime="2018-01-18T15:26:26.000Z" itemprop="datePublished">2018-01-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/18/ProtocolBuffers在Mac-OS的安装/">ProtocolBuffers在Mac OS的安装</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、检查环境"><a href="#一、检查环境" class="headerlink" title="一、检查环境"></a>一、检查环境</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//安装autoconf、automake、libtool工具</div><div class="line">brew install autoconf automake libtool</div></pre></td></tr></table></figure>
-<h2 id="二、安装步骤"><a href="#二、安装步骤" class="headerlink" title="二、安装步骤"></a>二、安装步骤</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">//1.clone源码</div><div class="line">git clone https://github.com/google/protobuf.git</div><div class="line"></div><div class="line">//2.进入项目目录</div><div class="line">cd protobuf</div><div class="line"></div><div class="line">//3.生成configure脚本</div><div class="line">./autogen.sh</div><div class="line"></div><div class="line">//4.安装</div><div class="line">./configure</div><div class="line">make</div><div class="line">make check</div><div class="line">sudo make install</div><div class="line"></div><div class="line">//5.配置protoc的环境变量，即protobuf项目的目录路径</div><div class="line">略。</div><div class="line"></div><div class="line">//6.可略过</div><div class="line">sudo ldconfig # refresh shared library cache.</div></pre></td></tr></table></figure>
-<h2 id="三、检查是否安装成功"><a href="#三、检查是否安装成功" class="headerlink" title="三、检查是否安装成功"></a>三、检查是否安装成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">protoc --version</div></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/01/18/ProtocolBuffers在Mac-OS的安装/" data-id="cjnmsb78c0015xxfyvh9s054i" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
 
     </footer>
   </div>
@@ -208,7 +295,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财/">理财</a></li></ul>
     </div>
   </div>
 
@@ -218,7 +305,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a> <a href="/tags/理财/" style="font-size: 10px;">理财</a>
     </div>
   </div>
 
@@ -227,7 +314,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -240,6 +327,14 @@
       <ul>
         
           <li>
+            <a href="/2019/02/24/《指数基金投资指南》笔记/">《指数基金投资指南》笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/14/未命名/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2018/08/09/深入理解Java虚拟机笔记/">深入理解Java虚拟机笔记</a>
           </li>
         
@@ -249,14 +344,6 @@
         
           <li>
             <a href="/2018/03/24/AndroidGradle权威指南笔记/">AndroidGradle权威指南笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/">Android开发者建议尽量不使用Fragment</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/19/git标签/">git标签</a>
           </li>
         
       </ul>
@@ -271,7 +358,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 JoKing<br>
+      &copy; 2019 JoKing<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

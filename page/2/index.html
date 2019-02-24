@@ -62,6 +62,217 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Android调试技巧" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/16/Android调试技巧/" class="article-date">
+  <time datetime="2018-07-16T06:19:20.000Z" itemprop="datePublished">2018-07-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/16/Android调试技巧/">Android调试技巧</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、方法调用栈"><a href="#一、方法调用栈" class="headerlink" title="一、方法调用栈"></a>一、方法调用栈</h2><h3 id="1-方法一：断点运行查看调用栈"><a href="#1-方法一：断点运行查看调用栈" class="headerlink" title="1.方法一：断点运行查看调用栈"></a>1.方法一：断点运行查看调用栈</h3><p>如下图所示。<br><img src="/2018/07/16/Android调试技巧/断点.png" alt="断点"></p>
+<h3 id="2-方法二：打Log出调用堆栈"><a href="#2-方法二：打Log出调用堆栈" class="headerlink" title="2.方法二：打Log出调用堆栈"></a>2.方法二：打Log出调用堆栈</h3><p>在方法里加入以下代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">StackTraceElement[] elements = Thread.currentThread().getStackTrace();</div><div class="line">for (StackTraceElement element : elements) &#123;</div><div class="line">    Log.i(&quot;TAG&quot;, String.format(Locale.getDefault(), </div><div class="line">    &quot;%s-----&gt;%s\tline: %d&quot;,</div><div class="line">    element.getClassName(),</div><div class="line">    element.getMethodName(),</div><div class="line">    element.getLineNumber()));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2018/07/16/Android调试技巧/" data-id="cjsiwqhdr000f9t9kdndzuiok" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-AndroidGradle权威指南笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/24/AndroidGradle权威指南笔记/" class="article-date">
+  <time datetime="2018-03-24T01:22:11.000Z" itemprop="datePublished">2018-03-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/24/AndroidGradle权威指南笔记/">AndroidGradle权威指南笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第一章：准备"><a href="#第一章：准备" class="headerlink" title="第一章：准备"></a>第一章：准备</h2><h3 id="1-环境配置"><a href="#1-环境配置" class="headerlink" title="1.环境配置"></a>1.环境配置</h3><p>（1）下载gradle-[version]-all.zip。<br>（2）配置环境变量。<br>（3）使用命令<code>gradle -v</code>检查安装是否成功。<br>（4）使用命令<code>gradle -help</code>查看帮助。  </p>
+<h3 id="2-编写Hello-World"><a href="#2-编写Hello-World" class="headerlink" title="2.编写Hello World"></a>2.编写Hello World</h3><p>（1）新建一个工程目录。<br>（2）新建一个build.gradle的文本文件。<br>（3）输入以下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">task hello &#123;</div><div class="line">	doLast &#123;</div><div class="line">		println &apos;Hello World!&apos;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>（4）工程目录下执行<code>gradle hello</code>。</p>
+<h3 id="3-生成Wrapper"><a href="#3-生成Wrapper" class="headerlink" title="3.生成Wrapper"></a>3.生成Wrapper</h3><ul>
+<li><p>GradleWrapper是用于兼容不同gradle版本的“通用接口”。</p>
+</li>
+<li><p>在根目录下执行<code>gradle wrapper</code>，将自动生成以下文件：<br><img src="/2018/03/24/AndroidGradle权威指南笔记/gradlewrapper.png" alt="gradlewrapper"></p>
+</li>
+<li><p>触类旁通，gradle wrapper命令其实是执行了一个名叫wrapper的task。</p>
+</li>
+<li><p>我们可以重写该task，代码如下：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//修改gradle-wrapper.properties里的参数值</div><div class="line">task wrapper(type : Wrapper) &#123;</div><div class="line">	gradleVersion = &apos;4.1&apos;</div><div class="line">	...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-开关级别"><a href="#4-开关级别" class="headerlink" title="4.开关级别"></a>4.开关级别</h3><table>
+<thead>
+<tr>
+<th>日志选项</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-q / –quiet</td>
+<td>重要消息及以上</td>
+</tr>
+<tr>
+<td>-i / –info</td>
+<td>info及以上</td>
+</tr>
+<tr>
+<td>-d / –debug</td>
+<td>debug及以上</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>错误堆栈选项</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-s / –stacktrace</td>
+<td>重要堆栈</td>
+</tr>
+<tr>
+<td>-S / –full-stacktrace</td>
+<td>全堆栈</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-常用辅助命令"><a href="#5-常用辅助命令" class="headerlink" title="5.常用辅助命令"></a>5.常用辅助命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">1.查看帮助</div><div class="line">./gradlew -help</div><div class="line"></div><div class="line">2.查看Tasks</div><div class="line">./gradlew tasks</div><div class="line"></div><div class="line">3.强制刷新Maven库</div><div class="line">./gradlew --refresh-dependencies assemble</div><div class="line"></div><div class="line">4.多任务串行执行</div><div class="line">./gradlew clean assembleDebug</div><div class="line"></div><div class="line">5.命令缩写</div><div class="line">./gradlew connectCheck 等价 ./gradlew cc</div></pre></td></tr></table></figure>
+<h2 id="第二章：初识Groovy"><a href="#第二章：初识Groovy" class="headerlink" title="第二章：初识Groovy"></a>第二章：初识Groovy</h2><p>Groovy是基于JVM的动态语言。它支持闭包，支持DSL，是一门灵活的动态脚步语言。</p>
+<h3 id="1-字符串"><a href="#1-字符串" class="headerlink" title="1.字符串"></a>1.字符串</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">task printStringVar &lt;&lt; &#123;</div><div class="line">	def name1 = &apos;张三&apos;</div><div class="line">	def name2 = &quot;李四&quot;</div><div class="line"></div><div class="line">	println &apos;单引号   $&#123;name1&#125;&apos;</div><div class="line">	println &quot;双引号   $&#123;name1&#125;&quot;</div><div class="line">	</div><div class="line">	println &apos;单引号   $&#123;name2&#125;&apos;</div><div class="line">	println &quot;双引号   $&#123;name2&#125;&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">输入：./gradlew printStringVar</div><div class="line"></div><div class="line">输出：</div><div class="line">单引号   $&#123;name1&#125;</div><div class="line">双引号   张三</div><div class="line">单引号   $&#123;name2&#125;</div><div class="line">双引号   李四</div></pre></td></tr></table></figure>
+<h3 id="2-集合"><a href="#2-集合" class="headerlink" title="2.集合"></a>2.集合</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">1.List</div><div class="line">task printList &lt;&lt; &#123;</div><div class="line">	def numList = [1, 2, 3, 4]</div><div class="line">	println numList.getClass().name</div><div class="line">	println numList[1]//访问第二个元素</div><div class="line">	println numList[-1]//访问倒数第一个元素</div><div class="line">	println numList[-2]//访问倒数第二个元素</div><div class="line">	println numList[1..3]//访问第二个到第四个元素</div><div class="line"></div><div class="line">	numList.each &#123;</div><div class="line">		println it</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">输出：</div><div class="line">java.util.ArrayList</div><div class="line">2</div><div class="line">4</div><div class="line">3</div><div class="line">[2, 3, 4]</div><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line"></div><div class="line">2.Map</div><div class="line">task printMap &lt;&lt; &#123;</div><div class="line">	def map = [&apos;width&apos;:1024, &apos;height&apos;:720]</div><div class="line">	println map.getClass().name</div><div class="line">	println map[&apos;width&apos;]</div><div class="line">	println map.height</div><div class="line"></div><div class="line">	map.each &#123;</div><div class="line">		println &quot;Key:$&#123;it.key&#125;,Value:$&#123;it.value&#125;&quot;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">输出：</div><div class="line">java.util.LinkedHashMap</div><div class="line">1024</div><div class="line">720</div><div class="line">Key:width,Value:1024</div><div class="line">Key:height,Value:720</div></pre></td></tr></table></figure>
+<h3 id="3-方法"><a href="#3-方法" class="headerlink" title="3.方法"></a>3.方法</h3><ul>
+<li>调用可以省略括号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">task invokeMethod &lt;&lt; &#123;</div><div class="line">	method1(1, 2)</div><div class="line">	method1 1, 2</div><div class="line">&#125;</div><div class="line"></div><div class="line">def method1 (int a,int b) &#123;</div><div class="line">	println a + b</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>return可以不写</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">task printMethodReturn &lt;&lt; &#123;</div><div class="line">	def max1 = method2 1, 2</div><div class="line">	def max2 = method2 6, 4</div><div class="line">	println &quot;max1:$&#123;max1&#125;,max2:$&#123;max2&#125;&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">def method2 (int a, int b) &#123;</div><div class="line">	if (a &gt; b) &#123;</div><div class="line">		a</div><div class="line">	&#125; else &#123;</div><div class="line">		b</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">输出：</div><div class="line">max1:2,max2:6</div></pre></td></tr></table></figure>
+<ul>
+<li>JavaBean</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">task helloJavaBean &lt;&lt; &#123;</div><div class="line">	Person p = new Person()</div><div class="line">	</div><div class="line">	println &quot;name:$&#123;p.name&#125;&quot;</div><div class="line">	p.name = &quot;Tom&quot;</div><div class="line">	println &quot;name:$&#123;p.name&#125;&quot;</div><div class="line">	//能访问age是因为有get方法，但并不能修改age，因为没有set方法。</div><div class="line">	println &quot;age:$&#123;p.age&#125;&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Person &#123;</div><div class="line">	private String name</div><div class="line">	public int getAge() &#123;</div><div class="line">		12</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">输出：</div><div class="line">name:null</div><div class="line">name:Tom</div><div class="line">age:12</div></pre></td></tr></table></figure>
+<ul>
+<li>闭包</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">//---------------------task 1---------------------</div><div class="line">task helloClosure &lt;&lt; &#123;</div><div class="line">	customEach &#123;//两个大括号之间就是闭包</div><div class="line">		println it</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">def customEach(closure) &#123;</div><div class="line">	for(int i in 1..10) &#123;</div><div class="line">		closure(i)</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//---------------------task 2---------------------</div><div class="line">task helloMap &lt;&lt; &#123;</div><div class="line">	eachMap &#123;//两个大括号之间就是闭包</div><div class="line">		k, v -&gt;</div><div class="line">		println &quot;$&#123;k&#125; , $&#123;v&#125;&quot;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">	</div><div class="line">def eachMap(closure) &#123;</div><div class="line">	def map = [&quot;name&quot;:&quot;abc&quot;,&quot;age&quot;:18]</div><div class="line">	map.each &#123;</div><div class="line">		closure(it.key, it.value)//向闭包传递数据</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//---------------------task 3---------------------</div><div class="line">task configClosure &lt;&lt; &#123;</div><div class="line">	person &#123;</div><div class="line">		name = &quot;abc&quot;</div><div class="line">		age = 20</div><div class="line">		dumpPerson()</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">class Person &#123;</div><div class="line">	String name</div><div class="line">	int age</div><div class="line">	</div><div class="line">	def dumpPerson() &#123;</div><div class="line">		println &quot;name is $&#123;name&#125;,age is $&#123;age&#125;&quot;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">def person (Closure&lt;Person&gt; closure) &#123;</div><div class="line">	Person p = new Person()</div><div class="line">	closure.delegate = p</div><div class="line">	closure.setResolveStrategy(Closure.DELEGATE_FIRST);</div><div class="line">	closure(p)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="第三章：初识Gradle"><a href="#第三章：初识Gradle" class="headerlink" title="第三章：初识Gradle"></a>第三章：初识Gradle</h2><h3 id="1-settings文件"><a href="#1-settings文件" class="headerlink" title="1.settings文件"></a>1.settings文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//settings.gradle</div><div class="line">rootProject.name = &apos;XXX&apos;</div><div class="line"></div><div class="line">//与主module在同一个根目录下</div><div class="line">include &apos;:ModuleA&apos;</div><div class="line">//不与主module在同一个根目录下，自定义相对路径</div><div class="line">include &apos;:RxJava&apos;</div><div class="line">project(&apos;:RxJava&apos;).projectDir = new File(rootDir, &apos;joking/rxjava&apos;)</div></pre></td></tr></table></figure>
+<h3 id="2-build-gradle文件"><a href="#2-build-gradle文件" class="headerlink" title="2.build.gradle文件"></a>2.build.gradle文件</h3><p>每个module都有一个build.gradle文件，而主module更可以配置子module属性或者全module属性。请记住，subprojects和allprojects是两个方法，接收闭包进行修改里面的参数，还可以执行其他命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">subprojects &#123;</div><div class="line">	repositories &#123;</div><div class="line">		jcenter()</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">allprojects &#123;</div><div class="line">	repositories &#123;</div><div class="line">		jcenter()</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-Projects和Tasks"><a href="#3-Projects和Tasks" class="headerlink" title="3.Projects和Tasks"></a>3.Projects和Tasks</h3><p>一个Project包含许多个Tasks。Task是一个原子性操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">task customTask1 &#123;</div><div class="line">	doFirst &#123;</div><div class="line">		println &apos;customTask1:doFirst&apos;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	doLast &#123;</div><div class="line">		println &apos;customTask1:doLast&apos;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//原型，两者作用一样。</div><div class="line">tasks.create(&quot;customTask2&quot;) &#123;</div><div class="line">	doFirst &#123;</div><div class="line">		println &apos;customTask2:doFirst&apos;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	doLast &#123;</div><div class="line">		println &apos;customTask2:doLast&apos;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-任务依赖"><a href="#4-任务依赖" class="headerlink" title="4.任务依赖"></a>4.任务依赖</h3><p>有时候我们要求作为前提条件的任务完成了才能执行当前任务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">task hello &lt;&lt; &#123;</div><div class="line">	println &apos;hello&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">task world &lt;&lt; &#123;</div><div class="line">	println &apos;world&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//1.单依赖</div><div class="line">task main(dependsOn:hello) &#123;</div><div class="line">	doLast &#123;</div><div class="line">		println &apos;main&apos;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">输出结果：</div><div class="line">&gt; Task :hello</div><div class="line">hello</div><div class="line"></div><div class="line">&gt; Task :main</div><div class="line">main</div><div class="line"></div><div class="line">//2.多依赖</div><div class="line">task main2 &#123;</div><div class="line">	dependsOn hello,world</div><div class="line">	doLast &#123;</div><div class="line">		println &apos;main&apos;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">输出结果：</div><div class="line">&gt; Task :hello</div><div class="line">hello</div><div class="line"></div><div class="line">&gt; Task :world</div><div class="line">world</div><div class="line"></div><div class="line">&gt; Task :main2</div><div class="line">main</div></pre></td></tr></table></figure>
+<h3 id="5-自定义属性"><a href="#5-自定义属性" class="headerlink" title="5.自定义属性"></a>5.自定义属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//其实就是闭包</div><div class="line">ext &#123;</div><div class="line">	name = &apos;tom&apos;</div><div class="line">	age = 18</div><div class="line">&#125;</div><div class="line"></div><div class="line">ext.father = &apos;jerry&apos;</div></pre></td></tr></table></figure>
+<h2 id="第四章：Gradle任务"><a href="#第四章：Gradle任务" class="headerlink" title="第四章：Gradle任务"></a>第四章：Gradle任务</h2><h3 id="1-task的属性"><a href="#1-task的属性" class="headerlink" title="1.task的属性"></a>1.task的属性</h3><table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>描述</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>基于一个存在的task来创建，类似类继承</td>
+<td>DefaultTask</td>
+</tr>
+<tr>
+<td>overwrite</td>
+<td>是否替换已存在的task，和type一起使用</td>
+<td>false</td>
+</tr>
+<tr>
+<td>dependsOn</td>
+<td>配置task的依赖</td>
+<td>[]</td>
+</tr>
+<tr>
+<td>action</td>
+<td>添加到任务中的一个Action或闭包</td>
+<td>null</td>
+</tr>
+<tr>
+<td>description</td>
+<td>task的描述</td>
+<td>null</td>
+</tr>
+<tr>
+<td>group</td>
+<td>task的分组</td>
+<td>null</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//1.闭包内声明</div><div class="line">task taskProperties &#123;</div><div class="line">	description &apos;task的属性&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//2.闭包外赋值</div><div class="line">taskProperties.group = BasePlugin.BUILD_GROUP</div></pre></td></tr></table></figure>
+<h3 id="2-lt-lt-操作符"><a href="#2-lt-lt-操作符" class="headerlink" title="2.&lt;&lt;操作符"></a>2.&lt;&lt;操作符</h3><p>其实是doLast的短标记形式。</p>
+<h3 id="3-任务执行顺序"><a href="#3-任务执行顺序" class="headerlink" title="3.任务执行顺序"></a>3.任务执行顺序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">//1.doFirst doSelf doLast</div><div class="line">class CustomTask extends DefaultTask &#123;</div><div class="line">	@TaskAction</div><div class="line">	def doSelf() &#123;</div><div class="line">		println &apos;execute doSelf&apos;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">def Task myTask = task exampleTask(type: CustomTask)</div><div class="line">myTask.doFirst &#123;</div><div class="line">	println &apos;execute doFirst&apos;</div><div class="line">&#125;</div><div class="line">myTask.doLast &#123;</div><div class="line">	println &apos;execute doLast&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">输出结果：</div><div class="line">&gt; Task :exampleTask</div><div class="line">execute doFirst</div><div class="line">execute doSelf</div><div class="line">execute doLast</div><div class="line"></div><div class="line">//2.shouldRunAfter mustRunAfter</div><div class="line">task Task1 &lt;&lt; &#123;</div><div class="line">	println &apos;task1&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">task Task2 &lt;&lt; &#123;</div><div class="line">	println &apos;task2&apos;</div><div class="line">&#125;</div><div class="line"></div><div class="line">task1.mustRunAfter task2</div><div class="line"></div><div class="line">执行./gradlew task1 task2</div><div class="line">输出结果：</div><div class="line">&gt; Task :Task2</div><div class="line">task2</div><div class="line"></div><div class="line">&gt; Task :Task1</div><div class="line">task1</div></pre></td></tr></table></figure>
+<h3 id="4-任务开启和禁用"><a href="#4-任务开启和禁用" class="headerlink" title="4.任务开启和禁用"></a>4.任务开启和禁用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//禁止执行某项任务</div><div class="line">Task1.enabled = false</div></pre></td></tr></table></figure>
+<h3 id="5-onlyIf断言"><a href="#5-onlyIf断言" class="headerlink" title="5.onlyIf断言"></a>5.onlyIf断言</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">final String BUILD_ALL = &quot;all&quot;</div><div class="line">final String BUILD_MIUI = &quot;miui&quot;</div><div class="line">final String BUILD_HUAWEI = &quot;huawei&quot;</div><div class="line"></div><div class="line">task MIUI_Release &lt;&lt; &#123;</div><div class="line">	println &quot;MIUI Release&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">task HUAWEI_Release &lt;&lt; &#123;</div><div class="line">	println &quot;HUAWEI Release&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">task buildApp &#123;</div><div class="line">	dependsOn MIUI_Release, HUAWEI_Release</div><div class="line">&#125;</div><div class="line"></div><div class="line">MIUI_Release.onlyIf &#123;</div><div class="line">	def excute = false;</div><div class="line">	if (project.hasProperty(&quot;build_apps&quot;)) &#123;</div><div class="line">		Object buildWhat = project.property(&quot;build_apps&quot;)</div><div class="line">		if (BUILD_ALL.equals(buildWhat) || BUILD_MIUI.equals(buildWhat)) &#123;</div><div class="line">			excute = true;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	excute</div><div class="line">&#125;</div><div class="line"></div><div class="line">HUAWEI_Release.onlyIf &#123;</div><div class="line">	def excute = false;</div><div class="line">	if (project.hasProperty(&quot;build_apps&quot;)) &#123;</div><div class="line">		Object buildWhat = project.property(&quot;build_apps&quot;)</div><div class="line">		if (BUILD_ALL.equals(buildWhat) || BUILD_HUAWEI.equals(buildWhat)) &#123;</div><div class="line">			excute = true;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	excute</div><div class="line">&#125;</div><div class="line"></div><div class="line">//1.两个渠道都打包</div><div class="line">./gradlew -P build_apps=all buildApp</div><div class="line">//2.打MIUI</div><div class="line">./gradlew -P build_apps=miui buildApp</div><div class="line">//3.打HUAWEI</div><div class="line">./gradlew -P build_apps=huawei buildApp</div></pre></td></tr></table></figure>
+<h2 id="第五六七章：Gradle插件"><a href="#第五六七章：Gradle插件" class="headerlink" title="第五六七章：Gradle插件"></a>第五六七章：Gradle插件</h2><h3 id="1-应用插件"><a href="#1-应用插件" class="headerlink" title="1.应用插件"></a>1.应用插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apply plugin:&apos;java&apos;</div><div class="line">apply plugin:org.gradle.api.plugins.JavaPlugin</div></pre></td></tr></table></figure>
+<h3 id="2-应用脚本"><a href="#2-应用脚本" class="headerlink" title="2.应用脚本"></a>2.应用脚本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apply from:&apos;version.gradle&apos;</div></pre></td></tr></table></figure>
+<h3 id="3-应用第三方的插件"><a href="#3-应用第三方的插件" class="headerlink" title="3.应用第三方的插件"></a>3.应用第三方的插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">buildscript &#123;</div><div class="line">	repositories &#123;</div><div class="line">		jcenter()</div><div class="line">	&#125;</div><div class="line">	dependebcies &#123;</div><div class="line">		classpath &apos;com.android.tools.build:gradle:1.5.0&apos;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">apply plugin:&apos;com.android.application&apos;</div><div class="line">需要配置classpath才能找到这个插件。</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://joking111111.github.io/2018/03/24/AndroidGradle权威指南笔记/" data-id="cjsiwqhdl00039t9ksz8hlvoi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Android开发者建议尽量不使用Fragment" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/" class="article-date">
@@ -106,94 +317,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/23/Android开发者建议尽量不使用Fragment/" data-id="cjnmsb780000axxfy8i0io5cv" class="article-share-link">Share</a>
+      <a data-url="https://joking111111.github.io/2018/03/23/Android开发者建议尽量不使用Fragment/" data-id="cjsiwqhdo00089t9keiewlhw7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git标签" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/19/git标签/" class="article-date">
-  <time datetime="2018-03-19T15:09:57.000Z" itemprop="datePublished">2018-03-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/19/git标签/">git标签</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、创建标签"><a href="#一、创建标签" class="headerlink" title="一、创建标签"></a>一、创建标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag -a &lt;Tag Name&gt; -m &lt;Message&gt;</div></pre></td></tr></table></figure>
-<h2 id="二、查看Tag"><a href="#二、查看Tag" class="headerlink" title="二、查看Tag"></a>二、查看Tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag</div></pre></td></tr></table></figure>
-<h2 id="三、删除Tag"><a href="#三、删除Tag" class="headerlink" title="三、删除Tag"></a>三、删除Tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git tag -d &lt;Tag Name&gt;</div></pre></td></tr></table></figure>
-<h2 id="四、推送到远程仓库"><a href="#四、推送到远程仓库" class="headerlink" title="四、推送到远程仓库"></a>四、推送到远程仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//推送某一Tag</div><div class="line">git push origin &lt;Tag Name&gt;</div><div class="line">//推送所有Tag</div><div class="line">git push origin --tags</div></pre></td></tr></table></figure>
-<h2 id="五、删除远程仓库的Tag"><a href="#五、删除远程仓库的Tag" class="headerlink" title="五、删除远程仓库的Tag"></a>五、删除远程仓库的Tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//先本地删除Tag</div><div class="line">git tag -d &lt;Tag Name&gt;</div><div class="line">//再推送到远程仓库</div><div class="line">git push origin :refs/tags/&lt;Tag Name&gt;</div></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/19/git标签/" data-id="cjnmsb78g001gxxfypgree3dj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git文件回退" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/19/git文件回退/" class="article-date">
-  <time datetime="2018-03-19T14:34:28.000Z" itemprop="datePublished">2018-03-19</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/19/git文件回退/">git文件回退</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>虽然git stash很好使,但是如果只想舍弃某个文件修改，git stash的代价太大了。因此我们可以使用单文件回退操作。</p>
-<h2 id="一、文件修改，但未进行git-add操作"><a href="#一、文件修改，但未进行git-add操作" class="headerlink" title="一、文件修改，但未进行git add操作"></a>一、文件修改，但未进行git add操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//使用版本库内容替换工作区</div><div class="line">git checkout &lt;file相对路径&gt;</div></pre></td></tr></table></figure>
-<h2 id="二、文件修改，已git-add，但未进行git-commit操作"><a href="#二、文件修改，已git-add，但未进行git-commit操作" class="headerlink" title="二、文件修改，已git add，但未进行git commit操作"></a>二、文件修改，已git add，但未进行git commit操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//将修改内容移除暂存区</div><div class="line">git reset HEAD &lt;file相对路径&gt;</div><div class="line">//使用版本库内容替换工作区</div><div class="line">git checkout &lt;file相对路径&gt;</div></pre></td></tr></table></figure>
-<h2 id="三、已将文件修改commit了"><a href="#三、已将文件修改commit了" class="headerlink" title="三、已将文件修改commit了"></a>三、已将文件修改commit了</h2><p>找到你想要舍弃所在的commit SHA，使用以下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git reset &lt;commit SHA&gt; &lt;file相对路径&gt;</div></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://joking111111.github.io/2018/03/19/git文件回退/" data-id="cjnmsb78e001bxxfy83qtpyyj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 
     </footer>
   </div>
@@ -218,7 +345,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/理财/">理财</a></li></ul>
     </div>
   </div>
 
@@ -228,7 +355,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a>
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/git/" style="font-size: 17.5px;">git</a> <a href="/tags/kotlin/" style="font-size: 12.5px;">kotlin</a> <a href="/tags/环境配置/" style="font-size: 15px;">环境配置</a> <a href="/tags/理财/" style="font-size: 10px;">理财</a>
     </div>
   </div>
 
@@ -237,7 +364,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li></ul>
     </div>
   </div>
 
@@ -250,6 +377,14 @@
       <ul>
         
           <li>
+            <a href="/2019/02/24/《指数基金投资指南》笔记/">《指数基金投资指南》笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/14/未命名/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2018/08/09/深入理解Java虚拟机笔记/">深入理解Java虚拟机笔记</a>
           </li>
         
@@ -259,14 +394,6 @@
         
           <li>
             <a href="/2018/03/24/AndroidGradle权威指南笔记/">AndroidGradle权威指南笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/23/Android开发者建议尽量不使用Fragment/">Android开发者建议尽量不使用Fragment</a>
-          </li>
-        
-          <li>
-            <a href="/2018/03/19/git标签/">git标签</a>
           </li>
         
       </ul>
@@ -281,7 +408,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2018 JoKing<br>
+      &copy; 2019 JoKing<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
